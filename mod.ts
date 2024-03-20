@@ -9,6 +9,8 @@ import * as plugins from './src/generated/plugins.ts';
 import * as reports from './src/generated/reports.ts';
 import * as settings from './src/generated/settings.ts';
 import * as utilities from './src/generated/utilities.ts';
+import * as custom from './src/custom.ts';
+import * as tools from './src/tools.ts';
 
 export class RentalWorks {
     private static _baseUrl: string = '';
@@ -32,6 +34,7 @@ export class RentalWorks {
         reports.defaults.baseUrl = baseUrl;
         settings.defaults.baseUrl = baseUrl;
         utilities.defaults.baseUrl = baseUrl;
+        custom.defaults.baseUrl = baseUrl;
     }
 
     public static get token() {
@@ -53,6 +56,7 @@ export class RentalWorks {
         reports.defaults.headers.Authorization = bearer;
         settings.defaults.headers.Authorization = bearer;
         utilities.defaults.headers.Authorization = bearer;
+        custom.defaults.headers.Authorization = bearer;
     }
 
     public static accountservices = accountservices;
@@ -66,6 +70,8 @@ export class RentalWorks {
     public static reports = reports;
     public static settings = settings;
     public static utilities = utilities;
+    public static custom = custom;
+    public static tools = tools;
 
     public static async login(username: string, password: string) {
         const response = await accountservices.postApiV1Jwt(
@@ -74,6 +80,12 @@ export class RentalWorks {
                 Password: password,
             }
         );
-        this.token = response.access_token ?? '';
+
+        const token = response.access_token;
+        if (!token) {
+            throw new Error('No access token returned. Check your username and password.');
+        }
+
+        this.token = token;
     }
 }
