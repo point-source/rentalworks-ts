@@ -1,0 +1,23 @@
+{
+  "name": "rentalworks-ts",
+  "version": "1.0.0",
+  "description": "A TypeScript SDK for the Rentalworks API",
+  "author": "point-source",
+  "license": "BSD-3-Clause",
+  "keywords": [
+    "rentalworks"
+  ],
+  "main": "src/index.js",
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "tsc"
+  },
+  "devDependencies": {
+    "oazapfts": "^6.0.4",
+    "typescript": "^5.4.2"
+  }
+}
