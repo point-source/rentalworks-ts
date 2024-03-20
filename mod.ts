@@ -11,7 +11,16 @@ import * as settings from './src/generated/settings.ts';
 import * as utilities from './src/generated/utilities.ts';
 
 export class RentalWorks {
+    private static _baseUrl: string = '';
+    private static _token: string = '';
+
+    public static get baseUrl() {
+        return this._baseUrl;
+    }
+
     public static set baseUrl(baseUrl: string) {
+        this._baseUrl = baseUrl;
+
         accountservices.defaults.baseUrl = baseUrl;
         administrator.defaults.baseUrl = baseUrl;
         rwexports.defaults.baseUrl = baseUrl;
@@ -25,7 +34,12 @@ export class RentalWorks {
         utilities.defaults.baseUrl = baseUrl;
     }
 
+    public static get token() {
+        return this._token;
+    }
+
     public static set token(token: string) {
+        this._token = token;
         const bearer = `Bearer ${token}`;
 
         accountservices.defaults.headers.Authorization = bearer;
