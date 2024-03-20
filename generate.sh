@@ -39,6 +39,10 @@ echo "Download complete."
 for page in "${pages[@]}"; do
     echo "Generating TypeScript files for $page..."
     npx oazapfts "${swagger_dir}/${page}.json" "src/generated/${page}.ts" --optimistic --useEnumType
+
+    # Replace the import statement with the correct path (for deno)
+    sed -i '' 's|import \* as Oazapfts from "@oazapfts/runtime";|import { Oazapfts, QS } from "../../deps.ts";|g' "src/generated/${page}.ts"
+    sed -i '' '/import \* as QS from "@oazapfts\/runtime\/query";/d' "src/generated/${page}.ts"
 done
 
 echo "Generation complete."

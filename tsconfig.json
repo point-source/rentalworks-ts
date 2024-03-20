@@ -4,7 +4,9 @@
         "module": "CommonJS",
         "target": "es6",
         "declaration": true,
-        "sourceMap": true
+        "sourceMap": true,
+        "allowImportingTsExtensions": true,
+        "noEmit": true
     },
     "include": [
         "src/**/*"

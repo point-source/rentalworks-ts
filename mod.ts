@@ -1,14 +1,14 @@
-import * as accountservices from './generated/accountservices';
-import * as administrator from './generated/administrator';
-import * as rwexports from './generated/exports';
-import * as home from './generated/home';
-import * as integrations from './generated/integrations';
-import * as mobile from './generated/mobile';
-import * as pages from './generated/pages';
-import * as plugins from './generated/plugins';
-import * as reports from './generated/reports';
-import * as settings from './generated/settings';
-import * as utilities from './generated/utilities';
+import * as accountservices from './src/generated/accountservices.ts';
+import * as administrator from './src/generated/administrator.ts';
+import * as rwexports from './src/generated/exports.ts';
+import * as home from './src/generated/home.ts';
+import * as integrations from './src/generated/integrations.ts';
+import * as mobile from './src/generated/mobile.ts';
+import * as pages from './src/generated/pages.ts';
+import * as plugins from './src/generated/plugins.ts';
+import * as reports from './src/generated/reports.ts';
+import * as settings from './src/generated/settings.ts';
+import * as utilities from './src/generated/utilities.ts';
 
 export class RentalWorks {
     public static set baseUrl(baseUrl: string) {
@@ -26,7 +26,6 @@ export class RentalWorks {
     }
 
     public static set token(token: string) {
-        this.token = token;
         const bearer = `Bearer ${token}`;
 
         accountservices.defaults.headers.Authorization = bearer;
