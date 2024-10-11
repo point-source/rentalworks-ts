@@ -128,7 +128,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/WebApi.Logic.TSpStatusResponse"
+                  "$ref": "#/components/schemas/FwStandard.SqlServer.TSpStatusResponse"
                 }
               }
             }
@@ -221,6 +221,53 @@
                 }
               }
             }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FwCore.Api.Swashbuckle.BadRequestResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized (jwt token is invalid)"
+          },
+          "403": {
+            "description": "Forbidden (jwt token is valid, but you don't have permission)"
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FwStandard.Models.FwApiException"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/jspm": {
+      "get": {
+        "tags": [
+          "JSPM"
+        ],
+        "parameters": [
+          {
+            "name": "timestamp",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
           },
           "400": {
             "description": "Bad Request",
@@ -380,7 +427,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/WebApi.Logic.TSpStatusResponse"
+                  "$ref": "#/components/schemas/FwStandard.SqlServer.TSpStatusResponse"
                 }
               }
             }
@@ -832,7 +879,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/WebApi.Logic.TSpStatusResponse"
+                  "$ref": "#/components/schemas/FwStandard.SqlServer.TSpStatusResponse"
                 }
               }
             }
@@ -2199,6 +2246,10 @@
             "nullable": true,
             "readOnly": true
           },
+          "ServerVersion": {
+            "type": "string",
+            "nullable": true
+          },
           "_Translation": {
             "type": "array",
             "items": {
@@ -2232,7 +2283,7 @@
         },
         "additionalProperties": false
       },
-      "WebApi.Logic.TSpStatusResponse": {
+      "FwStandard.SqlServer.TSpStatusResponse": {
         "type": "object",
         "properties": {
           "status": {
@@ -2436,6 +2487,12 @@
             "nullable": true
           },
           "IsFixedAsset": {
+            "maxLength": 1,
+            "type": "boolean",
+            "description": "Format: Boolean",
+            "nullable": true
+          },
+          "IsFixedContainer": {
             "maxLength": 1,
             "type": "boolean",
             "description": "Format: Boolean",
@@ -3046,7 +3103,22 @@
             "description": "Format: Boolean",
             "nullable": true
           },
+          "AutomaticallyCheckInEntireContainerWithScannableItem": {
+            "type": "boolean",
+            "description": "Format: Boolean",
+            "nullable": true
+          },
           "AutomaticallyRebuildContainerAtTransferIn": {
+            "type": "boolean",
+            "description": "Format: Boolean",
+            "nullable": true
+          },
+          "AutomaticallyCountAllItemsWhenPhysicalInventoryInitiated": {
+            "type": "boolean",
+            "description": "Format: Boolean",
+            "nullable": true
+          },
+          "AutomaticallyTransferInEntireContainerWithScannableItem": {
             "type": "boolean",
             "description": "Format: Boolean",
             "nullable": true
@@ -3184,11 +3256,6 @@
           },
           "TechnicalNotes": {
             "type": "string",
-            "nullable": true
-          },
-          "OverrideSystemDefaultRevenueAllocationBehavior": {
-            "type": "boolean",
-            "description": "Format: Boolean",
             "nullable": true
           },
           "AllocateRevenueForAccessories": {

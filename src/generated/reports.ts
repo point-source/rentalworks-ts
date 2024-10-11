@@ -52,16 +52,14 @@ export type FwStandardModelsCheckBoxListItem = {
     text?: string | null;
     selected?: boolean | null;
 };
-export type WebApiModulesReportsBillingAgentBillingReportAgentBillingReportRequest = {
+export type WebApiModulesReportsOrderReportsActiveOrdersWithUncontractedItemsReportActiveOrdersWithUncontractedItemsReportRequest = {
     FromDate?: string;
     ToDate?: string;
-    DateType?: string | null;
-    IncludeNoCharge?: boolean | null;
-    OfficeLocationId?: string | null;
+    WarehouseId?: string | null;
     DepartmentId?: string | null;
-    AgentId?: string | null;
-    CustomerId?: string | null;
-    DealId?: string | null;
+    OfficeLocationId?: string | null;
+    UserId?: string | null;
+    OrderTypeId?: string | null;
     UserDepartmentId?: string | null;
     UserLocationId?: string | null;
     UserWarehouseId?: string | null;
@@ -105,6 +103,7 @@ export type FwStandardSqlServerFwJsonDataTable = {
     TotalPages?: number;
     TotalRows?: number;
     DateFields?: string[] | null;
+    ServerVersion?: string | null;
     _Translation?: FwStandardDataFwTranslatedValue[] | null;
 };
 export type FwStandardSqlServerFwJsonDataTableRead = {
@@ -124,6 +123,7 @@ export type FwStandardSqlServerFwJsonDataTableRead = {
     ColumnNameByIndex?: {
         [key: string]: string | null;
     } | null;
+    ServerVersion?: string | null;
     _Translation?: FwStandardDataFwTranslatedValue[] | null;
 };
 export type FwStandardDataFwCustomValue = {
@@ -304,6 +304,28 @@ export type FwStandardModelsBrowseRequest = {
     activeviewfields?: {
         [key: string]: string[] | null;
     } | null;
+};
+export type WebApiModulesReportsBillingAgentBillingReportAgentBillingReportRequest = {
+    FromDate?: string;
+    ToDate?: string;
+    DateType?: string | null;
+    IncludeNoCharge?: boolean | null;
+    OfficeLocationId?: string | null;
+    DepartmentId?: string | null;
+    AgentId?: string | null;
+    CustomerId?: string | null;
+    DealId?: string | null;
+    UserDepartmentId?: string | null;
+    UserLocationId?: string | null;
+    UserWarehouseId?: string | null;
+    CustomReportLayoutId?: string | null;
+    IsSummary?: boolean | null;
+    IncludeSubHeadingsAndSubTotals?: boolean;
+    IncludeIdColumns?: boolean;
+    Locale?: string | null;
+    excelfields?: FwStandardModelsCheckBoxListItem[] | null;
+    ReportName?: string | null;
+    UseEmailTemplate?: boolean | null;
 };
 export type WebApiModulesReportsAccountingReportsArAgingReportArAgingReportRequest = {
     AsOfDate?: string;
@@ -852,7 +874,7 @@ export type WebApiModulesReportsContractReportsExchangeContractReportExchangeCon
 };
 export type WebApiModulesReportsFixedAssetBookValueFixedAssetBookValueRequest = {
     AsOfDate?: string;
-    Ranks?: FwStandardModelsSelectedCheckBoxListItem[] | null;
+    Ranks?: string | null;
     TrackedBys?: FwStandardModelsSelectedCheckBoxListItem[] | null;
     ExcludeFullyDepreciated?: boolean | null;
     WarehouseId?: string | null;
@@ -880,7 +902,7 @@ export type WebApiModulesReportsFixedAssetDepreciationReportFixedAssetDepreciati
     CategoryId?: string | null;
     SubCategoryId?: string | null;
     InventoryId?: string | null;
-    Ranks?: FwStandardModelsSelectedCheckBoxListItem[] | null;
+    Ranks?: string | null;
     TrackedBys?: FwStandardModelsSelectedCheckBoxListItem[] | null;
     UserDepartmentId?: string | null;
     UserLocationId?: string | null;
@@ -904,6 +926,24 @@ export type WebApiModulesReportsAccountingReportsGlDistributionReportGlDistribut
     DealId?: string | null;
     IsSomeDetail?: boolean | null;
     IsFullDetail?: boolean | null;
+    UserDepartmentId?: string | null;
+    UserLocationId?: string | null;
+    UserWarehouseId?: string | null;
+    CustomReportLayoutId?: string | null;
+    IsSummary?: boolean | null;
+    IncludeSubHeadingsAndSubTotals?: boolean;
+    IncludeIdColumns?: boolean;
+    Locale?: string | null;
+    excelfields?: FwStandardModelsCheckBoxListItem[] | null;
+    ReportName?: string | null;
+    UseEmailTemplate?: boolean | null;
+};
+export type WebApiModulesReportsWarehouseReportsInactiveEligibleReportInactiveEligibleReportRequest = {
+    InventoryTypeId?: string | null;
+    CategoryId?: string | null;
+    SubCategoryId?: string | null;
+    Ranks?: string | null;
+    IncludeFilter?: FwStandardModelsSelectedCheckBoxListItem[] | null;
     UserDepartmentId?: string | null;
     UserLocationId?: string | null;
     UserWarehouseId?: string | null;
@@ -1178,7 +1218,7 @@ export type WebApiModulesReportsBillingInvoiceSummaryReportInvoiceSummaryReportR
 };
 export type WebApiModulesReportsPropsWardrobeReportsItemsPurchasedByDealReportItemsPurchasedByDealReportRequest = {
     ReportType?: FwStandardModelsSelectedCheckBoxListItem[] | null;
-    TrackedBy?: FwStandardModelsCheckBoxListItem[] | null;
+    TrackedBy?: FwStandardModelsSelectedCheckBoxListItem[] | null;
     CostRangeFrom?: number | null;
     CostRangeTo?: number | null;
     SortBy?: FwStandardModelsCheckBoxListItem[] | null;
@@ -1284,9 +1324,34 @@ export type WebApiModulesReportsOrderReportsOrderConflictReportOrderConflictRepo
     SubCategoryId?: string | null;
     InventoryId?: string | null;
     Classifications?: FwStandardModelsSelectedCheckBoxListItem[] | null;
-    Ranks?: FwStandardModelsSelectedCheckBoxListItem[] | null;
+    Ranks?: string | null;
     TrackedBys?: FwStandardModelsSelectedCheckBoxListItem[] | null;
     RefreshIfNeeded?: boolean | null;
+    UserDepartmentId?: string | null;
+    UserLocationId?: string | null;
+    UserWarehouseId?: string | null;
+    CustomReportLayoutId?: string | null;
+    IsSummary?: boolean | null;
+    IncludeSubHeadingsAndSubTotals?: boolean;
+    IncludeIdColumns?: boolean;
+    Locale?: string | null;
+    excelfields?: FwStandardModelsCheckBoxListItem[] | null;
+    ReportName?: string | null;
+    UseEmailTemplate?: boolean | null;
+};
+export type WebApiModulesReportsOrderReportsOrderDatesAndBannersReportOrderDatesAndBannersReportRequest = {
+    WarehouseId?: string | null;
+    DepartmentId?: string | null;
+    OfficeLocationId?: string | null;
+    UserId?: string | null;
+    OrderTypeId?: string | null;
+    OrderStatus?: FwStandardModelsSelectedCheckBoxListItem[] | null;
+    OutgoingDeliveryType?: FwStandardModelsSelectedCheckBoxListItem[] | null;
+    IncomingDeliveryType?: FwStandardModelsSelectedCheckBoxListItem[] | null;
+    PrintAlertBannerMessage?: boolean;
+    FromDate?: string | null;
+    ToDate?: string | null;
+    FilterDates?: boolean | null;
     UserDepartmentId?: string | null;
     UserLocationId?: string | null;
     UserWarehouseId?: string | null;
@@ -1404,12 +1469,15 @@ export type WebApiModulesReportsOrderReportsOrderStatusSummaryReportOrderStatusS
 };
 export type WebApiModulesReportsOrderValueSheetReportOrderValueSheetReportRequest = {
     OrderId?: string | null;
+    QuoteId?: string | null;
+    ProjectId?: string | null;
     RentalValue?: string | null;
     WeightInCase?: boolean | null;
     ExcludeZeroValueItems?: boolean | null;
     FilterBy?: string | null;
     GroupByShippingCase?: boolean | null;
     OutContractId?: string | null;
+    OrderType?: string | null;
     UserDepartmentId?: string | null;
     UserLocationId?: string | null;
     UserWarehouseId?: string | null;
@@ -1472,6 +1540,30 @@ export type WebApiModulesReportsOrderReportsOutgoingShippingLabelOutgoingShippin
     ReportName?: string | null;
     UseEmailTemplate?: boolean | null;
 };
+export type WebApiModulesReportsVendorReportsOutstandingPurchaseReportOutstandingPurchaseReportRequest = {
+    FromDate?: string;
+    ToDate?: string;
+    WarehouseId?: string | null;
+    DepartmentId?: string | null;
+    CategoryId?: string | null;
+    InventoryId?: string | null;
+    PoTypeId?: string | null;
+    VendorId?: string | null;
+    Ranks?: string | null;
+    OustandingOnly?: boolean | null;
+    Statuses?: FwStandardModelsSelectedCheckBoxListItem[] | null;
+    UserDepartmentId?: string | null;
+    UserLocationId?: string | null;
+    UserWarehouseId?: string | null;
+    CustomReportLayoutId?: string | null;
+    IsSummary?: boolean | null;
+    IncludeSubHeadingsAndSubTotals?: boolean;
+    IncludeIdColumns?: boolean;
+    Locale?: string | null;
+    excelfields?: FwStandardModelsCheckBoxListItem[] | null;
+    ReportName?: string | null;
+    UseEmailTemplate?: boolean | null;
+};
 export type WebApiModulesReportsOrderReportsOutstandingSubRentalReportOutstandingSubRentalReportRequest = {
     WarehouseId?: string | null;
     DepartmentId?: string | null;
@@ -1502,7 +1594,7 @@ export type WebApiModulesReportsSharedInventoryAttributesReportInventoryAttribut
     InventoryId?: string | null;
     AttributeId?: string | null;
     FixedAsset?: WebApiIncludeExcludeAll;
-    Ranks?: FwStandardModelsSelectedCheckBoxListItem[] | null;
+    Ranks?: string | null;
     UserDepartmentId?: string | null;
     UserLocationId?: string | null;
     UserWarehouseId?: string | null;
@@ -1518,7 +1610,7 @@ export type WebApiModulesReportsSharedInventoryAttributesReportInventoryAttribut
 export type WebApiModulesReportsSharedInventoryCatalogReportInventoryCatalogReportRequest = {
     Classifications?: FwStandardModelsSelectedCheckBoxListItem[] | null;
     TrackedBys?: FwStandardModelsSelectedCheckBoxListItem[] | null;
-    Ranks?: FwStandardModelsSelectedCheckBoxListItem[] | null;
+    Ranks?: string | null;
     FixedAsset?: WebApiIncludeExcludeAll;
     WarehouseId?: string | null;
     InventoryTypeId?: string | null;
@@ -1549,7 +1641,7 @@ export type WebApiModulesReportsInventoryChangeReportInventoryChangeReportReques
     InventoryId?: string | null;
     ChangeType?: string | null;
     FixedAsset?: WebApiIncludeExcludeAll;
-    Ranks?: FwStandardModelsSelectedCheckBoxListItem[] | null;
+    Ranks?: string | null;
     TrackedBys?: FwStandardModelsSelectedCheckBoxListItem[] | null;
     UserDepartmentId?: string | null;
     UserLocationId?: string | null;
@@ -1569,7 +1661,7 @@ export type WebApiModulesReportsSharedInventoryPurchaseHistoryReportInventoryPur
     ReceivedFromDate?: string | null;
     ReceivedToDate?: string | null;
     TrackedBys?: FwStandardModelsSelectedCheckBoxListItem[] | null;
-    Ranks?: FwStandardModelsSelectedCheckBoxListItem[] | null;
+    Ranks?: string | null;
     WarehouseId?: string | null;
     InventoryTypeId?: string | null;
     CategoryId?: string | null;
@@ -1708,7 +1800,7 @@ export type WebApiModulesReportsPhysicalInventoryReportsPhysicalInventoryPrescan
     InventoryDepartmentIds?: string | null;
     CategoryIds?: string | null;
     MasterIds?: string | null;
-    TrackedBys?: FwStandardModelsCheckBoxListItem[] | null;
+    TrackedBys?: FwStandardModelsSelectedCheckBoxListItem[] | null;
     SortBy?: FwStandardModelsCheckBoxListItem[] | null;
     UserDepartmentId?: string | null;
     UserLocationId?: string | null;
@@ -2035,6 +2127,7 @@ export type WebApiModulesReportsOrderReportsQuikActivityReportQuikActivityReport
     ActivityTypeId?: string | null;
     InventoryTypeId?: string | null;
     AgentId?: string | null;
+    DealId?: string | null;
     IncludeCompleted?: boolean | null;
     UserDepartmentId?: string | null;
     UserLocationId?: string | null;
@@ -2520,7 +2613,7 @@ export type WebApiModulesReportsRentalInventoryReportsRentalInventoryActivityByD
     FixedAsset?: WebApiIncludeExcludeAll;
     ExcludeMigrates?: boolean | null;
     OwnershipTypes?: FwStandardModelsSelectedCheckBoxListItem[] | null;
-    Ranks?: FwStandardModelsSelectedCheckBoxListItem[] | null;
+    Ranks?: string | null;
     TrackedBys?: FwStandardModelsSelectedCheckBoxListItem[] | null;
     UserDepartmentId?: string | null;
     UserLocationId?: string | null;
@@ -2540,7 +2633,7 @@ export type WebApiModulesReportsRentalInventoryReportsRentalInventoryAssetAttrib
     CategoryId?: string | null;
     SubCategoryId?: string | null;
     InventoryId?: string | null;
-    Ranks?: FwStandardModelsSelectedCheckBoxListItem[] | null;
+    Ranks?: string | null;
     FixedAsset?: WebApiIncludeExcludeAll;
     SortBy?: FwStandardModelsCheckBoxListItem[] | null;
     UserDepartmentId?: string | null;
@@ -2568,7 +2661,7 @@ export type WebApiModulesReportsRentalInventoryReportsRentalInventoryAvailabilit
     SubCategoryId?: string | null;
     InventoryId?: string | null;
     Classifications?: FwStandardModelsSelectedCheckBoxListItem[] | null;
-    Ranks?: FwStandardModelsSelectedCheckBoxListItem[] | null;
+    Ranks?: string | null;
     TrackedBys?: FwStandardModelsSelectedCheckBoxListItem[] | null;
     FixedAsset?: WebApiIncludeExcludeAll;
     RefreshIfNeeded?: boolean | null;
@@ -2591,7 +2684,7 @@ export type WebApiModulesReportsRentalInventoryReportsRentalInventoryMasterRepor
     SubCategoryId?: string | null;
     InventoryId?: string | null;
     OriginalShowId?: string | null;
-    Ranks?: FwStandardModelsSelectedCheckBoxListItem[] | null;
+    Ranks?: string | null;
     TrackedBys?: FwStandardModelsSelectedCheckBoxListItem[] | null;
     OwnershipTypes?: FwStandardModelsSelectedCheckBoxListItem[] | null;
     FixedAsset?: WebApiIncludeExcludeAll;
@@ -2621,7 +2714,7 @@ export type WebApiModulesReportsRentalInventoryReportsRentalInventoryMovementRep
     SubCategoryId?: string | null;
     InventoryId?: string | null;
     Value?: string | null;
-    Ranks?: FwStandardModelsSelectedCheckBoxListItem[] | null;
+    Ranks?: string | null;
     TrackedBys?: FwStandardModelsSelectedCheckBoxListItem[] | null;
     UserDepartmentId?: string | null;
     UserLocationId?: string | null;
@@ -2642,7 +2735,7 @@ export type WebApiModulesReportsRentalInventoryReportsRentalInventoryOutageRepor
     InventoryTypeId?: string | null;
     CategoryId?: string | null;
     InventoryId?: string | null;
-    Ranks?: FwStandardModelsSelectedCheckBoxListItem[] | null;
+    Ranks?: string | null;
     OutageFilterMode?: string | null;
     OutageFilterAmount?: number | null;
     FilterDatesByOutagePercent?: boolean | null;
@@ -2664,6 +2757,26 @@ export type WebApiModulesReportsRentalInventoryReportsRentalInventoryQcRequiredR
     CategoryId?: string | null;
     SubCategoryId?: string | null;
     InventoryId?: string | null;
+    InContractId?: string | null;
+    UserDepartmentId?: string | null;
+    UserLocationId?: string | null;
+    UserWarehouseId?: string | null;
+    CustomReportLayoutId?: string | null;
+    IsSummary?: boolean | null;
+    IncludeSubHeadingsAndSubTotals?: boolean;
+    IncludeIdColumns?: boolean;
+    Locale?: string | null;
+    excelfields?: FwStandardModelsCheckBoxListItem[] | null;
+    ReportName?: string | null;
+    UseEmailTemplate?: boolean | null;
+};
+export type WebApiModulesReportsRentalInventoryReportsRentalInventoryQuantityOwnedReportRentalInventoryQuantityOwnedReportRequest = {
+    AsOfDate?: string;
+    WarehouseId?: string | null;
+    InventoryTypeId?: string | null;
+    CategoryId?: string | null;
+    InventoryId?: string | null;
+    Ranks?: string | null;
     UserDepartmentId?: string | null;
     UserLocationId?: string | null;
     UserWarehouseId?: string | null;
@@ -2685,7 +2798,7 @@ export type WebApiModulesReportsInventoryRepairHistoryReportInventoryRepairHisto
     CategoryId?: string | null;
     InventoryId?: string | null;
     FixedAsset?: WebApiIncludeExcludeAll;
-    Ranks?: FwStandardModelsSelectedCheckBoxListItem[] | null;
+    Ranks?: string | null;
     TrackedBys?: FwStandardModelsSelectedCheckBoxListItem[] | null;
     UserDepartmentId?: string | null;
     UserLocationId?: string | null;
@@ -2709,7 +2822,7 @@ export type WebApiModulesReportsRentalInventoryReportsRentalInventoryStatusAndRe
     InventoryTypeId?: string | null;
     CategoryId?: string | null;
     InventoryId?: string | null;
-    Ranks?: FwStandardModelsSelectedCheckBoxListItem[] | null;
+    Ranks?: string | null;
     TrackedBys?: FwStandardModelsSelectedCheckBoxListItem[] | null;
     IncludeNotRentedSince?: boolean | null;
     NotRentedSinceDate?: string | null;
@@ -2730,7 +2843,7 @@ export type WebApiModulesReportsRentalInventoryReportsRentalInventoryStatusAndRe
 export type WebApiModulesReportsRentalInventoryReportsRentalInventorySummaryByRankReportRentalInventorySummaryByRankReportRequest = {
     AsOfDate?: string;
     WarehouseId?: string | null;
-    Ranks?: FwStandardModelsSelectedCheckBoxListItem[] | null;
+    Ranks?: string | null;
     UserDepartmentId?: string | null;
     UserLocationId?: string | null;
     UserWarehouseId?: string | null;
@@ -2778,7 +2891,7 @@ export type WebApiModulesReportsRentalInventoryReportsRentalInventoryUsageByCust
     CategoryId?: string | null;
     InventoryId?: string | null;
     CustomerId?: string | null;
-    Ranks?: FwStandardModelsSelectedCheckBoxListItem[] | null;
+    Ranks?: string | null;
     TrackedBys?: FwStandardModelsSelectedCheckBoxListItem[] | null;
     ExcludeZeroOwned?: boolean | null;
     FilterDatesByUtilizationPercent?: boolean | null;
@@ -2804,7 +2917,7 @@ export type WebApiModulesReportsRentalInventoryReportsRentalInventoryUsageReport
     InventoryTypeId?: string | null;
     CategoryId?: string | null;
     InventoryId?: string | null;
-    Ranks?: FwStandardModelsSelectedCheckBoxListItem[] | null;
+    Ranks?: string | null;
     TrackedBys?: FwStandardModelsSelectedCheckBoxListItem[] | null;
     ExcludeZeroOwned?: boolean | null;
     FilterDatesByUtilizationPercent?: boolean | null;
@@ -2830,7 +2943,7 @@ export type WebApiModulesReportsRentalInventoryReportsRentalInventoryValueReport
     GroupByICode?: boolean | null;
     QuantityValueBasedOn?: string | null;
     SerializedValueBasedOn?: string | null;
-    Ranks?: FwStandardModelsSelectedCheckBoxListItem[] | null;
+    Ranks?: string | null;
     TrackedBys?: FwStandardModelsSelectedCheckBoxListItem[] | null;
     Summary?: boolean | null;
     WarehouseId?: string | null;
@@ -3020,7 +3133,7 @@ export type WebApiModulesReportsRentalInventoryReportsRetiredRentalInventoryRepo
     FromDate?: string;
     ToDate?: string;
     IncludeUnretired?: boolean | null;
-    Ranks?: FwStandardModelsSelectedCheckBoxListItem[] | null;
+    Ranks?: string | null;
     WarehouseId?: string | null;
     InventoryTypeId?: string | null;
     CategoryId?: string | null;
@@ -3124,7 +3237,7 @@ export type WebApiModulesReportsRentalInventoryReportsReturnOnAssetReportReturnO
     CategoryId?: string | null;
     SubCategoryId?: string | null;
     InventoryId?: string | null;
-    Ranks?: FwStandardModelsSelectedCheckBoxListItem[] | null;
+    Ranks?: string | null;
     TrackedBys?: FwStandardModelsSelectedCheckBoxListItem[] | null;
     IncludeZeroCurrentOwned?: boolean | null;
     IncludeZeroAverageOwned?: boolean | null;
@@ -3173,7 +3286,7 @@ export type WebApiModulesReportsBillingReportsRevenueReportRevenueReportRequest 
     CategoryId?: string | null;
     SubCategoryId?: string | null;
     InventoryId?: string | null;
-    Ranks?: FwStandardModelsSelectedCheckBoxListItem[] | null;
+    Ranks?: string | null;
     TrackedBys?: FwStandardModelsSelectedCheckBoxListItem[] | null;
     UserDepartmentId?: string | null;
     UserLocationId?: string | null;
@@ -3241,7 +3354,7 @@ export type WebApiModulesReportsSalesInventoryReportsSalesInventoryMasterReportS
     InventoryTypeId?: string | null;
     CategoryId?: string | null;
     InventoryId?: string | null;
-    Ranks?: FwStandardModelsSelectedCheckBoxListItem[] | null;
+    Ranks?: string | null;
     ExcludeZeroOwned?: boolean | null;
     UserDepartmentId?: string | null;
     UserLocationId?: string | null;
@@ -3486,7 +3599,7 @@ export type WebApiModulesReportsOrderReportsSubSalesStagedItemsReportSubSalesSta
     CategoryId?: string | null;
     SubCategoryId?: string | null;
     InventoryId?: string | null;
-    Ranks?: FwStandardModelsSelectedCheckBoxListItem[] | null;
+    Ranks?: string | null;
     TrackedBys?: FwStandardModelsSelectedCheckBoxListItem[] | null;
     UserDepartmentId?: string | null;
     UserLocationId?: string | null;
@@ -3732,7 +3845,7 @@ export type WebApiModulesReportsRentalInventoryReportsValueOfOutRentalInventoryR
     ExcludeHiatus?: boolean;
     OwnershipTypes?: FwStandardModelsSelectedCheckBoxListItem[] | null;
     TrackedBys?: FwStandardModelsSelectedCheckBoxListItem[] | null;
-    Ranks?: FwStandardModelsSelectedCheckBoxListItem[] | null;
+    Ranks?: string | null;
     FixedAsset?: WebApiIncludeExcludeAll;
     UserDepartmentId?: string | null;
     UserLocationId?: string | null;
@@ -3799,6 +3912,7 @@ export type WebApiModulesReportsWarehouseReportsWarehouseDispatchReportWarehouse
     DepartmentId?: string | null;
     AgentId?: string | null;
     ActivityTypeId?: string | null;
+    ExcludeCompleteOrders?: boolean | null;
     SortBy?: FwStandardModelsCheckBoxListItem[] | null;
     OrderTypes?: FwStandardModelsSelectedCheckBoxListItem[] | null;
     UserDepartmentId?: string | null;
@@ -3820,6 +3934,7 @@ export type WebApiModulesReportsWarehouseReportsWarehouseInboundReportWarehouseI
     DepartmentId?: string | null;
     AgentId?: string | null;
     ActivityTypeId?: string | null;
+    ExcludeCompleteOrders?: boolean | null;
     SortBy?: FwStandardModelsCheckBoxListItem[] | null;
     OrderTypes?: FwStandardModelsSelectedCheckBoxListItem[] | null;
     UserDepartmentId?: string | null;
@@ -3841,6 +3956,7 @@ export type WebApiModulesReportsWarehouseReportsWarehouseOutboundReportWarehouse
     DepartmentId?: string | null;
     AgentId?: string | null;
     ActivityTypeId?: string | null;
+    ExcludeCompleteOrders?: boolean | null;
     SortBy?: FwStandardModelsCheckBoxListItem[] | null;
     OrderTypes?: FwStandardModelsSelectedCheckBoxListItem[] | null;
     UserDepartmentId?: string | null;
@@ -3855,6 +3971,202 @@ export type WebApiModulesReportsWarehouseReportsWarehouseOutboundReportWarehouse
     ReportName?: string | null;
     UseEmailTemplate?: boolean | null;
 };
+export function postApiV1ActiveorderswithuncontracteditemsreportRender(fwStandardReportingFwReportRenderRequest?: FwStandardReportingFwReportRenderRequest, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.ok(oazapfts.fetchJson<{
+        status: 200;
+        data: FwStandardReportingFwReportRenderResponse;
+    } | {
+        status: 400;
+        data: FwCoreApiSwashbuckleBadRequestResponse;
+    } | {
+        status: 401;
+    } | {
+        status: 403;
+    } | {
+        status: 500;
+        data: FwStandardModelsFwApiException;
+    }>("/api/v1/activeorderswithuncontracteditemsreport/render", oazapfts.json({
+        ...opts,
+        method: "POST",
+        body: fwStandardReportingFwReportRenderRequest
+    })));
+}
+export function postApiV1ActiveorderswithuncontracteditemsreportExportexcelxlsx(webApiModulesReportsOrderReportsActiveOrdersWithUncontractedItemsReportActiveOrdersWithUncontractedItemsReportRequest?: WebApiModulesReportsOrderReportsActiveOrdersWithUncontractedItemsReportActiveOrdersWithUncontractedItemsReportRequest, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.ok(oazapfts.fetchJson<{
+        status: 200;
+        data: FwCoreControllersFwDataControllerDoExportExcelXlsxExportFileAsyncResult;
+    } | {
+        status: 400;
+        data: FwCoreApiSwashbuckleBadRequestResponse;
+    } | {
+        status: 401;
+    } | {
+        status: 403;
+    } | {
+        status: 500;
+        data: FwStandardModelsFwApiException;
+    }>("/api/v1/activeorderswithuncontracteditemsreport/exportexcelxlsx", oazapfts.json({
+        ...opts,
+        method: "POST",
+        body: webApiModulesReportsOrderReportsActiveOrdersWithUncontractedItemsReportActiveOrdersWithUncontractedItemsReportRequest
+    })));
+}
+export function postApiV1ActiveorderswithuncontracteditemsreportRunreport(webApiModulesReportsOrderReportsActiveOrdersWithUncontractedItemsReportActiveOrdersWithUncontractedItemsReportRequest?: WebApiModulesReportsOrderReportsActiveOrdersWithUncontractedItemsReportActiveOrdersWithUncontractedItemsReportRequest, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.ok(oazapfts.fetchJson<{
+        status: 200;
+        data: WebApiDataAppReportResponseRead;
+    } | {
+        status: 400;
+        data: FwCoreApiSwashbuckleBadRequestResponse;
+    } | {
+        status: 401;
+    } | {
+        status: 403;
+    } | {
+        status: 500;
+        data: FwStandardModelsFwApiException;
+    }>("/api/v1/activeorderswithuncontracteditemsreport/runreport", oazapfts.json({
+        ...opts,
+        method: "POST",
+        body: webApiModulesReportsOrderReportsActiveOrdersWithUncontractedItemsReportActiveOrdersWithUncontractedItemsReportRequest
+    })));
+}
+export function postApiV1ActiveorderswithuncontracteditemsreportValidatewarehouseBrowse(fwStandardModelsBrowseRequest?: FwStandardModelsBrowseRequest, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.ok(oazapfts.fetchJson<{
+        status: 200;
+        data: FwStandardSqlServerFwJsonDataTableRead;
+    } | {
+        status: 400;
+        data: FwCoreApiSwashbuckleBadRequestResponse;
+    } | {
+        status: 401;
+    } | {
+        status: 403;
+    } | {
+        status: 500;
+        data: FwStandardModelsFwApiException;
+    }>("/api/v1/activeorderswithuncontracteditemsreport/validatewarehouse/browse", oazapfts.json({
+        ...opts,
+        method: "POST",
+        body: fwStandardModelsBrowseRequest
+    })));
+}
+export function postApiV1ActiveorderswithuncontracteditemsreportValidatedepartmentBrowse(fwStandardModelsBrowseRequest?: FwStandardModelsBrowseRequest, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.ok(oazapfts.fetchJson<{
+        status: 200;
+        data: FwStandardSqlServerFwJsonDataTableRead;
+    } | {
+        status: 400;
+        data: FwCoreApiSwashbuckleBadRequestResponse;
+    } | {
+        status: 401;
+    } | {
+        status: 403;
+    } | {
+        status: 500;
+        data: FwStandardModelsFwApiException;
+    }>("/api/v1/activeorderswithuncontracteditemsreport/validatedepartment/browse", oazapfts.json({
+        ...opts,
+        method: "POST",
+        body: fwStandardModelsBrowseRequest
+    })));
+}
+export function postApiV1ActiveorderswithuncontracteditemsreportValidateagentBrowse(fwStandardModelsBrowseRequest?: FwStandardModelsBrowseRequest, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.ok(oazapfts.fetchJson<{
+        status: 200;
+        data: FwStandardSqlServerFwJsonDataTableRead;
+    } | {
+        status: 400;
+        data: FwCoreApiSwashbuckleBadRequestResponse;
+    } | {
+        status: 401;
+    } | {
+        status: 403;
+    } | {
+        status: 500;
+        data: FwStandardModelsFwApiException;
+    }>("/api/v1/activeorderswithuncontracteditemsreport/validateagent/browse", oazapfts.json({
+        ...opts,
+        method: "POST",
+        body: fwStandardModelsBrowseRequest
+    })));
+}
+export function postApiV1ActiveorderswithuncontracteditemsreportValidateofficelocationBrowse(fwStandardModelsBrowseRequest?: FwStandardModelsBrowseRequest, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.ok(oazapfts.fetchJson<{
+        status: 200;
+        data: FwStandardSqlServerFwJsonDataTableRead;
+    } | {
+        status: 400;
+        data: FwCoreApiSwashbuckleBadRequestResponse;
+    } | {
+        status: 401;
+    } | {
+        status: 403;
+    } | {
+        status: 500;
+        data: FwStandardModelsFwApiException;
+    }>("/api/v1/activeorderswithuncontracteditemsreport/validateofficelocation/browse", oazapfts.json({
+        ...opts,
+        method: "POST",
+        body: fwStandardModelsBrowseRequest
+    })));
+}
+export function postApiV1ActiveorderswithuncontracteditemsreportValidateordertypeBrowse(fwStandardModelsBrowseRequest?: FwStandardModelsBrowseRequest, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.ok(oazapfts.fetchJson<{
+        status: 200;
+        data: FwStandardSqlServerFwJsonDataTableRead;
+    } | {
+        status: 400;
+        data: FwCoreApiSwashbuckleBadRequestResponse;
+    } | {
+        status: 401;
+    } | {
+        status: 403;
+    } | {
+        status: 500;
+        data: FwStandardModelsFwApiException;
+    }>("/api/v1/activeorderswithuncontracteditemsreport/validateordertype/browse", oazapfts.json({
+        ...opts,
+        method: "POST",
+        body: fwStandardModelsBrowseRequest
+    })));
+}
+export function getApiV1ActiveorderswithuncontracteditemsreportEmptyobject(opts?: Oazapfts.RequestOpts) {
+    return oazapfts.ok(oazapfts.fetchJson<{
+        status: 200;
+        data: FwStandardSqlServerFwJsonDataTableRead;
+    } | {
+        status: 400;
+        data: FwCoreApiSwashbuckleBadRequestResponse;
+    } | {
+        status: 401;
+    } | {
+        status: 403;
+    } | {
+        status: 500;
+        data: FwStandardModelsFwApiException;
+    }>("/api/v1/activeorderswithuncontracteditemsreport/emptyobject", {
+        ...opts
+    }));
+}
+export function getApiV1ActiveorderswithuncontracteditemsreportPreview(opts?: Oazapfts.RequestOpts) {
+    return oazapfts.ok(oazapfts.fetchJson<{
+        status: 200;
+        data: FwStandardSqlServerFwJsonDataTableRead;
+    } | {
+        status: 400;
+        data: FwCoreApiSwashbuckleBadRequestResponse;
+    } | {
+        status: 401;
+    } | {
+        status: 403;
+    } | {
+        status: 500;
+        data: FwStandardModelsFwApiException;
+    }>("/api/v1/activeorderswithuncontracteditemsreport/preview", {
+        ...opts
+    }));
+}
 export function postApiV1AgentbillingreportRender(fwStandardReportingFwReportRenderRequest?: FwStandardReportingFwReportRenderRequest, opts?: Oazapfts.RequestOpts) {
     return oazapfts.ok(oazapfts.fetchJson<{
         status: 200;
@@ -9231,6 +9543,162 @@ export function postApiV1GldistributiontypeExportexcelxlsx(fwStandardModelsBrows
         body: fwStandardModelsBrowseRequest
     })));
 }
+export function postApiV1InactiveeligiblereportRender(fwStandardReportingFwReportRenderRequest?: FwStandardReportingFwReportRenderRequest, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.ok(oazapfts.fetchJson<{
+        status: 200;
+        data: FwStandardReportingFwReportRenderResponse;
+    } | {
+        status: 400;
+        data: FwCoreApiSwashbuckleBadRequestResponse;
+    } | {
+        status: 401;
+    } | {
+        status: 403;
+    } | {
+        status: 500;
+        data: FwStandardModelsFwApiException;
+    }>("/api/v1/inactiveeligiblereport/render", oazapfts.json({
+        ...opts,
+        method: "POST",
+        body: fwStandardReportingFwReportRenderRequest
+    })));
+}
+export function postApiV1InactiveeligiblereportExportexcelxlsx(webApiModulesReportsWarehouseReportsInactiveEligibleReportInactiveEligibleReportRequest?: WebApiModulesReportsWarehouseReportsInactiveEligibleReportInactiveEligibleReportRequest, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.ok(oazapfts.fetchJson<{
+        status: 200;
+        data: FwCoreControllersFwDataControllerDoExportExcelXlsxExportFileAsyncResult;
+    } | {
+        status: 400;
+        data: FwCoreApiSwashbuckleBadRequestResponse;
+    } | {
+        status: 401;
+    } | {
+        status: 403;
+    } | {
+        status: 500;
+        data: FwStandardModelsFwApiException;
+    }>("/api/v1/inactiveeligiblereport/exportexcelxlsx", oazapfts.json({
+        ...opts,
+        method: "POST",
+        body: webApiModulesReportsWarehouseReportsInactiveEligibleReportInactiveEligibleReportRequest
+    })));
+}
+export function postApiV1InactiveeligiblereportRunreport(webApiModulesReportsWarehouseReportsInactiveEligibleReportInactiveEligibleReportRequest?: WebApiModulesReportsWarehouseReportsInactiveEligibleReportInactiveEligibleReportRequest, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.ok(oazapfts.fetchJson<{
+        status: 200;
+        data: WebApiDataAppReportResponseRead;
+    } | {
+        status: 400;
+        data: FwCoreApiSwashbuckleBadRequestResponse;
+    } | {
+        status: 401;
+    } | {
+        status: 403;
+    } | {
+        status: 500;
+        data: FwStandardModelsFwApiException;
+    }>("/api/v1/inactiveeligiblereport/runreport", oazapfts.json({
+        ...opts,
+        method: "POST",
+        body: webApiModulesReportsWarehouseReportsInactiveEligibleReportInactiveEligibleReportRequest
+    })));
+}
+export function postApiV1InactiveeligiblereportValidateinventorytypeBrowse(fwStandardModelsBrowseRequest?: FwStandardModelsBrowseRequest, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.ok(oazapfts.fetchJson<{
+        status: 200;
+        data: FwStandardSqlServerFwJsonDataTableRead;
+    } | {
+        status: 400;
+        data: FwCoreApiSwashbuckleBadRequestResponse;
+    } | {
+        status: 401;
+    } | {
+        status: 403;
+    } | {
+        status: 500;
+        data: FwStandardModelsFwApiException;
+    }>("/api/v1/inactiveeligiblereport/validateinventorytype/browse", oazapfts.json({
+        ...opts,
+        method: "POST",
+        body: fwStandardModelsBrowseRequest
+    })));
+}
+export function postApiV1InactiveeligiblereportValidatecategoryBrowse(fwStandardModelsBrowseRequest?: FwStandardModelsBrowseRequest, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.ok(oazapfts.fetchJson<{
+        status: 200;
+        data: FwStandardSqlServerFwJsonDataTableRead;
+    } | {
+        status: 400;
+        data: FwCoreApiSwashbuckleBadRequestResponse;
+    } | {
+        status: 401;
+    } | {
+        status: 403;
+    } | {
+        status: 500;
+        data: FwStandardModelsFwApiException;
+    }>("/api/v1/inactiveeligiblereport/validatecategory/browse", oazapfts.json({
+        ...opts,
+        method: "POST",
+        body: fwStandardModelsBrowseRequest
+    })));
+}
+export function postApiV1InactiveeligiblereportValidatesubcategoryBrowse(fwStandardModelsBrowseRequest?: FwStandardModelsBrowseRequest, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.ok(oazapfts.fetchJson<{
+        status: 200;
+        data: FwStandardSqlServerFwJsonDataTableRead;
+    } | {
+        status: 400;
+        data: FwCoreApiSwashbuckleBadRequestResponse;
+    } | {
+        status: 401;
+    } | {
+        status: 403;
+    } | {
+        status: 500;
+        data: FwStandardModelsFwApiException;
+    }>("/api/v1/inactiveeligiblereport/validatesubcategory/browse", oazapfts.json({
+        ...opts,
+        method: "POST",
+        body: fwStandardModelsBrowseRequest
+    })));
+}
+export function getApiV1InactiveeligiblereportEmptyobject(opts?: Oazapfts.RequestOpts) {
+    return oazapfts.ok(oazapfts.fetchJson<{
+        status: 200;
+        data: FwStandardSqlServerFwJsonDataTableRead;
+    } | {
+        status: 400;
+        data: FwCoreApiSwashbuckleBadRequestResponse;
+    } | {
+        status: 401;
+    } | {
+        status: 403;
+    } | {
+        status: 500;
+        data: FwStandardModelsFwApiException;
+    }>("/api/v1/inactiveeligiblereport/emptyobject", {
+        ...opts
+    }));
+}
+export function getApiV1InactiveeligiblereportPreview(opts?: Oazapfts.RequestOpts) {
+    return oazapfts.ok(oazapfts.fetchJson<{
+        status: 200;
+        data: FwStandardSqlServerFwJsonDataTableRead;
+    } | {
+        status: 400;
+        data: FwCoreApiSwashbuckleBadRequestResponse;
+    } | {
+        status: 401;
+    } | {
+        status: 403;
+    } | {
+        status: 500;
+        data: FwStandardModelsFwApiException;
+    }>("/api/v1/inactiveeligiblereport/preview", {
+        ...opts
+    }));
+}
 export function postApiV1IncomegldetailreportRender(fwStandardReportingFwReportRenderRequest?: FwStandardReportingFwReportRenderRequest, opts?: Oazapfts.RequestOpts) {
     return oazapfts.ok(oazapfts.fetchJson<{
         status: 200;
@@ -10799,7 +11267,7 @@ export function postApiV1InventorystatusbypurchaseorderreportValidatevendorBrows
         body: fwStandardModelsBrowseRequest
     })));
 }
-export function postApiV1InventorystatusbypurchaseorderreportValidatedealBrowse(fwStandardModelsBrowseRequest?: FwStandardModelsBrowseRequest, opts?: Oazapfts.RequestOpts) {
+export function postApiV1InventorystatusbypurchaseorderreportValidatepotypeBrowse(fwStandardModelsBrowseRequest?: FwStandardModelsBrowseRequest, opts?: Oazapfts.RequestOpts) {
     return oazapfts.ok(oazapfts.fetchJson<{
         status: 200;
         data: FwStandardSqlServerFwJsonDataTableRead;
@@ -10813,7 +11281,7 @@ export function postApiV1InventorystatusbypurchaseorderreportValidatedealBrowse(
     } | {
         status: 500;
         data: FwStandardModelsFwApiException;
-    }>("/api/v1/inventorystatusbypurchaseorderreport/validatedeal/browse", oazapfts.json({
+    }>("/api/v1/inventorystatusbypurchaseorderreport/validatepotype/browse", oazapfts.json({
         ...opts,
         method: "POST",
         body: fwStandardModelsBrowseRequest
@@ -11659,6 +12127,27 @@ export function getApiV1ItemspurchasedbydealreportPreview(opts?: Oazapfts.Reques
         ...opts
     }));
 }
+export function getJspm({ timestamp }: {
+    timestamp?: string;
+} = {}, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.ok(oazapfts.fetchJson<{
+        status: 200;
+    } | {
+        status: 400;
+        data: FwCoreApiSwashbuckleBadRequestResponse;
+    } | {
+        status: 401;
+    } | {
+        status: 403;
+    } | {
+        status: 500;
+        data: FwStandardModelsFwApiException;
+    }>(`/jspm${QS.query(QS.explode({
+        timestamp
+    }))}`, {
+        ...opts
+    }));
+}
 export function postApiV1LatereturnsreportRender(fwStandardReportingFwReportRenderRequest?: FwStandardReportingFwReportRenderRequest, opts?: Oazapfts.RequestOpts) {
     return oazapfts.ok(oazapfts.fetchJson<{
         status: 200;
@@ -12051,10 +12540,10 @@ export function postApiV1OrderchangereportRender(fwStandardReportingFwReportRend
         body: fwStandardReportingFwReportRenderRequest
     })));
 }
-export function postApiV1OrderchangereportRunreport(webApiModulesReportsOrderChangeReportOrderChangeReportRequest?: WebApiModulesReportsOrderChangeReportOrderChangeReportRequest, opts?: Oazapfts.RequestOpts) {
+export function postApiV1OrderchangereportExportexcelxlsx(webApiModulesReportsOrderChangeReportOrderChangeReportRequest?: WebApiModulesReportsOrderChangeReportOrderChangeReportRequest, opts?: Oazapfts.RequestOpts) {
     return oazapfts.ok(oazapfts.fetchJson<{
         status: 200;
-        data: WebApiDataAppReportResponseRead;
+        data: FwCoreControllersFwDataControllerDoExportExcelXlsxExportFileAsyncResult;
     } | {
         status: 400;
         data: FwCoreApiSwashbuckleBadRequestResponse;
@@ -12065,7 +12554,7 @@ export function postApiV1OrderchangereportRunreport(webApiModulesReportsOrderCha
     } | {
         status: 500;
         data: FwStandardModelsFwApiException;
-    }>("/api/v1/orderchangereport/runreport", oazapfts.json({
+    }>("/api/v1/orderchangereport/exportexcelxlsx", oazapfts.json({
         ...opts,
         method: "POST",
         body: webApiModulesReportsOrderChangeReportOrderChangeReportRequest
@@ -12088,6 +12577,26 @@ export function getApiV1OrderchangereportEmptyobject(opts?: Oazapfts.RequestOpts
     }>("/api/v1/orderchangereport/emptyobject", {
         ...opts
     }));
+}
+export function postApiV1OrderchangereportRunreport(webApiModulesReportsOrderChangeReportOrderChangeReportRequest?: WebApiModulesReportsOrderChangeReportOrderChangeReportRequest, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.ok(oazapfts.fetchJson<{
+        status: 200;
+        data: WebApiDataAppReportResponseRead;
+    } | {
+        status: 400;
+        data: FwCoreApiSwashbuckleBadRequestResponse;
+    } | {
+        status: 401;
+    } | {
+        status: 403;
+    } | {
+        status: 500;
+        data: FwStandardModelsFwApiException;
+    }>("/api/v1/orderchangereport/runreport", oazapfts.json({
+        ...opts,
+        method: "POST",
+        body: webApiModulesReportsOrderChangeReportOrderChangeReportRequest
+    })));
 }
 export function getApiV1OrderchangereportPreview(opts?: Oazapfts.RequestOpts) {
     return oazapfts.ok(oazapfts.fetchJson<{
@@ -12360,6 +12869,202 @@ export function getApiV1OrderconflictreportPreview(opts?: Oazapfts.RequestOpts) 
         status: 500;
         data: FwStandardModelsFwApiException;
     }>("/api/v1/orderconflictreport/preview", {
+        ...opts
+    }));
+}
+export function postApiV1OrderdatesandbannersreportRender(fwStandardReportingFwReportRenderRequest?: FwStandardReportingFwReportRenderRequest, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.ok(oazapfts.fetchJson<{
+        status: 200;
+        data: FwStandardReportingFwReportRenderResponse;
+    } | {
+        status: 400;
+        data: FwCoreApiSwashbuckleBadRequestResponse;
+    } | {
+        status: 401;
+    } | {
+        status: 403;
+    } | {
+        status: 500;
+        data: FwStandardModelsFwApiException;
+    }>("/api/v1/orderdatesandbannersreport/render", oazapfts.json({
+        ...opts,
+        method: "POST",
+        body: fwStandardReportingFwReportRenderRequest
+    })));
+}
+export function postApiV1OrderdatesandbannersreportExportexcelxlsx(webApiModulesReportsOrderReportsOrderDatesAndBannersReportOrderDatesAndBannersReportRequest?: WebApiModulesReportsOrderReportsOrderDatesAndBannersReportOrderDatesAndBannersReportRequest, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.ok(oazapfts.fetchJson<{
+        status: 200;
+        data: FwCoreControllersFwDataControllerDoExportExcelXlsxExportFileAsyncResult;
+    } | {
+        status: 400;
+        data: FwCoreApiSwashbuckleBadRequestResponse;
+    } | {
+        status: 401;
+    } | {
+        status: 403;
+    } | {
+        status: 500;
+        data: FwStandardModelsFwApiException;
+    }>("/api/v1/orderdatesandbannersreport/exportexcelxlsx", oazapfts.json({
+        ...opts,
+        method: "POST",
+        body: webApiModulesReportsOrderReportsOrderDatesAndBannersReportOrderDatesAndBannersReportRequest
+    })));
+}
+export function postApiV1OrderdatesandbannersreportRunreport(webApiModulesReportsOrderReportsOrderDatesAndBannersReportOrderDatesAndBannersReportRequest?: WebApiModulesReportsOrderReportsOrderDatesAndBannersReportOrderDatesAndBannersReportRequest, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.ok(oazapfts.fetchJson<{
+        status: 200;
+        data: WebApiDataAppReportResponseRead;
+    } | {
+        status: 400;
+        data: FwCoreApiSwashbuckleBadRequestResponse;
+    } | {
+        status: 401;
+    } | {
+        status: 403;
+    } | {
+        status: 500;
+        data: FwStandardModelsFwApiException;
+    }>("/api/v1/orderdatesandbannersreport/runreport", oazapfts.json({
+        ...opts,
+        method: "POST",
+        body: webApiModulesReportsOrderReportsOrderDatesAndBannersReportOrderDatesAndBannersReportRequest
+    })));
+}
+export function postApiV1OrderdatesandbannersreportValidatewarehouseBrowse(fwStandardModelsBrowseRequest?: FwStandardModelsBrowseRequest, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.ok(oazapfts.fetchJson<{
+        status: 200;
+        data: FwStandardSqlServerFwJsonDataTableRead;
+    } | {
+        status: 400;
+        data: FwCoreApiSwashbuckleBadRequestResponse;
+    } | {
+        status: 401;
+    } | {
+        status: 403;
+    } | {
+        status: 500;
+        data: FwStandardModelsFwApiException;
+    }>("/api/v1/orderdatesandbannersreport/validatewarehouse/browse", oazapfts.json({
+        ...opts,
+        method: "POST",
+        body: fwStandardModelsBrowseRequest
+    })));
+}
+export function postApiV1OrderdatesandbannersreportValidatedepartmentBrowse(fwStandardModelsBrowseRequest?: FwStandardModelsBrowseRequest, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.ok(oazapfts.fetchJson<{
+        status: 200;
+        data: FwStandardSqlServerFwJsonDataTableRead;
+    } | {
+        status: 400;
+        data: FwCoreApiSwashbuckleBadRequestResponse;
+    } | {
+        status: 401;
+    } | {
+        status: 403;
+    } | {
+        status: 500;
+        data: FwStandardModelsFwApiException;
+    }>("/api/v1/orderdatesandbannersreport/validatedepartment/browse", oazapfts.json({
+        ...opts,
+        method: "POST",
+        body: fwStandardModelsBrowseRequest
+    })));
+}
+export function postApiV1OrderdatesandbannersreportValidateagentBrowse(fwStandardModelsBrowseRequest?: FwStandardModelsBrowseRequest, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.ok(oazapfts.fetchJson<{
+        status: 200;
+        data: FwStandardSqlServerFwJsonDataTableRead;
+    } | {
+        status: 400;
+        data: FwCoreApiSwashbuckleBadRequestResponse;
+    } | {
+        status: 401;
+    } | {
+        status: 403;
+    } | {
+        status: 500;
+        data: FwStandardModelsFwApiException;
+    }>("/api/v1/orderdatesandbannersreport/validateagent/browse", oazapfts.json({
+        ...opts,
+        method: "POST",
+        body: fwStandardModelsBrowseRequest
+    })));
+}
+export function postApiV1OrderdatesandbannersreportValidateofficelocationBrowse(fwStandardModelsBrowseRequest?: FwStandardModelsBrowseRequest, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.ok(oazapfts.fetchJson<{
+        status: 200;
+        data: FwStandardSqlServerFwJsonDataTableRead;
+    } | {
+        status: 400;
+        data: FwCoreApiSwashbuckleBadRequestResponse;
+    } | {
+        status: 401;
+    } | {
+        status: 403;
+    } | {
+        status: 500;
+        data: FwStandardModelsFwApiException;
+    }>("/api/v1/orderdatesandbannersreport/validateofficelocation/browse", oazapfts.json({
+        ...opts,
+        method: "POST",
+        body: fwStandardModelsBrowseRequest
+    })));
+}
+export function postApiV1OrderdatesandbannersreportValidateordertypeBrowse(fwStandardModelsBrowseRequest?: FwStandardModelsBrowseRequest, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.ok(oazapfts.fetchJson<{
+        status: 200;
+        data: FwStandardSqlServerFwJsonDataTableRead;
+    } | {
+        status: 400;
+        data: FwCoreApiSwashbuckleBadRequestResponse;
+    } | {
+        status: 401;
+    } | {
+        status: 403;
+    } | {
+        status: 500;
+        data: FwStandardModelsFwApiException;
+    }>("/api/v1/orderdatesandbannersreport/validateordertype/browse", oazapfts.json({
+        ...opts,
+        method: "POST",
+        body: fwStandardModelsBrowseRequest
+    })));
+}
+export function getApiV1OrderdatesandbannersreportEmptyobject(opts?: Oazapfts.RequestOpts) {
+    return oazapfts.ok(oazapfts.fetchJson<{
+        status: 200;
+        data: FwStandardSqlServerFwJsonDataTableRead;
+    } | {
+        status: 400;
+        data: FwCoreApiSwashbuckleBadRequestResponse;
+    } | {
+        status: 401;
+    } | {
+        status: 403;
+    } | {
+        status: 500;
+        data: FwStandardModelsFwApiException;
+    }>("/api/v1/orderdatesandbannersreport/emptyobject", {
+        ...opts
+    }));
+}
+export function getApiV1OrderdatesandbannersreportPreview(opts?: Oazapfts.RequestOpts) {
+    return oazapfts.ok(oazapfts.fetchJson<{
+        status: 200;
+        data: FwStandardSqlServerFwJsonDataTableRead;
+    } | {
+        status: 400;
+        data: FwCoreApiSwashbuckleBadRequestResponse;
+    } | {
+        status: 401;
+    } | {
+        status: 403;
+    } | {
+        status: 500;
+        data: FwStandardModelsFwApiException;
+    }>("/api/v1/orderdatesandbannersreport/preview", {
         ...opts
     }));
 }
@@ -13268,6 +13973,222 @@ export function getApiV1OutgoingshippinglabelPreview(opts?: Oazapfts.RequestOpts
         status: 500;
         data: FwStandardModelsFwApiException;
     }>("/api/v1/outgoingshippinglabel/preview", {
+        ...opts
+    }));
+}
+export function postApiV1OutstandingpurchasereportRender(fwStandardReportingFwReportRenderRequest?: FwStandardReportingFwReportRenderRequest, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.ok(oazapfts.fetchJson<{
+        status: 200;
+        data: FwStandardReportingFwReportRenderResponse;
+    } | {
+        status: 400;
+        data: FwCoreApiSwashbuckleBadRequestResponse;
+    } | {
+        status: 401;
+    } | {
+        status: 403;
+    } | {
+        status: 500;
+        data: FwStandardModelsFwApiException;
+    }>("/api/v1/outstandingpurchasereport/render", oazapfts.json({
+        ...opts,
+        method: "POST",
+        body: fwStandardReportingFwReportRenderRequest
+    })));
+}
+export function postApiV1OutstandingpurchasereportExportexcelxlsx(webApiModulesReportsVendorReportsOutstandingPurchaseReportOutstandingPurchaseReportRequest?: WebApiModulesReportsVendorReportsOutstandingPurchaseReportOutstandingPurchaseReportRequest, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.ok(oazapfts.fetchJson<{
+        status: 200;
+        data: FwCoreControllersFwDataControllerDoExportExcelXlsxExportFileAsyncResult;
+    } | {
+        status: 400;
+        data: FwCoreApiSwashbuckleBadRequestResponse;
+    } | {
+        status: 401;
+    } | {
+        status: 403;
+    } | {
+        status: 500;
+        data: FwStandardModelsFwApiException;
+    }>("/api/v1/outstandingpurchasereport/exportexcelxlsx", oazapfts.json({
+        ...opts,
+        method: "POST",
+        body: webApiModulesReportsVendorReportsOutstandingPurchaseReportOutstandingPurchaseReportRequest
+    })));
+}
+export function postApiV1OutstandingpurchasereportRunreport(webApiModulesReportsVendorReportsOutstandingPurchaseReportOutstandingPurchaseReportRequest?: WebApiModulesReportsVendorReportsOutstandingPurchaseReportOutstandingPurchaseReportRequest, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.ok(oazapfts.fetchJson<{
+        status: 200;
+        data: WebApiDataAppReportResponseRead;
+    } | {
+        status: 400;
+        data: FwCoreApiSwashbuckleBadRequestResponse;
+    } | {
+        status: 401;
+    } | {
+        status: 403;
+    } | {
+        status: 500;
+        data: FwStandardModelsFwApiException;
+    }>("/api/v1/outstandingpurchasereport/runreport", oazapfts.json({
+        ...opts,
+        method: "POST",
+        body: webApiModulesReportsVendorReportsOutstandingPurchaseReportOutstandingPurchaseReportRequest
+    })));
+}
+export function postApiV1OutstandingpurchasereportValidatewarehouseBrowse(fwStandardModelsBrowseRequest?: FwStandardModelsBrowseRequest, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.ok(oazapfts.fetchJson<{
+        status: 200;
+        data: FwStandardSqlServerFwJsonDataTableRead;
+    } | {
+        status: 400;
+        data: FwCoreApiSwashbuckleBadRequestResponse;
+    } | {
+        status: 401;
+    } | {
+        status: 403;
+    } | {
+        status: 500;
+        data: FwStandardModelsFwApiException;
+    }>("/api/v1/outstandingpurchasereport/validatewarehouse/browse", oazapfts.json({
+        ...opts,
+        method: "POST",
+        body: fwStandardModelsBrowseRequest
+    })));
+}
+export function postApiV1OutstandingpurchasereportValidatedepartmentBrowse(fwStandardModelsBrowseRequest?: FwStandardModelsBrowseRequest, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.ok(oazapfts.fetchJson<{
+        status: 200;
+        data: FwStandardSqlServerFwJsonDataTableRead;
+    } | {
+        status: 400;
+        data: FwCoreApiSwashbuckleBadRequestResponse;
+    } | {
+        status: 401;
+    } | {
+        status: 403;
+    } | {
+        status: 500;
+        data: FwStandardModelsFwApiException;
+    }>("/api/v1/outstandingpurchasereport/validatedepartment/browse", oazapfts.json({
+        ...opts,
+        method: "POST",
+        body: fwStandardModelsBrowseRequest
+    })));
+}
+export function postApiV1OutstandingpurchasereportValidatecategoryBrowse(fwStandardModelsBrowseRequest?: FwStandardModelsBrowseRequest, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.ok(oazapfts.fetchJson<{
+        status: 200;
+        data: FwStandardSqlServerFwJsonDataTableRead;
+    } | {
+        status: 400;
+        data: FwCoreApiSwashbuckleBadRequestResponse;
+    } | {
+        status: 401;
+    } | {
+        status: 403;
+    } | {
+        status: 500;
+        data: FwStandardModelsFwApiException;
+    }>("/api/v1/outstandingpurchasereport/validatecategory/browse", oazapfts.json({
+        ...opts,
+        method: "POST",
+        body: fwStandardModelsBrowseRequest
+    })));
+}
+export function postApiV1OutstandingpurchasereportValidateinventoryBrowse(fwStandardModelsBrowseRequest?: FwStandardModelsBrowseRequest, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.ok(oazapfts.fetchJson<{
+        status: 200;
+        data: FwStandardSqlServerFwJsonDataTableRead;
+    } | {
+        status: 400;
+        data: FwCoreApiSwashbuckleBadRequestResponse;
+    } | {
+        status: 401;
+    } | {
+        status: 403;
+    } | {
+        status: 500;
+        data: FwStandardModelsFwApiException;
+    }>("/api/v1/outstandingpurchasereport/validateinventory/browse", oazapfts.json({
+        ...opts,
+        method: "POST",
+        body: fwStandardModelsBrowseRequest
+    })));
+}
+export function postApiV1OutstandingpurchasereportValidatepotypeBrowse(fwStandardModelsBrowseRequest?: FwStandardModelsBrowseRequest, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.ok(oazapfts.fetchJson<{
+        status: 200;
+        data: FwStandardSqlServerFwJsonDataTableRead;
+    } | {
+        status: 400;
+        data: FwCoreApiSwashbuckleBadRequestResponse;
+    } | {
+        status: 401;
+    } | {
+        status: 403;
+    } | {
+        status: 500;
+        data: FwStandardModelsFwApiException;
+    }>("/api/v1/outstandingpurchasereport/validatepotype/browse", oazapfts.json({
+        ...opts,
+        method: "POST",
+        body: fwStandardModelsBrowseRequest
+    })));
+}
+export function postApiV1OutstandingpurchasereportValidatevendorBrowse(fwStandardModelsBrowseRequest?: FwStandardModelsBrowseRequest, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.ok(oazapfts.fetchJson<{
+        status: 200;
+        data: FwStandardSqlServerFwJsonDataTableRead;
+    } | {
+        status: 400;
+        data: FwCoreApiSwashbuckleBadRequestResponse;
+    } | {
+        status: 401;
+    } | {
+        status: 403;
+    } | {
+        status: 500;
+        data: FwStandardModelsFwApiException;
+    }>("/api/v1/outstandingpurchasereport/validatevendor/browse", oazapfts.json({
+        ...opts,
+        method: "POST",
+        body: fwStandardModelsBrowseRequest
+    })));
+}
+export function getApiV1OutstandingpurchasereportEmptyobject(opts?: Oazapfts.RequestOpts) {
+    return oazapfts.ok(oazapfts.fetchJson<{
+        status: 200;
+        data: FwStandardSqlServerFwJsonDataTableRead;
+    } | {
+        status: 400;
+        data: FwCoreApiSwashbuckleBadRequestResponse;
+    } | {
+        status: 401;
+    } | {
+        status: 403;
+    } | {
+        status: 500;
+        data: FwStandardModelsFwApiException;
+    }>("/api/v1/outstandingpurchasereport/emptyobject", {
+        ...opts
+    }));
+}
+export function getApiV1OutstandingpurchasereportPreview(opts?: Oazapfts.RequestOpts) {
+    return oazapfts.ok(oazapfts.fetchJson<{
+        status: 200;
+        data: FwStandardSqlServerFwJsonDataTableRead;
+    } | {
+        status: 400;
+        data: FwCoreApiSwashbuckleBadRequestResponse;
+    } | {
+        status: 401;
+    } | {
+        status: 403;
+    } | {
+        status: 500;
+        data: FwStandardModelsFwApiException;
+    }>("/api/v1/outstandingpurchasereport/preview", {
         ...opts
     }));
 }
@@ -18143,6 +19064,26 @@ export function postApiV1QuikactivityreportValidatedepartmentBrowse(fwStandardMo
         body: fwStandardModelsBrowseRequest
     })));
 }
+export function postApiV1QuikactivityreportValidatedealBrowse(fwStandardModelsBrowseRequest?: FwStandardModelsBrowseRequest, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.ok(oazapfts.fetchJson<{
+        status: 200;
+        data: FwStandardSqlServerFwJsonDataTableRead;
+    } | {
+        status: 400;
+        data: FwCoreApiSwashbuckleBadRequestResponse;
+    } | {
+        status: 401;
+    } | {
+        status: 403;
+    } | {
+        status: 500;
+        data: FwStandardModelsFwApiException;
+    }>("/api/v1/quikactivityreport/validatedeal/browse", oazapfts.json({
+        ...opts,
+        method: "POST",
+        body: fwStandardModelsBrowseRequest
+    })));
+}
 export function postApiV1QuikactivityreportValidateagentBrowse(fwStandardModelsBrowseRequest?: FwStandardModelsBrowseRequest, opts?: Oazapfts.RequestOpts) {
     return oazapfts.ok(oazapfts.fetchJson<{
         status: 200;
@@ -21436,6 +22377,182 @@ export function getApiV1RentalinventoryqcrequiredreportPreview(opts?: Oazapfts.R
         status: 500;
         data: FwStandardModelsFwApiException;
     }>("/api/v1/rentalinventoryqcrequiredreport/preview", {
+        ...opts
+    }));
+}
+export function postApiV1RentalinventoryquantityownedreportRender(fwStandardReportingFwReportRenderRequest?: FwStandardReportingFwReportRenderRequest, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.ok(oazapfts.fetchJson<{
+        status: 200;
+        data: FwStandardReportingFwReportRenderResponse;
+    } | {
+        status: 400;
+        data: FwCoreApiSwashbuckleBadRequestResponse;
+    } | {
+        status: 401;
+    } | {
+        status: 403;
+    } | {
+        status: 500;
+        data: FwStandardModelsFwApiException;
+    }>("/api/v1/rentalinventoryquantityownedreport/render", oazapfts.json({
+        ...opts,
+        method: "POST",
+        body: fwStandardReportingFwReportRenderRequest
+    })));
+}
+export function postApiV1RentalinventoryquantityownedreportExportexcelxlsx(webApiModulesReportsRentalInventoryReportsRentalInventoryQuantityOwnedReportRentalInventoryQuantityOwnedReportRequest?: WebApiModulesReportsRentalInventoryReportsRentalInventoryQuantityOwnedReportRentalInventoryQuantityOwnedReportRequest, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.ok(oazapfts.fetchJson<{
+        status: 200;
+        data: FwCoreControllersFwDataControllerDoExportExcelXlsxExportFileAsyncResult;
+    } | {
+        status: 400;
+        data: FwCoreApiSwashbuckleBadRequestResponse;
+    } | {
+        status: 401;
+    } | {
+        status: 403;
+    } | {
+        status: 500;
+        data: FwStandardModelsFwApiException;
+    }>("/api/v1/rentalinventoryquantityownedreport/exportexcelxlsx", oazapfts.json({
+        ...opts,
+        method: "POST",
+        body: webApiModulesReportsRentalInventoryReportsRentalInventoryQuantityOwnedReportRentalInventoryQuantityOwnedReportRequest
+    })));
+}
+export function postApiV1RentalinventoryquantityownedreportRunreport(webApiModulesReportsRentalInventoryReportsRentalInventoryQuantityOwnedReportRentalInventoryQuantityOwnedReportRequest?: WebApiModulesReportsRentalInventoryReportsRentalInventoryQuantityOwnedReportRentalInventoryQuantityOwnedReportRequest, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.ok(oazapfts.fetchJson<{
+        status: 200;
+        data: WebApiDataAppReportResponseRead;
+    } | {
+        status: 400;
+        data: FwCoreApiSwashbuckleBadRequestResponse;
+    } | {
+        status: 401;
+    } | {
+        status: 403;
+    } | {
+        status: 500;
+        data: FwStandardModelsFwApiException;
+    }>("/api/v1/rentalinventoryquantityownedreport/runreport", oazapfts.json({
+        ...opts,
+        method: "POST",
+        body: webApiModulesReportsRentalInventoryReportsRentalInventoryQuantityOwnedReportRentalInventoryQuantityOwnedReportRequest
+    })));
+}
+export function postApiV1RentalinventoryquantityownedreportValidateinventorytypeBrowse(fwStandardModelsBrowseRequest?: FwStandardModelsBrowseRequest, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.ok(oazapfts.fetchJson<{
+        status: 200;
+        data: FwStandardSqlServerFwJsonDataTableRead;
+    } | {
+        status: 400;
+        data: FwCoreApiSwashbuckleBadRequestResponse;
+    } | {
+        status: 401;
+    } | {
+        status: 403;
+    } | {
+        status: 500;
+        data: FwStandardModelsFwApiException;
+    }>("/api/v1/rentalinventoryquantityownedreport/validateinventorytype/browse", oazapfts.json({
+        ...opts,
+        method: "POST",
+        body: fwStandardModelsBrowseRequest
+    })));
+}
+export function postApiV1RentalinventoryquantityownedreportValidatecategoryBrowse(fwStandardModelsBrowseRequest?: FwStandardModelsBrowseRequest, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.ok(oazapfts.fetchJson<{
+        status: 200;
+        data: FwStandardSqlServerFwJsonDataTableRead;
+    } | {
+        status: 400;
+        data: FwCoreApiSwashbuckleBadRequestResponse;
+    } | {
+        status: 401;
+    } | {
+        status: 403;
+    } | {
+        status: 500;
+        data: FwStandardModelsFwApiException;
+    }>("/api/v1/rentalinventoryquantityownedreport/validatecategory/browse", oazapfts.json({
+        ...opts,
+        method: "POST",
+        body: fwStandardModelsBrowseRequest
+    })));
+}
+export function postApiV1RentalinventoryquantityownedreportValidateinventoryBrowse(fwStandardModelsBrowseRequest?: FwStandardModelsBrowseRequest, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.ok(oazapfts.fetchJson<{
+        status: 200;
+        data: FwStandardSqlServerFwJsonDataTableRead;
+    } | {
+        status: 400;
+        data: FwCoreApiSwashbuckleBadRequestResponse;
+    } | {
+        status: 401;
+    } | {
+        status: 403;
+    } | {
+        status: 500;
+        data: FwStandardModelsFwApiException;
+    }>("/api/v1/rentalinventoryquantityownedreport/validateinventory/browse", oazapfts.json({
+        ...opts,
+        method: "POST",
+        body: fwStandardModelsBrowseRequest
+    })));
+}
+export function postApiV1RentalinventoryquantityownedreportValidatewarehouseBrowse(fwStandardModelsBrowseRequest?: FwStandardModelsBrowseRequest, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.ok(oazapfts.fetchJson<{
+        status: 200;
+        data: FwStandardSqlServerFwJsonDataTableRead;
+    } | {
+        status: 400;
+        data: FwCoreApiSwashbuckleBadRequestResponse;
+    } | {
+        status: 401;
+    } | {
+        status: 403;
+    } | {
+        status: 500;
+        data: FwStandardModelsFwApiException;
+    }>("/api/v1/rentalinventoryquantityownedreport/validatewarehouse/browse", oazapfts.json({
+        ...opts,
+        method: "POST",
+        body: fwStandardModelsBrowseRequest
+    })));
+}
+export function getApiV1RentalinventoryquantityownedreportEmptyobject(opts?: Oazapfts.RequestOpts) {
+    return oazapfts.ok(oazapfts.fetchJson<{
+        status: 200;
+        data: FwStandardSqlServerFwJsonDataTableRead;
+    } | {
+        status: 400;
+        data: FwCoreApiSwashbuckleBadRequestResponse;
+    } | {
+        status: 401;
+    } | {
+        status: 403;
+    } | {
+        status: 500;
+        data: FwStandardModelsFwApiException;
+    }>("/api/v1/rentalinventoryquantityownedreport/emptyobject", {
+        ...opts
+    }));
+}
+export function getApiV1RentalinventoryquantityownedreportPreview(opts?: Oazapfts.RequestOpts) {
+    return oazapfts.ok(oazapfts.fetchJson<{
+        status: 200;
+        data: FwStandardSqlServerFwJsonDataTableRead;
+    } | {
+        status: 400;
+        data: FwCoreApiSwashbuckleBadRequestResponse;
+    } | {
+        status: 401;
+    } | {
+        status: 403;
+    } | {
+        status: 500;
+        data: FwStandardModelsFwApiException;
+    }>("/api/v1/rentalinventoryquantityownedreport/preview", {
         ...opts
     }));
 }

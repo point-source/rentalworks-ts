@@ -76,6 +76,7 @@ export type FwStandardSqlServerFwJsonDataTable = {
     TotalPages?: number;
     TotalRows?: number;
     DateFields?: string[] | null;
+    ServerVersion?: string | null;
     _Translation?: FwStandardDataFwTranslatedValue[] | null;
 };
 export type FwStandardSqlServerFwJsonDataTableRead = {
@@ -95,6 +96,7 @@ export type FwStandardSqlServerFwJsonDataTableRead = {
     ColumnNameByIndex?: {
         [key: string]: string | null;
     } | null;
+    ServerVersion?: string | null;
     _Translation?: FwStandardDataFwTranslatedValue[] | null;
 };
 export type FwCoreApiSwashbuckleBadRequestResponse = {
@@ -969,6 +971,26 @@ export type WebApiModulesAdministratorCustomReportLayoutCustomReportLayoutContro
     WebpackReportCss?: string | null;
     ReportCss?: string | null;
 };
+export type FwStandardModelsDataField = {
+    Name?: string | null;
+    Value?: string | null;
+    Type?: string | null;
+};
+export type FwStandardModelsCopyLogicRequest = {
+    DataFields?: FwStandardModelsDataField[] | null;
+};
+export type FwStandardModelsCopyLogicResponse = {
+    status?: number;
+    success?: boolean;
+    msg?: string | null;
+    Copy?: FwStandardBusinessLogicFwBusinessLogic;
+};
+export type FwStandardModelsCopyLogicResponseRead = {
+    status?: number;
+    success?: boolean;
+    msg?: string | null;
+    Copy?: FwStandardBusinessLogicFwBusinessLogicRead;
+};
 export type WebApiModulesAdministratorControlsCustomReportLayoutGroupCustomReportLayoutGroup = {
     /** Format: Text, IsPrimaryKey: true */
     CustomReportLayoutGroupId?: string | null;
@@ -1190,7 +1212,7 @@ export type FwStandardModelsFwQueryResponseWebApiModulesAdministratorDataHealthD
 export type WebApiModulesAdministratorDataHealthCheckDataHealthRequest = {
     SessionId?: string | null;
 };
-export type WebApiLogicTSpStatusResponse = {
+export type FwStandardSqlServerTSpStatusResponse = {
     status?: number;
     success?: boolean;
     msg?: string | null;
@@ -2355,6 +2377,8 @@ export type WebApiModulesAdministratorUserUser = {
     /** Format: Boolean */
     DisableInsertIntoActiveOrder?: boolean | null;
     /** Format: Boolean */
+    AutoPrintContract?: boolean | null;
+    /** Format: Boolean */
     Inactive?: boolean | null;
     /** Format: UTCDateTime, Total digits: 23, Decimal places: 3 */
     DateStamp?: string | null;
@@ -2374,18 +2398,9 @@ export type WebApiModulesAdministratorUserUser = {
     HomeMenuGuid?: string | null;
     /** Format: Text */
     HomeMenuPath?: string | null;
-    /** Format: Text */
-    SuccessSoundId?: string | null;
-    SuccessSound?: string | null;
-    SuccessBase64Sound?: string | null;
-    /** Format: Text */
-    ErrorSoundId?: string | null;
-    ErrorSound?: string | null;
-    ErrorBase64Sound?: string | null;
-    /** Format: Text */
-    NotificationSoundId?: string | null;
-    NotificationSound?: string | null;
-    NotificationBase64Sound?: string | null;
+    /** Format: Integer */
+    SoundProfileId?: number | null;
+    SoundProfileName?: string | null;
     /** Format: Integer */
     FirstDayOfWeek?: number | null;
     /** Format: Boolean */
@@ -2630,6 +2645,8 @@ export type WebApiModulesAdministratorUserUserRead = {
     /** Format: Boolean */
     DisableInsertIntoActiveOrder?: boolean | null;
     /** Format: Boolean */
+    AutoPrintContract?: boolean | null;
+    /** Format: Boolean */
     Inactive?: boolean | null;
     /** Format: UTCDateTime, Total digits: 23, Decimal places: 3 */
     DateStamp?: string | null;
@@ -2649,18 +2666,9 @@ export type WebApiModulesAdministratorUserUserRead = {
     HomeMenuGuid?: string | null;
     /** Format: Text */
     HomeMenuPath?: string | null;
-    /** Format: Text */
-    SuccessSoundId?: string | null;
-    SuccessSound?: string | null;
-    SuccessBase64Sound?: string | null;
-    /** Format: Text */
-    ErrorSoundId?: string | null;
-    ErrorSound?: string | null;
-    ErrorBase64Sound?: string | null;
-    /** Format: Text */
-    NotificationSoundId?: string | null;
-    NotificationSound?: string | null;
-    NotificationBase64Sound?: string | null;
+    /** Format: Integer */
+    SoundProfileId?: number | null;
+    SoundProfileName?: string | null;
     /** Format: Integer */
     FirstDayOfWeek?: number | null;
     /** Format: Boolean */
@@ -2897,16 +2905,12 @@ export type FwStandardModulesAdministratorWebEventLogWebEventLogLogicRead = {
     _ModifiedByUserName?: string | null;
     _ModifiedDateTime?: string | null;
 };
-export type WebApiModulesSettingsWidgetGroupWidgetGroup = {
-    /** Format: Text, IsPrimaryKey: true */
+export type FwStandardModulesSettingsWidgetGroupWidgetGroupLogic = {
     WidgetGroupId?: string | null;
-    /** Format: Text */
     WidgetId?: string | null;
     WidgetDescription?: string | null;
-    /** Format: Text */
     GroupId?: string | null;
     GroupName?: string | null;
-    /** Format: UTCDateTime */
     DateStamp?: string | null;
     AuditNote?: string | null;
     _Custom?: FwStandardDataFwCustomValue[] | null;
@@ -2921,16 +2925,12 @@ export type WebApiModulesSettingsWidgetGroupWidgetGroup = {
     _ModifiedByUserName?: string | null;
     _ModifiedDateTime?: string | null;
 };
-export type WebApiModulesSettingsWidgetGroupWidgetGroupRead = {
-    /** Format: Text, IsPrimaryKey: true */
+export type FwStandardModulesSettingsWidgetGroupWidgetGroupLogicRead = {
     WidgetGroupId?: string | null;
-    /** Format: Text */
     WidgetId?: string | null;
     WidgetDescription?: string | null;
-    /** Format: Text */
     GroupId?: string | null;
     GroupName?: string | null;
-    /** Format: UTCDateTime */
     DateStamp?: string | null;
     AuditNote?: string | null;
     RecordTitle?: string | null;
@@ -2947,31 +2947,27 @@ export type WebApiModulesSettingsWidgetGroupWidgetGroupRead = {
     _ModifiedByUserName?: string | null;
     _ModifiedDateTime?: string | null;
 };
-export type FwStandardModelsFwQueryResponseWebApiModulesSettingsWidgetGroupWidgetGroupLogic = {
-    Items?: WebApiModulesSettingsWidgetGroupWidgetGroup[] | null;
+export type FwStandardModelsFwQueryResponseFwStandardModulesSettingsWidgetGroupWidgetGroupLogic = {
+    Items?: FwStandardModulesSettingsWidgetGroupWidgetGroupLogic[] | null;
     PageNo?: number;
     PageSize?: number;
     TotalItems?: number;
     Sort?: string | null;
 };
-export type FwStandardModelsFwQueryResponseWebApiModulesSettingsWidgetGroupWidgetGroupLogicRead = {
-    Items?: WebApiModulesSettingsWidgetGroupWidgetGroupRead[] | null;
+export type FwStandardModelsFwQueryResponseFwStandardModulesSettingsWidgetGroupWidgetGroupLogicRead = {
+    Items?: FwStandardModulesSettingsWidgetGroupWidgetGroupLogicRead[] | null;
     PageNo?: number;
     PageSize?: number;
     TotalItems?: number;
     Sort?: string | null;
 };
-export type WebApiModulesSettingsWidgetUserWidgetUser = {
-    /** Format: Text, IsPrimaryKey: true */
+export type FwStandardModulesSettingsWidgetUserWidgetUserLogic = {
     WidgetUserId?: string | null;
-    /** Format: Text */
     WidgetId?: string | null;
     WidgetDescription?: string | null;
-    /** Format: Text */
     WebUserId?: string | null;
     UserId?: string | null;
     UserName?: string | null;
-    /** Format: UTCDateTime */
     DateStamp?: string | null;
     AuditNote?: string | null;
     _Custom?: FwStandardDataFwCustomValue[] | null;
@@ -2986,17 +2982,13 @@ export type WebApiModulesSettingsWidgetUserWidgetUser = {
     _ModifiedByUserName?: string | null;
     _ModifiedDateTime?: string | null;
 };
-export type WebApiModulesSettingsWidgetUserWidgetUserRead = {
-    /** Format: Text, IsPrimaryKey: true */
+export type FwStandardModulesSettingsWidgetUserWidgetUserLogicRead = {
     WidgetUserId?: string | null;
-    /** Format: Text */
     WidgetId?: string | null;
     WidgetDescription?: string | null;
-    /** Format: Text */
     WebUserId?: string | null;
     UserId?: string | null;
     UserName?: string | null;
-    /** Format: UTCDateTime */
     DateStamp?: string | null;
     AuditNote?: string | null;
     RecordTitle?: string | null;
@@ -3013,15 +3005,15 @@ export type WebApiModulesSettingsWidgetUserWidgetUserRead = {
     _ModifiedByUserName?: string | null;
     _ModifiedDateTime?: string | null;
 };
-export type FwStandardModelsFwQueryResponseWebApiModulesSettingsWidgetUserWidgetUserLogic = {
-    Items?: WebApiModulesSettingsWidgetUserWidgetUser[] | null;
+export type FwStandardModelsFwQueryResponseFwStandardModulesSettingsWidgetUserWidgetUserLogic = {
+    Items?: FwStandardModulesSettingsWidgetUserWidgetUserLogic[] | null;
     PageNo?: number;
     PageSize?: number;
     TotalItems?: number;
     Sort?: string | null;
 };
-export type FwStandardModelsFwQueryResponseWebApiModulesSettingsWidgetUserWidgetUserLogicRead = {
-    Items?: WebApiModulesSettingsWidgetUserWidgetUserRead[] | null;
+export type FwStandardModelsFwQueryResponseFwStandardModulesSettingsWidgetUserWidgetUserLogicRead = {
+    Items?: FwStandardModulesSettingsWidgetUserWidgetUserLogicRead[] | null;
     PageNo?: number;
     PageSize?: number;
     TotalItems?: number;
@@ -4808,6 +4800,26 @@ export function postApiV1CustomreportlayoutValidatecustomcssBrowse(fwStandardMod
         body: fwStandardModelsBrowseRequest
     })));
 }
+export function postApiV1CustomreportlayoutByIdCopy(id: string, fwStandardModelsCopyLogicRequest?: FwStandardModelsCopyLogicRequest, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.ok(oazapfts.fetchJson<{
+        status: 200;
+        data: FwStandardModelsCopyLogicResponseRead;
+    } | {
+        status: 400;
+        data: FwCoreApiSwashbuckleBadRequestResponse;
+    } | {
+        status: 401;
+    } | {
+        status: 403;
+    } | {
+        status: 500;
+        data: FwStandardModelsFwApiException;
+    }>(`/api/v1/customreportlayout/${encodeURIComponent(id)}/copy`, oazapfts.json({
+        ...opts,
+        method: "POST",
+        body: fwStandardModelsCopyLogicRequest
+    })));
+}
 export function postApiV1CustomreportlayoutgroupBrowse(fwStandardModelsBrowseRequest?: FwStandardModelsBrowseRequest, opts?: Oazapfts.RequestOpts) {
     return oazapfts.ok(oazapfts.fetchJson<{
         status: 200;
@@ -5267,7 +5279,7 @@ export function putApiV1DatahealthById(id: string, webApiModulesAdministratorDat
 export function postApiV1DatahealthCheckdatahealth(webApiModulesAdministratorDataHealthCheckDataHealthRequest?: WebApiModulesAdministratorDataHealthCheckDataHealthRequest, opts?: Oazapfts.RequestOpts) {
     return oazapfts.ok(oazapfts.fetchJson<{
         status: 200;
-        data: WebApiLogicTSpStatusResponse;
+        data: FwStandardSqlServerTSpStatusResponse;
     } | {
         status: 400;
         data: FwCoreApiSwashbuckleBadRequestResponse;
@@ -6094,6 +6106,26 @@ export function deleteApiV1GroupById(id: string, opts?: Oazapfts.RequestOpts) {
         method: "DELETE"
     }));
 }
+export function postApiV1GroupByIdCopy(id: string, fwStandardModelsCopyLogicRequest?: FwStandardModelsCopyLogicRequest, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.ok(oazapfts.fetchJson<{
+        status: 200;
+        data: FwStandardModelsCopyLogicResponseRead;
+    } | {
+        status: 400;
+        data: FwCoreApiSwashbuckleBadRequestResponse;
+    } | {
+        status: 401;
+    } | {
+        status: 403;
+    } | {
+        status: 500;
+        data: FwStandardModelsFwApiException;
+    }>(`/api/v1/group/${encodeURIComponent(id)}/copy`, oazapfts.json({
+        ...opts,
+        method: "POST",
+        body: fwStandardModelsCopyLogicRequest
+    })));
+}
 export function getApiV1GroupApplicationtreeById(id: string, opts?: Oazapfts.RequestOpts) {
     return oazapfts.ok(oazapfts.fetchJson<{
         status: 200;
@@ -6489,6 +6521,27 @@ export function postApiV1HubspotGetcontactsepoch(webApiModulesAccountServicesHub
         method: "POST",
         body: webApiModulesAccountServicesHubSpotSearchHubSpotContactsWithinPeriodRequest
     })));
+}
+export function getJspm({ timestamp }: {
+    timestamp?: string;
+} = {}, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.ok(oazapfts.fetchJson<{
+        status: 200;
+    } | {
+        status: 400;
+        data: FwCoreApiSwashbuckleBadRequestResponse;
+    } | {
+        status: 401;
+    } | {
+        status: 403;
+    } | {
+        status: 500;
+        data: FwStandardModelsFwApiException;
+    }>(`/jspm${QS.query(QS.explode({
+        timestamp
+    }))}`, {
+        ...opts
+    }));
 }
 export function postApiV1PersonBrowse(fwStandardModelsBrowseRequest?: FwStandardModelsBrowseRequest, opts?: Oazapfts.RequestOpts) {
     return oazapfts.ok(oazapfts.fetchJson<{
@@ -7420,6 +7473,26 @@ export function deleteApiV1UserById(id: string, opts?: Oazapfts.RequestOpts) {
         method: "DELETE"
     }));
 }
+export function postApiV1UserByIdCopy(id: string, fwStandardModelsCopyLogicRequest?: FwStandardModelsCopyLogicRequest, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.ok(oazapfts.fetchJson<{
+        status: 200;
+        data: FwStandardModelsCopyLogicResponseRead;
+    } | {
+        status: 400;
+        data: FwCoreApiSwashbuckleBadRequestResponse;
+    } | {
+        status: 401;
+    } | {
+        status: 403;
+    } | {
+        status: 500;
+        data: FwStandardModelsFwApiException;
+    }>(`/api/v1/user/${encodeURIComponent(id)}/copy`, oazapfts.json({
+        ...opts,
+        method: "POST",
+        body: fwStandardModelsCopyLogicRequest
+    })));
+}
 export function postApiV1UserCreateusersalesrepresentativecontactById(id: string, opts?: Oazapfts.RequestOpts) {
     return oazapfts.ok(oazapfts.fetchJson<{
         status: 200;
@@ -8193,7 +8266,7 @@ export function getApiV1Widgetgroup({ pageno, pagesize, sort, filter }: {
 } = {}, opts?: Oazapfts.RequestOpts) {
     return oazapfts.ok(oazapfts.fetchJson<{
         status: 200;
-        data: FwStandardModelsFwQueryResponseWebApiModulesSettingsWidgetGroupWidgetGroupLogicRead;
+        data: FwStandardModelsFwQueryResponseFwStandardModulesSettingsWidgetGroupWidgetGroupLogicRead;
     } | {
         status: 400;
         data: FwCoreApiSwashbuckleBadRequestResponse;
@@ -8213,10 +8286,10 @@ export function getApiV1Widgetgroup({ pageno, pagesize, sort, filter }: {
         ...opts
     }));
 }
-export function postApiV1Widgetgroup(webApiModulesSettingsWidgetGroupWidgetGroup?: WebApiModulesSettingsWidgetGroupWidgetGroup, opts?: Oazapfts.RequestOpts) {
+export function postApiV1Widgetgroup(fwStandardModulesSettingsWidgetGroupWidgetGroupLogic?: FwStandardModulesSettingsWidgetGroupWidgetGroupLogic, opts?: Oazapfts.RequestOpts) {
     return oazapfts.ok(oazapfts.fetchJson<{
         status: 200;
-        data: WebApiModulesSettingsWidgetGroupWidgetGroupRead;
+        data: FwStandardModulesSettingsWidgetGroupWidgetGroupLogicRead;
     } | {
         status: 400;
         data: FwCoreApiSwashbuckleBadRequestResponse;
@@ -8230,13 +8303,13 @@ export function postApiV1Widgetgroup(webApiModulesSettingsWidgetGroupWidgetGroup
     }>("/api/v1/widgetgroup", oazapfts.json({
         ...opts,
         method: "POST",
-        body: webApiModulesSettingsWidgetGroupWidgetGroup
+        body: fwStandardModulesSettingsWidgetGroupWidgetGroupLogic
     })));
 }
 export function getApiV1WidgetgroupById(id: string, opts?: Oazapfts.RequestOpts) {
     return oazapfts.ok(oazapfts.fetchJson<{
         status: 200;
-        data: WebApiModulesSettingsWidgetGroupWidgetGroupRead;
+        data: FwStandardModulesSettingsWidgetGroupWidgetGroupLogicRead;
     } | {
         status: 400;
         data: FwCoreApiSwashbuckleBadRequestResponse;
@@ -8251,10 +8324,10 @@ export function getApiV1WidgetgroupById(id: string, opts?: Oazapfts.RequestOpts)
         ...opts
     }));
 }
-export function putApiV1WidgetgroupById(id: string, webApiModulesSettingsWidgetGroupWidgetGroup?: WebApiModulesSettingsWidgetGroupWidgetGroup, opts?: Oazapfts.RequestOpts) {
+export function putApiV1WidgetgroupById(id: string, fwStandardModulesSettingsWidgetGroupWidgetGroupLogic?: FwStandardModulesSettingsWidgetGroupWidgetGroupLogic, opts?: Oazapfts.RequestOpts) {
     return oazapfts.ok(oazapfts.fetchJson<{
         status: 200;
-        data: WebApiModulesSettingsWidgetGroupWidgetGroupRead;
+        data: FwStandardModulesSettingsWidgetGroupWidgetGroupLogicRead;
     } | {
         status: 400;
         data: FwCoreApiSwashbuckleBadRequestResponse;
@@ -8268,7 +8341,7 @@ export function putApiV1WidgetgroupById(id: string, webApiModulesSettingsWidgetG
     }>(`/api/v1/widgetgroup/${encodeURIComponent(id)}`, oazapfts.json({
         ...opts,
         method: "PUT",
-        body: webApiModulesSettingsWidgetGroupWidgetGroup
+        body: fwStandardModulesSettingsWidgetGroupWidgetGroupLogic
     })));
 }
 export function deleteApiV1WidgetgroupById(id: string, opts?: Oazapfts.RequestOpts) {
@@ -8358,7 +8431,7 @@ export function getApiV1Widgetuser({ pageno, pagesize, sort, filter }: {
 } = {}, opts?: Oazapfts.RequestOpts) {
     return oazapfts.ok(oazapfts.fetchJson<{
         status: 200;
-        data: FwStandardModelsFwQueryResponseWebApiModulesSettingsWidgetUserWidgetUserLogicRead;
+        data: FwStandardModelsFwQueryResponseFwStandardModulesSettingsWidgetUserWidgetUserLogicRead;
     } | {
         status: 400;
         data: FwCoreApiSwashbuckleBadRequestResponse;
@@ -8378,10 +8451,10 @@ export function getApiV1Widgetuser({ pageno, pagesize, sort, filter }: {
         ...opts
     }));
 }
-export function postApiV1Widgetuser(webApiModulesSettingsWidgetUserWidgetUser?: WebApiModulesSettingsWidgetUserWidgetUser, opts?: Oazapfts.RequestOpts) {
+export function postApiV1Widgetuser(fwStandardModulesSettingsWidgetUserWidgetUserLogic?: FwStandardModulesSettingsWidgetUserWidgetUserLogic, opts?: Oazapfts.RequestOpts) {
     return oazapfts.ok(oazapfts.fetchJson<{
         status: 200;
-        data: WebApiModulesSettingsWidgetUserWidgetUserRead;
+        data: FwStandardModulesSettingsWidgetUserWidgetUserLogicRead;
     } | {
         status: 400;
         data: FwCoreApiSwashbuckleBadRequestResponse;
@@ -8395,13 +8468,13 @@ export function postApiV1Widgetuser(webApiModulesSettingsWidgetUserWidgetUser?: 
     }>("/api/v1/widgetuser", oazapfts.json({
         ...opts,
         method: "POST",
-        body: webApiModulesSettingsWidgetUserWidgetUser
+        body: fwStandardModulesSettingsWidgetUserWidgetUserLogic
     })));
 }
 export function getApiV1WidgetuserById(id: string, opts?: Oazapfts.RequestOpts) {
     return oazapfts.ok(oazapfts.fetchJson<{
         status: 200;
-        data: WebApiModulesSettingsWidgetUserWidgetUserRead;
+        data: FwStandardModulesSettingsWidgetUserWidgetUserLogicRead;
     } | {
         status: 400;
         data: FwCoreApiSwashbuckleBadRequestResponse;
@@ -8416,10 +8489,10 @@ export function getApiV1WidgetuserById(id: string, opts?: Oazapfts.RequestOpts) 
         ...opts
     }));
 }
-export function putApiV1WidgetuserById(id: string, webApiModulesSettingsWidgetUserWidgetUser?: WebApiModulesSettingsWidgetUserWidgetUser, opts?: Oazapfts.RequestOpts) {
+export function putApiV1WidgetuserById(id: string, fwStandardModulesSettingsWidgetUserWidgetUserLogic?: FwStandardModulesSettingsWidgetUserWidgetUserLogic, opts?: Oazapfts.RequestOpts) {
     return oazapfts.ok(oazapfts.fetchJson<{
         status: 200;
-        data: WebApiModulesSettingsWidgetUserWidgetUserRead;
+        data: FwStandardModulesSettingsWidgetUserWidgetUserLogicRead;
     } | {
         status: 400;
         data: FwCoreApiSwashbuckleBadRequestResponse;
@@ -8433,7 +8506,7 @@ export function putApiV1WidgetuserById(id: string, webApiModulesSettingsWidgetUs
     }>(`/api/v1/widgetuser/${encodeURIComponent(id)}`, oazapfts.json({
         ...opts,
         method: "PUT",
-        body: webApiModulesSettingsWidgetUserWidgetUser
+        body: fwStandardModulesSettingsWidgetUserWidgetUserLogic
     })));
 }
 export function deleteApiV1WidgetuserById(id: string, opts?: Oazapfts.RequestOpts) {

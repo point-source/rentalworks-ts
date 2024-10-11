@@ -5,6 +5,528 @@
     "version": "v1"
   },
   "paths": {
+    "/api/v1/activeorderswithuncontracteditemsreport/render": {
+      "post": {
+        "tags": [
+          "ActiveOrdersWithUncontractedItemsReport"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FwStandard.Reporting.FwReportRenderRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FwStandard.Reporting.FwReportRenderResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FwCore.Api.Swashbuckle.BadRequestResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized (jwt token is invalid)"
+          },
+          "403": {
+            "description": "Forbidden (jwt token is valid, but you don't have permission)"
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FwStandard.Models.FwApiException"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/activeorderswithuncontracteditemsreport/exportexcelxlsx": {
+      "post": {
+        "tags": [
+          "ActiveOrdersWithUncontractedItemsReport"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WebApi.Modules.Reports.OrderReports.ActiveOrdersWithUncontractedItemsReport.ActiveOrdersWithUncontractedItemsReportRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FwCore.Controllers.FwDataController_DoExportExcelXlsxExportFileAsyncResult"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FwCore.Api.Swashbuckle.BadRequestResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized (jwt token is invalid)"
+          },
+          "403": {
+            "description": "Forbidden (jwt token is valid, but you don't have permission)"
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FwStandard.Models.FwApiException"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/activeorderswithuncontracteditemsreport/runreport": {
+      "post": {
+        "tags": [
+          "ActiveOrdersWithUncontractedItemsReport"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WebApi.Modules.Reports.OrderReports.ActiveOrdersWithUncontractedItemsReport.ActiveOrdersWithUncontractedItemsReportRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WebApi.Data.AppReportResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FwCore.Api.Swashbuckle.BadRequestResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized (jwt token is invalid)"
+          },
+          "403": {
+            "description": "Forbidden (jwt token is valid, but you don't have permission)"
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FwStandard.Models.FwApiException"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/activeorderswithuncontracteditemsreport/validatewarehouse/browse": {
+      "post": {
+        "tags": [
+          "ActiveOrdersWithUncontractedItemsReport"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FwStandard.Models.BrowseRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FwStandard.SqlServer.FwJsonDataTable"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FwCore.Api.Swashbuckle.BadRequestResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized (jwt token is invalid)"
+          },
+          "403": {
+            "description": "Forbidden (jwt token is valid, but you don't have permission)"
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FwStandard.Models.FwApiException"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/activeorderswithuncontracteditemsreport/validatedepartment/browse": {
+      "post": {
+        "tags": [
+          "ActiveOrdersWithUncontractedItemsReport"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FwStandard.Models.BrowseRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FwStandard.SqlServer.FwJsonDataTable"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FwCore.Api.Swashbuckle.BadRequestResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized (jwt token is invalid)"
+          },
+          "403": {
+            "description": "Forbidden (jwt token is valid, but you don't have permission)"
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FwStandard.Models.FwApiException"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/activeorderswithuncontracteditemsreport/validateagent/browse": {
+      "post": {
+        "tags": [
+          "ActiveOrdersWithUncontractedItemsReport"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FwStandard.Models.BrowseRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FwStandard.SqlServer.FwJsonDataTable"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FwCore.Api.Swashbuckle.BadRequestResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized (jwt token is invalid)"
+          },
+          "403": {
+            "description": "Forbidden (jwt token is valid, but you don't have permission)"
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FwStandard.Models.FwApiException"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/activeorderswithuncontracteditemsreport/validateofficelocation/browse": {
+      "post": {
+        "tags": [
+          "ActiveOrdersWithUncontractedItemsReport"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FwStandard.Models.BrowseRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FwStandard.SqlServer.FwJsonDataTable"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FwCore.Api.Swashbuckle.BadRequestResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized (jwt token is invalid)"
+          },
+          "403": {
+            "description": "Forbidden (jwt token is valid, but you don't have permission)"
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FwStandard.Models.FwApiException"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/activeorderswithuncontracteditemsreport/validateordertype/browse": {
+      "post": {
+        "tags": [
+          "ActiveOrdersWithUncontractedItemsReport"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FwStandard.Models.BrowseRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FwStandard.SqlServer.FwJsonDataTable"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FwCore.Api.Swashbuckle.BadRequestResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized (jwt token is invalid)"
+          },
+          "403": {
+            "description": "Forbidden (jwt token is valid, but you don't have permission)"
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FwStandard.Models.FwApiException"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/activeorderswithuncontracteditemsreport/emptyobject": {
+      "get": {
+        "tags": [
+          "ActiveOrdersWithUncontractedItemsReport"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FwStandard.SqlServer.FwJsonDataTable"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FwCore.Api.Swashbuckle.BadRequestResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized (jwt token is invalid)"
+          },
+          "403": {
+            "description": "Forbidden (jwt token is valid, but you don't have permission)"
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FwStandard.Models.FwApiException"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/activeorderswithuncontracteditemsreport/preview": {
+      "get": {
+        "tags": [
+          "ActiveOrdersWithUncontractedItemsReport"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FwStandard.SqlServer.FwJsonDataTable"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FwCore.Api.Swashbuckle.BadRequestResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized (jwt token is invalid)"
+          },
+          "403": {
+            "description": "Forbidden (jwt token is valid, but you don't have permission)"
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FwStandard.Models.FwApiException"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/v1/agentbillingreport/render": {
       "post": {
         "tags": [
@@ -14297,6 +14819,420 @@
         }
       }
     },
+    "/api/v1/inactiveeligiblereport/render": {
+      "post": {
+        "tags": [
+          "InactiveEligibleReport"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FwStandard.Reporting.FwReportRenderRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FwStandard.Reporting.FwReportRenderResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FwCore.Api.Swashbuckle.BadRequestResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized (jwt token is invalid)"
+          },
+          "403": {
+            "description": "Forbidden (jwt token is valid, but you don't have permission)"
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FwStandard.Models.FwApiException"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/inactiveeligiblereport/exportexcelxlsx": {
+      "post": {
+        "tags": [
+          "InactiveEligibleReport"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WebApi.Modules.Reports.WarehouseReports.InactiveEligibleReport.InactiveEligibleReportRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FwCore.Controllers.FwDataController_DoExportExcelXlsxExportFileAsyncResult"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FwCore.Api.Swashbuckle.BadRequestResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized (jwt token is invalid)"
+          },
+          "403": {
+            "description": "Forbidden (jwt token is valid, but you don't have permission)"
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FwStandard.Models.FwApiException"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/inactiveeligiblereport/runreport": {
+      "post": {
+        "tags": [
+          "InactiveEligibleReport"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WebApi.Modules.Reports.WarehouseReports.InactiveEligibleReport.InactiveEligibleReportRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WebApi.Data.AppReportResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FwCore.Api.Swashbuckle.BadRequestResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized (jwt token is invalid)"
+          },
+          "403": {
+            "description": "Forbidden (jwt token is valid, but you don't have permission)"
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FwStandard.Models.FwApiException"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/inactiveeligiblereport/validateinventorytype/browse": {
+      "post": {
+        "tags": [
+          "InactiveEligibleReport"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FwStandard.Models.BrowseRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FwStandard.SqlServer.FwJsonDataTable"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FwCore.Api.Swashbuckle.BadRequestResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized (jwt token is invalid)"
+          },
+          "403": {
+            "description": "Forbidden (jwt token is valid, but you don't have permission)"
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FwStandard.Models.FwApiException"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/inactiveeligiblereport/validatecategory/browse": {
+      "post": {
+        "tags": [
+          "InactiveEligibleReport"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FwStandard.Models.BrowseRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FwStandard.SqlServer.FwJsonDataTable"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FwCore.Api.Swashbuckle.BadRequestResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized (jwt token is invalid)"
+          },
+          "403": {
+            "description": "Forbidden (jwt token is valid, but you don't have permission)"
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FwStandard.Models.FwApiException"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/inactiveeligiblereport/validatesubcategory/browse": {
+      "post": {
+        "tags": [
+          "InactiveEligibleReport"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FwStandard.Models.BrowseRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FwStandard.SqlServer.FwJsonDataTable"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FwCore.Api.Swashbuckle.BadRequestResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized (jwt token is invalid)"
+          },
+          "403": {
+            "description": "Forbidden (jwt token is valid, but you don't have permission)"
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FwStandard.Models.FwApiException"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/inactiveeligiblereport/emptyobject": {
+      "get": {
+        "tags": [
+          "InactiveEligibleReport"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FwStandard.SqlServer.FwJsonDataTable"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FwCore.Api.Swashbuckle.BadRequestResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized (jwt token is invalid)"
+          },
+          "403": {
+            "description": "Forbidden (jwt token is valid, but you don't have permission)"
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FwStandard.Models.FwApiException"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/inactiveeligiblereport/preview": {
+      "get": {
+        "tags": [
+          "InactiveEligibleReport"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FwStandard.SqlServer.FwJsonDataTable"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FwCore.Api.Swashbuckle.BadRequestResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized (jwt token is invalid)"
+          },
+          "403": {
+            "description": "Forbidden (jwt token is valid, but you don't have permission)"
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FwStandard.Models.FwApiException"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/v1/incomegldetailreport/render": {
       "post": {
         "tags": [
@@ -18473,7 +19409,7 @@
         }
       }
     },
-    "/api/v1/inventorystatusbypurchaseorderreport/validatedeal/browse": {
+    "/api/v1/inventorystatusbypurchaseorderreport/validatepotype/browse": {
       "post": {
         "tags": [
           "InventoryStatusByPurchaseOrderReport"
@@ -20759,6 +21695,53 @@
         }
       }
     },
+    "/jspm": {
+      "get": {
+        "tags": [
+          "JSPM"
+        ],
+        "parameters": [
+          {
+            "name": "timestamp",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FwCore.Api.Swashbuckle.BadRequestResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized (jwt token is invalid)"
+          },
+          "403": {
+            "description": "Forbidden (jwt token is valid, but you don't have permission)"
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FwStandard.Models.FwApiException"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/v1/latereturnsreport/render": {
       "post": {
         "tags": [
@@ -21803,7 +22786,7 @@
         }
       }
     },
-    "/api/v1/orderchangereport/runreport": {
+    "/api/v1/orderchangereport/exportexcelxlsx": {
       "post": {
         "tags": [
           "OrderChangeReport"
@@ -21823,7 +22806,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/WebApi.Data.AppReportResponse"
+                  "$ref": "#/components/schemas/FwCore.Controllers.FwDataController_DoExportExcelXlsxExportFileAsyncResult"
                 }
               }
             }
@@ -21869,6 +22852,60 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/FwStandard.SqlServer.FwJsonDataTable"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FwCore.Api.Swashbuckle.BadRequestResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized (jwt token is invalid)"
+          },
+          "403": {
+            "description": "Forbidden (jwt token is valid, but you don't have permission)"
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FwStandard.Models.FwApiException"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/orderchangereport/runreport": {
+      "post": {
+        "tags": [
+          "OrderChangeReport"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WebApi.Modules.Reports.OrderChangeReport.OrderChangeReportRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WebApi.Data.AppReportResponse"
                 }
               }
             }
@@ -22590,6 +23627,528 @@
       "get": {
         "tags": [
           "OrderConflictReport"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FwStandard.SqlServer.FwJsonDataTable"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FwCore.Api.Swashbuckle.BadRequestResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized (jwt token is invalid)"
+          },
+          "403": {
+            "description": "Forbidden (jwt token is valid, but you don't have permission)"
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FwStandard.Models.FwApiException"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/orderdatesandbannersreport/render": {
+      "post": {
+        "tags": [
+          "OrderDatesAndBannersReport"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FwStandard.Reporting.FwReportRenderRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FwStandard.Reporting.FwReportRenderResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FwCore.Api.Swashbuckle.BadRequestResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized (jwt token is invalid)"
+          },
+          "403": {
+            "description": "Forbidden (jwt token is valid, but you don't have permission)"
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FwStandard.Models.FwApiException"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/orderdatesandbannersreport/exportexcelxlsx": {
+      "post": {
+        "tags": [
+          "OrderDatesAndBannersReport"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WebApi.Modules.Reports.OrderReports.OrderDatesAndBannersReport.OrderDatesAndBannersReportRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FwCore.Controllers.FwDataController_DoExportExcelXlsxExportFileAsyncResult"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FwCore.Api.Swashbuckle.BadRequestResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized (jwt token is invalid)"
+          },
+          "403": {
+            "description": "Forbidden (jwt token is valid, but you don't have permission)"
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FwStandard.Models.FwApiException"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/orderdatesandbannersreport/runreport": {
+      "post": {
+        "tags": [
+          "OrderDatesAndBannersReport"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WebApi.Modules.Reports.OrderReports.OrderDatesAndBannersReport.OrderDatesAndBannersReportRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WebApi.Data.AppReportResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FwCore.Api.Swashbuckle.BadRequestResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized (jwt token is invalid)"
+          },
+          "403": {
+            "description": "Forbidden (jwt token is valid, but you don't have permission)"
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FwStandard.Models.FwApiException"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/orderdatesandbannersreport/validatewarehouse/browse": {
+      "post": {
+        "tags": [
+          "OrderDatesAndBannersReport"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FwStandard.Models.BrowseRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FwStandard.SqlServer.FwJsonDataTable"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FwCore.Api.Swashbuckle.BadRequestResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized (jwt token is invalid)"
+          },
+          "403": {
+            "description": "Forbidden (jwt token is valid, but you don't have permission)"
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FwStandard.Models.FwApiException"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/orderdatesandbannersreport/validatedepartment/browse": {
+      "post": {
+        "tags": [
+          "OrderDatesAndBannersReport"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FwStandard.Models.BrowseRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FwStandard.SqlServer.FwJsonDataTable"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FwCore.Api.Swashbuckle.BadRequestResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized (jwt token is invalid)"
+          },
+          "403": {
+            "description": "Forbidden (jwt token is valid, but you don't have permission)"
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FwStandard.Models.FwApiException"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/orderdatesandbannersreport/validateagent/browse": {
+      "post": {
+        "tags": [
+          "OrderDatesAndBannersReport"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FwStandard.Models.BrowseRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FwStandard.SqlServer.FwJsonDataTable"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FwCore.Api.Swashbuckle.BadRequestResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized (jwt token is invalid)"
+          },
+          "403": {
+            "description": "Forbidden (jwt token is valid, but you don't have permission)"
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FwStandard.Models.FwApiException"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/orderdatesandbannersreport/validateofficelocation/browse": {
+      "post": {
+        "tags": [
+          "OrderDatesAndBannersReport"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FwStandard.Models.BrowseRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FwStandard.SqlServer.FwJsonDataTable"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FwCore.Api.Swashbuckle.BadRequestResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized (jwt token is invalid)"
+          },
+          "403": {
+            "description": "Forbidden (jwt token is valid, but you don't have permission)"
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FwStandard.Models.FwApiException"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/orderdatesandbannersreport/validateordertype/browse": {
+      "post": {
+        "tags": [
+          "OrderDatesAndBannersReport"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FwStandard.Models.BrowseRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FwStandard.SqlServer.FwJsonDataTable"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FwCore.Api.Swashbuckle.BadRequestResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized (jwt token is invalid)"
+          },
+          "403": {
+            "description": "Forbidden (jwt token is valid, but you don't have permission)"
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FwStandard.Models.FwApiException"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/orderdatesandbannersreport/emptyobject": {
+      "get": {
+        "tags": [
+          "OrderDatesAndBannersReport"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FwStandard.SqlServer.FwJsonDataTable"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FwCore.Api.Swashbuckle.BadRequestResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized (jwt token is invalid)"
+          },
+          "403": {
+            "description": "Forbidden (jwt token is valid, but you don't have permission)"
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FwStandard.Models.FwApiException"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/orderdatesandbannersreport/preview": {
+      "get": {
+        "tags": [
+          "OrderDatesAndBannersReport"
         ],
         "responses": {
           "200": {
@@ -24984,6 +26543,582 @@
       "get": {
         "tags": [
           "OutgoingShippingLabel"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FwStandard.SqlServer.FwJsonDataTable"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FwCore.Api.Swashbuckle.BadRequestResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized (jwt token is invalid)"
+          },
+          "403": {
+            "description": "Forbidden (jwt token is valid, but you don't have permission)"
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FwStandard.Models.FwApiException"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/outstandingpurchasereport/render": {
+      "post": {
+        "tags": [
+          "OutstandingPurchaseReport"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FwStandard.Reporting.FwReportRenderRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FwStandard.Reporting.FwReportRenderResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FwCore.Api.Swashbuckle.BadRequestResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized (jwt token is invalid)"
+          },
+          "403": {
+            "description": "Forbidden (jwt token is valid, but you don't have permission)"
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FwStandard.Models.FwApiException"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/outstandingpurchasereport/exportexcelxlsx": {
+      "post": {
+        "tags": [
+          "OutstandingPurchaseReport"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WebApi.Modules.Reports.VendorReports.OutstandingPurchaseReport.OutstandingPurchaseReportRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FwCore.Controllers.FwDataController_DoExportExcelXlsxExportFileAsyncResult"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FwCore.Api.Swashbuckle.BadRequestResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized (jwt token is invalid)"
+          },
+          "403": {
+            "description": "Forbidden (jwt token is valid, but you don't have permission)"
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FwStandard.Models.FwApiException"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/outstandingpurchasereport/runreport": {
+      "post": {
+        "tags": [
+          "OutstandingPurchaseReport"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WebApi.Modules.Reports.VendorReports.OutstandingPurchaseReport.OutstandingPurchaseReportRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WebApi.Data.AppReportResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FwCore.Api.Swashbuckle.BadRequestResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized (jwt token is invalid)"
+          },
+          "403": {
+            "description": "Forbidden (jwt token is valid, but you don't have permission)"
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FwStandard.Models.FwApiException"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/outstandingpurchasereport/validatewarehouse/browse": {
+      "post": {
+        "tags": [
+          "OutstandingPurchaseReport"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FwStandard.Models.BrowseRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FwStandard.SqlServer.FwJsonDataTable"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FwCore.Api.Swashbuckle.BadRequestResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized (jwt token is invalid)"
+          },
+          "403": {
+            "description": "Forbidden (jwt token is valid, but you don't have permission)"
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FwStandard.Models.FwApiException"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/outstandingpurchasereport/validatedepartment/browse": {
+      "post": {
+        "tags": [
+          "OutstandingPurchaseReport"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FwStandard.Models.BrowseRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FwStandard.SqlServer.FwJsonDataTable"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FwCore.Api.Swashbuckle.BadRequestResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized (jwt token is invalid)"
+          },
+          "403": {
+            "description": "Forbidden (jwt token is valid, but you don't have permission)"
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FwStandard.Models.FwApiException"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/outstandingpurchasereport/validatecategory/browse": {
+      "post": {
+        "tags": [
+          "OutstandingPurchaseReport"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FwStandard.Models.BrowseRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FwStandard.SqlServer.FwJsonDataTable"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FwCore.Api.Swashbuckle.BadRequestResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized (jwt token is invalid)"
+          },
+          "403": {
+            "description": "Forbidden (jwt token is valid, but you don't have permission)"
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FwStandard.Models.FwApiException"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/outstandingpurchasereport/validateinventory/browse": {
+      "post": {
+        "tags": [
+          "OutstandingPurchaseReport"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FwStandard.Models.BrowseRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FwStandard.SqlServer.FwJsonDataTable"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FwCore.Api.Swashbuckle.BadRequestResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized (jwt token is invalid)"
+          },
+          "403": {
+            "description": "Forbidden (jwt token is valid, but you don't have permission)"
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FwStandard.Models.FwApiException"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/outstandingpurchasereport/validatepotype/browse": {
+      "post": {
+        "tags": [
+          "OutstandingPurchaseReport"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FwStandard.Models.BrowseRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FwStandard.SqlServer.FwJsonDataTable"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FwCore.Api.Swashbuckle.BadRequestResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized (jwt token is invalid)"
+          },
+          "403": {
+            "description": "Forbidden (jwt token is valid, but you don't have permission)"
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FwStandard.Models.FwApiException"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/outstandingpurchasereport/validatevendor/browse": {
+      "post": {
+        "tags": [
+          "OutstandingPurchaseReport"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FwStandard.Models.BrowseRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FwStandard.SqlServer.FwJsonDataTable"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FwCore.Api.Swashbuckle.BadRequestResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized (jwt token is invalid)"
+          },
+          "403": {
+            "description": "Forbidden (jwt token is valid, but you don't have permission)"
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FwStandard.Models.FwApiException"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/outstandingpurchasereport/emptyobject": {
+      "get": {
+        "tags": [
+          "OutstandingPurchaseReport"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FwStandard.SqlServer.FwJsonDataTable"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FwCore.Api.Swashbuckle.BadRequestResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized (jwt token is invalid)"
+          },
+          "403": {
+            "description": "Forbidden (jwt token is valid, but you don't have permission)"
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FwStandard.Models.FwApiException"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/outstandingpurchasereport/preview": {
+      "get": {
+        "tags": [
+          "OutstandingPurchaseReport"
         ],
         "responses": {
           "200": {
@@ -37985,6 +40120,60 @@
         }
       }
     },
+    "/api/v1/quikactivityreport/validatedeal/browse": {
+      "post": {
+        "tags": [
+          "QuikActivityReport"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FwStandard.Models.BrowseRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FwStandard.SqlServer.FwJsonDataTable"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FwCore.Api.Swashbuckle.BadRequestResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized (jwt token is invalid)"
+          },
+          "403": {
+            "description": "Forbidden (jwt token is valid, but you don't have permission)"
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FwStandard.Models.FwApiException"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/v1/quikactivityreport/validateagent/browse": {
       "post": {
         "tags": [
@@ -46692,6 +48881,474 @@
       "get": {
         "tags": [
           "RentalInventoryQCRequiredReport"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FwStandard.SqlServer.FwJsonDataTable"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FwCore.Api.Swashbuckle.BadRequestResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized (jwt token is invalid)"
+          },
+          "403": {
+            "description": "Forbidden (jwt token is valid, but you don't have permission)"
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FwStandard.Models.FwApiException"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/rentalinventoryquantityownedreport/render": {
+      "post": {
+        "tags": [
+          "RentalInventoryQuantityOwnedReport"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FwStandard.Reporting.FwReportRenderRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FwStandard.Reporting.FwReportRenderResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FwCore.Api.Swashbuckle.BadRequestResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized (jwt token is invalid)"
+          },
+          "403": {
+            "description": "Forbidden (jwt token is valid, but you don't have permission)"
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FwStandard.Models.FwApiException"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/rentalinventoryquantityownedreport/exportexcelxlsx": {
+      "post": {
+        "tags": [
+          "RentalInventoryQuantityOwnedReport"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WebApi.Modules.Reports.RentalInventoryReports.RentalInventoryQuantityOwnedReport.RentalInventoryQuantityOwnedReportRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FwCore.Controllers.FwDataController_DoExportExcelXlsxExportFileAsyncResult"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FwCore.Api.Swashbuckle.BadRequestResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized (jwt token is invalid)"
+          },
+          "403": {
+            "description": "Forbidden (jwt token is valid, but you don't have permission)"
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FwStandard.Models.FwApiException"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/rentalinventoryquantityownedreport/runreport": {
+      "post": {
+        "tags": [
+          "RentalInventoryQuantityOwnedReport"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WebApi.Modules.Reports.RentalInventoryReports.RentalInventoryQuantityOwnedReport.RentalInventoryQuantityOwnedReportRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WebApi.Data.AppReportResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FwCore.Api.Swashbuckle.BadRequestResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized (jwt token is invalid)"
+          },
+          "403": {
+            "description": "Forbidden (jwt token is valid, but you don't have permission)"
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FwStandard.Models.FwApiException"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/rentalinventoryquantityownedreport/validateinventorytype/browse": {
+      "post": {
+        "tags": [
+          "RentalInventoryQuantityOwnedReport"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FwStandard.Models.BrowseRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FwStandard.SqlServer.FwJsonDataTable"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FwCore.Api.Swashbuckle.BadRequestResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized (jwt token is invalid)"
+          },
+          "403": {
+            "description": "Forbidden (jwt token is valid, but you don't have permission)"
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FwStandard.Models.FwApiException"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/rentalinventoryquantityownedreport/validatecategory/browse": {
+      "post": {
+        "tags": [
+          "RentalInventoryQuantityOwnedReport"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FwStandard.Models.BrowseRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FwStandard.SqlServer.FwJsonDataTable"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FwCore.Api.Swashbuckle.BadRequestResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized (jwt token is invalid)"
+          },
+          "403": {
+            "description": "Forbidden (jwt token is valid, but you don't have permission)"
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FwStandard.Models.FwApiException"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/rentalinventoryquantityownedreport/validateinventory/browse": {
+      "post": {
+        "tags": [
+          "RentalInventoryQuantityOwnedReport"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FwStandard.Models.BrowseRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FwStandard.SqlServer.FwJsonDataTable"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FwCore.Api.Swashbuckle.BadRequestResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized (jwt token is invalid)"
+          },
+          "403": {
+            "description": "Forbidden (jwt token is valid, but you don't have permission)"
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FwStandard.Models.FwApiException"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/rentalinventoryquantityownedreport/validatewarehouse/browse": {
+      "post": {
+        "tags": [
+          "RentalInventoryQuantityOwnedReport"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FwStandard.Models.BrowseRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FwStandard.SqlServer.FwJsonDataTable"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FwCore.Api.Swashbuckle.BadRequestResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized (jwt token is invalid)"
+          },
+          "403": {
+            "description": "Forbidden (jwt token is valid, but you don't have permission)"
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FwStandard.Models.FwApiException"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/rentalinventoryquantityownedreport/emptyobject": {
+      "get": {
+        "tags": [
+          "RentalInventoryQuantityOwnedReport"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FwStandard.SqlServer.FwJsonDataTable"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FwCore.Api.Swashbuckle.BadRequestResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized (jwt token is invalid)"
+          },
+          "403": {
+            "description": "Forbidden (jwt token is valid, but you don't have permission)"
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FwStandard.Models.FwApiException"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/rentalinventoryquantityownedreport/preview": {
+      "get": {
+        "tags": [
+          "RentalInventoryQuantityOwnedReport"
         ],
         "responses": {
           "200": {
@@ -73606,6 +76263,10 @@
             "nullable": true,
             "readOnly": true
           },
+          "ServerVersion": {
+            "type": "string",
+            "nullable": true
+          },
           "_Translation": {
             "type": "array",
             "items": {
@@ -75631,10 +78292,7 @@
             "nullable": true
           },
           "Ranks": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/FwStandard.Models.SelectedCheckBoxListItem"
-            },
+            "type": "string",
             "nullable": true
           },
           "TrackedBys": {
@@ -78169,10 +80827,7 @@
             "format": "date-time"
           },
           "Ranks": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/FwStandard.Models.SelectedCheckBoxListItem"
-            },
+            "type": "string",
             "nullable": true
           },
           "TrackedBys": {
@@ -78286,10 +80941,7 @@
             "nullable": true
           },
           "Ranks": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/FwStandard.Models.SelectedCheckBoxListItem"
-            },
+            "type": "string",
             "nullable": true
           },
           "TrackedBys": {
@@ -78504,10 +81156,7 @@
             "$ref": "#/components/schemas/WebApi.IncludeExcludeAll"
           },
           "Ranks": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/FwStandard.Models.SelectedCheckBoxListItem"
-            },
+            "type": "string",
             "nullable": true
           },
           "TrackedBys": {
@@ -78600,10 +81249,7 @@
             "$ref": "#/components/schemas/WebApi.IncludeExcludeAll"
           },
           "Ranks": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/FwStandard.Models.SelectedCheckBoxListItem"
-            },
+            "type": "string",
             "nullable": true
           },
           "TrackedBys": {
@@ -78805,6 +81451,85 @@
           },
           "ExcludeZeroVariance": {
             "type": "boolean",
+            "nullable": true
+          },
+          "UserDepartmentId": {
+            "type": "string",
+            "nullable": true
+          },
+          "UserLocationId": {
+            "type": "string",
+            "nullable": true
+          },
+          "UserWarehouseId": {
+            "type": "string",
+            "nullable": true
+          },
+          "CustomReportLayoutId": {
+            "type": "string",
+            "nullable": true
+          },
+          "IsSummary": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "IncludeSubHeadingsAndSubTotals": {
+            "type": "boolean"
+          },
+          "IncludeIdColumns": {
+            "type": "boolean"
+          },
+          "Locale": {
+            "type": "string",
+            "nullable": true
+          },
+          "excelfields": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FwStandard.Models.CheckBoxListItem"
+            },
+            "nullable": true
+          },
+          "ReportName": {
+            "type": "string",
+            "nullable": true
+          },
+          "UseEmailTemplate": {
+            "type": "boolean",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "WebApi.Modules.Reports.OrderReports.ActiveOrdersWithUncontractedItemsReport.ActiveOrdersWithUncontractedItemsReportRequest": {
+        "type": "object",
+        "properties": {
+          "FromDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "ToDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "WarehouseId": {
+            "type": "string",
+            "nullable": true
+          },
+          "DepartmentId": {
+            "type": "string",
+            "nullable": true
+          },
+          "OfficeLocationId": {
+            "type": "string",
+            "nullable": true
+          },
+          "UserId": {
+            "type": "string",
+            "nullable": true
+          },
+          "OrderTypeId": {
+            "type": "string",
             "nullable": true
           },
           "UserDepartmentId": {
@@ -79201,10 +81926,7 @@
             "nullable": true
           },
           "Ranks": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/FwStandard.Models.SelectedCheckBoxListItem"
-            },
+            "type": "string",
             "nullable": true
           },
           "TrackedBys": {
@@ -79215,6 +81937,115 @@
             "nullable": true
           },
           "RefreshIfNeeded": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "UserDepartmentId": {
+            "type": "string",
+            "nullable": true
+          },
+          "UserLocationId": {
+            "type": "string",
+            "nullable": true
+          },
+          "UserWarehouseId": {
+            "type": "string",
+            "nullable": true
+          },
+          "CustomReportLayoutId": {
+            "type": "string",
+            "nullable": true
+          },
+          "IsSummary": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "IncludeSubHeadingsAndSubTotals": {
+            "type": "boolean"
+          },
+          "IncludeIdColumns": {
+            "type": "boolean"
+          },
+          "Locale": {
+            "type": "string",
+            "nullable": true
+          },
+          "excelfields": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FwStandard.Models.CheckBoxListItem"
+            },
+            "nullable": true
+          },
+          "ReportName": {
+            "type": "string",
+            "nullable": true
+          },
+          "UseEmailTemplate": {
+            "type": "boolean",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "WebApi.Modules.Reports.OrderReports.OrderDatesAndBannersReport.OrderDatesAndBannersReportRequest": {
+        "type": "object",
+        "properties": {
+          "WarehouseId": {
+            "type": "string",
+            "nullable": true
+          },
+          "DepartmentId": {
+            "type": "string",
+            "nullable": true
+          },
+          "OfficeLocationId": {
+            "type": "string",
+            "nullable": true
+          },
+          "UserId": {
+            "type": "string",
+            "nullable": true
+          },
+          "OrderTypeId": {
+            "type": "string",
+            "nullable": true
+          },
+          "OrderStatus": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FwStandard.Models.SelectedCheckBoxListItem"
+            },
+            "nullable": true
+          },
+          "OutgoingDeliveryType": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FwStandard.Models.SelectedCheckBoxListItem"
+            },
+            "nullable": true
+          },
+          "IncomingDeliveryType": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FwStandard.Models.SelectedCheckBoxListItem"
+            },
+            "nullable": true
+          },
+          "PrintAlertBannerMessage": {
+            "type": "boolean"
+          },
+          "FromDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "ToDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "FilterDates": {
             "type": "boolean",
             "nullable": true
           },
@@ -79796,6 +82627,10 @@
             "type": "string",
             "nullable": true
           },
+          "DealId": {
+            "type": "string",
+            "nullable": true
+          },
           "IncludeCompleted": {
             "type": "boolean",
             "nullable": true
@@ -80242,10 +83077,7 @@
             "nullable": true
           },
           "Ranks": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/FwStandard.Models.SelectedCheckBoxListItem"
-            },
+            "type": "string",
             "nullable": true
           },
           "TrackedBys": {
@@ -80310,6 +83142,14 @@
             "type": "string",
             "nullable": true
           },
+          "QuoteId": {
+            "type": "string",
+            "nullable": true
+          },
+          "ProjectId": {
+            "type": "string",
+            "nullable": true
+          },
           "RentalValue": {
             "type": "string",
             "nullable": true
@@ -80331,6 +83171,10 @@
             "nullable": true
           },
           "OutContractId": {
+            "type": "string",
+            "nullable": true
+          },
+          "OrderType": {
             "type": "string",
             "nullable": true
           },
@@ -80836,7 +83680,7 @@
           "TrackedBys": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/FwStandard.Models.CheckBoxListItem"
+              "$ref": "#/components/schemas/FwStandard.Models.SelectedCheckBoxListItem"
             },
             "nullable": true
           },
@@ -81591,7 +84435,7 @@
           "TrackedBy": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/FwStandard.Models.CheckBoxListItem"
+              "$ref": "#/components/schemas/FwStandard.Models.SelectedCheckBoxListItem"
             },
             "nullable": true
           },
@@ -81859,10 +84703,7 @@
             "nullable": true
           },
           "Ranks": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/FwStandard.Models.SelectedCheckBoxListItem"
-            },
+            "type": "string",
             "nullable": true
           },
           "TrackedBys": {
@@ -81944,10 +84785,7 @@
             "nullable": true
           },
           "Ranks": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/FwStandard.Models.SelectedCheckBoxListItem"
-            },
+            "type": "string",
             "nullable": true
           },
           "FixedAsset": {
@@ -82063,10 +84901,7 @@
             "nullable": true
           },
           "Ranks": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/FwStandard.Models.SelectedCheckBoxListItem"
-            },
+            "type": "string",
             "nullable": true
           },
           "TrackedBys": {
@@ -82159,10 +84994,7 @@
             "nullable": true
           },
           "Ranks": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/FwStandard.Models.SelectedCheckBoxListItem"
-            },
+            "type": "string",
             "nullable": true
           },
           "TrackedBys": {
@@ -82288,10 +85120,7 @@
             "nullable": true
           },
           "Ranks": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/FwStandard.Models.SelectedCheckBoxListItem"
-            },
+            "type": "string",
             "nullable": true
           },
           "TrackedBys": {
@@ -82377,10 +85206,7 @@
             "nullable": true
           },
           "Ranks": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/FwStandard.Models.SelectedCheckBoxListItem"
-            },
+            "type": "string",
             "nullable": true
           },
           "OutageFilterMode": {
@@ -82464,6 +85290,85 @@
             "nullable": true
           },
           "InventoryId": {
+            "type": "string",
+            "nullable": true
+          },
+          "InContractId": {
+            "type": "string",
+            "nullable": true
+          },
+          "UserDepartmentId": {
+            "type": "string",
+            "nullable": true
+          },
+          "UserLocationId": {
+            "type": "string",
+            "nullable": true
+          },
+          "UserWarehouseId": {
+            "type": "string",
+            "nullable": true
+          },
+          "CustomReportLayoutId": {
+            "type": "string",
+            "nullable": true
+          },
+          "IsSummary": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "IncludeSubHeadingsAndSubTotals": {
+            "type": "boolean"
+          },
+          "IncludeIdColumns": {
+            "type": "boolean"
+          },
+          "Locale": {
+            "type": "string",
+            "nullable": true
+          },
+          "excelfields": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FwStandard.Models.CheckBoxListItem"
+            },
+            "nullable": true
+          },
+          "ReportName": {
+            "type": "string",
+            "nullable": true
+          },
+          "UseEmailTemplate": {
+            "type": "boolean",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "WebApi.Modules.Reports.RentalInventoryReports.RentalInventoryQuantityOwnedReport.RentalInventoryQuantityOwnedReportRequest": {
+        "type": "object",
+        "properties": {
+          "AsOfDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "WarehouseId": {
+            "type": "string",
+            "nullable": true
+          },
+          "InventoryTypeId": {
+            "type": "string",
+            "nullable": true
+          },
+          "CategoryId": {
+            "type": "string",
+            "nullable": true
+          },
+          "InventoryId": {
+            "type": "string",
+            "nullable": true
+          },
+          "Ranks": {
             "type": "string",
             "nullable": true
           },
@@ -82558,10 +85463,7 @@
             "nullable": true
           },
           "Ranks": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/FwStandard.Models.SelectedCheckBoxListItem"
-            },
+            "type": "string",
             "nullable": true
           },
           "TrackedBys": {
@@ -82648,10 +85550,7 @@
             "nullable": true
           },
           "Ranks": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/FwStandard.Models.SelectedCheckBoxListItem"
-            },
+            "type": "string",
             "nullable": true
           },
           "UserDepartmentId": {
@@ -82849,10 +85748,7 @@
             "nullable": true
           },
           "Ranks": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/FwStandard.Models.SelectedCheckBoxListItem"
-            },
+            "type": "string",
             "nullable": true
           },
           "TrackedBys": {
@@ -82959,10 +85855,7 @@
             "nullable": true
           },
           "Ranks": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/FwStandard.Models.SelectedCheckBoxListItem"
-            },
+            "type": "string",
             "nullable": true
           },
           "TrackedBys": {
@@ -83068,10 +85961,7 @@
             "nullable": true
           },
           "Ranks": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/FwStandard.Models.SelectedCheckBoxListItem"
-            },
+            "type": "string",
             "nullable": true
           },
           "TrackedBys": {
@@ -83268,10 +86158,7 @@
             "nullable": true
           },
           "Ranks": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/FwStandard.Models.SelectedCheckBoxListItem"
-            },
+            "type": "string",
             "nullable": true
           },
           "WarehouseId": {
@@ -83404,10 +86291,7 @@
             "nullable": true
           },
           "Ranks": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/FwStandard.Models.SelectedCheckBoxListItem"
-            },
+            "type": "string",
             "nullable": true
           },
           "TrackedBys": {
@@ -83827,10 +86711,7 @@
             "nullable": true
           },
           "Ranks": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/FwStandard.Models.SelectedCheckBoxListItem"
-            },
+            "type": "string",
             "nullable": true
           },
           "FixedAsset": {
@@ -84352,10 +87233,7 @@
             "nullable": true
           },
           "Ranks": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/FwStandard.Models.SelectedCheckBoxListItem"
-            },
+            "type": "string",
             "nullable": true
           },
           "ExcludeZeroOwned": {
@@ -84523,10 +87401,7 @@
             "$ref": "#/components/schemas/WebApi.IncludeExcludeAll"
           },
           "Ranks": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/FwStandard.Models.SelectedCheckBoxListItem"
-            },
+            "type": "string",
             "nullable": true
           },
           "UserDepartmentId": {
@@ -84595,10 +87470,7 @@
             "nullable": true
           },
           "Ranks": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/FwStandard.Models.SelectedCheckBoxListItem"
-            },
+            "type": "string",
             "nullable": true
           },
           "FixedAsset": {
@@ -84711,10 +87583,7 @@
             "nullable": true
           },
           "Ranks": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/FwStandard.Models.SelectedCheckBoxListItem"
-            },
+            "type": "string",
             "nullable": true
           },
           "WarehouseId": {
@@ -85278,6 +88147,104 @@
           },
           "InventoryId": {
             "type": "string",
+            "nullable": true
+          },
+          "UserDepartmentId": {
+            "type": "string",
+            "nullable": true
+          },
+          "UserLocationId": {
+            "type": "string",
+            "nullable": true
+          },
+          "UserWarehouseId": {
+            "type": "string",
+            "nullable": true
+          },
+          "CustomReportLayoutId": {
+            "type": "string",
+            "nullable": true
+          },
+          "IsSummary": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "IncludeSubHeadingsAndSubTotals": {
+            "type": "boolean"
+          },
+          "IncludeIdColumns": {
+            "type": "boolean"
+          },
+          "Locale": {
+            "type": "string",
+            "nullable": true
+          },
+          "excelfields": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FwStandard.Models.CheckBoxListItem"
+            },
+            "nullable": true
+          },
+          "ReportName": {
+            "type": "string",
+            "nullable": true
+          },
+          "UseEmailTemplate": {
+            "type": "boolean",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "WebApi.Modules.Reports.VendorReports.OutstandingPurchaseReport.OutstandingPurchaseReportRequest": {
+        "type": "object",
+        "properties": {
+          "FromDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "ToDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "WarehouseId": {
+            "type": "string",
+            "nullable": true
+          },
+          "DepartmentId": {
+            "type": "string",
+            "nullable": true
+          },
+          "CategoryId": {
+            "type": "string",
+            "nullable": true
+          },
+          "InventoryId": {
+            "type": "string",
+            "nullable": true
+          },
+          "PoTypeId": {
+            "type": "string",
+            "nullable": true
+          },
+          "VendorId": {
+            "type": "string",
+            "nullable": true
+          },
+          "Ranks": {
+            "type": "string",
+            "nullable": true
+          },
+          "OustandingOnly": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "Statuses": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FwStandard.Models.SelectedCheckBoxListItem"
+            },
             "nullable": true
           },
           "UserDepartmentId": {
@@ -86355,6 +89322,80 @@
         },
         "additionalProperties": false
       },
+      "WebApi.Modules.Reports.WarehouseReports.InactiveEligibleReport.InactiveEligibleReportRequest": {
+        "type": "object",
+        "properties": {
+          "InventoryTypeId": {
+            "type": "string",
+            "nullable": true
+          },
+          "CategoryId": {
+            "type": "string",
+            "nullable": true
+          },
+          "SubCategoryId": {
+            "type": "string",
+            "nullable": true
+          },
+          "Ranks": {
+            "type": "string",
+            "nullable": true
+          },
+          "IncludeFilter": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FwStandard.Models.SelectedCheckBoxListItem"
+            },
+            "nullable": true
+          },
+          "UserDepartmentId": {
+            "type": "string",
+            "nullable": true
+          },
+          "UserLocationId": {
+            "type": "string",
+            "nullable": true
+          },
+          "UserWarehouseId": {
+            "type": "string",
+            "nullable": true
+          },
+          "CustomReportLayoutId": {
+            "type": "string",
+            "nullable": true
+          },
+          "IsSummary": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "IncludeSubHeadingsAndSubTotals": {
+            "type": "boolean"
+          },
+          "IncludeIdColumns": {
+            "type": "boolean"
+          },
+          "Locale": {
+            "type": "string",
+            "nullable": true
+          },
+          "excelfields": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FwStandard.Models.CheckBoxListItem"
+            },
+            "nullable": true
+          },
+          "ReportName": {
+            "type": "string",
+            "nullable": true
+          },
+          "UseEmailTemplate": {
+            "type": "boolean",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "WebApi.Modules.Reports.WarehouseReports.QuikReceiptReport.QuikReceiptMetaData": {
         "type": "object",
         "properties": {
@@ -87095,6 +90136,10 @@
             "type": "string",
             "nullable": true
           },
+          "ExcludeCompleteOrders": {
+            "type": "boolean",
+            "nullable": true
+          },
           "SortBy": {
             "type": "array",
             "items": {
@@ -87184,6 +90229,10 @@
             "type": "string",
             "nullable": true
           },
+          "ExcludeCompleteOrders": {
+            "type": "boolean",
+            "nullable": true
+          },
           "SortBy": {
             "type": "array",
             "items": {
@@ -87271,6 +90320,10 @@
           },
           "ActivityTypeId": {
             "type": "string",
+            "nullable": true
+          },
+          "ExcludeCompleteOrders": {
+            "type": "boolean",
             "nullable": true
           },
           "SortBy": {

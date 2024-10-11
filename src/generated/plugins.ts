@@ -409,6 +409,7 @@ export type FwStandardSqlServerFwJsonDataTable = {
     TotalPages?: number;
     TotalRows?: number;
     DateFields?: string[] | null;
+    ServerVersion?: string | null;
     _Translation?: FwStandardDataFwTranslatedValue[] | null;
 };
 export type FwStandardSqlServerFwJsonDataTableRead = {
@@ -428,6 +429,7 @@ export type FwStandardSqlServerFwJsonDataTableRead = {
     ColumnNameByIndex?: {
         [key: string]: string | null;
     } | null;
+    ServerVersion?: string | null;
     _Translation?: FwStandardDataFwTranslatedValue[] | null;
 };
 export type FwCoreControllersFwDataControllerDoExportExcelXlsxExportFileAsyncResult = {
@@ -449,6 +451,10 @@ export type WebApiModulesPluginsCreditCardCreditCardPreAuthorization = {
     HoldDaysRemaining?: number | null;
     /** Format: Decimal */
     Amount?: number | null;
+    /** Format: Decimal */
+    FeePercent?: number | null;
+    /** Format: Decimal */
+    FeeAmount?: number | null;
     /** Format: Decimal */
     CapturedAmount?: number | null;
     /** Format: Text */
@@ -494,6 +500,11 @@ export type WebApiModulesPluginsCreditCardCreditCardPreAuthorizationRead = {
     HoldDaysRemaining?: number | null;
     /** Format: Decimal */
     Amount?: number | null;
+    /** Format: Decimal */
+    FeePercent?: number | null;
+    /** Format: Decimal */
+    FeeAmount?: number | null;
+    AmountWithFee?: number | null;
     /** Format: Decimal */
     CapturedAmount?: number | null;
     /** Format: Text */
@@ -543,6 +554,8 @@ export type WebApiModulesPluginsCreditCardCreditCardPreAuthorizationRequest = {
     PayWith: WebApiModulesPluginsCreditCardCreditCardPreAuthorizationRequest_PaymentTypes;
     OrderId: string;
     AmountToPay: number;
+    FeePercent?: number;
+    FeeAmount?: number;
     CreditCardPinPadId?: number | null;
     DealNumber: string;
     /** Either 'CUSTOMER' or 'DEAL'.  This gets set on the invoice. */
@@ -692,6 +705,11 @@ export type WebApiModulesBillingReceiptReceipt = {
     DateStamp?: string;
     RefundingReceiptId?: string | null;
     IsCreditCardReceiptVoided?: boolean;
+    /** Format: Decimal, Total digits: 5, Decimal places: 2 */
+    FeePercent?: number | null;
+    /** Format: Decimal, Total digits: 9, Decimal places: 2 */
+    PaymentTypeFee?: number | null;
+    TotalWithPaymentTypeFee?: number | null;
     AuditNote?: string | null;
     _Custom?: FwStandardDataFwCustomValue[] | null;
     _DefaultFieldAttributes?: FwStandardDataFwDefaultAttribute[] | null;
@@ -807,6 +825,11 @@ export type WebApiModulesBillingReceiptReceiptRead = {
     DateStamp?: string;
     RefundingReceiptId?: string | null;
     IsCreditCardReceiptVoided?: boolean;
+    /** Format: Decimal, Total digits: 5, Decimal places: 2 */
+    FeePercent?: number | null;
+    /** Format: Decimal, Total digits: 9, Decimal places: 2 */
+    PaymentTypeFee?: number | null;
+    TotalWithPaymentTypeFee?: number | null;
     AuditNote?: string | null;
     RecordTitle?: string | null;
     _Fields?: FwStandardBusinessLogicFwBusinessLogicFieldDefinition[] | null;
@@ -827,6 +850,8 @@ export type WebApiModulesPluginsCreditCardCreditCardPluginAuthorizeResponse = {
         [key: string]: any | null;
     } | null;
     Amount: number;
+    FeePercent?: number;
+    FeeAmount?: number;
     Receipt?: WebApiModulesBillingReceiptReceipt;
     Success?: boolean;
     Status?: WebApiModulesPluginsCreditCardCreditCardPluginAuthorizeResponseStatusCodes;
@@ -843,6 +868,8 @@ export type WebApiModulesPluginsCreditCardCreditCardPluginAuthorizeResponseRead 
         [key: string]: any | null;
     } | null;
     Amount: number;
+    FeePercent?: number;
+    FeeAmount?: number;
     Receipt?: WebApiModulesBillingReceiptReceiptRead;
     Success?: boolean;
     Status?: WebApiModulesPluginsCreditCardCreditCardPluginAuthorizeResponseStatusCodes;
@@ -900,6 +927,8 @@ export type WebApiModulesPluginsCreditCardCreditCardCapturePreAuthorizationForOr
 export type WebApiModulesPluginsCreditCardCreditCardCapturePreAuthorizationRequest = {
     CreditCardPreAuthorizationId: number;
     Amount: number;
+    FeeAmount?: number | null;
+    FeePercent?: number | null;
 };
 export type WebApiModulesPluginsCreditCardCreditCardCapturePreAuthorizationResponse = {
     PluginResponse?: WebApiModulesPluginsCreditCardCreditCardPluginCaptureResponse;
@@ -957,6 +986,10 @@ export type WebApiModulesPluginsCreditCardAccount = {
     PostalCode?: string | null;
     Country?: string | null;
     Token?: string | null;
+    ChargePaymentTypeId?: string | null;
+    ChargePaymentType?: string | null;
+    CardUseType?: WebApiModulesPluginsCreditCardProcessCreditCardCardUsageTypes;
+    CardUseString?: string | null;
 };
 export type FwStandardModelsFwQueryResponseWebApiModulesPluginsCreditCardAccount = {
     Items?: WebApiModulesPluginsCreditCardAccount[] | null;
@@ -1089,6 +1122,9 @@ export type WebApiModulesPluginsCreditCardOrderDeposit = {
     PayType?: string | null;
     CheckOrReferenceNumber?: string | null;
     Amount?: number | null;
+    FeePercent?: number | null;
+    PaymentTypeFee?: number | null;
+    AmountWithFee?: number | null;
     CreditCardName?: string | null;
     CreditCardExpiration?: string | null;
     AuditNote?: string | null;
@@ -1110,6 +1146,9 @@ export type WebApiModulesPluginsCreditCardOrderDepositRead = {
     PayType?: string | null;
     CheckOrReferenceNumber?: string | null;
     Amount?: number | null;
+    FeePercent?: number | null;
+    PaymentTypeFee?: number | null;
+    AmountWithFee?: number | null;
     CreditCardName?: string | null;
     CreditCardExpiration?: string | null;
     AuditNote?: string | null;
@@ -1145,8 +1184,11 @@ export type WebApiModulesPluginsCreditCardCreditCardOrderDepositRequest = {
     PayWith: WebApiModulesPluginsCreditCardCreditCardOrderDepositRequest_PayWithTypes;
     OrderId: string;
     AmountToPay: number;
+    FeePercent?: number | null;
+    FeeAmount?: number | null;
     CreditCardPinPadId?: number | null;
     DealNumber: string;
+    PaymentTypeId?: string | null;
     EmailFrom?: string | null;
     EmailTo?: string | null;
     EmailSubject?: string | null;
@@ -1303,6 +1345,19 @@ export type WebApiModulesPluginsCreditCardProcessCreditCardInfoRead = {
     _ModifiedByUserName?: string | null;
     _ModifiedDateTime?: string | null;
 };
+export type WebApiModulesPluginsCreditCardProcessCreditCardPaymentType = {
+    PaymentTypeId?: string | null;
+    PaymentType?: string | null;
+    PaymentTypeType?: string | null;
+    FeePercent?: number | null;
+};
+export type FwStandardModelsFwQueryResponseWebApiModulesPluginsCreditCardProcessCreditCardPaymentType = {
+    Items?: WebApiModulesPluginsCreditCardProcessCreditCardPaymentType[] | null;
+    PageNo?: number;
+    PageSize?: number;
+    TotalItems?: number;
+    Sort?: string | null;
+};
 export type WebApiModulesPluginsCreditCardCreditCardPluginVoidReceiptRequest = {
     ReceiptId: string;
     Amount?: number | null;
@@ -1311,37 +1366,28 @@ export type WebApiModulesPluginsCreditCardCreditCardPluginGetSettingsResponse = 
     /** Indicates if CVV is enabled on the merchant account */
     UseCvv?: boolean;
 };
-export type WebApiModulesPagesActiveLinkCardPointePaymentPaymentActiveLinkAuthorizeRequest = {
-    /** Token for the ActiveLink */
-    ActiveLinkToken: string;
-    /** Token for the CreditCard data */
-    Account: string;
-    /** Card Expiration in either MMYY or YYYYMMDD format. Not required for eCheck (ACH) requests. */
-    ExpirationDate: string;
-    Capture: boolean;
-    CountryId: string;
+export type WebApiModulesPluginsCreditCardCreditCardPluginLocation = {
+    LocationId?: string | null;
+    Location?: string | null;
 };
-export type WebApiModulesPagesActiveLinkCardPointePaymentPaymentActiveLinkMakePaymentAsyncResponse = {
-    StatusCode?: string | null;
-    StatusMessage?: string | null;
-};
-export type WebApiModulesPagesActiveLinkCardPointePaymentPaymentActiveLinkCardPointeActiveLinkToken = {
-    OrderId?: string | null;
-    AmountToPay?: number;
-    Capture?: boolean;
-};
-export type WebApiModulesPagesActiveLinkCardPointePaymentPaymentActiveLinkSendAuthorizEmailRequest = {
-    ActiveLinkToken: WebApiModulesPagesActiveLinkCardPointePaymentPaymentActiveLinkCardPointeActiveLinkToken;
-    EmailFrom?: string | null;
-    EmailTo?: string | null;
-    EmailSubject?: string | null;
-    EmailBody?: string | null;
-    Capture?: boolean;
-};
-export type WebApiModulesPagesActiveLinkCardPointePaymentPaymentActiveLinkSendPreAuthorizeEmailResponse = {
+export type WebApiModulesPluginsCreditCardCreditCardPluginGetDefaultSurchargeAmountResponse = {
+    /** true when the StatusCode is Ok, otherwise false */
     Success?: boolean;
-    Status?: string | null;
+    Status?: WebApiModulesPluginsCreditCardCreditCardPluginGetDefaultSurchargeAmountResponseStatusCodes;
     StatusText?: string | null;
+    FeePercent?: number | null;
+    FeeAmount?: number | null;
+    TotalWithFee?: number | null;
+};
+export type WebApiModulesPluginsCreditCardCreditCardPluginBinResponse = {
+    Success?: boolean;
+    Status?: WebApiModulesPluginsCreditCardCreditCardPluginBinResponseStatusCodes;
+    StatusText?: string | null;
+    PaymentTypeId?: string | null;
+    PaymentType?: string | null;
+    CardType?: string | null;
+    CardUseType?: string | null;
+    CardUseString?: string | null;
 };
 export type WebApiModulesAccountServicesHubSpotGetHubSpotRefreshTokenBool = {
     hasRefreshToken?: boolean;
@@ -1369,6 +1415,7 @@ export type WebApiModulesPluginsShopifyLocation = {
     LocationName?: string | null;
     StoreURL?: string | null;
     AdminAPIAccessToken?: string | null;
+    SecretKey?: string | null;
     ShopifyStoreId?: string | null;
 };
 export type WebApiModulesPluginsShopifyShopifyLocations = {
@@ -1380,6 +1427,23 @@ export type WebApiModulesPluginsShopifyValidateShopUrlRequest = {
 export type WebApiModulesPluginsShopifyValidateShopUrlResponse = {
     Shop_URL_Valid?: boolean;
 };
+export type WebApiModulesPluginsShopifyShopifyIntegrationStatusValue = {
+    Installed?: boolean;
+    Status?: string | null;
+};
+export type WebApiModulesPluginsShopifyShopifyIntegrationStatus = {
+    StoreUrl?: WebApiModulesPluginsShopifyShopifyIntegrationStatusValue;
+    AdminApiAccessToken?: WebApiModulesPluginsShopifyShopifyIntegrationStatusValue;
+    StoreId?: WebApiModulesPluginsShopifyShopifyIntegrationStatusValue;
+    SecretKey?: WebApiModulesPluginsShopifyShopifyIntegrationStatusValue;
+    AccessScopes?: WebApiModulesPluginsShopifyShopifyIntegrationStatusValue;
+    Theme?: WebApiModulesPluginsShopifyShopifyIntegrationStatusValue;
+    CreateOrderWebhook?: WebApiModulesPluginsShopifyShopifyIntegrationStatusValue;
+};
+export type WebApiModulesPluginsShopifyEnableCreateOrderWebhookResponse = object;
+export type WebApiModulesPluginsShopifyDisableCreateOrderWebhookResponse = object;
+export type WebApiModulesIntegrationsShopifyShopifyInstallThemeResponse = object;
+export type WebApiModulesIntegrationsShopifyShopifyUninstallThemeResponse = object;
 export type WebApiModulesAdministratorTaskSchedulerTaskSteps = {
     TaskStepsId?: number | null;
     TaskId?: number | null;
@@ -1748,7 +1812,27 @@ export function getApiV1CreditcardpluginLogOrderByOrderidHasrecords(orderId: str
     } | {
         status: 500;
         data: FwStandardModelsFwApiException;
-    }>(`/api/v1/creditcardplugin/log/order/${encodeURIComponent(orderId)}/hasrecords`, {
+    }>(`/api/v1/creditcardplugin/log/order/${encodeURIComponent(orderid)}/hasrecords`, {
+        ...opts
+    }));
+}
+export function getApiV1CreditcardpluginLogLegend(opts?: Oazapfts.RequestOpts) {
+    return oazapfts.ok(oazapfts.fetchJson<{
+        status: 200;
+        data: {
+            [key: string]: string;
+        };
+    } | {
+        status: 400;
+        data: FwCoreApiSwashbuckleBadRequestResponse;
+    } | {
+        status: 401;
+    } | {
+        status: 403;
+    } | {
+        status: 500;
+        data: FwStandardModelsFwApiException;
+    }>("/api/v1/creditcardplugin/log/legend", {
         ...opts
     }));
 }
@@ -1889,7 +1973,7 @@ export function getApiV1CreditcardpluginPreauthorizationOrderByOrderidTotalpreau
     } | {
         status: 500;
         data: FwStandardModelsFwApiException;
-    }>(`/api/v1/creditcardplugin/preauthorization/order/${encodeURIComponent(orderId)}/totalpreauthorizationamount`, {
+    }>(`/api/v1/creditcardplugin/preauthorization/order/${encodeURIComponent(orderid)}/totalpreauthorizationamount`, {
         ...opts
     }));
 }
@@ -1910,7 +1994,7 @@ export function getApiV1CreditcardpluginPreauthorizationOrderByOrderidHaspreauth
     } | {
         status: 500;
         data: FwStandardModelsFwApiException;
-    }>(`/api/v1/creditcardplugin/preauthorization/order/${encodeURIComponent(orderId)}/haspreauthorizationrecords`, {
+    }>(`/api/v1/creditcardplugin/preauthorization/order/${encodeURIComponent(orderid)}/haspreauthorizationrecords`, {
         ...opts
     }));
 }
@@ -2462,7 +2546,7 @@ export function getApiV1CreditcardpluginDepositOrderByOrderidHasdepositrecords(o
     } | {
         status: 500;
         data: FwStandardModelsFwApiException;
-    }>(`/api/v1/creditcardplugin/deposit/order/${encodeURIComponent(orderId)}/hasdepositrecords`, {
+    }>(`/api/v1/creditcardplugin/deposit/order/${encodeURIComponent(orderid)}/hasdepositrecords`, {
         ...opts
     }));
 }
@@ -2483,7 +2567,80 @@ export function getApiV1CreditcardpluginProcesscreditcardinfoByOrderid(orderId: 
     } | {
         status: 500;
         data: FwStandardModelsFwApiException;
-    }>(`/api/v1/creditcardplugin/processcreditcardinfo/${encodeURIComponent(orderId)}`, {
+    }>(`/api/v1/creditcardplugin/processcreditcardinfo/${encodeURIComponent(orderid)}`, {
+        ...opts
+    }));
+}
+/**
+ * Lookup payment type field on process credit card form (on Order).
+ */
+export function getApiV1CreditcardpluginProcesscreditcardinfoLookuppaymenttype({ pageno, pagesize, sort, filter }: {
+    pageno?: number;
+    pagesize?: number;
+    sort?: string;
+    filter?: FwStandardModelsFwQueryFilter[];
+} = {}, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.ok(oazapfts.fetchJson<{
+        status: 200;
+        data: FwStandardModelsFwQueryResponseWebApiModulesPluginsCreditCardProcessCreditCardPaymentType;
+    } | {
+        status: 400;
+        data: FwCoreApiSwashbuckleBadRequestResponse;
+    } | {
+        status: 401;
+    } | {
+        status: 403;
+    } | {
+        status: 500;
+        data: FwStandardModelsFwApiException;
+    }>(`/api/v1/creditcardplugin/processcreditcardinfo/lookuppaymenttype${QS.query(QS.explode({
+        pageno,
+        pagesize,
+        sort,
+        filter
+    }))}`, {
+        ...opts
+    }));
+}
+/**
+ * Returns a PaymentType record with fees given a tokenized card number.
+ */
+export function getApiV1CreditcardpluginProcesscreditcardinfoPaymenttypebytokenByToken(token: string, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.ok(oazapfts.fetchJson<{
+        status: 200;
+        data: WebApiModulesPluginsCreditCardProcessCreditCardPaymentType;
+    } | {
+        status: 400;
+        data: FwCoreApiSwashbuckleBadRequestResponse;
+    } | {
+        status: 401;
+    } | {
+        status: 403;
+    } | {
+        status: 500;
+        data: FwStandardModelsFwApiException;
+    }>(`/api/v1/creditcardplugin/processcreditcardinfo/paymenttypebytoken/${encodeURIComponent(token)}`, {
+        ...opts
+    }));
+}
+/**
+ * Returns a PaymentType record with fees given a PaymentTypeId
+ */
+export function getApiV1CreditcardpluginProcesscreditcardinfoPaymenttypeByPaymenttypeid(paymenttypeid: string, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.ok(oazapfts.fetchJson<{
+        status: 200;
+        data: WebApiModulesPluginsCreditCardProcessCreditCardPaymentType;
+    } | {
+        status: 400;
+        data: FwCoreApiSwashbuckleBadRequestResponse;
+    } | {
+        status: 401;
+    } | {
+        status: 403;
+    } | {
+        status: 500;
+        data: FwStandardModelsFwApiException;
+    }>(`/api/v1/creditcardplugin/processcreditcardinfo/paymenttype/${encodeURIComponent(paymenttypeid)}`, {
         ...opts
     }));
 }
@@ -2531,10 +2688,10 @@ export function getApiV1CreditcardpluginSettings(receiptid: string, opts?: Oazap
         ...opts
     }));
 }
-export function postApiV1CreditcardpluginCardpointeGatewayapiMakepayment(webApiModulesPagesActiveLinkCardPointePaymentPaymentActiveLinkAuthorizeRequest?: WebApiModulesPagesActiveLinkCardPointePaymentPaymentActiveLinkAuthorizeRequest, opts?: Oazapfts.RequestOpts) {
+export function getApiV1CreditcardpluginLocations(opts?: Oazapfts.RequestOpts) {
     return oazapfts.ok(oazapfts.fetchJson<{
         status: 200;
-        data: WebApiModulesPagesActiveLinkCardPointePaymentPaymentActiveLinkMakePaymentAsyncResponse;
+        data: WebApiModulesPluginsCreditCardCreditCardPluginLocation[];
     } | {
         status: 400;
         data: FwCoreApiSwashbuckleBadRequestResponse;
@@ -2545,19 +2702,17 @@ export function postApiV1CreditcardpluginCardpointeGatewayapiMakepayment(webApiM
     } | {
         status: 500;
         data: FwStandardModelsFwApiException;
-    }>("/api/v1/creditcardplugin/cardpointe/gatewayapi/makepayment", oazapfts.json({
-        ...opts,
-        method: "POST",
-        body: webApiModulesPagesActiveLinkCardPointePaymentPaymentActiveLinkAuthorizeRequest
-    })));
+    }>("/api/v1/creditcardplugin/locations", {
+        ...opts
+    }));
 }
 /**
- * Sends an email to a customer requesting them to input their credit card information, which is then used to create a credit card pre-authorization or a deposit, based on the Capture flag..
+ * Calls InquireMerchant on the CardPointe GatewayApi to get the surcharge fee percentage.
  */
-export function postApiV1CreditcardpluginCardpointeGatewayapiSendauthorizeemail(webApiModulesPagesActiveLinkCardPointePaymentPaymentActiveLinkSendAuthorizEmailRequest?: WebApiModulesPagesActiveLinkCardPointePaymentPaymentActiveLinkSendAuthorizEmailRequest, opts?: Oazapfts.RequestOpts) {
+export function getApiV1CreditcardpluginCardpointeGatewayapiSurchargefee(opts?: Oazapfts.RequestOpts) {
     return oazapfts.ok(oazapfts.fetchJson<{
         status: 200;
-        data: WebApiModulesPagesActiveLinkCardPointePaymentPaymentActiveLinkSendPreAuthorizeEmailResponse;
+        data: WebApiModulesPluginsCreditCardCreditCardPluginGetDefaultSurchargeAmountResponse;
     } | {
         status: 400;
         data: FwCoreApiSwashbuckleBadRequestResponse;
@@ -2568,11 +2723,114 @@ export function postApiV1CreditcardpluginCardpointeGatewayapiSendauthorizeemail(
     } | {
         status: 500;
         data: FwStandardModelsFwApiException;
-    }>("/api/v1/creditcardplugin/cardpointe/gatewayapi/sendauthorizeemail", oazapfts.json({
-        ...opts,
-        method: "POST",
-        body: webApiModulesPagesActiveLinkCardPointePaymentPaymentActiveLinkSendAuthorizEmailRequest
-    })));
+    }>("/api/v1/creditcardplugin/cardpointe/gatewayapi/surchargefee", {
+        ...opts
+    }));
+}
+/**
+ * Calls the Cardpointe Gateway API Surcharge endpoint to determine if there is a surcharge for this postal code.  Accountid should be the saved card number from the proifle.  If so, then calls CardPointe Gateway API InquireMerchant to determine the surcharge percent and returns the percentages and totals.
+ */
+export function getApiV1CreditcardpluginCardpointeGatewayapiSurchargefeeCustomerByCustomeridAccountidAndAccountidPostalcodePostalcodeAmountAmount(customerid: string, accountid: string, postalcode: string, amount: number, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.ok(oazapfts.fetchJson<{
+        status: 200;
+        data: WebApiModulesPluginsCreditCardCreditCardPluginGetDefaultSurchargeAmountResponse;
+    } | {
+        status: 400;
+        data: FwCoreApiSwashbuckleBadRequestResponse;
+    } | {
+        status: 401;
+    } | {
+        status: 403;
+    } | {
+        status: 500;
+        data: FwStandardModelsFwApiException;
+    }>(`/api/v1/creditcardplugin/cardpointe/gatewayapi/surchargefee/customer/${encodeURIComponent(customerid)}/accountid/${encodeURIComponent(accountid)}/postalcode/${encodeURIComponent(postalcode)}/amount/${encodeURIComponent(amount)}`, {
+        ...opts
+    }));
+}
+/**
+ * Calls the Cardpointe Gateway API Surcharge endpoint to determine if there is a surcharge for this postal code.  If so, then calls CardPointe Gateway API InquireMerchant to determine the surcharge percent and returns the percentages and totals.
+ */
+export function getApiV1CreditcardpluginCardpointeGatewayapiSurchargefeeDealByDealidAccountidAndAccountidPostalcodePostalcodeAmountAmount(dealid: string, accountid: string, postalcode: string, amount: number, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.ok(oazapfts.fetchJson<{
+        status: 200;
+        data: WebApiModulesPluginsCreditCardCreditCardPluginGetDefaultSurchargeAmountResponse;
+    } | {
+        status: 400;
+        data: FwCoreApiSwashbuckleBadRequestResponse;
+    } | {
+        status: 401;
+    } | {
+        status: 403;
+    } | {
+        status: 500;
+        data: FwStandardModelsFwApiException;
+    }>(`/api/v1/creditcardplugin/cardpointe/gatewayapi/surchargefee/deal/${encodeURIComponent(dealid)}/accountid/${encodeURIComponent(accountid)}/postalcode/${encodeURIComponent(postalcode)}/amount/${encodeURIComponent(amount)}`, {
+        ...opts
+    }));
+}
+/**
+ * Calls the Cardpointe Gateway API Surcharge endpoint to determine if there is a surcharge for an account (tokenized card #).
+ */
+export function getApiV1CreditcardpluginCardpointeGatewayapiSurchargefeeAccountByAccountidPostalcodeAndPostalcodeAmountAmount(accountid: string, postalcode: string, amount: number, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.ok(oazapfts.fetchJson<{
+        status: 200;
+        data: WebApiModulesPluginsCreditCardCreditCardPluginGetDefaultSurchargeAmountResponse;
+    } | {
+        status: 400;
+        data: FwCoreApiSwashbuckleBadRequestResponse;
+    } | {
+        status: 401;
+    } | {
+        status: 403;
+    } | {
+        status: 500;
+        data: FwStandardModelsFwApiException;
+    }>(`/api/v1/creditcardplugin/cardpointe/gatewayapi/surchargefee/account/${encodeURIComponent(accountid)}/postalcode/${encodeURIComponent(postalcode)}/amount/${encodeURIComponent(amount)}`, {
+        ...opts
+    }));
+}
+/**
+ * Calls the Cardpointe Gateway API BIN endpoint to get info about the card such as whether it's credit or debit.
+ */
+export function getApiV1CreditcardpluginCardpointeGatewayapiCarddetailsAccountByAccountid(accountid: string, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.ok(oazapfts.fetchJson<{
+        status: 200;
+        data: WebApiModulesPluginsCreditCardCreditCardPluginBinResponse;
+    } | {
+        status: 400;
+        data: FwCoreApiSwashbuckleBadRequestResponse;
+    } | {
+        status: 401;
+    } | {
+        status: 403;
+    } | {
+        status: 500;
+        data: FwStandardModelsFwApiException;
+    }>(`/api/v1/creditcardplugin/cardpointe/gatewayapi/carddetails/account/${encodeURIComponent(accountid)}`, {
+        ...opts
+    }));
+}
+/**
+ * This determines if MerchId (Surcharge) is configured in CardPointe plugin settings.
+ */
+export function getApiV1CreditcardpluginCardpointeIscreditcardfeeenabled(opts?: Oazapfts.RequestOpts) {
+    return oazapfts.ok(oazapfts.fetchJson<{
+        status: 200;
+        data: boolean;
+    } | {
+        status: 400;
+        data: FwCoreApiSwashbuckleBadRequestResponse;
+    } | {
+        status: 401;
+    } | {
+        status: 403;
+    } | {
+        status: 500;
+        data: FwStandardModelsFwApiException;
+    }>("/api/v1/creditcardplugin/cardpointe/iscreditcardfeeenabled", {
+        ...opts
+    }));
 }
 export function postApiV1HubspotpluginHashubspotrefreshtoken(opts?: Oazapfts.RequestOpts) {
     return oazapfts.ok(oazapfts.fetchJson<{
@@ -2610,6 +2868,27 @@ export function postApiV1HubspotpluginDeletehubspottokens(opts?: Oazapfts.Reques
     }>("/api/v1/hubspotplugin/deletehubspottokens", {
         ...opts,
         method: "POST"
+    }));
+}
+export function getJspm({ timestamp }: {
+    timestamp?: string;
+} = {}, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.ok(oazapfts.fetchJson<{
+        status: 200;
+    } | {
+        status: 400;
+        data: FwCoreApiSwashbuckleBadRequestResponse;
+    } | {
+        status: 401;
+    } | {
+        status: 403;
+    } | {
+        status: 500;
+        data: FwStandardModelsFwApiException;
+    }>(`/jspm${QS.query(QS.explode({
+        timestamp
+    }))}`, {
+        ...opts
     }));
 }
 export function getApiV1QuickbooksonlinepluginLocations(opts?: Oazapfts.RequestOpts) {
@@ -2752,6 +3031,119 @@ export function postApiV1ShopifypluginValidateshopifyurl(webApiModulesPluginsSho
         method: "POST",
         body: webApiModulesPluginsShopifyValidateShopUrlRequest
     })));
+}
+export function getApiV1ShopifypluginIntegrationStatusLocationByLocationid(locationid: string, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.ok(oazapfts.fetchJson<{
+        status: 200;
+        data: WebApiModulesPluginsShopifyShopifyIntegrationStatus;
+    } | {
+        status: 400;
+        data: FwCoreApiSwashbuckleBadRequestResponse;
+    } | {
+        status: 401;
+    } | {
+        status: 403;
+    } | {
+        status: 500;
+        data: FwStandardModelsFwApiException;
+    }>(`/api/v1/shopifyplugin/integration_status/location/${encodeURIComponent(locationid)}`, {
+        ...opts
+    }));
+}
+export function postApiV1ShopifypluginEnableCreateOrderWebhookLocationByLocationid(locationid: string, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.ok(oazapfts.fetchJson<{
+        status: 200;
+        data: WebApiModulesPluginsShopifyEnableCreateOrderWebhookResponse;
+    } | {
+        status: 400;
+        data: FwCoreApiSwashbuckleBadRequestResponse;
+    } | {
+        status: 401;
+    } | {
+        status: 403;
+    } | {
+        status: 500;
+        data: FwStandardModelsFwApiException;
+    }>(`/api/v1/shopifyplugin/enable_create_order_webhook/location/${encodeURIComponent(locationid)}`, {
+        ...opts,
+        method: "POST"
+    }));
+}
+export function postApiV1ShopifypluginDisableCreateOrderWebhookLocationByLocationid(locationid: string, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.ok(oazapfts.fetchJson<{
+        status: 200;
+        data: WebApiModulesPluginsShopifyDisableCreateOrderWebhookResponse;
+    } | {
+        status: 400;
+        data: FwCoreApiSwashbuckleBadRequestResponse;
+    } | {
+        status: 401;
+    } | {
+        status: 403;
+    } | {
+        status: 500;
+        data: FwStandardModelsFwApiException;
+    }>(`/api/v1/shopifyplugin/disable_create_order_webhook/location/${encodeURIComponent(locationid)}`, {
+        ...opts,
+        method: "POST"
+    }));
+}
+export function postApiV1ShopifypluginInstallThemeLocationByLocationid(locationid: string, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.ok(oazapfts.fetchJson<{
+        status: 200;
+        data: WebApiModulesIntegrationsShopifyShopifyInstallThemeResponse;
+    } | {
+        status: 400;
+        data: FwCoreApiSwashbuckleBadRequestResponse;
+    } | {
+        status: 401;
+    } | {
+        status: 403;
+    } | {
+        status: 500;
+        data: FwStandardModelsFwApiException;
+    }>(`/api/v1/shopifyplugin/install_theme/location/${encodeURIComponent(locationid)}`, {
+        ...opts,
+        method: "POST"
+    }));
+}
+export function postApiV1ShopifypluginUninstallThemeLocationByLocationid(locationid: string, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.ok(oazapfts.fetchJson<{
+        status: 200;
+        data: WebApiModulesIntegrationsShopifyShopifyUninstallThemeResponse;
+    } | {
+        status: 400;
+        data: FwCoreApiSwashbuckleBadRequestResponse;
+    } | {
+        status: 401;
+    } | {
+        status: 403;
+    } | {
+        status: 500;
+        data: FwStandardModelsFwApiException;
+    }>(`/api/v1/shopifyplugin/uninstall_theme/location/${encodeURIComponent(locationid)}`, {
+        ...opts,
+        method: "POST"
+    }));
+}
+export function postApiV1ShopifypluginCreateQuoteFromShopifyOrderLocationByLocationidOrderNumberAndOrderNumber(locationid: string, orderNumber: string, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.ok(oazapfts.fetchJson<{
+        status: 200;
+        data: string;
+    } | {
+        status: 400;
+        data: FwCoreApiSwashbuckleBadRequestResponse;
+    } | {
+        status: 401;
+    } | {
+        status: 403;
+    } | {
+        status: 500;
+        data: FwStandardModelsFwApiException;
+    }>(`/api/v1/shopifyplugin/create_quote_from_shopify_order/location/${encodeURIComponent(locationid)}/order_number/${encodeURIComponent(orderNumber)}`, {
+        ...opts,
+        method: "POST"
+    }));
 }
 export function postApiV1TaskschedulerTaskstepsBrowse(fwStandardModelsBrowseRequest?: FwStandardModelsBrowseRequest, opts?: Oazapfts.RequestOpts) {
     return oazapfts.ok(oazapfts.fetchJson<{
@@ -2982,6 +3374,10 @@ export enum WebApiModulesPluginsCreditCardCreditCardPluginVoidResponseStatusCode
     Declined = "Declined",
     Error = "Error"
 }
+export enum WebApiModulesPluginsCreditCardProcessCreditCardCardUsageTypes {
+    Credit = "CREDIT",
+    Debit = "DEBIT"
+}
 export enum WebApiModulesPluginsCreditCardCreditCardPluginCreateOrUpdateProfileResponseStatusCodes {
     Approved = "Approved",
     Retry = "Retry",
@@ -3006,5 +3402,13 @@ export enum WebApiModulesPluginsCreditCardCreditCardPluginRefundResponseStatusCo
     Approved = "Approved",
     Retry = "Retry",
     Declined = "Declined",
+    Error = "Error"
+}
+export enum WebApiModulesPluginsCreditCardCreditCardPluginGetDefaultSurchargeAmountResponseStatusCodes {
+    Ok = "Ok",
+    Error = "Error"
+}
+export enum WebApiModulesPluginsCreditCardCreditCardPluginBinResponseStatusCodes {
+    Ok = "Ok",
     Error = "Error"
 }

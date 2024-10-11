@@ -238,6 +238,289 @@
         }
       }
     },
+    "/jspm": {
+      "get": {
+        "tags": [
+          "JSPM"
+        ],
+        "parameters": [
+          {
+            "name": "timestamp",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FwCore.Api.Swashbuckle.BadRequestResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized (jwt token is invalid)"
+          },
+          "403": {
+            "description": "Forbidden (jwt token is valid, but you don't have permission)"
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FwStandard.Models.FwApiException"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/shopify/create_order_webhook/location/{locationid}": {
+      "post": {
+        "tags": [
+          "Shopify"
+        ],
+        "parameters": [
+          {
+            "name": "locationid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ShopifySharp.Order"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FwCore.Api.Swashbuckle.BadRequestResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized (jwt token is invalid)"
+          },
+          "403": {
+            "description": "Forbidden (jwt token is valid, but you don't have permission)"
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FwStandard.Models.FwApiException"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/shopify/theme-install-instructions": {
+      "get": {
+        "tags": [
+          "Shopify"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FwCore.Api.Swashbuckle.BadRequestResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized (jwt token is invalid)"
+          },
+          "403": {
+            "description": "Forbidden (jwt token is valid, but you don't have permission)"
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FwStandard.Models.FwApiException"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/storefront/settings/schema": {
+      "get": {
+        "tags": [
+          "Storefront"
+        ],
+        "summary": "Returns storefront settings.",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/WebApi.Modules.Integrations.Storefront.StorefrontSettingsPropertySchema"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FwCore.Api.Swashbuckle.BadRequestResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized (jwt token is invalid)"
+          },
+          "403": {
+            "description": "Forbidden (jwt token is valid, but you don't have permission)"
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FwStandard.Models.FwApiException"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/storefront/settings": {
+      "get": {
+        "tags": [
+          "Storefront"
+        ],
+        "summary": "Returns storefront settings.",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WebApi.Modules.Integrations.Storefront.StorefrontSettings"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FwCore.Api.Swashbuckle.BadRequestResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized (jwt token is invalid)"
+          },
+          "403": {
+            "description": "Forbidden (jwt token is valid, but you don't have permission)"
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FwStandard.Models.FwApiException"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Storefront"
+        ],
+        "summary": "Update storefront settings.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WebApi.Modules.Integrations.Storefront.StorefrontSettings"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FwCore.Api.Swashbuckle.BadRequestResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized (jwt token is invalid)"
+          },
+          "403": {
+            "description": "Forbidden (jwt token is valid, but you don't have permission)"
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FwStandard.Models.FwApiException"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/v1/storefront/catalog": {
       "get": {
         "tags": [
@@ -872,7 +1155,55 @@
         "tags": [
           "Storefront"
         ],
-        "summary": "Send email to sReset Password (for Contacts)",
+        "summary": "Send email to Reset Password (for Contacts)",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WebApi.Modules.Integrations.Storefront.SendResetPasswordEmailRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FwCore.Api.Swashbuckle.BadRequestResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized (jwt token is invalid)"
+          },
+          "403": {
+            "description": "Forbidden (jwt token is valid, but you don't have permission)"
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FwStandard.Models.FwApiException"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/storefront/sendchangepasswordemail": {
+      "post": {
+        "tags": [
+          "Storefront"
+        ],
+        "summary": "Send email to Reset Password (for Contacts)",
         "requestBody": {
           "content": {
             "application/json": {
@@ -920,7 +1251,7 @@
         "tags": [
           "Storefront"
         ],
-        "summary": "Send email to sReset Password (for Contacts)",
+        "summary": "Send email to Reset Password (for Contacts)",
         "requestBody": {
           "content": {
             "application/json": {
@@ -1334,6 +1665,52 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/WebApi.Modules.Integrations.Storefront.StorefrontProgress"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FwCore.Api.Swashbuckle.BadRequestResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized (jwt token is invalid)"
+          },
+          "403": {
+            "description": "Forbidden (jwt token is valid, but you don't have permission)"
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FwStandard.Models.FwApiException"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/storefront/version": {
+      "get": {
+        "tags": [
+          "Storefront"
+        ],
+        "summary": "Returns the storefront api version.",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
                 }
               }
             }
@@ -2353,6 +2730,10 @@
             "nullable": true,
             "readOnly": true
           },
+          "ServerVersion": {
+            "type": "string",
+            "nullable": true
+          },
           "_Translation": {
             "type": "array",
             "items": {
@@ -2386,6 +2767,1859 @@
         },
         "additionalProperties": false
       },
+      "ShopifySharp.Address": {
+        "type": "object",
+        "properties": {
+          "address1": {
+            "type": "string",
+            "nullable": true
+          },
+          "address2": {
+            "type": "string",
+            "nullable": true
+          },
+          "city": {
+            "type": "string",
+            "nullable": true
+          },
+          "company": {
+            "type": "string",
+            "nullable": true
+          },
+          "country": {
+            "type": "string",
+            "nullable": true
+          },
+          "country_code": {
+            "type": "string",
+            "nullable": true
+          },
+          "country_name": {
+            "type": "string",
+            "nullable": true
+          },
+          "default": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "first_name": {
+            "type": "string",
+            "nullable": true
+          },
+          "last_name": {
+            "type": "string",
+            "nullable": true
+          },
+          "latitude": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "longitude": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "phone": {
+            "type": "string",
+            "nullable": true
+          },
+          "province": {
+            "type": "string",
+            "nullable": true
+          },
+          "province_code": {
+            "type": "string",
+            "nullable": true
+          },
+          "zip": {
+            "type": "string",
+            "nullable": true
+          },
+          "id": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "admin_graphql_api_id": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ShopifySharp.ClientDetails": {
+        "type": "object",
+        "properties": {
+          "accept_language": {
+            "type": "string",
+            "nullable": true
+          },
+          "browser_height": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "browser_ip": {
+            "type": "string",
+            "nullable": true
+          },
+          "browser_width": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "session_hash": {
+            "type": "string",
+            "nullable": true
+          },
+          "user_agent": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ShopifySharp.CurrencyExchangeAdjustment": {
+        "type": "object",
+        "properties": {
+          "adjustment": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "original_amount": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "final_amount": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "currency": {
+            "type": "string",
+            "nullable": true
+          },
+          "id": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "admin_graphql_api_id": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ShopifySharp.Customer": {
+        "type": "object",
+        "properties": {
+          "addresses": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ShopifySharp.Address"
+            },
+            "nullable": true
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "currency": {
+            "type": "string",
+            "nullable": true
+          },
+          "default_address": {
+            "$ref": "#/components/schemas/ShopifySharp.Address"
+          },
+          "email": {
+            "type": "string",
+            "nullable": true
+          },
+          "first_name": {
+            "type": "string",
+            "nullable": true
+          },
+          "multipass_identifier": {
+            "type": "string",
+            "nullable": true
+          },
+          "last_name": {
+            "type": "string",
+            "nullable": true
+          },
+          "last_order_id": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "last_order_name": {
+            "type": "string",
+            "nullable": true
+          },
+          "note": {
+            "type": "string",
+            "nullable": true
+          },
+          "orders_count": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "phone": {
+            "type": "string",
+            "nullable": true
+          },
+          "state": {
+            "type": "string",
+            "nullable": true
+          },
+          "tags": {
+            "type": "string",
+            "nullable": true
+          },
+          "tax_exempt": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "tax_exemptions": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          },
+          "total_spent": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "verified_email": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "sms_marketing_consent": {
+            "$ref": "#/components/schemas/ShopifySharp.CustomerSmsMarketingConsent"
+          },
+          "metafields": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ShopifySharp.MetaField"
+            },
+            "nullable": true
+          },
+          "email_marketing_consent": {
+            "$ref": "#/components/schemas/ShopifySharp.CustomerEmailMarketingConsent"
+          },
+          "id": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "admin_graphql_api_id": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ShopifySharp.CustomerEmailMarketingConsent": {
+        "type": "object",
+        "properties": {
+          "state": {
+            "type": "string",
+            "nullable": true
+          },
+          "opt_in_level": {
+            "type": "string",
+            "nullable": true
+          },
+          "consent_updated_at": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ShopifySharp.CustomerSmsMarketingConsent": {
+        "type": "object",
+        "properties": {
+          "state": {
+            "type": "string",
+            "nullable": true
+          },
+          "opt_in_level": {
+            "type": "string",
+            "nullable": true
+          },
+          "consent_updated_at": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "consent_collected_from": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ShopifySharp.DiscountAllocation": {
+        "type": "object",
+        "properties": {
+          "amount": {
+            "type": "string",
+            "nullable": true
+          },
+          "discount_application_index": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "amount_set": {
+            "$ref": "#/components/schemas/ShopifySharp.PriceSet"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ShopifySharp.DiscountApplication": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "nullable": true
+          },
+          "code": {
+            "type": "string",
+            "nullable": true
+          },
+          "title": {
+            "type": "string",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "value": {
+            "type": "string",
+            "nullable": true
+          },
+          "value_type": {
+            "type": "string",
+            "nullable": true
+          },
+          "allocation_method": {
+            "type": "string",
+            "nullable": true
+          },
+          "target_selection": {
+            "type": "string",
+            "nullable": true
+          },
+          "target_type": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ShopifySharp.DiscountCode": {
+        "type": "object",
+        "properties": {
+          "amount": {
+            "type": "string",
+            "nullable": true
+          },
+          "code": {
+            "type": "string",
+            "nullable": true
+          },
+          "type": {
+            "type": "string",
+            "nullable": true
+          },
+          "id": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "admin_graphql_api_id": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ShopifySharp.Entities.Return": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "admin_graphql_api_id": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ShopifySharp.Fulfillment": {
+        "type": "object",
+        "properties": {
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "line_items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ShopifySharp.LineItem"
+            },
+            "nullable": true
+          },
+          "order_id": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "receipt": {
+            "nullable": true
+          },
+          "status": {
+            "type": "string",
+            "nullable": true
+          },
+          "location_id": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "email": {
+            "type": "string",
+            "nullable": true
+          },
+          "notify_customer": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "destination": {
+            "$ref": "#/components/schemas/ShopifySharp.Address"
+          },
+          "tracking_company": {
+            "type": "string",
+            "nullable": true
+          },
+          "tracking_number": {
+            "type": "string",
+            "nullable": true
+          },
+          "tracking_numbers": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          },
+          "tracking_url": {
+            "type": "string",
+            "nullable": true
+          },
+          "tracking_urls": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "variant_inventory_management": {
+            "type": "string",
+            "nullable": true
+          },
+          "service": {
+            "type": "string",
+            "nullable": true
+          },
+          "shipment_status": {
+            "type": "string",
+            "nullable": true
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "origin_address": {
+            "$ref": "#/components/schemas/ShopifySharp.FulfillmentOriginAddress"
+          },
+          "id": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "admin_graphql_api_id": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ShopifySharp.FulfillmentOriginAddress": {
+        "type": "object",
+        "properties": {
+          "address1": {
+            "type": "string",
+            "nullable": true
+          },
+          "address2": {
+            "type": "string",
+            "nullable": true
+          },
+          "city": {
+            "type": "string",
+            "nullable": true
+          },
+          "country_code": {
+            "type": "string",
+            "nullable": true
+          },
+          "province_code": {
+            "type": "string",
+            "nullable": true
+          },
+          "zip": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ShopifySharp.LineItem": {
+        "type": "object",
+        "properties": {
+          "fulfillable_quantity": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "fulfillment_service": {
+            "type": "string",
+            "nullable": true
+          },
+          "fulfillment_status": {
+            "type": "string",
+            "nullable": true
+          },
+          "grams": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "price": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "product_id": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "quantity": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "requires_shipping": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "sku": {
+            "type": "string",
+            "nullable": true
+          },
+          "title": {
+            "type": "string",
+            "nullable": true
+          },
+          "variant_id": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "variant_title": {
+            "type": "string",
+            "nullable": true
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "vendor": {
+            "type": "string",
+            "nullable": true
+          },
+          "gift_card": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "taxable": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "tax_lines": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ShopifySharp.TaxLine"
+            },
+            "nullable": true
+          },
+          "tip_payment_gateway": {
+            "type": "string",
+            "nullable": true
+          },
+          "tip_payment_method": {
+            "type": "string",
+            "nullable": true
+          },
+          "total_discount": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "total_discount_set": {
+            "$ref": "#/components/schemas/ShopifySharp.PriceSet"
+          },
+          "discount_allocations": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ShopifySharp.DiscountAllocation"
+            },
+            "nullable": true
+          },
+          "properties": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ShopifySharp.LineItemProperty"
+            },
+            "nullable": true
+          },
+          "variant_inventory_management": {
+            "type": "string",
+            "nullable": true
+          },
+          "product_exists": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "price_set": {
+            "$ref": "#/components/schemas/ShopifySharp.PriceSet"
+          },
+          "pre_tax_price": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "pre_tax_price_set": {
+            "$ref": "#/components/schemas/ShopifySharp.PriceSet"
+          },
+          "duties": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ShopifySharp.LineItemDuty"
+            },
+            "nullable": true
+          },
+          "fulfillment_line_item_id": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "attributed_staffs": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ShopifySharp.LineItemAttributedStaff"
+            },
+            "nullable": true
+          },
+          "id": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "admin_graphql_api_id": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ShopifySharp.LineItemAttributedStaff": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "nullable": true
+          },
+          "quantity": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ShopifySharp.LineItemDuty": {
+        "type": "object",
+        "properties": {
+          "harmonized_system_code": {
+            "type": "string",
+            "nullable": true
+          },
+          "country_code_of_origin": {
+            "type": "string",
+            "nullable": true
+          },
+          "price_set": {
+            "$ref": "#/components/schemas/ShopifySharp.PriceSet"
+          },
+          "tax_lines": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ShopifySharp.TaxLine"
+            },
+            "nullable": true
+          },
+          "id": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "admin_graphql_api_id": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ShopifySharp.LineItemProperty": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "nullable": true
+          },
+          "value": {
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ShopifySharp.MetaField": {
+        "type": "object",
+        "properties": {
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "key": {
+            "type": "string",
+            "nullable": true
+          },
+          "value": {
+            "nullable": true
+          },
+          "type": {
+            "type": "string",
+            "nullable": true
+          },
+          "namespace": {
+            "type": "string",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "owner_id": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "owner_resource": {
+            "type": "string",
+            "nullable": true
+          },
+          "id": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "admin_graphql_api_id": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ShopifySharp.NoteAttribute": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "value": {
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ShopifySharp.Order": {
+        "type": "object",
+        "properties": {
+          "app_id": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "billing_address": {
+            "$ref": "#/components/schemas/ShopifySharp.Address"
+          },
+          "browser_ip": {
+            "type": "string",
+            "nullable": true
+          },
+          "buyer_accepts_marketing": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "cancel_reason": {
+            "type": "string",
+            "nullable": true
+          },
+          "cancelled_at": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "cart_token": {
+            "type": "string",
+            "nullable": true
+          },
+          "checkout_token": {
+            "type": "string",
+            "nullable": true
+          },
+          "checkout_id": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "client_details": {
+            "$ref": "#/components/schemas/ShopifySharp.ClientDetails"
+          },
+          "closed_at": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "confirmed": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "currency": {
+            "type": "string",
+            "nullable": true
+          },
+          "customer": {
+            "$ref": "#/components/schemas/ShopifySharp.Customer"
+          },
+          "customer_locale": {
+            "type": "string",
+            "nullable": true
+          },
+          "device_id": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "discount_codes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ShopifySharp.DiscountCode"
+            },
+            "nullable": true
+          },
+          "discount_applications": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ShopifySharp.DiscountApplication"
+            },
+            "nullable": true
+          },
+          "email": {
+            "type": "string",
+            "nullable": true
+          },
+          "financial_status": {
+            "type": "string",
+            "nullable": true
+          },
+          "fulfillments": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ShopifySharp.Fulfillment"
+            },
+            "nullable": true
+          },
+          "fulfillment_status": {
+            "type": "string",
+            "nullable": true
+          },
+          "phone": {
+            "type": "string",
+            "nullable": true
+          },
+          "tags": {
+            "type": "string",
+            "nullable": true
+          },
+          "landing_site": {
+            "type": "string",
+            "nullable": true
+          },
+          "line_items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ShopifySharp.LineItem"
+            },
+            "nullable": true
+          },
+          "location_id": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "note": {
+            "type": "string",
+            "nullable": true
+          },
+          "note_attributes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ShopifySharp.NoteAttribute"
+            },
+            "nullable": true
+          },
+          "number": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "order_number": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "order_status_url": {
+            "type": "string",
+            "nullable": true
+          },
+          "payment_gateway_names": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          },
+          "processed_at": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "processing_method": {
+            "type": "string",
+            "nullable": true,
+            "deprecated": true
+          },
+          "referring_site": {
+            "type": "string",
+            "nullable": true
+          },
+          "refunds": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ShopifySharp.Refund"
+            },
+            "nullable": true
+          },
+          "shipping_address": {
+            "$ref": "#/components/schemas/ShopifySharp.Address"
+          },
+          "shipping_lines": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ShopifySharp.ShippingLine"
+            },
+            "nullable": true
+          },
+          "source_identifier": {
+            "type": "string",
+            "nullable": true
+          },
+          "source_name": {
+            "type": "string",
+            "nullable": true
+          },
+          "subtotal_price": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "tax_lines": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ShopifySharp.TaxLine"
+            },
+            "nullable": true
+          },
+          "taxes_included": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "test": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "token": {
+            "type": "string",
+            "nullable": true
+          },
+          "total_discounts": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "total_line_items_price": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "total_tip_received": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "total_price": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "total_tax": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "total_weight": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "user_id": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "transactions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ShopifySharp.Transaction"
+            },
+            "nullable": true
+          },
+          "metafields": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ShopifySharp.MetaField"
+            },
+            "nullable": true
+          },
+          "current_total_duties_set": {
+            "$ref": "#/components/schemas/ShopifySharp.PriceSet"
+          },
+          "original_total_duties_set": {
+            "$ref": "#/components/schemas/ShopifySharp.PriceSet"
+          },
+          "presentment_currency": {
+            "type": "string",
+            "nullable": true
+          },
+          "total_line_items_price_set": {
+            "$ref": "#/components/schemas/ShopifySharp.PriceSet"
+          },
+          "total_discounts_set": {
+            "$ref": "#/components/schemas/ShopifySharp.PriceSet"
+          },
+          "total_shipping_price_set": {
+            "$ref": "#/components/schemas/ShopifySharp.PriceSet"
+          },
+          "subtotal_price_set": {
+            "$ref": "#/components/schemas/ShopifySharp.PriceSet"
+          },
+          "total_price_set": {
+            "$ref": "#/components/schemas/ShopifySharp.PriceSet"
+          },
+          "total_outstanding": {
+            "type": "string",
+            "nullable": true
+          },
+          "total_tax_set": {
+            "$ref": "#/components/schemas/ShopifySharp.PriceSet"
+          },
+          "estimated_taxes": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "current_subtotal_price": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "current_subtotal_price_set": {
+            "$ref": "#/components/schemas/ShopifySharp.PriceSet"
+          },
+          "current_total_discounts": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "current_total_discounts_set": {
+            "$ref": "#/components/schemas/ShopifySharp.PriceSet"
+          },
+          "current_total_price": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "current_total_price_set": {
+            "$ref": "#/components/schemas/ShopifySharp.PriceSet"
+          },
+          "current_total_tax": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "current_total_tax_set": {
+            "$ref": "#/components/schemas/ShopifySharp.PriceSet"
+          },
+          "payment_terms": {
+            "$ref": "#/components/schemas/ShopifySharp.PaymentTerms"
+          },
+          "current_total_additional_fees_set": {
+            "$ref": "#/components/schemas/ShopifySharp.PriceSet"
+          },
+          "original_total_additional_fees_set": {
+            "$ref": "#/components/schemas/ShopifySharp.PriceSet"
+          },
+          "po_number": {
+            "type": "string",
+            "nullable": true
+          },
+          "tax_exempt": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "company": {
+            "$ref": "#/components/schemas/ShopifySharp.OrderCompany"
+          },
+          "id": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "admin_graphql_api_id": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ShopifySharp.OrderCompany": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "location_id": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ShopifySharp.PaymentDetails": {
+        "type": "object",
+        "properties": {
+          "avs_result_code": {
+            "type": "string",
+            "nullable": true
+          },
+          "credit_card_bin": {
+            "type": "string",
+            "nullable": true
+          },
+          "cvv_result_code": {
+            "type": "string",
+            "nullable": true
+          },
+          "credit_card_number": {
+            "type": "string",
+            "nullable": true
+          },
+          "credit_card_company": {
+            "type": "string",
+            "nullable": true
+          },
+          "credit_card_name": {
+            "type": "string",
+            "nullable": true
+          },
+          "credit_card_wallet": {
+            "type": "string",
+            "nullable": true
+          },
+          "credit_card_expiration_month": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "credit_card_expiration_year": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "payment_method_name": {
+            "type": "string",
+            "nullable": true
+          },
+          "buyer_action_info": {
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ShopifySharp.PaymentSchedule": {
+        "type": "object",
+        "properties": {
+          "amount": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "currency": {
+            "type": "string",
+            "nullable": true
+          },
+          "issued_at": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "due_at": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "completed_at": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "expected_payment_method": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ShopifySharp.PaymentTerms": {
+        "type": "object",
+        "properties": {
+          "amount": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "currency": {
+            "type": "string",
+            "nullable": true
+          },
+          "due_in_days": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "payment_terms_name": {
+            "type": "string",
+            "nullable": true
+          },
+          "payment_terms_type": {
+            "type": "string",
+            "nullable": true
+          },
+          "payment_schedules": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ShopifySharp.PaymentSchedule"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ShopifySharp.PaymentsRefundAttributes": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "nullable": true
+          },
+          "acquirer_reference_number": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ShopifySharp.Price": {
+        "type": "object",
+        "properties": {
+          "currency_code": {
+            "type": "string",
+            "nullable": true
+          },
+          "amount": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ShopifySharp.PriceSet": {
+        "type": "object",
+        "properties": {
+          "shop_money": {
+            "$ref": "#/components/schemas/ShopifySharp.Price"
+          },
+          "presentment_money": {
+            "$ref": "#/components/schemas/ShopifySharp.Price"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ShopifySharp.Refund": {
+        "type": "object",
+        "properties": {
+          "order_id": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "notify": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "shipping": {
+            "$ref": "#/components/schemas/ShopifySharp.Shipping"
+          },
+          "currency": {
+            "type": "string",
+            "nullable": true
+          },
+          "order_adjustments": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ShopifySharp.RefundOrderAdjustment"
+            },
+            "nullable": true
+          },
+          "processed_at": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "note": {
+            "type": "string",
+            "nullable": true
+          },
+          "discrepancy_reason": {
+            "type": "string",
+            "nullable": true
+          },
+          "refund_line_items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ShopifySharp.RefundLineItem"
+            },
+            "nullable": true
+          },
+          "transactions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ShopifySharp.Transaction"
+            },
+            "nullable": true
+          },
+          "user_id": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "duties": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ShopifySharp.RefundDuty"
+            },
+            "nullable": true
+          },
+          "refund_duties": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ShopifySharp.RefundDutyType"
+            },
+            "nullable": true
+          },
+          "return": {
+            "$ref": "#/components/schemas/ShopifySharp.Entities.Return"
+          },
+          "id": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "admin_graphql_api_id": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ShopifySharp.RefundDuty": {
+        "type": "object",
+        "properties": {
+          "duty_id": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "amount_set": {
+            "$ref": "#/components/schemas/ShopifySharp.PriceSet"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ShopifySharp.RefundDutyType": {
+        "type": "object",
+        "properties": {
+          "duty_id": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "refund_type": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ShopifySharp.RefundLineItem": {
+        "type": "object",
+        "properties": {
+          "line_item": {
+            "$ref": "#/components/schemas/ShopifySharp.LineItem"
+          },
+          "line_item_id": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "quantity": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "total_tax": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "subtotal": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "subtotal_set": {
+            "$ref": "#/components/schemas/ShopifySharp.PriceSet"
+          },
+          "total_tax_set": {
+            "$ref": "#/components/schemas/ShopifySharp.PriceSet"
+          },
+          "restock_type": {
+            "type": "string",
+            "nullable": true
+          },
+          "location_id": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "id": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "admin_graphql_api_id": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ShopifySharp.RefundOrderAdjustment": {
+        "type": "object",
+        "properties": {
+          "order_id": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "refund_id": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "amount": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "tax_amount": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "kind": {
+            "type": "string",
+            "nullable": true
+          },
+          "Reason": {
+            "type": "string",
+            "nullable": true
+          },
+          "amount_set": {
+            "$ref": "#/components/schemas/ShopifySharp.PriceSet"
+          },
+          "tax_amount_set": {
+            "$ref": "#/components/schemas/ShopifySharp.PriceSet"
+          },
+          "id": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "admin_graphql_api_id": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ShopifySharp.Shipping": {
+        "type": "object",
+        "properties": {
+          "full_refund": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "amount": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "maximum_refundable": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ShopifySharp.ShippingLine": {
+        "type": "object",
+        "properties": {
+          "carrier_identifier": {
+            "type": "string",
+            "nullable": true
+          },
+          "code": {
+            "type": "string",
+            "nullable": true
+          },
+          "is_removed": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "phone": {
+            "type": "string",
+            "nullable": true
+          },
+          "price": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "discounted_price": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "discount_allocations": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ShopifySharp.DiscountAllocation"
+            },
+            "nullable": true
+          },
+          "source": {
+            "type": "string",
+            "nullable": true
+          },
+          "title": {
+            "type": "string",
+            "nullable": true
+          },
+          "tax_lines": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ShopifySharp.TaxLine"
+            },
+            "nullable": true
+          },
+          "price_set": {
+            "$ref": "#/components/schemas/ShopifySharp.PriceSet"
+          },
+          "discounted_price_set": {
+            "$ref": "#/components/schemas/ShopifySharp.PriceSet"
+          },
+          "id": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "admin_graphql_api_id": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ShopifySharp.TaxLine": {
+        "type": "object",
+        "properties": {
+          "price": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "rate": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "title": {
+            "type": "string",
+            "nullable": true
+          },
+          "price_set": {
+            "$ref": "#/components/schemas/ShopifySharp.PriceSet"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ShopifySharp.Transaction": {
+        "type": "object",
+        "properties": {
+          "amount": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "authorization": {
+            "type": "string",
+            "nullable": true
+          },
+          "authorization_expires_at": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "device_id": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "gateway": {
+            "type": "string",
+            "nullable": true
+          },
+          "source_name": {
+            "type": "string",
+            "nullable": true
+          },
+          "source": {
+            "type": "string",
+            "nullable": true
+          },
+          "payment_details": {
+            "$ref": "#/components/schemas/ShopifySharp.PaymentDetails"
+          },
+          "kind": {
+            "type": "string",
+            "nullable": true
+          },
+          "order_id": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "receipt": {
+            "nullable": true
+          },
+          "error_code": {
+            "type": "string",
+            "nullable": true
+          },
+          "status": {
+            "type": "string",
+            "nullable": true
+          },
+          "test": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "user_id": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "currency": {
+            "type": "string",
+            "nullable": true
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
+          },
+          "location_id": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "parent_id": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "processed_at": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "maximum_refundable": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "currency_exchange_adjustment": {
+            "$ref": "#/components/schemas/ShopifySharp.CurrencyExchangeAdjustment"
+          },
+          "payments_refund_attributes": {
+            "$ref": "#/components/schemas/ShopifySharp.PaymentsRefundAttributes"
+          },
+          "payment_id": {
+            "type": "string",
+            "nullable": true
+          },
+          "total_unsettled_set": {
+            "$ref": "#/components/schemas/ShopifySharp.PriceSet"
+          },
+          "id": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "admin_graphql_api_id": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "StorefrontPackageItem": {
         "type": "object",
         "properties": {
@@ -2405,14 +4639,6 @@
             "nullable": true
           },
           "ICode": {
-            "type": "string",
-            "nullable": true
-          },
-          "ICodeColor": {
-            "type": "string",
-            "nullable": true
-          },
-          "LineColor": {
             "type": "string",
             "nullable": true
           },
@@ -2469,11 +4695,6 @@
           },
           "AvailFrom": {
             "type": "string",
-            "nullable": true
-          },
-          "CategoryOrderBy": {
-            "type": "number",
-            "format": "double",
             "nullable": true
           },
           "OrderBy": {
@@ -2554,7 +4775,7 @@
             "format": "double",
             "nullable": true
           },
-          "Price": {
+          "SalesPrice": {
             "type": "number",
             "format": "double",
             "nullable": true
@@ -3004,6 +5225,11 @@
         ],
         "type": "object",
         "properties": {
+          "WebCatalogId": {
+            "maxLength": 8,
+            "type": "string",
+            "nullable": true
+          },
           "Language": {
             "maxLength": 2,
             "type": "string",
@@ -3360,6 +5586,11 @@
             "format": "double",
             "nullable": true
           },
+          "SalesPrice": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
           "CurrencySymbol": {
             "type": "string",
             "nullable": true
@@ -3373,6 +5604,38 @@
             "items": {
               "$ref": "#/components/schemas/StorefrontPackageItem"
             },
+            "nullable": true
+          },
+          "Manufacturer": {
+            "type": "string",
+            "nullable": true
+          },
+          "ManufacturerPartNumber": {
+            "type": "string",
+            "nullable": true
+          },
+          "ManufacturerUrl": {
+            "type": "string",
+            "nullable": true
+          },
+          "UnitValue": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "ReplacementCost": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "ShipWeightLbs": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "ShipWeightOz": {
+            "type": "number",
+            "format": "double",
             "nullable": true
           },
           "Images": {
@@ -3505,6 +5768,82 @@
         },
         "additionalProperties": false
       },
+      "WebApi.Modules.Integrations.Storefront.StorefrontSettings": {
+        "type": "object",
+        "properties": {
+          "IsStorefrontEnabled": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "IsUniversity": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "IsAnonymousAccessEnabled": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "SeparateQuoteRequestsByCatalog": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "MakeQuoteRequestIntoOrderOnSubmission": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "AutoplaySpeed": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "AutoplayImagesOnLandingPage": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "AutoplayImagesOnProductBrowser": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "AutoplayImagesOnProductDetails": {
+            "type": "boolean",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "WebApi.Modules.Integrations.Storefront.StorefrontSettingsPropertyDataTypes": {
+        "enum": [
+          "Boolean",
+          "Text",
+          "Number"
+        ],
+        "type": "string"
+      },
+      "WebApi.Modules.Integrations.Storefront.StorefrontSettingsPropertySchema": {
+        "type": "object",
+        "properties": {
+          "Group": {
+            "type": "string",
+            "nullable": true
+          },
+          "Caption": {
+            "type": "string",
+            "nullable": true
+          },
+          "PropertyName": {
+            "type": "string",
+            "nullable": true
+          },
+          "DataType": {
+            "$ref": "#/components/schemas/WebApi.Modules.Integrations.Storefront.StorefrontSettingsPropertyDataTypes"
+          },
+          "Description": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "WebApi.Modules.Integrations.Storefront.SubmitQuoteRequestResponse": {
         "type": "object",
         "properties": {
@@ -3537,6 +5876,10 @@
             "type": "string",
             "nullable": true
           },
+          "DealId": {
+            "type": "string",
+            "nullable": true
+          },
           "DepartmentId": {
             "type": "string",
             "nullable": true
@@ -3550,6 +5893,14 @@
             "nullable": true
           },
           "AllowAddingUnavailableItems": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "HasRental": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "HasSales": {
             "type": "boolean",
             "nullable": true
           },
@@ -3582,6 +5933,10 @@
             "nullable": true
           },
           "Images": {
+            "type": "string",
+            "nullable": true
+          },
+          "LandingPageHtml": {
             "type": "string",
             "nullable": true
           },

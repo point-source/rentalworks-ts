@@ -123,6 +123,7 @@ export type FwStandardSqlServerFwJsonDataTable = {
     TotalPages?: number;
     TotalRows?: number;
     DateFields?: string[] | null;
+    ServerVersion?: string | null;
     _Translation?: FwStandardDataFwTranslatedValue[] | null;
 };
 export type FwStandardSqlServerFwJsonDataTableRead = {
@@ -142,6 +143,7 @@ export type FwStandardSqlServerFwJsonDataTableRead = {
     ColumnNameByIndex?: {
         [key: string]: string | null;
     } | null;
+    ServerVersion?: string | null;
     _Translation?: FwStandardDataFwTranslatedValue[] | null;
 };
 export type FwCoreControllersFwDataControllerDoExportExcelXlsxExportFileAsyncResult = {
@@ -299,56 +301,55 @@ export type WebApiModulesAgentOrderChangeOrderStatusResponse = {
     success?: boolean;
     msg?: string | null;
 };
-export type WebApiModulesSettingsWidgetSettingsWidgetWidgetDataSet = {
+export type FwStandardModulesSettingsWidgetSettingsWidgetWidgetDataSet = {
     label?: string | null;
     data?: number[] | null;
     backgroundColor?: string[] | null;
     borderColor?: string[] | null;
     borderWidth?: number;
 };
-export type WebApiModulesSettingsWidgetSettingsWidgetWidgetData = {
+export type FwStandardModulesSettingsWidgetSettingsWidgetWidgetData = {
     labels?: string[] | null;
-    datasets?: WebApiModulesSettingsWidgetSettingsWidgetWidgetDataSet[] | null;
+    datasets?: FwStandardModulesSettingsWidgetSettingsWidgetWidgetDataSet[] | null;
 };
-export type WebApiModulesSettingsWidgetSettingsWidgetWidgetTitle = {
+export type FwStandardModulesSettingsWidgetSettingsWidgetWidgetTitle = {
     fontSize?: number;
     display?: boolean;
     text?: string | null;
 };
-export type WebApiModulesSettingsWidgetSettingsWidgetWidgetLegend = {
+export type FwStandardModulesSettingsWidgetSettingsWidgetWidgetLegend = {
     display?: boolean;
 };
-export type WebApiModulesSettingsWidgetSettingsWidgetWidgetAxisTicks = {
+export type FwStandardModulesSettingsWidgetSettingsWidgetWidgetAxisTicks = {
     beginAtZero?: boolean;
 };
-export type WebApiModulesSettingsWidgetSettingsWidgetWidgetAxis = {
-    ticks?: WebApiModulesSettingsWidgetSettingsWidgetWidgetAxisTicks;
+export type FwStandardModulesSettingsWidgetSettingsWidgetWidgetAxis = {
+    ticks?: FwStandardModulesSettingsWidgetSettingsWidgetWidgetAxisTicks;
     stacked?: boolean;
 };
-export type WebApiModulesSettingsWidgetSettingsWidgetWidgetScales = {
-    xAxes?: WebApiModulesSettingsWidgetSettingsWidgetWidgetAxis[] | null;
-    yAxes?: WebApiModulesSettingsWidgetSettingsWidgetWidgetAxis[] | null;
+export type FwStandardModulesSettingsWidgetSettingsWidgetWidgetScales = {
+    xAxes?: FwStandardModulesSettingsWidgetSettingsWidgetWidgetAxis[] | null;
+    yAxes?: FwStandardModulesSettingsWidgetSettingsWidgetWidgetAxis[] | null;
 };
-export type WebApiModulesSettingsWidgetSettingsWidgetWidgetOptions = {
-    title?: WebApiModulesSettingsWidgetSettingsWidgetWidgetTitle;
-    legend?: WebApiModulesSettingsWidgetSettingsWidgetWidgetLegend;
-    scales?: WebApiModulesSettingsWidgetSettingsWidgetWidgetScales;
+export type FwStandardModulesSettingsWidgetSettingsWidgetWidgetOptions = {
+    title?: FwStandardModulesSettingsWidgetSettingsWidgetWidgetTitle;
+    legend?: FwStandardModulesSettingsWidgetSettingsWidgetWidgetLegend;
+    scales?: FwStandardModulesSettingsWidgetSettingsWidgetWidgetScales;
     responsive?: boolean;
     maintainAspectRatio?: boolean;
 };
-export type WebApiModulesSettingsWidgetSettingsWidgetWidget = {
-    locationId?: string | null;
-    warehouseId?: string | null;
-    departmentId?: string | null;
-    locationCodes?: string | null;
-    locations?: string | null;
+export type FwStandardModulesSettingsWidgetSettingsWidgetWidget = {
+    displayNumbers?: boolean;
+    filters?: string | null;
+    filterValues?: string | null;
+    mappedFilterValues?: string | null;
     dateBehaviorId?: string | null;
     dateField?: string | null;
     fromDate?: string | null;
     toDate?: string | null;
     "type"?: string | null;
-    data?: WebApiModulesSettingsWidgetSettingsWidgetWidgetData;
-    options?: WebApiModulesSettingsWidgetSettingsWidgetWidgetOptions;
+    data?: FwStandardModulesSettingsWidgetSettingsWidgetWidgetData;
+    options?: FwStandardModulesSettingsWidgetSettingsWidgetWidgetOptions;
     dataPoints?: number;
     apiName?: string | null;
     procedureName?: string | null;
@@ -360,7 +361,7 @@ export type WebApiModulesSettingsWidgetSettingsWidgetWidget = {
     opacity?: number;
     stacked?: boolean;
 };
-export type WebApiModulesSettingsAvailableWidgetAvailableWidget = {
+export type FwStandardModulesSettingsAvailableWidgetAvailableWidgetLogic = {
     WidgetId?: string | null;
     Widget?: string | null;
     AuditNote?: string | null;
@@ -376,7 +377,7 @@ export type WebApiModulesSettingsAvailableWidgetAvailableWidget = {
     _ModifiedByUserName?: string | null;
     _ModifiedDateTime?: string | null;
 };
-export type WebApiModulesSettingsAvailableWidgetAvailableWidgetRead = {
+export type FwStandardModulesSettingsAvailableWidgetAvailableWidgetLogicRead = {
     WidgetId?: string | null;
     Widget?: string | null;
     value?: string | null;
@@ -396,7 +397,7 @@ export type WebApiModulesSettingsAvailableWidgetAvailableWidgetRead = {
     _ModifiedByUserName?: string | null;
     _ModifiedDateTime?: string | null;
 };
-export type WebApiModulesUtilitiesDashboardSettingsDashboardSettingsLogicUserDashboardSetting = {
+export type FwStandardModulesUtilitiesDashboardSettingsDashboardSettingsLogicUserDashboardSetting = {
     userWidgetId?: string | null;
     value?: string | null;
     text?: string | null;
@@ -432,17 +433,18 @@ export type WebApiModulesUtilitiesDashboardSettingsDashboardSettingsLogicUserDas
     fromDate?: string | null;
     defaultToDate?: string | null;
     toDate?: string | null;
-    officeLocationId?: string | null;
-    officeLocation?: string | null;
-    officeLocationCode?: string | null;
+    filters?: string | null;
+    filterValues?: string | null;
     defaultStacked?: boolean | null;
     stacked?: boolean | null;
+    defaultDisplayNumbers?: boolean | null;
+    displayNumbers?: boolean | null;
 };
-export type WebApiModulesUtilitiesDashboardSettingsDashboardSettings = {
+export type FwStandardModulesUtilitiesDashboardSettingsDashboardSettingsLogic = {
     UserId?: string | null;
     WidgetsPerRow?: number | null;
-    AvailableWidgets?: WebApiModulesSettingsAvailableWidgetAvailableWidget[] | null;
-    UserWidgets?: WebApiModulesUtilitiesDashboardSettingsDashboardSettingsLogicUserDashboardSetting[] | null;
+    AvailableWidgets?: FwStandardModulesSettingsAvailableWidgetAvailableWidgetLogic[] | null;
+    UserWidgets?: FwStandardModulesUtilitiesDashboardSettingsDashboardSettingsLogicUserDashboardSetting[] | null;
     AuditNote?: string | null;
     _Custom?: FwStandardDataFwCustomValue[] | null;
     _DefaultFieldAttributes?: FwStandardDataFwDefaultAttribute[] | null;
@@ -456,11 +458,11 @@ export type WebApiModulesUtilitiesDashboardSettingsDashboardSettings = {
     _ModifiedByUserName?: string | null;
     _ModifiedDateTime?: string | null;
 };
-export type WebApiModulesUtilitiesDashboardSettingsDashboardSettingsRead = {
+export type FwStandardModulesUtilitiesDashboardSettingsDashboardSettingsLogicRead = {
     UserId?: string | null;
     WidgetsPerRow?: number | null;
-    AvailableWidgets?: WebApiModulesSettingsAvailableWidgetAvailableWidgetRead[] | null;
-    UserWidgets?: WebApiModulesUtilitiesDashboardSettingsDashboardSettingsLogicUserDashboardSetting[] | null;
+    AvailableWidgets?: FwStandardModulesSettingsAvailableWidgetAvailableWidgetLogicRead[] | null;
+    UserWidgets?: FwStandardModulesUtilitiesDashboardSettingsDashboardSettingsLogicUserDashboardSetting[] | null;
     AuditNote?: string | null;
     RecordTitle?: string | null;
     _Fields?: FwStandardBusinessLogicFwBusinessLogicFieldDefinition[] | null;
@@ -625,7 +627,7 @@ export type WebApiModulesUtilitiesInventoryMergeUtilityMergeInventoryRequest = {
     SessionId?: string | null;
     MakeInactive?: string | null;
 };
-export type WebApiLogicTSpStatusResponse = {
+export type FwStandardSqlServerTSpStatusResponse = {
     status?: number;
     success?: boolean;
     msg?: string | null;
@@ -1539,6 +1541,8 @@ export type WebApiModulesSettingsWarehouseSettingsWarehouseWarehouse = {
     /** Format: Boolean */
     DeleteAssetConditionOnOut?: boolean | null;
     /** Format: Boolean */
+    DeleteAssetConditionOnQCRequired?: boolean | null;
+    /** Format: Boolean */
     StagingShowCheckedInHoldingItems?: boolean | null;
     /** Format: Text */
     PoDeliveryType?: string | null;
@@ -1599,12 +1603,6 @@ export type WebApiModulesSettingsWarehouseSettingsWarehouseWarehouse = {
     RequireScanVendorBarCodeOnReturn?: boolean | null;
     /** Format: Text */
     GlPrefix?: string | null;
-    /** Format: Text */
-    InternalDealId?: string | null;
-    InternalDeal?: string | null;
-    /** Format: Text */
-    InternalVendorId?: string | null;
-    InternalVendor?: string | null;
     /** Format: Boolean */
     CalculateOnPoAfterApproved?: boolean | null;
     /** Format: Boolean */
@@ -1790,6 +1788,8 @@ export type WebApiModulesSettingsWarehouseSettingsWarehouseWarehouseRead = {
     /** Format: Boolean */
     DeleteAssetConditionOnOut?: boolean | null;
     /** Format: Boolean */
+    DeleteAssetConditionOnQCRequired?: boolean | null;
+    /** Format: Boolean */
     StagingShowCheckedInHoldingItems?: boolean | null;
     /** Format: Text */
     PoDeliveryType?: string | null;
@@ -1850,12 +1850,6 @@ export type WebApiModulesSettingsWarehouseSettingsWarehouseWarehouseRead = {
     RequireScanVendorBarCodeOnReturn?: boolean | null;
     /** Format: Text */
     GlPrefix?: string | null;
-    /** Format: Text */
-    InternalDealId?: string | null;
-    InternalDeal?: string | null;
-    /** Format: Text */
-    InternalVendorId?: string | null;
-    InternalVendor?: string | null;
     /** Format: Boolean */
     CalculateOnPoAfterApproved?: boolean | null;
     /** Format: Boolean */
@@ -1981,6 +1975,8 @@ export type WebApiModulesInventoryRentalInventoryRentalInventory = {
     ExcludeFromReturnOnAsset?: boolean | null;
     /** Format: Boolean */
     IsFixedAsset?: boolean | null;
+    /** Format: Boolean */
+    IsFixedContainer?: boolean | null;
     /** Format: Boolean */
     MultiAssignRFIDs?: boolean | null;
     /** Format: Boolean */
@@ -2143,7 +2139,13 @@ export type WebApiModulesInventoryRentalInventoryRentalInventory = {
     /** Format: Boolean */
     AutomaticallyRebuildContainerAtCheckIn?: boolean | null;
     /** Format: Boolean */
+    AutomaticallyCheckInEntireContainerWithScannableItem?: boolean | null;
+    /** Format: Boolean */
     AutomaticallyRebuildContainerAtTransferIn?: boolean | null;
+    /** Format: Boolean */
+    AutomaticallyCountAllItemsWhenPhysicalInventoryInitiated?: boolean | null;
+    /** Format: Boolean */
+    AutomaticallyTransferInEntireContainerWithScannableItem?: boolean | null;
     /** Format: Text */
     ContainerStagingRule?: string | null;
     /** Format: Boolean */
@@ -2186,8 +2188,6 @@ export type WebApiModulesInventoryRentalInventoryRentalInventory = {
     WardrobeDetailedDescription?: string | null;
     WebDetailedDescription?: string | null;
     TechnicalNotes?: string | null;
-    /** Format: Boolean */
-    OverrideSystemDefaultRevenueAllocationBehavior?: boolean | null;
     /** Format: Boolean */
     AllocateRevenueForAccessories?: boolean | null;
     /** Format: Text */
@@ -2357,6 +2357,8 @@ export type WebApiModulesInventoryRentalInventoryRentalInventoryRead = {
     /** Format: Boolean */
     IsFixedAsset?: boolean | null;
     /** Format: Boolean */
+    IsFixedContainer?: boolean | null;
+    /** Format: Boolean */
     MultiAssignRFIDs?: boolean | null;
     /** Format: Boolean */
     AllowFlexibleContainer?: boolean | null;
@@ -2518,7 +2520,13 @@ export type WebApiModulesInventoryRentalInventoryRentalInventoryRead = {
     /** Format: Boolean */
     AutomaticallyRebuildContainerAtCheckIn?: boolean | null;
     /** Format: Boolean */
+    AutomaticallyCheckInEntireContainerWithScannableItem?: boolean | null;
+    /** Format: Boolean */
     AutomaticallyRebuildContainerAtTransferIn?: boolean | null;
+    /** Format: Boolean */
+    AutomaticallyCountAllItemsWhenPhysicalInventoryInitiated?: boolean | null;
+    /** Format: Boolean */
+    AutomaticallyTransferInEntireContainerWithScannableItem?: boolean | null;
     /** Format: Text */
     ContainerStagingRule?: string | null;
     /** Format: Boolean */
@@ -2561,8 +2569,6 @@ export type WebApiModulesInventoryRentalInventoryRentalInventoryRead = {
     WardrobeDetailedDescription?: string | null;
     WebDetailedDescription?: string | null;
     TechnicalNotes?: string | null;
-    /** Format: Boolean */
-    OverrideSystemDefaultRevenueAllocationBehavior?: boolean | null;
     /** Format: Boolean */
     AllocateRevenueForAccessories?: boolean | null;
     /** Format: Text */
@@ -2910,6 +2916,8 @@ export type WebApiModulesAgentVendorVendor = {
     InternalOrderDealId?: string | null;
     TaxOption?: string | null;
     /** Format: Boolean */
+    ExcludeItemsWithZero?: boolean | null;
+    /** Format: Boolean */
     Inactive?: boolean | null;
     /** Format: UTCDateTime */
     DateStamp?: string | null;
@@ -3093,6 +3101,8 @@ export type WebApiModulesAgentVendorVendorRead = {
     InternalWarehouse?: string | null;
     InternalOrderDealId?: string | null;
     TaxOption?: string | null;
+    /** Format: Boolean */
+    ExcludeItemsWithZero?: boolean | null;
     /** Format: Boolean */
     Inactive?: boolean | null;
     /** Format: UTCDateTime */
@@ -3396,21 +3406,16 @@ export type WebApiModulesBillingInvoiceInvoiceProcessBatchResponse = {
     success?: boolean;
     msg?: string | null;
     Batch?: WebApiModulesUtilitiesInvoiceProcessBatchInvoiceProcessBatch;
-    AutoProcessDepeletingDeposit?: boolean;
 };
 export type WebApiModulesBillingInvoiceInvoiceProcessBatchResponseRead = {
     status?: number;
     success?: boolean;
     msg?: string | null;
     Batch?: WebApiModulesUtilitiesInvoiceProcessBatchInvoiceProcessBatchRead;
-    AutoProcessDepeletingDeposit?: boolean;
 };
 export type WebApiModulesUtilitiesLabelDesignLabelDesign = {
     /** Format: Text, IsPrimaryKey: true */
     LabelId?: string | null;
-    /** Format: Text */
-    WarehouseId?: string | null;
-    Warehouse?: string | null;
     /** Format: Text */
     Format?: string | null;
     /** Format: Text */
@@ -3437,9 +3442,6 @@ export type WebApiModulesUtilitiesLabelDesignLabelDesign = {
 export type WebApiModulesUtilitiesLabelDesignLabelDesignRead = {
     /** Format: Text, IsPrimaryKey: true */
     LabelId?: string | null;
-    /** Format: Text */
-    WarehouseId?: string | null;
-    Warehouse?: string | null;
     /** Format: Text */
     Format?: string | null;
     /** Format: Text */
@@ -3486,6 +3488,9 @@ export type WebApiModulesUtilitiesLabelDesignBarcodeLabel = {
     INVENTORYTYPE?: string | null;
     CATEGORY?: string | null;
     SUBCATEGORY?: string | null;
+    TRACKEDBY?: string | null;
+    MANUFACTURER?: string | null;
+    MANUFACTURERPARTNUMBER?: string | null;
 };
 export type WebApiModulesUtilitiesMigrateStartMigrateSessionRequest = {
     DealId?: string | null;
@@ -5112,6 +5117,11 @@ export type WebApiModulesInventoryInventoryCopyPendingModificationsToOtherWareho
     success?: boolean;
     msg?: string | null;
 };
+export type WebApiModulesInventoryInventoryCopyCurrentPricingToOtherWarehousesResponse = {
+    status?: number;
+    success?: boolean;
+    msg?: string | null;
+};
 export type WebApiModulesUtilitiesReceiptProcessBatchReceiptProcessBatchRequest = {
     OfficeLocationId?: string | null;
     SingleReceiptId?: string | null;
@@ -5393,18 +5403,9 @@ export type WebApiModulesUtilitiesUserProfileUserProfile = {
     HomeMenuPath?: string | null;
     LanguageId?: string | null;
     Language?: string | null;
-    /** Format: Text */
-    SuccessSoundId?: string | null;
-    SuccessSound?: string | null;
-    SuccessBase64Sound?: string | null;
-    /** Format: Text */
-    ErrorSoundId?: string | null;
-    ErrorSound?: string | null;
-    ErrorBase64Sound?: string | null;
-    /** Format: Text */
-    NotificationSoundId?: string | null;
-    NotificationSound?: string | null;
-    NotificationBase64Sound?: string | null;
+    /** Format: Integer */
+    SoundProfileId?: number | null;
+    SoundProfileName?: string | null;
     FavoritesJson?: string | null;
     /** Format: Integer */
     FirstDayOfWeek?: number | null;
@@ -5433,6 +5434,7 @@ export type WebApiModulesUtilitiesUserProfileUserProfile = {
     AddRentalWorksUserSignature?: boolean | null;
     /** Format: Text */
     QuikSearchMode?: string | null;
+    AutoPrintContract?: boolean | null;
     /** Format: Boolean */
     ShowRentalItemsOutOnly?: boolean | null;
     /** Format: UTCDateTime, Total digits: 23, Decimal places: 3 */
@@ -5469,18 +5471,9 @@ export type WebApiModulesUtilitiesUserProfileUserProfileRead = {
     HomeMenuPath?: string | null;
     LanguageId?: string | null;
     Language?: string | null;
-    /** Format: Text */
-    SuccessSoundId?: string | null;
-    SuccessSound?: string | null;
-    SuccessBase64Sound?: string | null;
-    /** Format: Text */
-    ErrorSoundId?: string | null;
-    ErrorSound?: string | null;
-    ErrorBase64Sound?: string | null;
-    /** Format: Text */
-    NotificationSoundId?: string | null;
-    NotificationSound?: string | null;
-    NotificationBase64Sound?: string | null;
+    /** Format: Integer */
+    SoundProfileId?: number | null;
+    SoundProfileName?: string | null;
     FavoritesJson?: string | null;
     /** Format: Integer */
     FirstDayOfWeek?: number | null;
@@ -5509,6 +5502,7 @@ export type WebApiModulesUtilitiesUserProfileUserProfileRead = {
     AddRentalWorksUserSignature?: boolean | null;
     /** Format: Text */
     QuikSearchMode?: string | null;
+    AutoPrintContract?: boolean | null;
     /** Format: Boolean */
     ShowRentalItemsOutOnly?: boolean | null;
     /** Format: UTCDateTime, Total digits: 23, Decimal places: 3 */
@@ -6288,20 +6282,21 @@ export function postApiV1ChangeorderstatusValidateorderBrowse(fwStandardModelsBr
         body: fwStandardModelsBrowseRequest
     })));
 }
-export function getApiV1DashboardLoadwidgetbynameByWidgetapiname(widgetApiName: string, { dataPoints, locationId, warehouseId, departmentId, dateBehaviorId, dateField, fromDate, toDate, stacked }: {
+export function getApiV1DashboardLoadwidgetbynameByWidgetapiname(widgetApiName: string, { dataPoints, filters, filterValues, mappedFilterValues, dateBehaviorId, dateField, fromDate, toDate, stacked, displayNumbers }: {
     dataPoints?: number;
-    locationId?: string;
-    warehouseId?: string;
-    departmentId?: string;
+    filters?: string;
+    filterValues?: string;
+    mappedFilterValues?: string;
     dateBehaviorId?: string;
     dateField?: string;
     fromDate?: string;
     toDate?: string;
     stacked?: boolean;
+    displayNumbers?: boolean;
 } = {}, opts?: Oazapfts.RequestOpts) {
     return oazapfts.ok(oazapfts.fetchJson<{
         status: 200;
-        data: WebApiModulesSettingsWidgetSettingsWidgetWidget;
+        data: FwStandardModulesSettingsWidgetSettingsWidgetWidget;
     } | {
         status: 400;
         data: FwCoreApiSwashbuckleBadRequestResponse;
@@ -6312,16 +6307,17 @@ export function getApiV1DashboardLoadwidgetbynameByWidgetapiname(widgetApiName: 
     } | {
         status: 500;
         data: FwStandardModelsFwApiException;
-    }>(`/api/v1/dashboard/loadwidgetbyname/${encodeURIComponent(widgetApiName)}${QS.query(QS.explode({
+    }>(`/api/v1/dashboard/loadwidgetbyname/${encodeURIComponent(widgetapiname)}${QS.query(QS.explode({
         dataPoints,
-        locationId,
-        warehouseId,
-        departmentId,
+        filters,
+        filterValues,
+        mappedFilterValues,
         dateBehaviorId,
         dateField,
         fromDate,
         toDate,
-        stacked
+        stacked,
+        displayNumbers
     }))}`, {
         ...opts
     }));
@@ -6329,7 +6325,7 @@ export function getApiV1DashboardLoadwidgetbynameByWidgetapiname(widgetApiName: 
 export function getApiV1DashboardsettingsById(id: string, opts?: Oazapfts.RequestOpts) {
     return oazapfts.ok(oazapfts.fetchJson<{
         status: 200;
-        data: WebApiModulesUtilitiesDashboardSettingsDashboardSettingsRead;
+        data: FwStandardModulesUtilitiesDashboardSettingsDashboardSettingsLogicRead;
     } | {
         status: 400;
         data: FwCoreApiSwashbuckleBadRequestResponse;
@@ -6344,10 +6340,10 @@ export function getApiV1DashboardsettingsById(id: string, opts?: Oazapfts.Reques
         ...opts
     }));
 }
-export function putApiV1DashboardsettingsById(id: string, webApiModulesUtilitiesDashboardSettingsDashboardSettings?: WebApiModulesUtilitiesDashboardSettingsDashboardSettings, opts?: Oazapfts.RequestOpts) {
+export function putApiV1DashboardsettingsById(id: string, fwStandardModulesUtilitiesDashboardSettingsDashboardSettingsLogic?: FwStandardModulesUtilitiesDashboardSettingsDashboardSettingsLogic, opts?: Oazapfts.RequestOpts) {
     return oazapfts.ok(oazapfts.fetchJson<{
         status: 200;
-        data: WebApiModulesUtilitiesDashboardSettingsDashboardSettingsRead;
+        data: FwStandardModulesUtilitiesDashboardSettingsDashboardSettingsLogicRead;
     } | {
         status: 400;
         data: FwCoreApiSwashbuckleBadRequestResponse;
@@ -6361,13 +6357,13 @@ export function putApiV1DashboardsettingsById(id: string, webApiModulesUtilities
     }>(`/api/v1/dashboardsettings/${encodeURIComponent(id)}`, oazapfts.json({
         ...opts,
         method: "PUT",
-        body: webApiModulesUtilitiesDashboardSettingsDashboardSettings
+        body: fwStandardModulesUtilitiesDashboardSettingsDashboardSettingsLogic
     })));
 }
-export function postApiV1Dashboardsettings(webApiModulesUtilitiesDashboardSettingsDashboardSettings?: WebApiModulesUtilitiesDashboardSettingsDashboardSettings, opts?: Oazapfts.RequestOpts) {
+export function postApiV1Dashboardsettings(fwStandardModulesUtilitiesDashboardSettingsDashboardSettingsLogic?: FwStandardModulesUtilitiesDashboardSettingsDashboardSettingsLogic, opts?: Oazapfts.RequestOpts) {
     return oazapfts.ok(oazapfts.fetchJson<{
         status: 200;
-        data: WebApiModulesUtilitiesDashboardSettingsDashboardSettingsRead;
+        data: FwStandardModulesUtilitiesDashboardSettingsDashboardSettingsLogicRead;
     } | {
         status: 400;
         data: FwCoreApiSwashbuckleBadRequestResponse;
@@ -6381,7 +6377,7 @@ export function postApiV1Dashboardsettings(webApiModulesUtilitiesDashboardSettin
     }>("/api/v1/dashboardsettings", oazapfts.json({
         ...opts,
         method: "POST",
-        body: webApiModulesUtilitiesDashboardSettingsDashboardSettings
+        body: fwStandardModulesUtilitiesDashboardSettingsDashboardSettingsLogic
     })));
 }
 export function getApiV1DatefunctionsAdddays({ date, days }: {
@@ -6755,7 +6751,7 @@ export function postApiV1InventorymergeValidateitemBrowse(fwStandardModelsBrowse
 export function postApiV1InventorymergeutilityMergeinventory(webApiModulesUtilitiesInventoryMergeUtilityMergeInventoryRequest?: WebApiModulesUtilitiesInventoryMergeUtilityMergeInventoryRequest, opts?: Oazapfts.RequestOpts) {
     return oazapfts.ok(oazapfts.fetchJson<{
         status: 200;
-        data: WebApiLogicTSpStatusResponse;
+        data: FwStandardSqlServerTSpStatusResponse;
     } | {
         status: 400;
         data: FwCoreApiSwashbuckleBadRequestResponse;
@@ -7587,6 +7583,27 @@ export function postApiV1InvoiceprocessbatchValidatebatchBrowse(fwStandardModels
         body: fwStandardModelsBrowseRequest
     })));
 }
+export function getJspm({ timestamp }: {
+    timestamp?: string;
+} = {}, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.ok(oazapfts.fetchJson<{
+        status: 200;
+    } | {
+        status: 400;
+        data: FwCoreApiSwashbuckleBadRequestResponse;
+    } | {
+        status: 401;
+    } | {
+        status: 403;
+    } | {
+        status: 500;
+        data: FwStandardModelsFwApiException;
+    }>(`/jspm${QS.query(QS.explode({
+        timestamp
+    }))}`, {
+        ...opts
+    }));
+}
 export function getApiV1Keepalive(opts?: Oazapfts.RequestOpts) {
     return oazapfts.ok(oazapfts.fetchJson<{
         status: 200;
@@ -7899,7 +7916,7 @@ export function getApiV1LabeldesignBarcodesFromByFrombarcodeToAndTobarcodeWareho
 /**
  * Get a comma separated list of barcodes by inventory purchase utility sessionid for printing labels.
  */
-export function getApiV1LabeldesignBarcodesInventorypurchaseBySessionidWarehouseAndWarehouseid(sessionid: string, warehouseid: string, opts?: Oazapfts.RequestOpts) {
+export function getApiV1LabeldesignBarcodesInventorypurchaseBySessionid(sessionid: string, opts?: Oazapfts.RequestOpts) {
     return oazapfts.ok(oazapfts.fetchJson<{
         status: 200;
         data: string;
@@ -7913,7 +7930,7 @@ export function getApiV1LabeldesignBarcodesInventorypurchaseBySessionidWarehouse
     } | {
         status: 500;
         data: FwStandardModelsFwApiException;
-    }>(`/api/v1/labeldesign/barcodes/inventorypurchase/${encodeURIComponent(sessionid)}/warehouse/${encodeURIComponent(warehouseid)}`, {
+    }>(`/api/v1/labeldesign/barcodes/inventorypurchase/${encodeURIComponent(sessionid)}`, {
         ...opts
     }));
 }
@@ -8025,7 +8042,7 @@ export function getApiV1LabeldesignLabeldataPurchaseorderByOrderidBarcodeAndBarc
 /**
  * Get field replacements for inventory purchase session barcodes.
  */
-export function getApiV1LabeldesignLabeldataInventorypurchaseBySessionidBarcodeAndBarcodeWarehouseWarehouseid(sessionid: string, barcode: string, warehouseid: string, opts?: Oazapfts.RequestOpts) {
+export function getApiV1LabeldesignLabeldataInventorypurchaseBySessionidBarcodeAndBarcode(sessionid: string, barcode: string, opts?: Oazapfts.RequestOpts) {
     return oazapfts.ok(oazapfts.fetchJson<{
         status: 200;
         data: WebApiModulesUtilitiesLabelDesignBarcodeLabel;
@@ -8039,7 +8056,7 @@ export function getApiV1LabeldesignLabeldataInventorypurchaseBySessionidBarcodeA
     } | {
         status: 500;
         data: FwStandardModelsFwApiException;
-    }>(`/api/v1/labeldesign/labeldata/inventorypurchase/${encodeURIComponent(sessionid)}/barcode/${encodeURIComponent(barcode)}/warehouse/${encodeURIComponent(warehouseid)}`, {
+    }>(`/api/v1/labeldesign/labeldata/inventorypurchase/${encodeURIComponent(sessionid)}/barcode/${encodeURIComponent(barcode)}`, {
         ...opts
     }));
 }
@@ -9243,6 +9260,26 @@ export function postApiV1RateupdateutilityCopypendingmodificationstootherwarehou
         ...opts,
         method: "POST",
         body: webApiModulesInventoryInventoryCopyPendingModificationsToOtherWarehousesRequest
+    })));
+}
+export function postApiV1RateupdateutilityCopycurrentpricingtootherwarehouses(fwStandardModelsBrowseRequest?: FwStandardModelsBrowseRequest, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.ok(oazapfts.fetchJson<{
+        status: 200;
+        data: WebApiModulesInventoryInventoryCopyCurrentPricingToOtherWarehousesResponse;
+    } | {
+        status: 400;
+        data: FwCoreApiSwashbuckleBadRequestResponse;
+    } | {
+        status: 401;
+    } | {
+        status: 403;
+    } | {
+        status: 500;
+        data: FwStandardModelsFwApiException;
+    }>("/api/v1/rateupdateutility/copycurrentpricingtootherwarehouses", oazapfts.json({
+        ...opts,
+        method: "POST",
+        body: fwStandardModelsBrowseRequest
     })));
 }
 export function postApiV1RateupdateutilityValidatewarehouseBrowse(fwStandardModelsBrowseRequest?: FwStandardModelsBrowseRequest, opts?: Oazapfts.RequestOpts) {

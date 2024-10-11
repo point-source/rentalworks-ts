@@ -76,6 +76,7 @@ export type FwStandardSqlServerFwJsonDataTable = {
     TotalPages?: number;
     TotalRows?: number;
     DateFields?: string[] | null;
+    ServerVersion?: string | null;
     _Translation?: FwStandardDataFwTranslatedValue[] | null;
 };
 export type FwStandardSqlServerFwJsonDataTableRead = {
@@ -95,6 +96,7 @@ export type FwStandardSqlServerFwJsonDataTableRead = {
     ColumnNameByIndex?: {
         [key: string]: string | null;
     } | null;
+    ServerVersion?: string | null;
     _Translation?: FwStandardDataFwTranslatedValue[] | null;
 };
 export type FwCoreApiSwashbuckleBadRequestResponse = {
@@ -461,9 +463,6 @@ export type WebApiModulesAgentPurchaseOrderPurchaseOrderReceiveBarCodeAddItemsRe
     success?: boolean;
     msg?: string | null;
 };
-export type FwStandardModelsSelectedCheckBoxListItem = {
-    value?: string | null;
-};
 export type WebApiServicesAvailabilityServiceAvailabilityConflictRequest = {
     ToDate?: string | null;
     AvailableFor?: string | null;
@@ -476,7 +475,7 @@ export type WebApiServicesAvailabilityServiceAvailabilityConflictRequest = {
     Description?: string | null;
     OrderId?: string | null;
     DealId?: string | null;
-    Ranks?: FwStandardModelsSelectedCheckBoxListItem[] | null;
+    Ranks?: string | null;
     ShowRegionAvailability?: boolean;
     ShowOtherWarehouseAvailability?: boolean;
     OtherWarehouseIds?: string | null;
@@ -657,8 +656,8 @@ export type WebApiModulesBillingBillingPopulateBillingResponse = {
     BillingMessages?: number;
 };
 export type WebApiModulesBillingBillingBilling = {
-    SessionId?: string | null;
     BillingId?: number | null;
+    SessionId?: string | null;
     CustomerId?: string | null;
     Customer?: string | null;
     DealId?: string | null;
@@ -681,6 +680,7 @@ export type WebApiModulesBillingBillingBilling = {
     BillingCycle?: string | null;
     BillingCycleType?: string | null;
     OfficeLocationId?: string | null;
+    OfficeLocation?: string | null;
     BillingStartDate?: string | null;
     BillingStopDate?: string | null;
     BillAsOfDate?: string | null;
@@ -726,6 +726,8 @@ export type WebApiModulesBillingBillingBilling = {
     ProjectManager?: string | null;
     OutsideSalesRepresentativeId?: string | null;
     OutsideSalesRepresentative?: string | null;
+    ProjectNumber?: string | null;
+    ProjectDescription?: string | null;
     OrderNumberColor?: string | null;
     DescriptionColor?: string | null;
     BillingStopDateColor?: string | null;
@@ -746,8 +748,8 @@ export type WebApiModulesBillingBillingBilling = {
     _ModifiedDateTime?: string | null;
 };
 export type WebApiModulesBillingBillingBillingRead = {
-    SessionId?: string | null;
     BillingId?: number | null;
+    SessionId?: string | null;
     CustomerId?: string | null;
     Customer?: string | null;
     DealId?: string | null;
@@ -770,6 +772,7 @@ export type WebApiModulesBillingBillingBillingRead = {
     BillingCycle?: string | null;
     BillingCycleType?: string | null;
     OfficeLocationId?: string | null;
+    OfficeLocation?: string | null;
     BillingStartDate?: string | null;
     BillingStopDate?: string | null;
     BillAsOfDate?: string | null;
@@ -815,6 +818,8 @@ export type WebApiModulesBillingBillingBillingRead = {
     ProjectManager?: string | null;
     OutsideSalesRepresentativeId?: string | null;
     OutsideSalesRepresentative?: string | null;
+    ProjectNumber?: string | null;
+    ProjectDescription?: string | null;
     OrderNumberColor?: string | null;
     DescriptionColor?: string | null;
     BillingStopDateColor?: string | null;
@@ -839,40 +844,6 @@ export type WebApiModulesBillingBillingBillingRead = {
 export type WebApiModulesBillingBillingCreateInvoicesRequest = {
     SessionId?: string | null;
     BillingIds?: string[] | null;
-};
-export type WebApiModulesBillingBillingCreateInvoicesResponse = {
-    status?: number;
-    success?: boolean;
-    msg?: string | null;
-    InvoiceCreationBatchId?: string | null;
-};
-export type WebApiModulesBillingBillingGetOrderBillingDatesResponse = {
-    status?: number;
-    success?: boolean;
-    msg?: string | null;
-    PeriodStart?: string;
-    PeriodEnd?: string;
-    BillPeriodEvent?: string | null;
-};
-export type WebApiModulesBillingBillingCreateEstimateRequest = {
-    OrderId?: string | null;
-    PeriodStart?: string;
-    PeriodEnd?: string;
-    BillPeriodEvent?: string | null;
-    IncludeNotYetOut?: boolean | null;
-};
-export type WebApiModulesBillingBillingCreateEstimateResponse = {
-    status?: number;
-    success?: boolean;
-    msg?: string | null;
-    InvoiceId?: string | null;
-};
-export type WebApiModulesBillingBillingCreateInvoiceRequest = {
-    OrderId?: string | null;
-    PeriodStart?: string;
-    PeriodEnd?: string;
-    BillPeriodEvent?: string | null;
-    IncludeNotYetOut?: boolean | null;
 };
 export type WebApiModulesBillingInvoiceInvoice = {
     /** Format: Text, IsPrimaryKey: true */
@@ -910,6 +881,7 @@ export type WebApiModulesBillingInvoiceInvoice = {
     Deal?: string | null;
     DealNumber?: string | null;
     DealTypeId?: string | null;
+    DealType?: string | null;
     /** Format: Text, Required: true */
     DepartmentId?: string | null;
     Department?: string | null;
@@ -1150,6 +1122,7 @@ export type WebApiModulesBillingInvoiceInvoiceRead = {
     Deal?: string | null;
     DealNumber?: string | null;
     DealTypeId?: string | null;
+    DealType?: string | null;
     /** Format: Text, Required: true */
     DepartmentId?: string | null;
     Department?: string | null;
@@ -1356,6 +1329,55 @@ export type WebApiModulesBillingInvoiceInvoiceRead = {
     _ModifiedByUserName?: string | null;
     _ModifiedDateTime?: string | null;
 };
+export type WebApiModulesBillingBillingCreateInvoicesResponse = {
+    status?: number;
+    success?: boolean;
+    msg?: string | null;
+    InvoiceCreationBatchId?: string | null;
+    Invoices?: WebApiModulesBillingInvoiceInvoice[] | null;
+};
+export type WebApiModulesBillingBillingCreateInvoicesResponseRead = {
+    status?: number;
+    success?: boolean;
+    msg?: string | null;
+    InvoiceCreationBatchId?: string | null;
+    Invoices?: WebApiModulesBillingInvoiceInvoiceRead[] | null;
+};
+export type WebApiModulesBillingBillingCreateGroupInvoicesRequest = {
+    NewTotal?: number;
+    IncludeTaxInTotal?: boolean | null;
+    SessionId?: string | null;
+    BillingIds?: string[] | null;
+};
+export type WebApiModulesBillingBillingGetOrderBillingDatesResponse = {
+    status?: number;
+    success?: boolean;
+    msg?: string | null;
+    PeriodStart?: string;
+    PeriodEnd?: string;
+    BillPeriodEvent?: string | null;
+};
+export type WebApiModulesBillingBillingCreateEstimateRequest = {
+    OrderId?: string | null;
+    PeriodStart?: string;
+    PeriodEnd?: string;
+    BillPeriodEvent?: string | null;
+    IncludeNotYetOut?: boolean | null;
+};
+export type WebApiModulesBillingBillingCreateEstimateResponse = {
+    status?: number;
+    success?: boolean;
+    msg?: string | null;
+    InvoiceId?: string | null;
+};
+export type WebApiModulesBillingBillingCreateInvoiceRequest = {
+    OrderId?: string | null;
+    PeriodStart?: string;
+    PeriodEnd?: string;
+    BillPeriodEvent?: string | null;
+    IncludeNotYetOut?: boolean | null;
+    ForceDates?: boolean | null;
+};
 export type WebApiModulesBillingBillingCreateInvoiceResponse = {
     status?: number;
     success?: boolean;
@@ -1490,6 +1512,9 @@ export type WebApiModulesBillingBillingWorksheetBillingWorksheet = {
     /** Format: Decimal, Total digits: 12, Decimal places: 2 */
     SalesTotal?: number | null;
     /** Format: Decimal, Total digits: 12, Decimal places: 2 */
+    LaborTotal?: number | null;
+    MiscTotal?: number | null;
+    /** Format: Decimal, Total digits: 12, Decimal places: 2 */
     FacilitiesTotal?: number | null;
     WorksheetGrossTotal?: number | null;
     WorksheetDiscountTotal?: number | null;
@@ -1600,6 +1625,9 @@ export type WebApiModulesBillingBillingWorksheetBillingWorksheetRead = {
     RentalTotal?: number | null;
     /** Format: Decimal, Total digits: 12, Decimal places: 2 */
     SalesTotal?: number | null;
+    /** Format: Decimal, Total digits: 12, Decimal places: 2 */
+    LaborTotal?: number | null;
+    MiscTotal?: number | null;
     /** Format: Decimal, Total digits: 12, Decimal places: 2 */
     FacilitiesTotal?: number | null;
     WorksheetGrossTotal?: number | null;
@@ -2087,6 +2115,7 @@ export type WebApiModulesWarehouseCheckInCheckInItem = {
     InventoryId?: string | null;
     IsBarcode?: boolean;
     IsContainer?: boolean | null;
+    ContainerRentalItemId?: string | null;
     ItemInContainer?: boolean | null;
     InternalChar?: string | null;
     Location?: string | null;
@@ -2138,6 +2167,7 @@ export type WebApiModulesWarehouseCheckInCheckInItem = {
     Vendor?: string | null;
     WarehouseId?: string | null;
     WHCode?: string | null;
+    ForceCheckInContainerItem?: boolean | null;
 };
 export type WebApiModulesWarehouseCheckInCheckInItemsRequest = {
     ContractId?: string | null;
@@ -2151,6 +2181,7 @@ export type WebApiModulesWarehouseCheckInCheckInItemsRequest = {
     ContractType?: string | null;
     UserWarehouseId?: string | null;
     ForceNewSession?: boolean | null;
+    ForceCheckInItemInContainer?: boolean | null;
     Items?: WebApiModulesWarehouseCheckInCheckInItem[] | null;
 };
 export type WebApiModulesWarehouseCheckInCheckInSessionInfo = {
@@ -2191,6 +2222,7 @@ export type WebApiModulesWarehouseCheckInCheckInItemsResponse = {
     Status?: number | null;
     Message?: string | null;
     ForceNewSession?: boolean | null;
+    ItemInContainer?: boolean | null;
     Items?: WebApiModulesWarehouseCheckInCheckInItem[] | null;
     Orders?: WebApiModulesWarehouseCheckInCheckInAddOrderResponse;
     SuspendedSessions?: WebApiModulesWarehouseCheckInSuspendedSession[] | null;
@@ -2625,7 +2657,7 @@ export type WebApiModulesInventoryRepairRepairReleaseItemsResponseRead = {
 export type WebApiModulesWarehouseContractCancelContractRequest = {
     ContractId?: string | null;
 };
-export type WebApiLogicTSpStatusResponse = {
+export type FwStandardSqlServerTSpStatusResponse = {
     status?: number;
     success?: boolean;
     msg?: string | null;
@@ -2992,6 +3024,7 @@ export type WebApiModulesWarehouseCheckOutStageItemResponse = {
     ShowStageIncompleteContainer?: boolean;
     ShowReleaseFromRepair?: boolean;
     ShowOverrideReservation?: boolean;
+    ShowCompleteQC?: boolean;
     ShowStageConsignedItem?: boolean;
     IsSub?: boolean;
 };
@@ -3027,6 +3060,7 @@ export type WebApiModulesWarehouseCheckOutCheckOutAllStagedResponse = {
     success?: boolean;
     msg?: string | null;
     ContractId?: string | null;
+    ContractNumber?: string | null;
 };
 export type WebApiModulesWarehouseCheckOutCreateOutContractRequest = {
     OrderId?: string | null;
@@ -3539,6 +3573,7 @@ export type WebApiModulesAgentOrderOrder = {
     PaymentTypeId?: string | null;
     PaymentType?: string | null;
     PaymentTypeType?: string | null;
+    PaymentTypeFeePercentage?: number | null;
     /** Format: Text */
     CurrencyId?: string | null;
     UpdateAllRatesToNewCurrency?: boolean;
@@ -3960,6 +3995,9 @@ export type WebApiModulesAgentOrderOrder = {
     /** Format: Text */
     ProjectDepositId?: string | null;
     ProjectDeposit?: string | null;
+    ProjectSyncMarket?: boolean | null;
+    ProjectSyncDeliverShip?: boolean | null;
+    ProjectSyncBilling?: boolean | null;
     /** Format: Text */
     InputByUserId?: string | null;
     /** Format: Text */
@@ -4024,6 +4062,12 @@ export type WebApiModulesAgentOrderOrder = {
     /** Format: Boolean */
     DoNotBillDayWhenItemsAreCheckedInByCertainTime?: boolean | null;
     CheckInByTimeToAvoidBilling?: string | null;
+    /** Format: Text */
+    JobName?: string | null;
+    /** Format: Boolean */
+    ItineraryOverrideBillableDays?: boolean | null;
+    DealProductionTypeId?: string | null;
+    DealProductionType?: string | null;
     /** Format: UTCDateTime */
     DateStamp?: string | null;
     AuditNote?: string | null;
@@ -4216,6 +4260,7 @@ export type WebApiModulesAgentOrderOrderRead = {
     PaymentTypeId?: string | null;
     PaymentType?: string | null;
     PaymentTypeType?: string | null;
+    PaymentTypeFeePercentage?: number | null;
     /** Format: Text */
     CurrencyId?: string | null;
     UpdateAllRatesToNewCurrency?: boolean;
@@ -4637,6 +4682,9 @@ export type WebApiModulesAgentOrderOrderRead = {
     /** Format: Text */
     ProjectDepositId?: string | null;
     ProjectDeposit?: string | null;
+    ProjectSyncMarket?: boolean | null;
+    ProjectSyncDeliverShip?: boolean | null;
+    ProjectSyncBilling?: boolean | null;
     /** Format: Text */
     InputByUserId?: string | null;
     /** Format: Text */
@@ -4701,6 +4749,12 @@ export type WebApiModulesAgentOrderOrderRead = {
     /** Format: Boolean */
     DoNotBillDayWhenItemsAreCheckedInByCertainTime?: boolean | null;
     CheckInByTimeToAvoidBilling?: string | null;
+    /** Format: Text */
+    JobName?: string | null;
+    /** Format: Boolean */
+    ItineraryOverrideBillableDays?: boolean | null;
+    DealProductionTypeId?: string | null;
+    DealProductionType?: string | null;
     /** Format: UTCDateTime */
     DateStamp?: string | null;
     AuditNote?: string | null;
@@ -5204,6 +5258,7 @@ export type WebApiModulesHomeControlsContainerItemContainerItem = {
     /** Format: Text */
     SpaceId?: string | null;
     BuildingRoom?: string | null;
+    BuildingFloorRoom?: string | null;
     ItemNotes?: string | null;
     /** Format: Text */
     PhysicalId?: string | null;
@@ -5397,6 +5452,8 @@ export type WebApiModulesHomeControlsContainerItemContainerItem = {
     CurrentOrderFromDate?: string | null;
     CurrentOrderToDate?: string | null;
     CurrentOrderAgent?: string | null;
+    CurrentContractId?: string | null;
+    CurrentContractNumber?: string | null;
     /** Format: Text */
     LotNumber?: string | null;
     LastOrderId?: string | null;
@@ -5539,6 +5596,7 @@ export type WebApiModulesHomeControlsContainerItemContainerItemRead = {
     /** Format: Text */
     SpaceId?: string | null;
     BuildingRoom?: string | null;
+    BuildingFloorRoom?: string | null;
     ItemNotes?: string | null;
     /** Format: Text */
     PhysicalId?: string | null;
@@ -5732,6 +5790,8 @@ export type WebApiModulesHomeControlsContainerItemContainerItemRead = {
     CurrentOrderFromDate?: string | null;
     CurrentOrderToDate?: string | null;
     CurrentOrderAgent?: string | null;
+    CurrentContractId?: string | null;
+    CurrentContractNumber?: string | null;
     /** Format: Text */
     LotNumber?: string | null;
     LastOrderId?: string | null;
@@ -7218,6 +7278,9 @@ export type WebApiModulesHomeControlsContractItemDetailContractItemDetail = {
     DescriptionColor?: string | null;
     Quantity?: number | null;
     BarCode?: string | null;
+    SerialNumber?: string | null;
+    RfId?: string | null;
+    CodeForVoiding?: string | null;
     ItemId?: string | null;
     ManufacturerPartNumber?: string | null;
     TrackedBy?: string | null;
@@ -7287,6 +7350,9 @@ export type WebApiModulesHomeControlsContractItemDetailContractItemDetailRead = 
     DescriptionColor?: string | null;
     Quantity?: number | null;
     BarCode?: string | null;
+    SerialNumber?: string | null;
+    RfId?: string | null;
+    CodeForVoiding?: string | null;
     ItemId?: string | null;
     ManufacturerPartNumber?: string | null;
     TrackedBy?: string | null;
@@ -8542,6 +8608,26 @@ export type WebApiModulesPluginsQuickbooksOnlineRwToQboLogicQboSyncResponse = {
     SyncDate?: string | null;
     Code?: string | null;
     Message?: string | null;
+};
+export type FwStandardModelsDataField = {
+    Name?: string | null;
+    Value?: string | null;
+    Type?: string | null;
+};
+export type FwStandardModelsCopyLogicRequest = {
+    DataFields?: FwStandardModelsDataField[] | null;
+};
+export type FwStandardModelsCopyLogicResponse = {
+    status?: number;
+    success?: boolean;
+    msg?: string | null;
+    Copy?: FwStandardBusinessLogicFwBusinessLogic;
+};
+export type FwStandardModelsCopyLogicResponseRead = {
+    status?: number;
+    success?: boolean;
+    msg?: string | null;
+    Copy?: FwStandardBusinessLogicFwBusinessLogicRead;
 };
 export type WebApiModulesHomeControlsCustomerNoteCustomerNote = {
     /** Format: Text, IsPrimaryKey: true */
@@ -10231,6 +10317,8 @@ export type WebApiLogicSortItemsResponse = {
     status?: number;
     success?: boolean;
     msg?: string | null;
+    SortStartDateTime?: string;
+    ItemDateStamp?: string;
 };
 export type WebApiModulesUtilitiesGlDistributionGlDistribution = {
     Date?: string | null;
@@ -10513,6 +10601,7 @@ export type WebApiServicesAvailabilityServiceTInventoryWarehouseAvailabilityQuan
     Subbed?: number;
     Consigned?: number;
     OwnedAndConsigned?: number;
+    OwnedAndSubbed?: number;
     Total?: number;
 };
 export type WebApiServicesAvailabilityServiceTPackageAccessory = {
@@ -11855,12 +11944,13 @@ export type WebApiModulesHomeControlsInventoryPackageInventoryInventoryPackageIn
     InventoryPackageInventoryId?: string | null;
     /** Format: Text, Required: true */
     PackageId?: string | null;
+    PackageICode?: string | null;
     /** Format: Text, Required: true */
     InventoryId?: string | null;
     ICode?: string | null;
     ICodeColor?: string | null;
     LineColor?: string | null;
-    /** Format: Text, Required: true */
+    /** Format: Text */
     Description?: string | null;
     /** Format: Boolean */
     IsPrimary?: boolean | null;
@@ -11927,12 +12017,13 @@ export type WebApiModulesHomeControlsInventoryPackageInventoryInventoryPackageIn
     InventoryPackageInventoryId?: string | null;
     /** Format: Text, Required: true */
     PackageId?: string | null;
+    PackageICode?: string | null;
     /** Format: Text, Required: true */
     InventoryId?: string | null;
     ICode?: string | null;
     ICodeColor?: string | null;
     LineColor?: string | null;
-    /** Format: Text, Required: true */
+    /** Format: Text */
     Description?: string | null;
     /** Format: Boolean */
     IsPrimary?: boolean | null;
@@ -12978,6 +13069,7 @@ export type WebApiModulesHomeControlsInventorySearchInventorySearchAddToOrderReq
     ToDate?: string | null;
     ToTime?: string | null;
     InsertAtItemOrder?: string | null;
+    IsLossAndDamage?: boolean | null;
     SessionId?: string | null;
 };
 export type WebApiModulesHomeControlsInventorySearchInventorySearchAddToCompleteKitContainerRequest = {
@@ -13592,6 +13684,9 @@ export type WebApiModulesBillingInvoiceInvoiceReceipt = {
     InvoiceOrderDescription?: string | null;
     /** Format: Decimal, Total digits: 9, Decimal places: 2 */
     Amount?: number | null;
+    /** Format: Decimal, Total digits: 9, Decimal places: 2 */
+    AppliedPaymentTypeFee?: number | null;
+    FeePercent?: number | null;
     Remaining?: number | null;
     AppliedById?: string | null;
     AppliedBy?: string | null;
@@ -13643,6 +13738,9 @@ export type WebApiModulesBillingInvoiceInvoiceReceiptRead = {
     InvoiceOrderDescription?: string | null;
     /** Format: Decimal, Total digits: 9, Decimal places: 2 */
     Amount?: number | null;
+    /** Format: Decimal, Total digits: 9, Decimal places: 2 */
+    AppliedPaymentTypeFee?: number | null;
+    FeePercent?: number | null;
     Remaining?: number | null;
     AppliedById?: string | null;
     AppliedBy?: string | null;
@@ -13735,6 +13833,125 @@ export type WebApiModulesBillingInvoiceProcessInvoiceResponse = {
     success?: boolean;
     msg?: string | null;
     QBOResponse?: WebApiModulesPluginsQuickbooksOnlineRwToQboLogicQboSyncResponse;
+};
+export type WebApiModulesBilingInvoiceInvoiceDocument = {
+    InvoiceId?: string | null;
+    copying?: boolean;
+    DocumentId?: string | null;
+    /** Format: Text */
+    DocumentTypeId?: string | null;
+    /** Format: Text */
+    UniqueId1?: string | null;
+    /** Format: Text */
+    UniqueId2?: string | null;
+    /** Format: Integer */
+    UniqueId1Int?: number | null;
+    /** Format: Text */
+    Description?: string | null;
+    /** Format: Text */
+    InputByUsersId?: string | null;
+    /** Format: Date */
+    AttachDate?: string | null;
+    /** Format: Text */
+    AttachTime?: string | null;
+    /** Format: Boolean */
+    AttachToEmail?: boolean | null;
+    /** Format: Boolean */
+    Inactive?: boolean | null;
+    /** Format: UTCDateTime */
+    DateStamp?: string | null;
+    Extension?: string | null;
+    DocumentType?: string | null;
+    InputBy?: string | null;
+    HasImage?: boolean | null;
+    HasFile?: boolean | null;
+    AppImageCount?: number | null;
+    FileIsModified?: boolean | null;
+    FileDataUrl?: string | null;
+    FilePath?: string | null;
+    AuditNote?: string | null;
+    _Custom?: FwStandardDataFwCustomValue[] | null;
+    _DefaultFieldAttributes?: FwStandardDataFwDefaultAttribute[] | null;
+    _Original?: FwStandardBusinessLogicFwBusinessLogic;
+    _Translation?: FwStandardDataFwTranslatedValue[] | null;
+    _HasImport?: boolean;
+    _CreatedByUserId?: string | null;
+    _CreatedByUserName?: string | null;
+    _CreatedDateTime?: string | null;
+    _ModifiedByUserId?: string | null;
+    _ModifiedByUserName?: string | null;
+    _ModifiedDateTime?: string | null;
+};
+export type WebApiModulesBilingInvoiceInvoiceDocumentRead = {
+    InvoiceId?: string | null;
+    copying?: boolean;
+    DocumentId?: string | null;
+    /** Format: Text */
+    DocumentTypeId?: string | null;
+    /** Format: Text */
+    UniqueId1?: string | null;
+    /** Format: Text */
+    UniqueId2?: string | null;
+    /** Format: Integer */
+    UniqueId1Int?: number | null;
+    /** Format: Text */
+    Description?: string | null;
+    /** Format: Text */
+    InputByUsersId?: string | null;
+    /** Format: Date */
+    AttachDate?: string | null;
+    /** Format: Text */
+    AttachTime?: string | null;
+    /** Format: Boolean */
+    AttachToEmail?: boolean | null;
+    /** Format: Boolean */
+    Inactive?: boolean | null;
+    /** Format: UTCDateTime */
+    DateStamp?: string | null;
+    Extension?: string | null;
+    DocumentType?: string | null;
+    InputBy?: string | null;
+    HasImage?: boolean | null;
+    HasFile?: boolean | null;
+    AppImageCount?: number | null;
+    FileIsModified?: boolean | null;
+    FileDataUrl?: string | null;
+    FilePath?: string | null;
+    AuditNote?: string | null;
+    RecordTitle?: string | null;
+    _Fields?: FwStandardBusinessLogicFwBusinessLogicFieldDefinition[] | null;
+    _Custom?: FwStandardDataFwCustomValue[] | null;
+    _DefaultFieldAttributes?: FwStandardDataFwDefaultAttribute[] | null;
+    _Original?: FwStandardBusinessLogicFwBusinessLogicRead;
+    _Translation?: FwStandardDataFwTranslatedValue[] | null;
+    _HasImport?: boolean;
+    _CreatedByUserId?: string | null;
+    _CreatedByUserName?: string | null;
+    _CreatedDateTime?: string | null;
+    _ModifiedByUserId?: string | null;
+    _ModifiedByUserName?: string | null;
+    _ModifiedDateTime?: string | null;
+};
+export type WebApiModulesBilingInvoiceInvoiceDocumentPutRequest = {
+    InvoiceId?: string | null;
+    DocumentId?: string | null;
+    DocumentTypeId?: string | null;
+    Description?: string | null;
+    AttachToEmail?: boolean | null;
+    Inactive?: boolean | null;
+    FileIsModified?: boolean | null;
+    FileDataUrl?: string | null;
+    FilePath?: string | null;
+};
+export type WebApiModulesBilingInvoiceInvoiceDocumentPostRequest = {
+    InvoiceId?: string | null;
+    DocumentTypeId?: string | null;
+    Description?: string | null;
+    AttachToEmail?: boolean | null;
+    Inactive?: boolean | null;
+    FileIsModified?: boolean | null;
+    FileDataUrl?: string | null;
+    FilePath?: string | null;
 };
 export type WebApiModulesHomeControlsInvoiceCreationBatchInvoiceCreationBatch = {
     /** Format: Text, IsPrimaryKey: true */
@@ -13903,6 +14120,7 @@ export type WebApiModulesHomeControlsInvoiceItemInvoiceItem = {
     InvoiceDate?: string | null;
     DealId?: string | null;
     Deal?: string | null;
+    IsFixedContainerComponent?: boolean | null;
     AuditNote?: string | null;
     _Custom?: FwStandardDataFwCustomValue[] | null;
     _DefaultFieldAttributes?: FwStandardDataFwDefaultAttribute[] | null;
@@ -14019,6 +14237,7 @@ export type WebApiModulesHomeControlsInvoiceItemInvoiceItemRead = {
     InvoiceDate?: string | null;
     DealId?: string | null;
     Deal?: string | null;
+    IsFixedContainerComponent?: boolean | null;
     AuditNote?: string | null;
     RecordTitle?: string | null;
     _Fields?: FwStandardBusinessLogicFwBusinessLogicFieldDefinition[] | null;
@@ -14593,6 +14812,7 @@ export type WebApiModulesInventoryAssetItem = {
     /** Format: Text */
     SpaceId?: string | null;
     BuildingRoom?: string | null;
+    BuildingFloorRoom?: string | null;
     ItemNotes?: string | null;
     /** Format: Text */
     PhysicalId?: string | null;
@@ -14786,6 +15006,8 @@ export type WebApiModulesInventoryAssetItem = {
     CurrentOrderFromDate?: string | null;
     CurrentOrderToDate?: string | null;
     CurrentOrderAgent?: string | null;
+    CurrentContractId?: string | null;
+    CurrentContractNumber?: string | null;
     /** Format: Text */
     LotNumber?: string | null;
     LastOrderId?: string | null;
@@ -14928,6 +15150,7 @@ export type WebApiModulesInventoryAssetItemRead = {
     /** Format: Text */
     SpaceId?: string | null;
     BuildingRoom?: string | null;
+    BuildingFloorRoom?: string | null;
     ItemNotes?: string | null;
     /** Format: Text */
     PhysicalId?: string | null;
@@ -15121,6 +15344,8 @@ export type WebApiModulesInventoryAssetItemRead = {
     CurrentOrderFromDate?: string | null;
     CurrentOrderToDate?: string | null;
     CurrentOrderAgent?: string | null;
+    CurrentContractId?: string | null;
+    CurrentContractNumber?: string | null;
     /** Format: Text */
     LotNumber?: string | null;
     LastOrderId?: string | null;
@@ -15281,6 +15506,45 @@ export type FwStandardModelsFwQueryResponseWebApiModulesHomeControlsItemAttribut
     PageSize?: number;
     TotalItems?: number;
     Sort?: string | null;
+};
+export type WebApiModulesHomeControlsItemAttributeValueMassUpdateItemAttributesRequest = {
+    SourceItemId?: string | null;
+    DestinationItemIds?: string[] | null;
+    miscfields?: any | null;
+    "module"?: string | null;
+    options?: any | null;
+    orderby?: string | null;
+    orderbydirection?: string | null;
+    top?: number;
+    pageno?: number;
+    pagesize?: number;
+    searchfieldoperators?: string[] | null;
+    searchfields?: string[] | null;
+    searchfieldvalues?: string[] | null;
+    searchfieldtypes?: string[] | null;
+    searchseparators?: string[] | null;
+    searchcondition?: string[] | null;
+    searchconjunctions?: string[] | null;
+    searchgroupings?: number[] | null;
+    uniqueids?: any | null;
+    boundids?: any | null;
+    filterfields?: {
+        [key: string]: string | null;
+    } | null;
+    activeview?: string | null;
+    emptyobject?: boolean;
+    forexcel?: boolean;
+    includeallcolumns?: boolean;
+    fields?: FwStandardModelsCheckBoxListItem[] | null;
+    totalfields?: string[] | null;
+    activeviewfields?: {
+        [key: string]: string[] | null;
+    } | null;
+};
+export type WebApiModulesHomeControlsItemAttributeValueMassUpdateItemAttributesResponse = {
+    status?: number;
+    success?: boolean;
+    msg?: string | null;
 };
 export type WebApiModulesHomeItemChargeItemCharge = {
     /** Format: Text, IsPrimaryKey: true */
@@ -15729,6 +15993,8 @@ export type WebApiModulesSettingsOrderSettingsOrderTypeOrderType = {
     GlSuffix?: string | null;
     /** Format: Boolean */
     AllowRoundTripRentals?: boolean | null;
+    /** Format: Text */
+    DefaultUseHiatusScheduleFrom?: string | null;
     /** Format: Boolean */
     AutomaticallyBoldPrimaryItem?: boolean | null;
     RentalShowFields?: string[] | null;
@@ -15876,6 +16142,8 @@ export type WebApiModulesSettingsOrderSettingsOrderTypeOrderTypeRead = {
     GlSuffix?: string | null;
     /** Format: Boolean */
     AllowRoundTripRentals?: boolean | null;
+    /** Format: Text */
+    DefaultUseHiatusScheduleFrom?: string | null;
     /** Format: Boolean */
     AutomaticallyBoldPrimaryItem?: boolean | null;
     RentalShowFields?: string[] | null;
@@ -16221,9 +16489,18 @@ export type WebApiModulesAgentOrderItemOrderItem = {
     IsRecurringRateType?: boolean | null;
     DisableMiscDescriptionChange?: boolean | null;
     LockMarkup?: boolean | null;
+    IsFixedContainer?: boolean | null;
+    /** Format: Boolean */
+    IsFixedContainerComponent?: boolean | null;
+    Inactive?: boolean | null;
+    ImportToQuoteId?: string | null;
+    ImportToQuoteNumber?: string | null;
+    ImportToOrderId?: string | null;
+    ImportToOrderNumber?: string | null;
+    ImportRentalInventoryId?: string | null;
+    ImportRentalICode?: string | null;
     /** Format: UTCDateTime */
     DateStamp?: string | null;
-    Inactive?: boolean | null;
     AuditNote?: string | null;
     SummarySave?: boolean;
     _Custom?: FwStandardDataFwCustomValue[] | null;
@@ -16512,9 +16789,18 @@ export type WebApiModulesAgentOrderItemOrderItemRead = {
     IsRecurringRateType?: boolean | null;
     DisableMiscDescriptionChange?: boolean | null;
     LockMarkup?: boolean | null;
+    IsFixedContainer?: boolean | null;
+    /** Format: Boolean */
+    IsFixedContainerComponent?: boolean | null;
+    Inactive?: boolean | null;
+    ImportToQuoteId?: string | null;
+    ImportToQuoteNumber?: string | null;
+    ImportToOrderId?: string | null;
+    ImportToOrderNumber?: string | null;
+    ImportRentalInventoryId?: string | null;
+    ImportRentalICode?: string | null;
     /** Format: UTCDateTime */
     DateStamp?: string | null;
-    Inactive?: boolean | null;
     AuditNote?: string | null;
     RecordTitle?: string | null;
     _Fields?: FwStandardBusinessLogicFwBusinessLogicFieldDefinition[] | null;
@@ -16841,6 +17127,7 @@ export type WebApiModulesAgentOrderGetOrderResponse = {
     PaymentTypeId?: string | null;
     PaymentType?: string | null;
     PaymentTypeType?: string | null;
+    PaymentTypeFeePercentage?: number | null;
     /** Format: Text */
     CurrencyId?: string | null;
     UpdateAllRatesToNewCurrency?: boolean;
@@ -17262,6 +17549,9 @@ export type WebApiModulesAgentOrderGetOrderResponse = {
     /** Format: Text */
     ProjectDepositId?: string | null;
     ProjectDeposit?: string | null;
+    ProjectSyncMarket?: boolean | null;
+    ProjectSyncDeliverShip?: boolean | null;
+    ProjectSyncBilling?: boolean | null;
     /** Format: Text */
     InputByUserId?: string | null;
     /** Format: Text */
@@ -17326,6 +17616,12 @@ export type WebApiModulesAgentOrderGetOrderResponse = {
     /** Format: Boolean */
     DoNotBillDayWhenItemsAreCheckedInByCertainTime?: boolean | null;
     CheckInByTimeToAvoidBilling?: string | null;
+    /** Format: Text */
+    JobName?: string | null;
+    /** Format: Boolean */
+    ItineraryOverrideBillableDays?: boolean | null;
+    DealProductionTypeId?: string | null;
+    DealProductionType?: string | null;
     /** Format: UTCDateTime */
     DateStamp?: string | null;
     AuditNote?: string | null;
@@ -17519,6 +17815,7 @@ export type WebApiModulesAgentOrderGetOrderResponseRead = {
     PaymentTypeId?: string | null;
     PaymentType?: string | null;
     PaymentTypeType?: string | null;
+    PaymentTypeFeePercentage?: number | null;
     /** Format: Text */
     CurrencyId?: string | null;
     UpdateAllRatesToNewCurrency?: boolean;
@@ -17940,6 +18237,9 @@ export type WebApiModulesAgentOrderGetOrderResponseRead = {
     /** Format: Text */
     ProjectDepositId?: string | null;
     ProjectDeposit?: string | null;
+    ProjectSyncMarket?: boolean | null;
+    ProjectSyncDeliverShip?: boolean | null;
+    ProjectSyncBilling?: boolean | null;
     /** Format: Text */
     InputByUserId?: string | null;
     /** Format: Text */
@@ -18004,6 +18304,12 @@ export type WebApiModulesAgentOrderGetOrderResponseRead = {
     /** Format: Boolean */
     DoNotBillDayWhenItemsAreCheckedInByCertainTime?: boolean | null;
     CheckInByTimeToAvoidBilling?: string | null;
+    /** Format: Text */
+    JobName?: string | null;
+    /** Format: Boolean */
+    ItineraryOverrideBillableDays?: boolean | null;
+    DealProductionTypeId?: string | null;
+    DealProductionType?: string | null;
     /** Format: UTCDateTime */
     DateStamp?: string | null;
     AuditNote?: string | null;
@@ -18022,13 +18328,13 @@ export type WebApiModulesAgentOrderGetOrderResponseRead = {
     _ModifiedByUserName?: string | null;
     _ModifiedDateTime?: string | null;
 };
-export type WebApiModulesAgentOrderCopyTemplateRequest = {
+export type WebApiModulesAgentOrderApplyTemplateRequest = {
     TemplateIds?: string[] | null;
     OrderId?: string | null;
     RecType?: string | null;
     ModuleName?: string | null;
 };
-export type WebApiModulesAgentOrderCopyTemplateResponse = {
+export type WebApiModulesAgentOrderApplyTemplateResponse = {
     status?: number;
     success?: boolean;
     msg?: string | null;
@@ -18217,6 +18523,7 @@ export type WebApiModulesAgentOrderOrderBase = {
     PaymentTypeId?: string | null;
     PaymentType?: string | null;
     PaymentTypeType?: string | null;
+    PaymentTypeFeePercentage?: number | null;
     /** Format: Text */
     CurrencyId?: string | null;
     UpdateAllRatesToNewCurrency?: boolean;
@@ -18638,6 +18945,9 @@ export type WebApiModulesAgentOrderOrderBase = {
     /** Format: Text */
     ProjectDepositId?: string | null;
     ProjectDeposit?: string | null;
+    ProjectSyncMarket?: boolean | null;
+    ProjectSyncDeliverShip?: boolean | null;
+    ProjectSyncBilling?: boolean | null;
     /** Format: Text */
     InputByUserId?: string | null;
     /** Format: Text */
@@ -18702,6 +19012,12 @@ export type WebApiModulesAgentOrderOrderBase = {
     /** Format: Boolean */
     DoNotBillDayWhenItemsAreCheckedInByCertainTime?: boolean | null;
     CheckInByTimeToAvoidBilling?: string | null;
+    /** Format: Text */
+    JobName?: string | null;
+    /** Format: Boolean */
+    ItineraryOverrideBillableDays?: boolean | null;
+    DealProductionTypeId?: string | null;
+    DealProductionType?: string | null;
     /** Format: UTCDateTime */
     DateStamp?: string | null;
     AuditNote?: string | null;
@@ -18880,6 +19196,7 @@ export type WebApiModulesAgentOrderOrderBaseRead = {
     PaymentTypeId?: string | null;
     PaymentType?: string | null;
     PaymentTypeType?: string | null;
+    PaymentTypeFeePercentage?: number | null;
     /** Format: Text */
     CurrencyId?: string | null;
     UpdateAllRatesToNewCurrency?: boolean;
@@ -19301,6 +19618,9 @@ export type WebApiModulesAgentOrderOrderBaseRead = {
     /** Format: Text */
     ProjectDepositId?: string | null;
     ProjectDeposit?: string | null;
+    ProjectSyncMarket?: boolean | null;
+    ProjectSyncDeliverShip?: boolean | null;
+    ProjectSyncBilling?: boolean | null;
     /** Format: Text */
     InputByUserId?: string | null;
     /** Format: Text */
@@ -19365,6 +19685,12 @@ export type WebApiModulesAgentOrderOrderBaseRead = {
     /** Format: Boolean */
     DoNotBillDayWhenItemsAreCheckedInByCertainTime?: boolean | null;
     CheckInByTimeToAvoidBilling?: string | null;
+    /** Format: Text */
+    JobName?: string | null;
+    /** Format: Boolean */
+    ItineraryOverrideBillableDays?: boolean | null;
+    DealProductionTypeId?: string | null;
+    DealProductionType?: string | null;
     /** Format: UTCDateTime */
     DateStamp?: string | null;
     AuditNote?: string | null;
@@ -19926,6 +20252,158 @@ export type FwStandardModelsFwQueryResponseWebApiModulesHomeControlsOrderContact
     TotalItems?: number;
     Sort?: string | null;
 };
+export type WebApiModulesHomeOrderDayOrderDay = {
+    /** Format: Text, IsPrimaryKey: true */
+    OrderDayId?: string | null;
+    /** Format: Text, Required: true */
+    OrderId?: string | null;
+    /** Format: Date */
+    OrderDate?: string | null;
+    DayName?: string | null;
+    ActivityHint?: string | null;
+    /** Format: Text */
+    ActivityDescription?: string | null;
+    /** Format: Text */
+    StartTime?: string | null;
+    /** Format: Text */
+    StopTime?: string | null;
+    /** Format: Decimal, Total digits: 12, Decimal places: 2 */
+    Hours?: number | null;
+    /** Format: Decimal, Total digits: 12, Decimal places: 2 */
+    HoursOvertime?: number | null;
+    /** Format: Decimal, Total digits: 12, Decimal places: 2 */
+    HoursDoubletime?: number | null;
+    /** Format: Text */
+    Break1StartTime?: string | null;
+    /** Format: Text */
+    Break1StopTime?: string | null;
+    /** Format: Text */
+    Break2StartTime?: string | null;
+    /** Format: Text */
+    Break2StopTime?: string | null;
+    /** Format: Text */
+    Break3StartTime?: string | null;
+    /** Format: Text */
+    Break3StopTime?: string | null;
+    BreakTime?: string | null;
+    DailyTotalTime?: string | null;
+    /** Format: Text */
+    VenueId?: string | null;
+    Venue?: string | null;
+    VenueAddress1?: string | null;
+    VenueAddress2?: string | null;
+    VenueCity?: string | null;
+    VenueState?: string | null;
+    VenueCountryId?: string | null;
+    VenueCountry?: string | null;
+    VenueZipCode?: string | null;
+    /** Format: Boolean */
+    Billable?: boolean | null;
+    /** Format: Boolean */
+    TotalTimeEstimated?: boolean | null;
+    /** Format: Boolean */
+    Break1PaId?: boolean | null;
+    /** Format: Boolean */
+    Break2PaId?: boolean | null;
+    /** Format: Boolean */
+    Break3PaId?: boolean | null;
+    /** Format: Boolean */
+    Milestone?: boolean | null;
+    Notes?: string | null;
+    AuditNote?: string | null;
+    _Custom?: FwStandardDataFwCustomValue[] | null;
+    _DefaultFieldAttributes?: FwStandardDataFwDefaultAttribute[] | null;
+    _Original?: FwStandardBusinessLogicFwBusinessLogic;
+    _Translation?: FwStandardDataFwTranslatedValue[] | null;
+    _HasImport?: boolean;
+    _CreatedByUserId?: string | null;
+    _CreatedByUserName?: string | null;
+    _CreatedDateTime?: string | null;
+    _ModifiedByUserId?: string | null;
+    _ModifiedByUserName?: string | null;
+    _ModifiedDateTime?: string | null;
+};
+export type WebApiModulesHomeOrderDayOrderDayRead = {
+    /** Format: Text, IsPrimaryKey: true */
+    OrderDayId?: string | null;
+    /** Format: Text, Required: true */
+    OrderId?: string | null;
+    /** Format: Date */
+    OrderDate?: string | null;
+    DayName?: string | null;
+    ActivityHint?: string | null;
+    /** Format: Text */
+    ActivityDescription?: string | null;
+    /** Format: Text */
+    StartTime?: string | null;
+    /** Format: Text */
+    StopTime?: string | null;
+    /** Format: Decimal, Total digits: 12, Decimal places: 2 */
+    Hours?: number | null;
+    /** Format: Decimal, Total digits: 12, Decimal places: 2 */
+    HoursOvertime?: number | null;
+    /** Format: Decimal, Total digits: 12, Decimal places: 2 */
+    HoursDoubletime?: number | null;
+    /** Format: Text */
+    Break1StartTime?: string | null;
+    /** Format: Text */
+    Break1StopTime?: string | null;
+    /** Format: Text */
+    Break2StartTime?: string | null;
+    /** Format: Text */
+    Break2StopTime?: string | null;
+    /** Format: Text */
+    Break3StartTime?: string | null;
+    /** Format: Text */
+    Break3StopTime?: string | null;
+    BreakTime?: string | null;
+    DailyTotalTime?: string | null;
+    /** Format: Text */
+    VenueId?: string | null;
+    Venue?: string | null;
+    VenueAddress1?: string | null;
+    VenueAddress2?: string | null;
+    VenueCity?: string | null;
+    VenueState?: string | null;
+    VenueCountryId?: string | null;
+    VenueCountry?: string | null;
+    VenueZipCode?: string | null;
+    /** Format: Boolean */
+    Billable?: boolean | null;
+    /** Format: Boolean */
+    TotalTimeEstimated?: boolean | null;
+    /** Format: Boolean */
+    Break1PaId?: boolean | null;
+    /** Format: Boolean */
+    Break2PaId?: boolean | null;
+    /** Format: Boolean */
+    Break3PaId?: boolean | null;
+    /** Format: Boolean */
+    Milestone?: boolean | null;
+    Notes?: string | null;
+    AuditNote?: string | null;
+    RecordTitle?: string | null;
+    _Fields?: FwStandardBusinessLogicFwBusinessLogicFieldDefinition[] | null;
+    _Custom?: FwStandardDataFwCustomValue[] | null;
+    _DefaultFieldAttributes?: FwStandardDataFwDefaultAttribute[] | null;
+    _Original?: FwStandardBusinessLogicFwBusinessLogicRead;
+    _Translation?: FwStandardDataFwTranslatedValue[] | null;
+    _HasImport?: boolean;
+    _CreatedByUserId?: string | null;
+    _CreatedByUserName?: string | null;
+    _CreatedDateTime?: string | null;
+    _ModifiedByUserId?: string | null;
+    _ModifiedByUserName?: string | null;
+    _ModifiedDateTime?: string | null;
+};
+export type MicrosoftAspNetCoreMvcActionResultWebApiModulesHomeOrderDayOrderDayLogic = {
+    Result?: MicrosoftAspNetCoreMvcActionResult;
+    Value?: WebApiModulesHomeOrderDayOrderDay;
+};
+export type MicrosoftAspNetCoreMvcActionResultWebApiModulesHomeOrderDayOrderDayLogicRead = {
+    Result?: MicrosoftAspNetCoreMvcActionResult;
+    Value?: WebApiModulesHomeOrderDayOrderDayRead;
+};
 export type MicrosoftAspNetCoreMvcActionResultWebApiModulesAgentOrderItemOrderItemLogic = {
     Result?: MicrosoftAspNetCoreMvcActionResult;
     Value?: WebApiModulesAgentOrderItemOrderItem;
@@ -19950,6 +20428,18 @@ export type WebApiModulesAgentOrderItemInsertOptionRequest = {
     ParentOrderItemId?: string | null;
     Items?: WebApiModulesAgentOrderItemCompleteKitOption[] | null;
 };
+export type WebApiModulesAgentOrderItemAddAListOfItemsRequest = {
+    OrderId?: string | null;
+    ItemList?: string | null;
+    ItemType?: string | null;
+    RecType?: string | null;
+};
+export type WebApiModulesAgentOrderItemAddAListOfItemsResponse = {
+    status?: number;
+    success?: boolean;
+    msg?: string | null;
+    Errors?: string[] | null;
+};
 export type WebApiModulesAgentOrderItemSplitOrderItemRequest = {
     OrderId?: string | null;
     OrderItemId?: string | null;
@@ -19973,6 +20463,7 @@ export type WebApiModulesAgentOrderItemSplitOrderItemResponse = {
 export type WebApiModulesAgentOrderItemSortOrderItemsRequest = {
     StartAtIndex?: number | null;
     OrderItemIds?: string[] | null;
+    SortStartDateTime?: string | null;
 };
 export type WebApiModulesAgentOrderItemCancelManualSortRequest = {
     OrderId?: string | null;
@@ -19995,41 +20486,10 @@ export type WebApiModulesAgentOrderItemPasteOrderItemsFromClipboardResponse = {
     success?: boolean;
     msg?: string | null;
 };
-export type WebApiModulesAgentOrderItemCostOrderItemsRequest = {
-    OrderId?: string | null;
-    CostOrderId?: string | null;
-    OrderItemIds?: string[] | null;
-};
-export type WebApiModulesAgentOrderItemCostOrderItemsResponse = {
-    Status?: number | null;
-    Message?: string | null;
-};
 export type WebApiModulesAgentOrderItemToggleOrderApprovalRequest = {
     OrderId?: string | null;
 };
 export type WebApiModulesAgentOrderItemToggleOrderApprovalResponse = {
-    Status?: number | null;
-    Message?: string | null;
-    ToggleOrderApproval?: boolean | null;
-};
-export type WebApiModulesAgentOrderItemMassUpdateCrewRequest = {
-    OrderId?: string | null;
-    OrderItemIds?: string[] | null;
-    UnitCost?: number | null;
-    MarkupPercent?: number | null;
-    Price?: number | null;
-    DiscountPercent?: number | null;
-    PremiumPercent?: number | null;
-    Taxable?: boolean | null;
-    FromDate?: string | null;
-    FromTime?: string | null;
-    ToDate?: string | null;
-    ToTime?: string | null;
-    HoursPerDay?: number | null;
-    SubQuantity?: number | null;
-    UpdateAllHoursPerDay?: boolean | null;
-};
-export type WebApiModulesAgentOrderItemMassUpdateCrewResponse = {
     Status?: number | null;
     Message?: string | null;
     ToggleOrderApproval?: boolean | null;
@@ -20794,7 +21254,13 @@ export type WebApiModulesInventoryPartsInventoryPartsInventory = {
     /** Format: Boolean */
     AutomaticallyRebuildContainerAtCheckIn?: boolean | null;
     /** Format: Boolean */
+    AutomaticallyCheckInEntireContainerWithScannableItem?: boolean | null;
+    /** Format: Boolean */
     AutomaticallyRebuildContainerAtTransferIn?: boolean | null;
+    /** Format: Boolean */
+    AutomaticallyCountAllItemsWhenPhysicalInventoryInitiated?: boolean | null;
+    /** Format: Boolean */
+    AutomaticallyTransferInEntireContainerWithScannableItem?: boolean | null;
     /** Format: Text */
     ContainerStagingRule?: string | null;
     /** Format: Boolean */
@@ -20837,8 +21303,6 @@ export type WebApiModulesInventoryPartsInventoryPartsInventory = {
     WardrobeDetailedDescription?: string | null;
     WebDetailedDescription?: string | null;
     TechnicalNotes?: string | null;
-    /** Format: Boolean */
-    OverrideSystemDefaultRevenueAllocationBehavior?: boolean | null;
     /** Format: Boolean */
     AllocateRevenueForAccessories?: boolean | null;
     /** Format: Text */
@@ -21122,7 +21586,13 @@ export type WebApiModulesInventoryPartsInventoryPartsInventoryRead = {
     /** Format: Boolean */
     AutomaticallyRebuildContainerAtCheckIn?: boolean | null;
     /** Format: Boolean */
+    AutomaticallyCheckInEntireContainerWithScannableItem?: boolean | null;
+    /** Format: Boolean */
     AutomaticallyRebuildContainerAtTransferIn?: boolean | null;
+    /** Format: Boolean */
+    AutomaticallyCountAllItemsWhenPhysicalInventoryInitiated?: boolean | null;
+    /** Format: Boolean */
+    AutomaticallyTransferInEntireContainerWithScannableItem?: boolean | null;
     /** Format: Text */
     ContainerStagingRule?: string | null;
     /** Format: Boolean */
@@ -21165,8 +21635,6 @@ export type WebApiModulesInventoryPartsInventoryPartsInventoryRead = {
     WardrobeDetailedDescription?: string | null;
     WebDetailedDescription?: string | null;
     TechnicalNotes?: string | null;
-    /** Format: Boolean */
-    OverrideSystemDefaultRevenueAllocationBehavior?: boolean | null;
     /** Format: Boolean */
     AllocateRevenueForAccessories?: boolean | null;
     /** Format: Text */
@@ -21345,11 +21813,6 @@ export type FwStandardModelsFwQueryResponseWebApiModulesInventoryPartsInventoryP
     PageSize?: number;
     TotalItems?: number;
     Sort?: string | null;
-};
-export type WebApiModulesInventoryInventoryCopyInventoryRequest = {
-    InventoryId?: string | null;
-    NewICode?: string | null;
-    NewDescription?: string | null;
 };
 export type WebApiModulesInventoryInventoryPopulateInventoryUsageHistoryRequest = {
     InventoryId?: string | null;
@@ -21613,36 +22076,6 @@ export type WebApiModulesInventoryPhysicalInventoryPhysicalInventory = {
     /** Format: Text, Required: true */
     RecType?: string | null;
     RecTypeDisplay?: string | null;
-    /** Format: Text */
-    Rank?: string | null;
-    /** Format: Boolean */
-    CycleRankA?: boolean | null;
-    /** Format: Boolean */
-    CycleRankB?: boolean | null;
-    /** Format: Boolean */
-    CycleRankC?: boolean | null;
-    /** Format: Boolean */
-    CycleRankD?: boolean | null;
-    /** Format: Boolean */
-    CycleRankE?: boolean | null;
-    /** Format: Boolean */
-    CycleRankF?: boolean | null;
-    /** Format: Boolean */
-    CycleRankG?: boolean | null;
-    AFromValue?: number | null;
-    AToValue?: number | null;
-    BFromValue?: number | null;
-    BToValue?: number | null;
-    CFromValue?: number | null;
-    CToValue?: number | null;
-    DFromValue?: number | null;
-    DToValue?: number | null;
-    EFromValue?: number | null;
-    EToValue?: number | null;
-    FFromValue?: number | null;
-    FToValue?: number | null;
-    GFromValue?: number | null;
-    GToValue?: number | null;
     /** Format: Integer */
     StepPreScan?: number | null;
     /** Format: Integer */
@@ -21760,36 +22193,6 @@ export type WebApiModulesInventoryPhysicalInventoryPhysicalInventoryRead = {
     /** Format: Text, Required: true */
     RecType?: string | null;
     RecTypeDisplay?: string | null;
-    /** Format: Text */
-    Rank?: string | null;
-    /** Format: Boolean */
-    CycleRankA?: boolean | null;
-    /** Format: Boolean */
-    CycleRankB?: boolean | null;
-    /** Format: Boolean */
-    CycleRankC?: boolean | null;
-    /** Format: Boolean */
-    CycleRankD?: boolean | null;
-    /** Format: Boolean */
-    CycleRankE?: boolean | null;
-    /** Format: Boolean */
-    CycleRankF?: boolean | null;
-    /** Format: Boolean */
-    CycleRankG?: boolean | null;
-    AFromValue?: number | null;
-    AToValue?: number | null;
-    BFromValue?: number | null;
-    BToValue?: number | null;
-    CFromValue?: number | null;
-    CToValue?: number | null;
-    DFromValue?: number | null;
-    DToValue?: number | null;
-    EFromValue?: number | null;
-    EToValue?: number | null;
-    FFromValue?: number | null;
-    FToValue?: number | null;
-    GFromValue?: number | null;
-    GToValue?: number | null;
     /** Format: Integer */
     StepPreScan?: number | null;
     AllowStepPreScan?: boolean | null;
@@ -22733,6 +23136,69 @@ export type WebApiModulesWarehousePickListPickList = {
     DueDate?: string | null;
     /** Format: Text */
     DueTime?: string | null;
+    /** Format: Text, IsPrimaryKey: true */
+    DeliveryId?: string | null;
+    DeliveryDeliveryType?: string | null;
+    DeliveryRequiredDate?: string | null;
+    DeliveryRequiredTime?: string | null;
+    DeliveryTargetShipDate?: string | null;
+    DeliveryTargetShipTime?: string | null;
+    DeliveryDirection?: string | null;
+    DeliveryAddressType?: string | null;
+    DeliveryFromLocation?: string | null;
+    DeliveryFromContact?: string | null;
+    DeliveryFromContactPhone?: string | null;
+    DeliveryFromAlternateContact?: string | null;
+    DeliveryFromAlternateContactPhone?: string | null;
+    DeliveryFromAttention?: string | null;
+    DeliveryFromAddress1?: string | null;
+    DeliveryFromAddress2?: string | null;
+    DeliveryFromCity?: string | null;
+    DeliveryFromState?: string | null;
+    DeliveryFromZipCode?: string | null;
+    DeliveryFromCountry?: string | null;
+    DeliveryFromCountryCodeIsoAlpha2?: string | null;
+    DeliveryFromCountryCodePhone?: number | null;
+    DeliveryFromCountryId?: string | null;
+    DeliveryFromCrossStreets?: string | null;
+    DeliveryToLocation?: string | null;
+    DeliveryToContact?: string | null;
+    DeliveryToContactPhone?: string | null;
+    DeliveryToAlternateContact?: string | null;
+    DeliveryToAlternateContactPhone?: string | null;
+    DeliveryToAttention?: string | null;
+    DeliveryToAddress1?: string | null;
+    DeliveryToAddress2?: string | null;
+    DeliveryToCity?: string | null;
+    DeliveryToState?: string | null;
+    DeliveryToZipCode?: string | null;
+    DeliveryToCountryId?: string | null;
+    DeliveryToCountry?: string | null;
+    DeliveryToCountryCodeIsoAlpha2?: string | null;
+    DeliveryToCountryCodePhone?: number | null;
+    DeliveryToContactFax?: string | null;
+    DeliveryToCrossStreets?: string | null;
+    DeliveryDeliveryNotes?: string | null;
+    DeliveryCarrierId?: string | null;
+    DeliveryCarrier?: string | null;
+    DeliveryCarrierAccount?: string | null;
+    DeliveryShipViaId?: string | null;
+    DeliveryShipVia?: string | null;
+    DeliveryInvoiceId?: string | null;
+    DeliveryVendorInvoiceId?: string | null;
+    DeliveryEstimatedFreight?: number | null;
+    DeliveryFreightInvoiceAmount?: number | null;
+    DeliveryChargeType?: string | null;
+    DeliveryFreightTrackingNumber?: string | null;
+    DeliveryFreightTrackingUrl?: string | null;
+    DeliveryDropShip?: boolean | null;
+    DeliveryPackageCode?: string | null;
+    DeliveryBillPoFreightOnOrder?: boolean | null;
+    DeliveryOnlineOrderNumber?: string | null;
+    DeliveryOnlineOrderStatus?: string | null;
+    DeliveryToVenue?: string | null;
+    DeliveryToVenueId?: string | null;
+    DeliveryDateStamp?: string | null;
     Note?: string | null;
     /** Format: UTCDateTime */
     DateStamp?: string | null;
@@ -22802,6 +23268,69 @@ export type WebApiModulesWarehousePickListPickListRead = {
     DueDate?: string | null;
     /** Format: Text */
     DueTime?: string | null;
+    /** Format: Text, IsPrimaryKey: true */
+    DeliveryId?: string | null;
+    DeliveryDeliveryType?: string | null;
+    DeliveryRequiredDate?: string | null;
+    DeliveryRequiredTime?: string | null;
+    DeliveryTargetShipDate?: string | null;
+    DeliveryTargetShipTime?: string | null;
+    DeliveryDirection?: string | null;
+    DeliveryAddressType?: string | null;
+    DeliveryFromLocation?: string | null;
+    DeliveryFromContact?: string | null;
+    DeliveryFromContactPhone?: string | null;
+    DeliveryFromAlternateContact?: string | null;
+    DeliveryFromAlternateContactPhone?: string | null;
+    DeliveryFromAttention?: string | null;
+    DeliveryFromAddress1?: string | null;
+    DeliveryFromAddress2?: string | null;
+    DeliveryFromCity?: string | null;
+    DeliveryFromState?: string | null;
+    DeliveryFromZipCode?: string | null;
+    DeliveryFromCountry?: string | null;
+    DeliveryFromCountryCodeIsoAlpha2?: string | null;
+    DeliveryFromCountryCodePhone?: number | null;
+    DeliveryFromCountryId?: string | null;
+    DeliveryFromCrossStreets?: string | null;
+    DeliveryToLocation?: string | null;
+    DeliveryToContact?: string | null;
+    DeliveryToContactPhone?: string | null;
+    DeliveryToAlternateContact?: string | null;
+    DeliveryToAlternateContactPhone?: string | null;
+    DeliveryToAttention?: string | null;
+    DeliveryToAddress1?: string | null;
+    DeliveryToAddress2?: string | null;
+    DeliveryToCity?: string | null;
+    DeliveryToState?: string | null;
+    DeliveryToZipCode?: string | null;
+    DeliveryToCountryId?: string | null;
+    DeliveryToCountry?: string | null;
+    DeliveryToCountryCodeIsoAlpha2?: string | null;
+    DeliveryToCountryCodePhone?: number | null;
+    DeliveryToContactFax?: string | null;
+    DeliveryToCrossStreets?: string | null;
+    DeliveryDeliveryNotes?: string | null;
+    DeliveryCarrierId?: string | null;
+    DeliveryCarrier?: string | null;
+    DeliveryCarrierAccount?: string | null;
+    DeliveryShipViaId?: string | null;
+    DeliveryShipVia?: string | null;
+    DeliveryInvoiceId?: string | null;
+    DeliveryVendorInvoiceId?: string | null;
+    DeliveryEstimatedFreight?: number | null;
+    DeliveryFreightInvoiceAmount?: number | null;
+    DeliveryChargeType?: string | null;
+    DeliveryFreightTrackingNumber?: string | null;
+    DeliveryFreightTrackingUrl?: string | null;
+    DeliveryDropShip?: boolean | null;
+    DeliveryPackageCode?: string | null;
+    DeliveryBillPoFreightOnOrder?: boolean | null;
+    DeliveryOnlineOrderNumber?: string | null;
+    DeliveryOnlineOrderStatus?: string | null;
+    DeliveryToVenue?: string | null;
+    DeliveryToVenueId?: string | null;
+    DeliveryDateStamp?: string | null;
     Note?: string | null;
     /** Format: UTCDateTime */
     DateStamp?: string | null;
@@ -23566,7 +24095,7 @@ export type WebApiModulesAgentProjectProject = {
     /** Format: Text, Required: true */
     OfficeLocationId?: string | null;
     OfficeLocation?: string | null;
-    /** Format: Text, Required: true */
+    /** Format: Text */
     WarehouseId?: string | null;
     Warehouse?: string | null;
     /** Format: Text, Required: true */
@@ -23619,6 +24148,290 @@ export type WebApiModulesAgentProjectProject = {
     EstimatedStopTime?: string | null;
     /** Format: Boolean */
     CcPrimaryApproverWhenEmailingBackupApprover?: boolean | null;
+    HasWeeklyOnly?: boolean | null;
+    HasMonthlyOnly?: boolean | null;
+    HasWeeklyAndMonthly?: boolean | null;
+    PurchaseOrderHasWeeklyOnly?: boolean | null;
+    PurchaseOrderHasMonthlyOnly?: boolean | null;
+    PurchaseOrderHasWeeklyAndMonthly?: boolean | null;
+    /** Format: Text */
+    MarketTypeId?: string | null;
+    MarketType?: string | null;
+    /** Format: Text */
+    MarketSegmentId?: string | null;
+    MarketSegment?: string | null;
+    /** Format: Text */
+    MarketSegmentJobId?: string | null;
+    MarketSegmentJob?: string | null;
+    /** Format: Boolean */
+    SyncMarket?: boolean | null;
+    /** Format: Boolean */
+    SyncDeliverShip?: boolean | null;
+    /** Format: Text */
+    OutDeliveryId?: string | null;
+    OutDeliveryDeliveryType?: string | null;
+    OutDeliveryRequiredDate?: string | null;
+    OutDeliveryRequiredTime?: string | null;
+    OutDeliveryTargetShipDate?: string | null;
+    OutDeliveryTargetShipTime?: string | null;
+    OutDeliveryDirection?: string | null;
+    OutDeliveryAddressType?: string | null;
+    OutDeliveryFromLocation?: string | null;
+    OutDeliveryFromContact?: string | null;
+    OutDeliveryFromContactPhone?: string | null;
+    OutDeliveryFromAlternateContact?: string | null;
+    OutDeliveryFromAlternateContactPhone?: string | null;
+    OutDeliveryFromAttention?: string | null;
+    OutDeliveryFromAddress1?: string | null;
+    OutDeliveryFromAddress2?: string | null;
+    OutDeliveryFromCity?: string | null;
+    OutDeliveryFromState?: string | null;
+    OutDeliveryFromZipCode?: string | null;
+    OutDeliveryFromCountry?: string | null;
+    OutDeliveryFromCountryId?: string | null;
+    OutDeliveryFromCountryCodeIsoAlpha2?: string | null;
+    OutDeliveryFromCountryCodePhone?: number | null;
+    OutDeliveryFromCrossStreets?: string | null;
+    OutDeliveryToLocation?: string | null;
+    OutDeliveryToContact?: string | null;
+    OutDeliveryToContactPhone?: string | null;
+    OutDeliveryToAlternateContact?: string | null;
+    OutDeliveryToAlternateContactPhone?: string | null;
+    OutDeliveryToAttention?: string | null;
+    OutDeliveryToAddress1?: string | null;
+    OutDeliveryToAddress2?: string | null;
+    OutDeliveryToCity?: string | null;
+    OutDeliveryToState?: string | null;
+    OutDeliveryToZipCode?: string | null;
+    OutDeliveryToCountryId?: string | null;
+    OutDeliveryToCountry?: string | null;
+    OutDeliveryToCountryCodeIsoAlpha2?: string | null;
+    OutDeliveryToCountryCodePhone?: number | null;
+    OutDeliveryToContactFax?: string | null;
+    OutDeliveryToCrossStreets?: string | null;
+    OutDeliveryDeliveryNotes?: string | null;
+    OutDeliveryCarrierId?: string | null;
+    OutDeliveryCarrier?: string | null;
+    OutDeliveryCarrierAccount?: string | null;
+    OutDeliveryShipViaId?: string | null;
+    OutDeliveryShipVia?: string | null;
+    OutDeliveryInvoiceId?: string | null;
+    OutDeliveryVendorInvoiceId?: string | null;
+    OutDeliveryEstimatedFreight?: number | null;
+    OutDeliveryFreightInvoiceAmount?: number | null;
+    OutDeliveryChargeType?: string | null;
+    OutDeliveryFreightTrackingNumber?: string | null;
+    OutDeliveryFreightTrackingUrl?: string | null;
+    OutDeliveryPackageCode?: string | null;
+    OutDeliveryBillPoFreightOnOrder?: boolean | null;
+    OutDeliveryOnlineOrderNumber?: string | null;
+    OutDeliveryToVenue?: string | null;
+    OutDeliveryToVenueId?: string | null;
+    OutDeliveryToWarehouse?: string | null;
+    OutDeliveryToWarehouseId?: string | null;
+    OutDeliveryDateStamp?: string | null;
+    /** Format: Text */
+    InDeliveryId?: string | null;
+    InDeliveryDeliveryType?: string | null;
+    InDeliveryRequiredDate?: string | null;
+    InDeliveryRequiredTime?: string | null;
+    InDeliveryTargetShipDate?: string | null;
+    InDeliveryTargetShipTime?: string | null;
+    InDeliveryDirection?: string | null;
+    InDeliveryAddressType?: string | null;
+    InDeliveryFromLocation?: string | null;
+    InDeliveryFromContact?: string | null;
+    InDeliveryFromContactPhone?: string | null;
+    InDeliveryFromAlternateContact?: string | null;
+    InDeliveryFromAlternateContactPhone?: string | null;
+    InDeliveryFromAttention?: string | null;
+    InDeliveryFromAddress1?: string | null;
+    InDeliveryFromAddress2?: string | null;
+    InDeliveryFromCity?: string | null;
+    InDeliveryFromState?: string | null;
+    InDeliveryFromZipCode?: string | null;
+    InDeliveryFromCountry?: string | null;
+    InDeliveryFromCountryId?: string | null;
+    InDeliveryFromCountryCodeIsoAlpha2?: string | null;
+    InDeliveryFromCountryCodePhone?: number | null;
+    InDeliveryFromCrossStreets?: string | null;
+    InDeliveryToLocation?: string | null;
+    InDeliveryToContact?: string | null;
+    InDeliveryToContactPhone?: string | null;
+    InDeliveryToAlternateContact?: string | null;
+    InDeliveryToAlternateContactPhone?: string | null;
+    InDeliveryToAttention?: string | null;
+    InDeliveryToAddress1?: string | null;
+    InDeliveryToAddress2?: string | null;
+    InDeliveryToCity?: string | null;
+    InDeliveryToState?: string | null;
+    InDeliveryToZipCode?: string | null;
+    InDeliveryToCountryId?: string | null;
+    InDeliveryToCountry?: string | null;
+    InDeliveryToCountryCodeIsoAlpha2?: string | null;
+    InDeliveryToCountryCodePhone?: number | null;
+    InDeliveryToContactFax?: string | null;
+    InDeliveryToCrossStreets?: string | null;
+    InDeliveryDeliveryNotes?: string | null;
+    InDeliveryCarrierId?: string | null;
+    InDeliveryCarrier?: string | null;
+    InDeliveryCarrierAccount?: string | null;
+    InDeliveryShipViaId?: string | null;
+    InDeliveryShipVia?: string | null;
+    InDeliveryInvoiceId?: string | null;
+    InDeliveryVendorInvoiceId?: string | null;
+    InDeliveryEstimatedFreight?: number | null;
+    InDeliveryFreightInvoiceAmount?: number | null;
+    InDeliveryChargeType?: string | null;
+    InDeliveryFreightTrackingNumber?: string | null;
+    InDeliveryFreightTrackingUrl?: string | null;
+    InDeliveryPackageCode?: string | null;
+    InDeliveryBillPoFreightOnOrder?: boolean | null;
+    InDeliveryOnlineOrderNumber?: string | null;
+    InDeliveryOnlineOrderStatus?: string | null;
+    InDeliveryToVenue?: string | null;
+    InDeliveryToVenueId?: string | null;
+    InDeliveryToWarehouse?: string | null;
+    InDeliveryToWarehouseId?: string | null;
+    InDeliveryDateStamp?: string | null;
+    /** Format: Boolean */
+    SyncBilling?: boolean | null;
+    /** Format: Date */
+    BillingStartDate?: string | null;
+    /** Format: Date */
+    BillingEndDate?: string | null;
+    BillingWeeks?: number | null;
+    BillingMonths?: number | null;
+    /** Format: Date */
+    DelayBillingSearchUntil?: string | null;
+    /** Format: Boolean */
+    UseEstimatedDatesForBilling?: boolean | null;
+    /** Format: Boolean */
+    LockBillingDates?: boolean | null;
+    /** Format: Boolean */
+    SpecifyBillingDatesByType?: boolean | null;
+    /** Format: Boolean */
+    DoNotBillDayWhenItemsAreCheckedInByCertainTime?: boolean | null;
+    CheckInByTimeToAvoidBilling?: string | null;
+    /** Format: Date */
+    RentalBillingStartDate?: string | null;
+    /** Format: Date */
+    RentalBillingEndDate?: string | null;
+    /** Format: Date */
+    LaborBillingStartDate?: string | null;
+    /** Format: Date */
+    LaborBillingEndDate?: string | null;
+    /** Format: Date */
+    MiscellaneousBillingStartDate?: string | null;
+    /** Format: Date */
+    MiscellaneousBillingEndDate?: string | null;
+    /** Format: Date */
+    FacilitiesBillingStartDate?: string | null;
+    /** Format: Date */
+    FacilitiesBillingEndDate?: string | null;
+    /** Format: Date */
+    VehicleBillingStartDate?: string | null;
+    /** Format: Date */
+    VehicleBillingEndDate?: string | null;
+    /** Format: Text */
+    BillingCycleId?: string | null;
+    BillingCycle?: string | null;
+    BillingCycleType?: string | null;
+    /** Format: Text */
+    PaymentTermsId?: string | null;
+    PaymentTerms?: string | null;
+    /** Format: Text */
+    PaymentTypeId?: string | null;
+    PaymentType?: string | null;
+    PaymentTypeType?: string | null;
+    PaymentTypeFeePercentage?: number | null;
+    /** Format: Text */
+    CurrencyId?: string | null;
+    UpdateAllRatesToNewCurrency?: boolean;
+    ConfirmUpdateAllRatesToNewCurrency?: string | null;
+    CurrencyCode?: string | null;
+    Currency?: string | null;
+    CurrencySymbol?: string | null;
+    /** Format: Text */
+    TaxOptionId?: string | null;
+    TaxOption?: string | null;
+    /** Format: Text, IsPrimaryKey: true */
+    TaxId?: string | null;
+    /** Format: Decimal, Total digits: 6, Decimal places: 4 */
+    RentalTaxRate1?: number | null;
+    /** Format: Decimal, Total digits: 6, Decimal places: 4 */
+    SalesTaxRate1?: number | null;
+    /** Format: Decimal, Total digits: 6, Decimal places: 4 */
+    LaborTaxRate1?: number | null;
+    /** Format: Decimal, Total digits: 6, Decimal places: 4 */
+    RentalTaxRate2?: number | null;
+    /** Format: Decimal, Total digits: 6, Decimal places: 4 */
+    SalesTaxRate2?: number | null;
+    /** Format: Decimal, Total digits: 6, Decimal places: 4 */
+    LaborTaxRate2?: number | null;
+    /** Format: Text */
+    DetermineQuantitiesToBillBasedOn?: string | null;
+    /** Format: Boolean */
+    IncludePrepFeesInRentalRate?: boolean | null;
+    /** Format: Text */
+    HiatusDiscountFrom?: string | null;
+    /** Format: Text */
+    CrewBilling?: string | null;
+    /** Format: Text */
+    PrintIssuedToAddressFrom?: string | null;
+    /** Format: Text */
+    IssuedToName?: string | null;
+    /** Format: Text */
+    IssuedToAttention?: string | null;
+    /** Format: Text */
+    IssuedToAttention2?: string | null;
+    /** Format: Text */
+    IssuedToAddress1?: string | null;
+    /** Format: Text */
+    IssuedToAddress2?: string | null;
+    /** Format: Text */
+    IssuedToCity?: string | null;
+    /** Format: Text */
+    IssuedToState?: string | null;
+    /** Format: Text */
+    IssuedToZipCode?: string | null;
+    /** Format: Text */
+    IssuedToCountryId?: string | null;
+    IssuedToCountry?: string | null;
+    IssuedToCountryCodeIsoAlpha2?: string | null;
+    IssuedToCountryCodePhone?: number | null;
+    /** Format: Boolean */
+    RoundTripRentals?: boolean | null;
+    /** Format: Text */
+    DiscountReasonId?: string | null;
+    DiscountReason?: string | null;
+    /** Format: Boolean */
+    InGroup?: boolean | null;
+    /** Format: Integer */
+    GroupNumber?: number | null;
+    /** Format: Integer */
+    GroupColor?: number | null;
+    /** Format: Decimal, Total digits: 4, Decimal places: 1 */
+    GroupOrderBy?: number | null;
+    /** Format: Boolean */
+    BillToAddressDifferentFromIssuedToAddress?: boolean | null;
+    BillToAddressId?: string | null;
+    BillToName?: string | null;
+    BillToAttention?: string | null;
+    BillToAttention2?: string | null;
+    BillToAddress1?: string | null;
+    BillToAddress2?: string | null;
+    BillToCity?: string | null;
+    BillToState?: string | null;
+    BillToZipCode?: string | null;
+    BillToCountryId?: string | null;
+    BillToCountry?: string | null;
+    BillToCountryCodeIsoAlpha2?: string | null;
+    BillToCountryCodePhone?: number | null;
+    /** Format: Boolean */
+    NoCharge?: boolean | null;
+    /** Format: Text */
+    NoChargeReason?: string | null;
     Inactive?: boolean | null;
     /** Format: UTCDateTime */
     DateStamp?: string | null;
@@ -23643,7 +24456,7 @@ export type WebApiModulesAgentProjectProjectRead = {
     /** Format: Text, Required: true */
     OfficeLocationId?: string | null;
     OfficeLocation?: string | null;
-    /** Format: Text, Required: true */
+    /** Format: Text */
     WarehouseId?: string | null;
     Warehouse?: string | null;
     /** Format: Text, Required: true */
@@ -23696,6 +24509,290 @@ export type WebApiModulesAgentProjectProjectRead = {
     EstimatedStopTime?: string | null;
     /** Format: Boolean */
     CcPrimaryApproverWhenEmailingBackupApprover?: boolean | null;
+    HasWeeklyOnly?: boolean | null;
+    HasMonthlyOnly?: boolean | null;
+    HasWeeklyAndMonthly?: boolean | null;
+    PurchaseOrderHasWeeklyOnly?: boolean | null;
+    PurchaseOrderHasMonthlyOnly?: boolean | null;
+    PurchaseOrderHasWeeklyAndMonthly?: boolean | null;
+    /** Format: Text */
+    MarketTypeId?: string | null;
+    MarketType?: string | null;
+    /** Format: Text */
+    MarketSegmentId?: string | null;
+    MarketSegment?: string | null;
+    /** Format: Text */
+    MarketSegmentJobId?: string | null;
+    MarketSegmentJob?: string | null;
+    /** Format: Boolean */
+    SyncMarket?: boolean | null;
+    /** Format: Boolean */
+    SyncDeliverShip?: boolean | null;
+    /** Format: Text */
+    OutDeliveryId?: string | null;
+    OutDeliveryDeliveryType?: string | null;
+    OutDeliveryRequiredDate?: string | null;
+    OutDeliveryRequiredTime?: string | null;
+    OutDeliveryTargetShipDate?: string | null;
+    OutDeliveryTargetShipTime?: string | null;
+    OutDeliveryDirection?: string | null;
+    OutDeliveryAddressType?: string | null;
+    OutDeliveryFromLocation?: string | null;
+    OutDeliveryFromContact?: string | null;
+    OutDeliveryFromContactPhone?: string | null;
+    OutDeliveryFromAlternateContact?: string | null;
+    OutDeliveryFromAlternateContactPhone?: string | null;
+    OutDeliveryFromAttention?: string | null;
+    OutDeliveryFromAddress1?: string | null;
+    OutDeliveryFromAddress2?: string | null;
+    OutDeliveryFromCity?: string | null;
+    OutDeliveryFromState?: string | null;
+    OutDeliveryFromZipCode?: string | null;
+    OutDeliveryFromCountry?: string | null;
+    OutDeliveryFromCountryId?: string | null;
+    OutDeliveryFromCountryCodeIsoAlpha2?: string | null;
+    OutDeliveryFromCountryCodePhone?: number | null;
+    OutDeliveryFromCrossStreets?: string | null;
+    OutDeliveryToLocation?: string | null;
+    OutDeliveryToContact?: string | null;
+    OutDeliveryToContactPhone?: string | null;
+    OutDeliveryToAlternateContact?: string | null;
+    OutDeliveryToAlternateContactPhone?: string | null;
+    OutDeliveryToAttention?: string | null;
+    OutDeliveryToAddress1?: string | null;
+    OutDeliveryToAddress2?: string | null;
+    OutDeliveryToCity?: string | null;
+    OutDeliveryToState?: string | null;
+    OutDeliveryToZipCode?: string | null;
+    OutDeliveryToCountryId?: string | null;
+    OutDeliveryToCountry?: string | null;
+    OutDeliveryToCountryCodeIsoAlpha2?: string | null;
+    OutDeliveryToCountryCodePhone?: number | null;
+    OutDeliveryToContactFax?: string | null;
+    OutDeliveryToCrossStreets?: string | null;
+    OutDeliveryDeliveryNotes?: string | null;
+    OutDeliveryCarrierId?: string | null;
+    OutDeliveryCarrier?: string | null;
+    OutDeliveryCarrierAccount?: string | null;
+    OutDeliveryShipViaId?: string | null;
+    OutDeliveryShipVia?: string | null;
+    OutDeliveryInvoiceId?: string | null;
+    OutDeliveryVendorInvoiceId?: string | null;
+    OutDeliveryEstimatedFreight?: number | null;
+    OutDeliveryFreightInvoiceAmount?: number | null;
+    OutDeliveryChargeType?: string | null;
+    OutDeliveryFreightTrackingNumber?: string | null;
+    OutDeliveryFreightTrackingUrl?: string | null;
+    OutDeliveryPackageCode?: string | null;
+    OutDeliveryBillPoFreightOnOrder?: boolean | null;
+    OutDeliveryOnlineOrderNumber?: string | null;
+    OutDeliveryToVenue?: string | null;
+    OutDeliveryToVenueId?: string | null;
+    OutDeliveryToWarehouse?: string | null;
+    OutDeliveryToWarehouseId?: string | null;
+    OutDeliveryDateStamp?: string | null;
+    /** Format: Text */
+    InDeliveryId?: string | null;
+    InDeliveryDeliveryType?: string | null;
+    InDeliveryRequiredDate?: string | null;
+    InDeliveryRequiredTime?: string | null;
+    InDeliveryTargetShipDate?: string | null;
+    InDeliveryTargetShipTime?: string | null;
+    InDeliveryDirection?: string | null;
+    InDeliveryAddressType?: string | null;
+    InDeliveryFromLocation?: string | null;
+    InDeliveryFromContact?: string | null;
+    InDeliveryFromContactPhone?: string | null;
+    InDeliveryFromAlternateContact?: string | null;
+    InDeliveryFromAlternateContactPhone?: string | null;
+    InDeliveryFromAttention?: string | null;
+    InDeliveryFromAddress1?: string | null;
+    InDeliveryFromAddress2?: string | null;
+    InDeliveryFromCity?: string | null;
+    InDeliveryFromState?: string | null;
+    InDeliveryFromZipCode?: string | null;
+    InDeliveryFromCountry?: string | null;
+    InDeliveryFromCountryId?: string | null;
+    InDeliveryFromCountryCodeIsoAlpha2?: string | null;
+    InDeliveryFromCountryCodePhone?: number | null;
+    InDeliveryFromCrossStreets?: string | null;
+    InDeliveryToLocation?: string | null;
+    InDeliveryToContact?: string | null;
+    InDeliveryToContactPhone?: string | null;
+    InDeliveryToAlternateContact?: string | null;
+    InDeliveryToAlternateContactPhone?: string | null;
+    InDeliveryToAttention?: string | null;
+    InDeliveryToAddress1?: string | null;
+    InDeliveryToAddress2?: string | null;
+    InDeliveryToCity?: string | null;
+    InDeliveryToState?: string | null;
+    InDeliveryToZipCode?: string | null;
+    InDeliveryToCountryId?: string | null;
+    InDeliveryToCountry?: string | null;
+    InDeliveryToCountryCodeIsoAlpha2?: string | null;
+    InDeliveryToCountryCodePhone?: number | null;
+    InDeliveryToContactFax?: string | null;
+    InDeliveryToCrossStreets?: string | null;
+    InDeliveryDeliveryNotes?: string | null;
+    InDeliveryCarrierId?: string | null;
+    InDeliveryCarrier?: string | null;
+    InDeliveryCarrierAccount?: string | null;
+    InDeliveryShipViaId?: string | null;
+    InDeliveryShipVia?: string | null;
+    InDeliveryInvoiceId?: string | null;
+    InDeliveryVendorInvoiceId?: string | null;
+    InDeliveryEstimatedFreight?: number | null;
+    InDeliveryFreightInvoiceAmount?: number | null;
+    InDeliveryChargeType?: string | null;
+    InDeliveryFreightTrackingNumber?: string | null;
+    InDeliveryFreightTrackingUrl?: string | null;
+    InDeliveryPackageCode?: string | null;
+    InDeliveryBillPoFreightOnOrder?: boolean | null;
+    InDeliveryOnlineOrderNumber?: string | null;
+    InDeliveryOnlineOrderStatus?: string | null;
+    InDeliveryToVenue?: string | null;
+    InDeliveryToVenueId?: string | null;
+    InDeliveryToWarehouse?: string | null;
+    InDeliveryToWarehouseId?: string | null;
+    InDeliveryDateStamp?: string | null;
+    /** Format: Boolean */
+    SyncBilling?: boolean | null;
+    /** Format: Date */
+    BillingStartDate?: string | null;
+    /** Format: Date */
+    BillingEndDate?: string | null;
+    BillingWeeks?: number | null;
+    BillingMonths?: number | null;
+    /** Format: Date */
+    DelayBillingSearchUntil?: string | null;
+    /** Format: Boolean */
+    UseEstimatedDatesForBilling?: boolean | null;
+    /** Format: Boolean */
+    LockBillingDates?: boolean | null;
+    /** Format: Boolean */
+    SpecifyBillingDatesByType?: boolean | null;
+    /** Format: Boolean */
+    DoNotBillDayWhenItemsAreCheckedInByCertainTime?: boolean | null;
+    CheckInByTimeToAvoidBilling?: string | null;
+    /** Format: Date */
+    RentalBillingStartDate?: string | null;
+    /** Format: Date */
+    RentalBillingEndDate?: string | null;
+    /** Format: Date */
+    LaborBillingStartDate?: string | null;
+    /** Format: Date */
+    LaborBillingEndDate?: string | null;
+    /** Format: Date */
+    MiscellaneousBillingStartDate?: string | null;
+    /** Format: Date */
+    MiscellaneousBillingEndDate?: string | null;
+    /** Format: Date */
+    FacilitiesBillingStartDate?: string | null;
+    /** Format: Date */
+    FacilitiesBillingEndDate?: string | null;
+    /** Format: Date */
+    VehicleBillingStartDate?: string | null;
+    /** Format: Date */
+    VehicleBillingEndDate?: string | null;
+    /** Format: Text */
+    BillingCycleId?: string | null;
+    BillingCycle?: string | null;
+    BillingCycleType?: string | null;
+    /** Format: Text */
+    PaymentTermsId?: string | null;
+    PaymentTerms?: string | null;
+    /** Format: Text */
+    PaymentTypeId?: string | null;
+    PaymentType?: string | null;
+    PaymentTypeType?: string | null;
+    PaymentTypeFeePercentage?: number | null;
+    /** Format: Text */
+    CurrencyId?: string | null;
+    UpdateAllRatesToNewCurrency?: boolean;
+    ConfirmUpdateAllRatesToNewCurrency?: string | null;
+    CurrencyCode?: string | null;
+    Currency?: string | null;
+    CurrencySymbol?: string | null;
+    /** Format: Text */
+    TaxOptionId?: string | null;
+    TaxOption?: string | null;
+    /** Format: Text, IsPrimaryKey: true */
+    TaxId?: string | null;
+    /** Format: Decimal, Total digits: 6, Decimal places: 4 */
+    RentalTaxRate1?: number | null;
+    /** Format: Decimal, Total digits: 6, Decimal places: 4 */
+    SalesTaxRate1?: number | null;
+    /** Format: Decimal, Total digits: 6, Decimal places: 4 */
+    LaborTaxRate1?: number | null;
+    /** Format: Decimal, Total digits: 6, Decimal places: 4 */
+    RentalTaxRate2?: number | null;
+    /** Format: Decimal, Total digits: 6, Decimal places: 4 */
+    SalesTaxRate2?: number | null;
+    /** Format: Decimal, Total digits: 6, Decimal places: 4 */
+    LaborTaxRate2?: number | null;
+    /** Format: Text */
+    DetermineQuantitiesToBillBasedOn?: string | null;
+    /** Format: Boolean */
+    IncludePrepFeesInRentalRate?: boolean | null;
+    /** Format: Text */
+    HiatusDiscountFrom?: string | null;
+    /** Format: Text */
+    CrewBilling?: string | null;
+    /** Format: Text */
+    PrintIssuedToAddressFrom?: string | null;
+    /** Format: Text */
+    IssuedToName?: string | null;
+    /** Format: Text */
+    IssuedToAttention?: string | null;
+    /** Format: Text */
+    IssuedToAttention2?: string | null;
+    /** Format: Text */
+    IssuedToAddress1?: string | null;
+    /** Format: Text */
+    IssuedToAddress2?: string | null;
+    /** Format: Text */
+    IssuedToCity?: string | null;
+    /** Format: Text */
+    IssuedToState?: string | null;
+    /** Format: Text */
+    IssuedToZipCode?: string | null;
+    /** Format: Text */
+    IssuedToCountryId?: string | null;
+    IssuedToCountry?: string | null;
+    IssuedToCountryCodeIsoAlpha2?: string | null;
+    IssuedToCountryCodePhone?: number | null;
+    /** Format: Boolean */
+    RoundTripRentals?: boolean | null;
+    /** Format: Text */
+    DiscountReasonId?: string | null;
+    DiscountReason?: string | null;
+    /** Format: Boolean */
+    InGroup?: boolean | null;
+    /** Format: Integer */
+    GroupNumber?: number | null;
+    /** Format: Integer */
+    GroupColor?: number | null;
+    /** Format: Decimal, Total digits: 4, Decimal places: 1 */
+    GroupOrderBy?: number | null;
+    /** Format: Boolean */
+    BillToAddressDifferentFromIssuedToAddress?: boolean | null;
+    BillToAddressId?: string | null;
+    BillToName?: string | null;
+    BillToAttention?: string | null;
+    BillToAttention2?: string | null;
+    BillToAddress1?: string | null;
+    BillToAddress2?: string | null;
+    BillToCity?: string | null;
+    BillToState?: string | null;
+    BillToZipCode?: string | null;
+    BillToCountryId?: string | null;
+    BillToCountry?: string | null;
+    BillToCountryCodeIsoAlpha2?: string | null;
+    BillToCountryCodePhone?: number | null;
+    /** Format: Boolean */
+    NoCharge?: boolean | null;
+    /** Format: Text */
+    NoChargeReason?: string | null;
     Inactive?: boolean | null;
     /** Format: UTCDateTime */
     DateStamp?: string | null;
@@ -24094,6 +25191,8 @@ export type WebApiModulesAgentPurchaseOrderGetPurchaseOrderResponse = {
     ApprovedBySecondUser?: string | null;
     /** Format: Date */
     ApprovedDateSecond?: string | null;
+    /** Format: Text */
+    HiatusDiscountFrom?: string | null;
     ImportanceId?: string | null;
     Importance?: string | null;
     /** Format: Text */
@@ -24101,6 +25200,8 @@ export type WebApiModulesAgentPurchaseOrderGetPurchaseOrderResponse = {
     SubmittedForApprovalByUser?: string | null;
     /** Format: Date */
     SubmittedForApprovalDate?: string | null;
+    /** Format: Text */
+    ApprovalRequestNote?: string | null;
     /** Format: Text */
     RejectedByUserId?: string | null;
     RejectedByUser?: string | null;
@@ -24574,6 +25675,8 @@ export type WebApiModulesAgentPurchaseOrderGetPurchaseOrderResponseRead = {
     ApprovedBySecondUser?: string | null;
     /** Format: Date */
     ApprovedDateSecond?: string | null;
+    /** Format: Text */
+    HiatusDiscountFrom?: string | null;
     ImportanceId?: string | null;
     Importance?: string | null;
     /** Format: Text */
@@ -24581,6 +25684,8 @@ export type WebApiModulesAgentPurchaseOrderGetPurchaseOrderResponseRead = {
     SubmittedForApprovalByUser?: string | null;
     /** Format: Date */
     SubmittedForApprovalDate?: string | null;
+    /** Format: Text */
+    ApprovalRequestNote?: string | null;
     /** Format: Text */
     RejectedByUserId?: string | null;
     RejectedByUser?: string | null;
@@ -25056,6 +26161,8 @@ export type WebApiModulesAgentPurchaseOrderPurchaseOrder = {
     ApprovedBySecondUser?: string | null;
     /** Format: Date */
     ApprovedDateSecond?: string | null;
+    /** Format: Text */
+    HiatusDiscountFrom?: string | null;
     ImportanceId?: string | null;
     Importance?: string | null;
     /** Format: Text */
@@ -25063,6 +26170,8 @@ export type WebApiModulesAgentPurchaseOrderPurchaseOrder = {
     SubmittedForApprovalByUser?: string | null;
     /** Format: Date */
     SubmittedForApprovalDate?: string | null;
+    /** Format: Text */
+    ApprovalRequestNote?: string | null;
     /** Format: Text */
     RejectedByUserId?: string | null;
     RejectedByUser?: string | null;
@@ -25535,6 +26644,8 @@ export type WebApiModulesAgentPurchaseOrderPurchaseOrderRead = {
     ApprovedBySecondUser?: string | null;
     /** Format: Date */
     ApprovedDateSecond?: string | null;
+    /** Format: Text */
+    HiatusDiscountFrom?: string | null;
     ImportanceId?: string | null;
     Importance?: string | null;
     /** Format: Text */
@@ -25542,6 +26653,8 @@ export type WebApiModulesAgentPurchaseOrderPurchaseOrderRead = {
     SubmittedForApprovalByUser?: string | null;
     /** Format: Date */
     SubmittedForApprovalDate?: string | null;
+    /** Format: Text */
+    ApprovalRequestNote?: string | null;
     /** Format: Text */
     RejectedByUserId?: string | null;
     RejectedByUser?: string | null;
@@ -26073,6 +27186,7 @@ export type WebApiModulesAgentPurchaseOrderSubmitPurchaseOrderForApprovalRequest
     PurchaseOrderId?: string | null;
     ImportanceId?: string | null;
     ApprovalNeededBy?: string | null;
+    ApprovalRequestNote?: string | null;
 };
 export type WebApiModulesAgentPurchaseOrderSubmitPurchaseOrderForApprovalResponse = {
     status?: number;
@@ -26083,6 +27197,7 @@ export type WebApiModulesAgentPurchaseOrderRejectPurchaseOrderRequest = {
     PurchaseOrderId?: string | null;
     RejectReasonId?: string | null;
     RejectReasonNote?: string | null;
+    UsersId?: string | null;
 };
 export type WebApiModulesAgentPurchaseOrderRejectPurchaseOrderResponse = {
     status?: number;
@@ -26098,6 +27213,7 @@ export type WebApiModulesAgentPurchaseOrderRejectPurchaseOrderResponseRead = {
 };
 export type WebApiModulesAgentPurchaseOrderFirstApprovePurchaseOrderRequest = {
     PurchaseOrderId?: string | null;
+    UsersId?: string | null;
 };
 export type WebApiModulesAgentPurchaseOrderFirstApprovePurchaseOrderResponse = {
     status?: number;
@@ -26111,8 +27227,44 @@ export type WebApiModulesAgentPurchaseOrderFirstApprovePurchaseOrderResponseRead
     msg?: string | null;
     po?: WebApiModulesAgentPurchaseOrderPurchaseOrderRead;
 };
+export type WebApiModulesAgentPurchaseOrderKissFlowPoApprovalRequest = {
+    PurchaseOrderNumber?: string | null;
+    UserEmail?: string | null;
+    ApprovalNote?: string | null;
+};
+export type WebApiModulesAgentPurchaseOrderKissFlowPoApproveReseponse = {
+    status?: number;
+    success?: boolean;
+    msg?: string | null;
+    po?: WebApiModulesAgentPurchaseOrderPurchaseOrder;
+};
+export type WebApiModulesAgentPurchaseOrderKissFlowPoApproveReseponseRead = {
+    status?: number;
+    success?: boolean;
+    msg?: string | null;
+    po?: WebApiModulesAgentPurchaseOrderPurchaseOrderRead;
+};
+export type WebApiModulesAgentPurchaseOrderKissFlowPoRejectRequest = {
+    PurchaseOrderNumber?: string | null;
+    UserEmail?: string | null;
+    RejectionReason?: string | null;
+    RejectionNote?: string | null;
+};
+export type WebApiModulesAgentPurchaseOrderKissFlowPoRejectReseponse = {
+    status?: number;
+    success?: boolean;
+    msg?: string | null;
+    po?: WebApiModulesAgentPurchaseOrderPurchaseOrder;
+};
+export type WebApiModulesAgentPurchaseOrderKissFlowPoRejectReseponseRead = {
+    status?: number;
+    success?: boolean;
+    msg?: string | null;
+    po?: WebApiModulesAgentPurchaseOrderPurchaseOrderRead;
+};
 export type WebApiModulesAgentPurchaseOrderSecondApprovePurchaseOrderRequest = {
     PurchaseOrderId?: string | null;
+    UsersId?: string | null;
 };
 export type WebApiModulesAgentPurchaseOrderSecondApprovePurchaseOrderResponse = {
     status?: number;
@@ -27295,8 +28447,6 @@ export type WebApiModulesAgentQuoteQuote = {
     ConvertedToOrderId?: string | null;
     ConvertedToOrderNumber?: string | null;
     ConvertedToOrder?: boolean | null;
-    /** Format: Text */
-    JobName?: string | null;
     /** Format: Text, Required: true */
     Description?: string | null;
     /** Format: Text, Required: true */
@@ -27459,6 +28609,7 @@ export type WebApiModulesAgentQuoteQuote = {
     PaymentTypeId?: string | null;
     PaymentType?: string | null;
     PaymentTypeType?: string | null;
+    PaymentTypeFeePercentage?: number | null;
     /** Format: Text */
     CurrencyId?: string | null;
     UpdateAllRatesToNewCurrency?: boolean;
@@ -27880,6 +29031,9 @@ export type WebApiModulesAgentQuoteQuote = {
     /** Format: Text */
     ProjectDepositId?: string | null;
     ProjectDeposit?: string | null;
+    ProjectSyncMarket?: boolean | null;
+    ProjectSyncDeliverShip?: boolean | null;
+    ProjectSyncBilling?: boolean | null;
     /** Format: Text */
     InputByUserId?: string | null;
     /** Format: Text */
@@ -27944,6 +29098,12 @@ export type WebApiModulesAgentQuoteQuote = {
     /** Format: Boolean */
     DoNotBillDayWhenItemsAreCheckedInByCertainTime?: boolean | null;
     CheckInByTimeToAvoidBilling?: string | null;
+    /** Format: Text */
+    JobName?: string | null;
+    /** Format: Boolean */
+    ItineraryOverrideBillableDays?: boolean | null;
+    DealProductionTypeId?: string | null;
+    DealProductionType?: string | null;
     /** Format: UTCDateTime */
     DateStamp?: string | null;
     AuditNote?: string | null;
@@ -27968,8 +29128,6 @@ export type WebApiModulesAgentQuoteQuoteRead = {
     ConvertedToOrderId?: string | null;
     ConvertedToOrderNumber?: string | null;
     ConvertedToOrder?: boolean | null;
-    /** Format: Text */
-    JobName?: string | null;
     /** Format: Text, Required: true */
     Description?: string | null;
     /** Format: Text, Required: true */
@@ -28132,6 +29290,7 @@ export type WebApiModulesAgentQuoteQuoteRead = {
     PaymentTypeId?: string | null;
     PaymentType?: string | null;
     PaymentTypeType?: string | null;
+    PaymentTypeFeePercentage?: number | null;
     /** Format: Text */
     CurrencyId?: string | null;
     UpdateAllRatesToNewCurrency?: boolean;
@@ -28553,6 +29712,9 @@ export type WebApiModulesAgentQuoteQuoteRead = {
     /** Format: Text */
     ProjectDepositId?: string | null;
     ProjectDeposit?: string | null;
+    ProjectSyncMarket?: boolean | null;
+    ProjectSyncDeliverShip?: boolean | null;
+    ProjectSyncBilling?: boolean | null;
     /** Format: Text */
     InputByUserId?: string | null;
     /** Format: Text */
@@ -28617,6 +29779,12 @@ export type WebApiModulesAgentQuoteQuoteRead = {
     /** Format: Boolean */
     DoNotBillDayWhenItemsAreCheckedInByCertainTime?: boolean | null;
     CheckInByTimeToAvoidBilling?: string | null;
+    /** Format: Text */
+    JobName?: string | null;
+    /** Format: Boolean */
+    ItineraryOverrideBillableDays?: boolean | null;
+    DealProductionTypeId?: string | null;
+    DealProductionType?: string | null;
     /** Format: UTCDateTime */
     DateStamp?: string | null;
     AuditNote?: string | null;
@@ -28810,6 +29978,11 @@ export type WebApiModulesBillingReceiptReceipt = {
     DateStamp?: string;
     RefundingReceiptId?: string | null;
     IsCreditCardReceiptVoided?: boolean;
+    /** Format: Decimal, Total digits: 5, Decimal places: 2 */
+    FeePercent?: number | null;
+    /** Format: Decimal, Total digits: 9, Decimal places: 2 */
+    PaymentTypeFee?: number | null;
+    TotalWithPaymentTypeFee?: number | null;
     AuditNote?: string | null;
     _Custom?: FwStandardDataFwCustomValue[] | null;
     _DefaultFieldAttributes?: FwStandardDataFwDefaultAttribute[] | null;
@@ -28925,6 +30098,11 @@ export type WebApiModulesBillingReceiptReceiptRead = {
     DateStamp?: string;
     RefundingReceiptId?: string | null;
     IsCreditCardReceiptVoided?: boolean;
+    /** Format: Decimal, Total digits: 5, Decimal places: 2 */
+    FeePercent?: number | null;
+    /** Format: Decimal, Total digits: 9, Decimal places: 2 */
+    PaymentTypeFee?: number | null;
+    TotalWithPaymentTypeFee?: number | null;
     AuditNote?: string | null;
     RecordTitle?: string | null;
     _Fields?: FwStandardBusinessLogicFwBusinessLogicFieldDefinition[] | null;
@@ -29249,6 +30427,8 @@ export type WebApiModulesAdministratorUserUser = {
     /** Format: Boolean */
     DisableInsertIntoActiveOrder?: boolean | null;
     /** Format: Boolean */
+    AutoPrintContract?: boolean | null;
+    /** Format: Boolean */
     Inactive?: boolean | null;
     /** Format: UTCDateTime, Total digits: 23, Decimal places: 3 */
     DateStamp?: string | null;
@@ -29268,18 +30448,9 @@ export type WebApiModulesAdministratorUserUser = {
     HomeMenuGuid?: string | null;
     /** Format: Text */
     HomeMenuPath?: string | null;
-    /** Format: Text */
-    SuccessSoundId?: string | null;
-    SuccessSound?: string | null;
-    SuccessBase64Sound?: string | null;
-    /** Format: Text */
-    ErrorSoundId?: string | null;
-    ErrorSound?: string | null;
-    ErrorBase64Sound?: string | null;
-    /** Format: Text */
-    NotificationSoundId?: string | null;
-    NotificationSound?: string | null;
-    NotificationBase64Sound?: string | null;
+    /** Format: Integer */
+    SoundProfileId?: number | null;
+    SoundProfileName?: string | null;
     /** Format: Integer */
     FirstDayOfWeek?: number | null;
     /** Format: Boolean */
@@ -29524,6 +30695,8 @@ export type WebApiModulesAdministratorUserUserRead = {
     /** Format: Boolean */
     DisableInsertIntoActiveOrder?: boolean | null;
     /** Format: Boolean */
+    AutoPrintContract?: boolean | null;
+    /** Format: Boolean */
     Inactive?: boolean | null;
     /** Format: UTCDateTime, Total digits: 23, Decimal places: 3 */
     DateStamp?: string | null;
@@ -29543,18 +30716,9 @@ export type WebApiModulesAdministratorUserUserRead = {
     HomeMenuGuid?: string | null;
     /** Format: Text */
     HomeMenuPath?: string | null;
-    /** Format: Text */
-    SuccessSoundId?: string | null;
-    SuccessSound?: string | null;
-    SuccessBase64Sound?: string | null;
-    /** Format: Text */
-    ErrorSoundId?: string | null;
-    ErrorSound?: string | null;
-    ErrorBase64Sound?: string | null;
-    /** Format: Text */
-    NotificationSoundId?: string | null;
-    NotificationSound?: string | null;
-    NotificationBase64Sound?: string | null;
+    /** Format: Integer */
+    SoundProfileId?: number | null;
+    SoundProfileName?: string | null;
     /** Format: Integer */
     FirstDayOfWeek?: number | null;
     /** Format: Boolean */
@@ -29634,6 +30798,14 @@ export type WebApiModulesSettingsPaymentSettingsPaymentTypePaymentType = {
     RentalWorksNetCaption?: string | null;
     /** Format: OleToHtmlColor */
     Color?: string | null;
+    /** Format: Decimal, Total digits: 5, Decimal places: 2 */
+    FeePercent?: number | null;
+    /** Format: Text */
+    PaymentTypeFeeDescription?: string | null;
+    /** Format: Text */
+    FeeRateId?: string | null;
+    FeeRateICode?: string | null;
+    FeeRateDescription?: string | null;
     /** Format: Boolean */
     Inactive?: boolean | null;
     /** Format: UTCDateTime */
@@ -29676,6 +30848,14 @@ export type WebApiModulesSettingsPaymentSettingsPaymentTypePaymentTypeRead = {
     RentalWorksNetCaption?: string | null;
     /** Format: OleToHtmlColor */
     Color?: string | null;
+    /** Format: Decimal, Total digits: 5, Decimal places: 2 */
+    FeePercent?: number | null;
+    /** Format: Text */
+    PaymentTypeFeeDescription?: string | null;
+    /** Format: Text */
+    FeeRateId?: string | null;
+    FeeRateICode?: string | null;
+    FeeRateDescription?: string | null;
     /** Format: Boolean */
     Inactive?: boolean | null;
     /** Format: UTCDateTime */
@@ -29818,6 +30998,8 @@ export type WebApiModulesBillingReceiptAddDepletingDepositRequest = {
     CurrencyId?: string | null;
     CheckNumber?: string | null;
     PaymentMemo?: string | null;
+    FeePercent?: number | null;
+    PaymentTypeFee?: number | null;
 };
 export type WebApiModulesSettingsCreditCardSettingsCreditCardPaymentTypeCreditCardPaymentType = {
     /** Format: Integer, IsPrimaryKey: true */
@@ -29903,6 +31085,8 @@ export type WebApiModulesHomeControlsReceiptInvoiceReceiptInvoice = {
     DealId?: string | null;
     Deal?: string | null;
     Total?: number | null;
+    Fee?: number | null;
+    TotalWithFee?: number | null;
     ReceiptId?: boolean | null;
     InvoiceType?: string | null;
     Applied?: number | null;
@@ -29940,6 +31124,8 @@ export type WebApiModulesHomeControlsReceiptInvoiceReceiptInvoiceRead = {
     DealId?: string | null;
     Deal?: string | null;
     Total?: number | null;
+    Fee?: number | null;
+    TotalWithFee?: number | null;
     ReceiptId?: boolean | null;
     InvoiceType?: string | null;
     Applied?: number | null;
@@ -30365,6 +31551,8 @@ export type WebApiModulesInventoryRentalInventoryRentalInventory = {
     /** Format: Boolean */
     IsFixedAsset?: boolean | null;
     /** Format: Boolean */
+    IsFixedContainer?: boolean | null;
+    /** Format: Boolean */
     MultiAssignRFIDs?: boolean | null;
     /** Format: Boolean */
     AllowFlexibleContainer?: boolean | null;
@@ -30526,7 +31714,13 @@ export type WebApiModulesInventoryRentalInventoryRentalInventory = {
     /** Format: Boolean */
     AutomaticallyRebuildContainerAtCheckIn?: boolean | null;
     /** Format: Boolean */
+    AutomaticallyCheckInEntireContainerWithScannableItem?: boolean | null;
+    /** Format: Boolean */
     AutomaticallyRebuildContainerAtTransferIn?: boolean | null;
+    /** Format: Boolean */
+    AutomaticallyCountAllItemsWhenPhysicalInventoryInitiated?: boolean | null;
+    /** Format: Boolean */
+    AutomaticallyTransferInEntireContainerWithScannableItem?: boolean | null;
     /** Format: Text */
     ContainerStagingRule?: string | null;
     /** Format: Boolean */
@@ -30569,8 +31763,6 @@ export type WebApiModulesInventoryRentalInventoryRentalInventory = {
     WardrobeDetailedDescription?: string | null;
     WebDetailedDescription?: string | null;
     TechnicalNotes?: string | null;
-    /** Format: Boolean */
-    OverrideSystemDefaultRevenueAllocationBehavior?: boolean | null;
     /** Format: Boolean */
     AllocateRevenueForAccessories?: boolean | null;
     /** Format: Text */
@@ -30740,6 +31932,8 @@ export type WebApiModulesInventoryRentalInventoryRentalInventoryRead = {
     /** Format: Boolean */
     IsFixedAsset?: boolean | null;
     /** Format: Boolean */
+    IsFixedContainer?: boolean | null;
+    /** Format: Boolean */
     MultiAssignRFIDs?: boolean | null;
     /** Format: Boolean */
     AllowFlexibleContainer?: boolean | null;
@@ -30901,7 +32095,13 @@ export type WebApiModulesInventoryRentalInventoryRentalInventoryRead = {
     /** Format: Boolean */
     AutomaticallyRebuildContainerAtCheckIn?: boolean | null;
     /** Format: Boolean */
+    AutomaticallyCheckInEntireContainerWithScannableItem?: boolean | null;
+    /** Format: Boolean */
     AutomaticallyRebuildContainerAtTransferIn?: boolean | null;
+    /** Format: Boolean */
+    AutomaticallyCountAllItemsWhenPhysicalInventoryInitiated?: boolean | null;
+    /** Format: Boolean */
+    AutomaticallyTransferInEntireContainerWithScannableItem?: boolean | null;
     /** Format: Text */
     ContainerStagingRule?: string | null;
     /** Format: Boolean */
@@ -30944,8 +32144,6 @@ export type WebApiModulesInventoryRentalInventoryRentalInventoryRead = {
     WardrobeDetailedDescription?: string | null;
     WebDetailedDescription?: string | null;
     TechnicalNotes?: string | null;
-    /** Format: Boolean */
-    OverrideSystemDefaultRevenueAllocationBehavior?: boolean | null;
     /** Format: Boolean */
     AllocateRevenueForAccessories?: boolean | null;
     /** Format: Text */
@@ -31150,6 +32348,8 @@ export type WebApiModulesInventoryRentalInventoryRentalInventoryDetailResponse =
     /** Format: Boolean */
     IsFixedAsset?: boolean | null;
     /** Format: Boolean */
+    IsFixedContainer?: boolean | null;
+    /** Format: Boolean */
     MultiAssignRFIDs?: boolean | null;
     /** Format: Boolean */
     AllowFlexibleContainer?: boolean | null;
@@ -31311,7 +32511,13 @@ export type WebApiModulesInventoryRentalInventoryRentalInventoryDetailResponse =
     /** Format: Boolean */
     AutomaticallyRebuildContainerAtCheckIn?: boolean | null;
     /** Format: Boolean */
+    AutomaticallyCheckInEntireContainerWithScannableItem?: boolean | null;
+    /** Format: Boolean */
     AutomaticallyRebuildContainerAtTransferIn?: boolean | null;
+    /** Format: Boolean */
+    AutomaticallyCountAllItemsWhenPhysicalInventoryInitiated?: boolean | null;
+    /** Format: Boolean */
+    AutomaticallyTransferInEntireContainerWithScannableItem?: boolean | null;
     /** Format: Text */
     ContainerStagingRule?: string | null;
     /** Format: Boolean */
@@ -31354,8 +32560,6 @@ export type WebApiModulesInventoryRentalInventoryRentalInventoryDetailResponse =
     WardrobeDetailedDescription?: string | null;
     WebDetailedDescription?: string | null;
     TechnicalNotes?: string | null;
-    /** Format: Boolean */
-    OverrideSystemDefaultRevenueAllocationBehavior?: boolean | null;
     /** Format: Boolean */
     AllocateRevenueForAccessories?: boolean | null;
     /** Format: Text */
@@ -31526,6 +32730,8 @@ export type WebApiModulesInventoryRentalInventoryRentalInventoryDetailResponseRe
     /** Format: Boolean */
     IsFixedAsset?: boolean | null;
     /** Format: Boolean */
+    IsFixedContainer?: boolean | null;
+    /** Format: Boolean */
     MultiAssignRFIDs?: boolean | null;
     /** Format: Boolean */
     AllowFlexibleContainer?: boolean | null;
@@ -31687,7 +32893,13 @@ export type WebApiModulesInventoryRentalInventoryRentalInventoryDetailResponseRe
     /** Format: Boolean */
     AutomaticallyRebuildContainerAtCheckIn?: boolean | null;
     /** Format: Boolean */
+    AutomaticallyCheckInEntireContainerWithScannableItem?: boolean | null;
+    /** Format: Boolean */
     AutomaticallyRebuildContainerAtTransferIn?: boolean | null;
+    /** Format: Boolean */
+    AutomaticallyCountAllItemsWhenPhysicalInventoryInitiated?: boolean | null;
+    /** Format: Boolean */
+    AutomaticallyTransferInEntireContainerWithScannableItem?: boolean | null;
     /** Format: Text */
     ContainerStagingRule?: string | null;
     /** Format: Boolean */
@@ -31730,8 +32942,6 @@ export type WebApiModulesInventoryRentalInventoryRentalInventoryDetailResponseRe
     WardrobeDetailedDescription?: string | null;
     WebDetailedDescription?: string | null;
     TechnicalNotes?: string | null;
-    /** Format: Boolean */
-    OverrideSystemDefaultRevenueAllocationBehavior?: boolean | null;
     /** Format: Boolean */
     AllocateRevenueForAccessories?: boolean | null;
     /** Format: Text */
@@ -32751,6 +33961,7 @@ export type WebApiModulesInventoryRetiredRetired = {
     InventoryId?: string | null;
     ICode?: string | null;
     Description?: string | null;
+    AvailableFor?: string | null;
     BarCode?: string | null;
     ItemId?: string | null;
     SerialNumber?: string | null;
@@ -32866,6 +34077,7 @@ export type WebApiModulesInventoryRetiredRetiredRead = {
     InventoryId?: string | null;
     ICode?: string | null;
     Description?: string | null;
+    AvailableFor?: string | null;
     BarCode?: string | null;
     ItemId?: string | null;
     SerialNumber?: string | null;
@@ -33147,6 +34359,10 @@ export type WebApiModulesInventorySalesInventorySalesInventoryDocumentPostReques
     FilePath?: string | null;
 };
 export type WebApiModulesInventorySalesInventorySalesInventory = {
+    /** Format: Text */
+    RentalInventoryId?: string | null;
+    RentalInventoryICode?: string | null;
+    RentalInventoryDescription?: string | null;
     Price?: number | null;
     DefaultCost?: number | null;
     AverageCost?: number | null;
@@ -33266,7 +34482,13 @@ export type WebApiModulesInventorySalesInventorySalesInventory = {
     /** Format: Boolean */
     AutomaticallyRebuildContainerAtCheckIn?: boolean | null;
     /** Format: Boolean */
+    AutomaticallyCheckInEntireContainerWithScannableItem?: boolean | null;
+    /** Format: Boolean */
     AutomaticallyRebuildContainerAtTransferIn?: boolean | null;
+    /** Format: Boolean */
+    AutomaticallyCountAllItemsWhenPhysicalInventoryInitiated?: boolean | null;
+    /** Format: Boolean */
+    AutomaticallyTransferInEntireContainerWithScannableItem?: boolean | null;
     /** Format: Text */
     ContainerStagingRule?: string | null;
     /** Format: Boolean */
@@ -33309,8 +34531,6 @@ export type WebApiModulesInventorySalesInventorySalesInventory = {
     WardrobeDetailedDescription?: string | null;
     WebDetailedDescription?: string | null;
     TechnicalNotes?: string | null;
-    /** Format: Boolean */
-    OverrideSystemDefaultRevenueAllocationBehavior?: boolean | null;
     /** Format: Boolean */
     AllocateRevenueForAccessories?: boolean | null;
     /** Format: Text */
@@ -33475,6 +34695,10 @@ export type WebApiModulesInventorySalesInventorySalesInventory = {
     _ModifiedDateTime?: string | null;
 };
 export type WebApiModulesInventorySalesInventorySalesInventoryRead = {
+    /** Format: Text */
+    RentalInventoryId?: string | null;
+    RentalInventoryICode?: string | null;
+    RentalInventoryDescription?: string | null;
     Price?: number | null;
     DefaultCost?: number | null;
     AverageCost?: number | null;
@@ -33594,7 +34818,13 @@ export type WebApiModulesInventorySalesInventorySalesInventoryRead = {
     /** Format: Boolean */
     AutomaticallyRebuildContainerAtCheckIn?: boolean | null;
     /** Format: Boolean */
+    AutomaticallyCheckInEntireContainerWithScannableItem?: boolean | null;
+    /** Format: Boolean */
     AutomaticallyRebuildContainerAtTransferIn?: boolean | null;
+    /** Format: Boolean */
+    AutomaticallyCountAllItemsWhenPhysicalInventoryInitiated?: boolean | null;
+    /** Format: Boolean */
+    AutomaticallyTransferInEntireContainerWithScannableItem?: boolean | null;
     /** Format: Text */
     ContainerStagingRule?: string | null;
     /** Format: Boolean */
@@ -33637,8 +34867,6 @@ export type WebApiModulesInventorySalesInventorySalesInventoryRead = {
     WardrobeDetailedDescription?: string | null;
     WebDetailedDescription?: string | null;
     TechnicalNotes?: string | null;
-    /** Format: Boolean */
-    OverrideSystemDefaultRevenueAllocationBehavior?: boolean | null;
     /** Format: Boolean */
     AllocateRevenueForAccessories?: boolean | null;
     /** Format: Text */
@@ -34307,6 +35535,21 @@ export type WebApiModulesInventorySetImageHistorySetImageHistoryItemPutRequest =
     FileDataUrl?: string | null;
     FilePath?: string | null;
 };
+export type WebApiModulesInventorySetQcSetQcItemRequest = {
+    Code?: string[] | null;
+};
+export type WebApiModulesInventorySetQcSetQcItemResponse = {
+    status?: number;
+    success?: boolean;
+    msg?: string | null;
+    ItemIds?: string[] | null;
+    Descriptions?: string[] | null;
+    ICodes?: string[] | null;
+    SetQcReqds?: boolean[] | null;
+    InventoryIds?: string[] | null;
+    SuccessCount?: number;
+    FailCount?: number;
+};
 export type WebApiModulesHomeControlsSubPurchaseOrderItemSubPurchaseOrderItem = {
     /** Format: Text, IsPrimaryKey: true */
     SessionId?: string | null;
@@ -34741,6 +35984,125 @@ export type WebApiModulesHomeControlsTaxableTaxableRead = {
     _ModifiedByUserName?: string | null;
     _ModifiedDateTime?: string | null;
 };
+export type WebApiModulesTransfersTransferOrderTransferOrderDocument = {
+    TransferId?: string | null;
+    copying?: boolean;
+    DocumentId?: string | null;
+    /** Format: Text */
+    DocumentTypeId?: string | null;
+    /** Format: Text */
+    UniqueId1?: string | null;
+    /** Format: Text */
+    UniqueId2?: string | null;
+    /** Format: Integer */
+    UniqueId1Int?: number | null;
+    /** Format: Text */
+    Description?: string | null;
+    /** Format: Text */
+    InputByUsersId?: string | null;
+    /** Format: Date */
+    AttachDate?: string | null;
+    /** Format: Text */
+    AttachTime?: string | null;
+    /** Format: Boolean */
+    AttachToEmail?: boolean | null;
+    /** Format: Boolean */
+    Inactive?: boolean | null;
+    /** Format: UTCDateTime */
+    DateStamp?: string | null;
+    Extension?: string | null;
+    DocumentType?: string | null;
+    InputBy?: string | null;
+    HasImage?: boolean | null;
+    HasFile?: boolean | null;
+    AppImageCount?: number | null;
+    FileIsModified?: boolean | null;
+    FileDataUrl?: string | null;
+    FilePath?: string | null;
+    AuditNote?: string | null;
+    _Custom?: FwStandardDataFwCustomValue[] | null;
+    _DefaultFieldAttributes?: FwStandardDataFwDefaultAttribute[] | null;
+    _Original?: FwStandardBusinessLogicFwBusinessLogic;
+    _Translation?: FwStandardDataFwTranslatedValue[] | null;
+    _HasImport?: boolean;
+    _CreatedByUserId?: string | null;
+    _CreatedByUserName?: string | null;
+    _CreatedDateTime?: string | null;
+    _ModifiedByUserId?: string | null;
+    _ModifiedByUserName?: string | null;
+    _ModifiedDateTime?: string | null;
+};
+export type WebApiModulesTransfersTransferOrderTransferOrderDocumentRead = {
+    TransferId?: string | null;
+    copying?: boolean;
+    DocumentId?: string | null;
+    /** Format: Text */
+    DocumentTypeId?: string | null;
+    /** Format: Text */
+    UniqueId1?: string | null;
+    /** Format: Text */
+    UniqueId2?: string | null;
+    /** Format: Integer */
+    UniqueId1Int?: number | null;
+    /** Format: Text */
+    Description?: string | null;
+    /** Format: Text */
+    InputByUsersId?: string | null;
+    /** Format: Date */
+    AttachDate?: string | null;
+    /** Format: Text */
+    AttachTime?: string | null;
+    /** Format: Boolean */
+    AttachToEmail?: boolean | null;
+    /** Format: Boolean */
+    Inactive?: boolean | null;
+    /** Format: UTCDateTime */
+    DateStamp?: string | null;
+    Extension?: string | null;
+    DocumentType?: string | null;
+    InputBy?: string | null;
+    HasImage?: boolean | null;
+    HasFile?: boolean | null;
+    AppImageCount?: number | null;
+    FileIsModified?: boolean | null;
+    FileDataUrl?: string | null;
+    FilePath?: string | null;
+    AuditNote?: string | null;
+    RecordTitle?: string | null;
+    _Fields?: FwStandardBusinessLogicFwBusinessLogicFieldDefinition[] | null;
+    _Custom?: FwStandardDataFwCustomValue[] | null;
+    _DefaultFieldAttributes?: FwStandardDataFwDefaultAttribute[] | null;
+    _Original?: FwStandardBusinessLogicFwBusinessLogicRead;
+    _Translation?: FwStandardDataFwTranslatedValue[] | null;
+    _HasImport?: boolean;
+    _CreatedByUserId?: string | null;
+    _CreatedByUserName?: string | null;
+    _CreatedDateTime?: string | null;
+    _ModifiedByUserId?: string | null;
+    _ModifiedByUserName?: string | null;
+    _ModifiedDateTime?: string | null;
+};
+export type WebApiModulesTransfersTransferOrderTransferOrderDocumentPutRequest = {
+    TransferId?: string | null;
+    DocumentId?: string | null;
+    DocumentTypeId?: string | null;
+    Description?: string | null;
+    AttachToEmail?: boolean | null;
+    Inactive?: boolean | null;
+    FileIsModified?: boolean | null;
+    FileDataUrl?: string | null;
+    FilePath?: string | null;
+};
+export type WebApiModulesTransfersTransferOrderTransferOrderDocumentPostRequest = {
+    TransferId?: string | null;
+    DocumentTypeId?: string | null;
+    Description?: string | null;
+    AttachToEmail?: boolean | null;
+    Inactive?: boolean | null;
+    FileIsModified?: boolean | null;
+    FileDataUrl?: string | null;
+    FilePath?: string | null;
+};
 export type WebApiModulesTransfersTransferOrderConfirmTransferOrderResponse = {
     transfer?: WebApiModulesTransfersTransferOrderTransferOrder;
     status?: number;
@@ -35071,6 +36433,8 @@ export type WebApiModulesAgentVendorVendor = {
     InternalOrderDealId?: string | null;
     TaxOption?: string | null;
     /** Format: Boolean */
+    ExcludeItemsWithZero?: boolean | null;
+    /** Format: Boolean */
     Inactive?: boolean | null;
     /** Format: UTCDateTime */
     DateStamp?: string | null;
@@ -35254,6 +36618,8 @@ export type WebApiModulesAgentVendorVendorRead = {
     InternalWarehouse?: string | null;
     InternalOrderDealId?: string | null;
     TaxOption?: string | null;
+    /** Format: Boolean */
+    ExcludeItemsWithZero?: boolean | null;
     /** Format: Boolean */
     Inactive?: boolean | null;
     /** Format: UTCDateTime */
@@ -35514,6 +36880,8 @@ export type WebApiModulesBillingVendorInvoiceVendorInvoice = {
     /** Format: Decimal, Total digits: 11, Decimal places: 2 */
     Credit?: number | null;
     VendorInvoiceModificationsPushToPo?: string | null;
+    ChargeBatchId?: string | null;
+    ChargeBatchNumber?: string | null;
     AuditNote?: string | null;
     _Custom?: FwStandardDataFwCustomValue[] | null;
     _DefaultFieldAttributes?: FwStandardDataFwDefaultAttribute[] | null;
@@ -35635,6 +37003,8 @@ export type WebApiModulesBillingVendorInvoiceVendorInvoiceRead = {
     /** Format: Decimal, Total digits: 11, Decimal places: 2 */
     Credit?: number | null;
     VendorInvoiceModificationsPushToPo?: string | null;
+    ChargeBatchId?: string | null;
+    ChargeBatchNumber?: string | null;
     AuditNote?: string | null;
     RecordTitle?: string | null;
     _Fields?: FwStandardBusinessLogicFwBusinessLogicFieldDefinition[] | null;
@@ -36992,7 +38362,7 @@ export function getApiV1BillingById(id: string, opts?: Oazapfts.RequestOpts) {
 export function postApiV1BillingCreateinvoices(webApiModulesBillingBillingCreateInvoicesRequest?: WebApiModulesBillingBillingCreateInvoicesRequest, opts?: Oazapfts.RequestOpts) {
     return oazapfts.ok(oazapfts.fetchJson<{
         status: 200;
-        data: WebApiModulesBillingBillingCreateInvoicesResponse;
+        data: WebApiModulesBillingBillingCreateInvoicesResponseRead;
     } | {
         status: 400;
         data: FwCoreApiSwashbuckleBadRequestResponse;
@@ -37007,6 +38377,26 @@ export function postApiV1BillingCreateinvoices(webApiModulesBillingBillingCreate
         ...opts,
         method: "POST",
         body: webApiModulesBillingBillingCreateInvoicesRequest
+    })));
+}
+export function postApiV1BillingCreategroupinvoices(webApiModulesBillingBillingCreateGroupInvoicesRequest?: WebApiModulesBillingBillingCreateGroupInvoicesRequest, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.ok(oazapfts.fetchJson<{
+        status: 200;
+        data: WebApiModulesBillingBillingCreateInvoicesResponseRead;
+    } | {
+        status: 400;
+        data: FwCoreApiSwashbuckleBadRequestResponse;
+    } | {
+        status: 401;
+    } | {
+        status: 403;
+    } | {
+        status: 500;
+        data: FwStandardModelsFwApiException;
+    }>("/api/v1/billing/creategroupinvoices", oazapfts.json({
+        ...opts,
+        method: "POST",
+        body: webApiModulesBillingBillingCreateGroupInvoicesRequest
     })));
 }
 export function postApiV1BillingGetorderbillingdatesById(id: string, opts?: Oazapfts.RequestOpts) {
@@ -37995,7 +39385,7 @@ export function postApiV1CheckinReleaserepairitems(webApiModulesWarehouseCheckIn
 export function postApiV1CheckinCancelcontract(webApiModulesWarehouseContractCancelContractRequest?: WebApiModulesWarehouseContractCancelContractRequest, opts?: Oazapfts.RequestOpts) {
     return oazapfts.ok(oazapfts.fetchJson<{
         status: 200;
-        data: WebApiLogicTSpStatusResponse;
+        data: FwStandardSqlServerTSpStatusResponse;
     } | {
         status: 400;
         data: FwCoreApiSwashbuckleBadRequestResponse;
@@ -38015,7 +39405,7 @@ export function postApiV1CheckinCancelcontract(webApiModulesWarehouseContractCan
 export function postApiV1CheckinForcesuspendsession(webApiModulesWarehouseContractForceSuspendSessionRequest?: WebApiModulesWarehouseContractForceSuspendSessionRequest, opts?: Oazapfts.RequestOpts) {
     return oazapfts.ok(oazapfts.fetchJson<{
         status: 200;
-        data: WebApiLogicTSpStatusResponse;
+        data: FwStandardSqlServerTSpStatusResponse;
     } | {
         status: 400;
         data: FwCoreApiSwashbuckleBadRequestResponse;
@@ -39056,7 +40446,7 @@ export function postApiV1CheckoutCompletecheckoutcontract(webApiModulesWarehouse
 export function postApiV1CheckoutCancelcontract(webApiModulesWarehouseContractCancelContractRequest?: WebApiModulesWarehouseContractCancelContractRequest, opts?: Oazapfts.RequestOpts) {
     return oazapfts.ok(oazapfts.fetchJson<{
         status: 200;
-        data: WebApiLogicTSpStatusResponse;
+        data: FwStandardSqlServerTSpStatusResponse;
     } | {
         status: 400;
         data: FwCoreApiSwashbuckleBadRequestResponse;
@@ -39176,7 +40566,7 @@ export function postApiV1CheckoutIsvalidshippingcase(webApiModulesWarehouseCheck
 export function postApiV1CheckoutAddtoshippingcase(webApiModulesWarehouseCheckOutAddToShippingCaseRequest?: WebApiModulesWarehouseCheckOutAddToShippingCaseRequest, opts?: Oazapfts.RequestOpts) {
     return oazapfts.ok(oazapfts.fetchJson<{
         status: 200;
-        data: WebApiLogicTSpStatusResponse;
+        data: FwStandardSqlServerTSpStatusResponse;
     } | {
         status: 400;
         data: FwCoreApiSwashbuckleBadRequestResponse;
@@ -39196,7 +40586,7 @@ export function postApiV1CheckoutAddtoshippingcase(webApiModulesWarehouseCheckOu
 export function postApiV1CheckoutRemovefromshippingcase(webApiModulesWarehouseCheckOutRemoveFromShippingCaseRequest?: WebApiModulesWarehouseCheckOutRemoveFromShippingCaseRequest, opts?: Oazapfts.RequestOpts) {
     return oazapfts.ok(oazapfts.fetchJson<{
         status: 200;
-        data: WebApiLogicTSpStatusResponse;
+        data: FwStandardSqlServerTSpStatusResponse;
     } | {
         status: 400;
         data: FwCoreApiSwashbuckleBadRequestResponse;
@@ -39216,7 +40606,7 @@ export function postApiV1CheckoutRemovefromshippingcase(webApiModulesWarehouseCh
 export function postApiV1CheckoutUpdateshippingcaseno(webApiModulesWarehouseCheckOutUpdateShippingCaseNumberRequest?: WebApiModulesWarehouseCheckOutUpdateShippingCaseNumberRequest, opts?: Oazapfts.RequestOpts) {
     return oazapfts.ok(oazapfts.fetchJson<{
         status: 200;
-        data: WebApiLogicTSpStatusResponse;
+        data: FwStandardSqlServerTSpStatusResponse;
     } | {
         status: 400;
         data: FwCoreApiSwashbuckleBadRequestResponse;
@@ -42572,7 +43962,7 @@ export function deleteApiV1ContractById(id: string, opts?: Oazapfts.RequestOpts)
 export function postApiV1ContractVoidcontract(webApiModulesWarehouseContractVoidContractRequest?: WebApiModulesWarehouseContractVoidContractRequest, opts?: Oazapfts.RequestOpts) {
     return oazapfts.ok(oazapfts.fetchJson<{
         status: 200;
-        data: WebApiLogicTSpStatusResponse;
+        data: FwStandardSqlServerTSpStatusResponse;
     } | {
         status: 400;
         data: FwCoreApiSwashbuckleBadRequestResponse;
@@ -44082,6 +45472,26 @@ export function postApiV1CustomerSynctoqbo({ customerid, locationid }: {
         method: "POST"
     }));
 }
+export function postApiV1CustomerByIdCopy(id: string, fwStandardModelsCopyLogicRequest?: FwStandardModelsCopyLogicRequest, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.ok(oazapfts.fetchJson<{
+        status: 200;
+        data: FwStandardModelsCopyLogicResponseRead;
+    } | {
+        status: 400;
+        data: FwCoreApiSwashbuckleBadRequestResponse;
+    } | {
+        status: 401;
+    } | {
+        status: 403;
+    } | {
+        status: 500;
+        data: FwStandardModelsFwApiException;
+    }>(`/api/v1/customer/${encodeURIComponent(id)}/copy`, oazapfts.json({
+        ...opts,
+        method: "POST",
+        body: fwStandardModelsCopyLogicRequest
+    })));
+}
 export function postApiV1CustomercreditBrowse(fwStandardModelsBrowseRequest?: FwStandardModelsBrowseRequest, opts?: Oazapfts.RequestOpts) {
     return oazapfts.ok(oazapfts.fetchJson<{
         status: 200;
@@ -45322,6 +46732,26 @@ export function getApiV1DealEpisodicscheduleLegend(opts?: Oazapfts.RequestOpts) 
         ...opts
     }));
 }
+export function postApiV1DealByIdCopy(id: string, fwStandardModelsCopyLogicRequest?: FwStandardModelsCopyLogicRequest, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.ok(oazapfts.fetchJson<{
+        status: 200;
+        data: FwStandardModelsCopyLogicResponseRead;
+    } | {
+        status: 400;
+        data: FwCoreApiSwashbuckleBadRequestResponse;
+    } | {
+        status: 401;
+    } | {
+        status: 403;
+    } | {
+        status: 500;
+        data: FwStandardModelsFwApiException;
+    }>(`/api/v1/deal/${encodeURIComponent(id)}/copy`, oazapfts.json({
+        ...opts,
+        method: "POST",
+        body: fwStandardModelsCopyLogicRequest
+    })));
+}
 export function postApiV1DealcreditBrowse(fwStandardModelsBrowseRequest?: FwStandardModelsBrowseRequest, opts?: Oazapfts.RequestOpts) {
     return oazapfts.ok(oazapfts.fetchJson<{
         status: 200;
@@ -46490,7 +47920,7 @@ export function postApiV1ExchangeCompleteexchangecontractById(id: string, opts?:
 export function postApiV1ExchangeCancelcontract(webApiModulesWarehouseContractCancelContractRequest?: WebApiModulesWarehouseContractCancelContractRequest, opts?: Oazapfts.RequestOpts) {
     return oazapfts.ok(oazapfts.fetchJson<{
         status: 200;
-        data: WebApiLogicTSpStatusResponse;
+        data: FwStandardSqlServerTSpStatusResponse;
     } | {
         status: 400;
         data: FwCoreApiSwashbuckleBadRequestResponse;
@@ -50460,7 +51890,7 @@ export function getApiV1InventorysearchGettotalBySessionid(sessionId: string, op
     } | {
         status: 500;
         data: FwStandardModelsFwApiException;
-    }>(`/api/v1/inventorysearch/gettotal/${encodeURIComponent(sessionId)}`, {
+    }>(`/api/v1/inventorysearch/gettotal/${encodeURIComponent(sessionid)}`, {
         ...opts
     }));
 }
@@ -52266,6 +53696,397 @@ export function getApiV1InvoiceGldistributionInvoiceByInvoiceid(invoiceid: strin
         ...opts
     }));
 }
+/**
+ * Get documents.
+ */
+export function postApiV1InvoiceByInvoiceidDocumentBrowse(invoiceid: string, fwStandardModelsBrowseRequest?: FwStandardModelsBrowseRequest, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.ok(oazapfts.fetchJson<{
+        status: 200;
+        data: FwStandardSqlServerFwJsonDataTableRead;
+    } | {
+        status: 400;
+        data: FwCoreApiSwashbuckleBadRequestResponse;
+    } | {
+        status: 401;
+    } | {
+        status: 403;
+    } | {
+        status: 500;
+        data: FwStandardModelsFwApiException;
+    }>(`/api/v1/invoice/${encodeURIComponent(invoiceid)}/document/browse`, oazapfts.json({
+        ...opts,
+        method: "POST",
+        body: fwStandardModelsBrowseRequest
+    })));
+}
+/**
+ * Export documents to Excel.
+ */
+export function postApiV1InvoiceByInvoiceidDocumentExportexcelxlsx(invoiceid: string, fwStandardModelsBrowseRequest?: FwStandardModelsBrowseRequest, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.ok(oazapfts.fetchJson<{
+        status: 200;
+        data: FwCoreControllersFwDataControllerDoExportExcelXlsxExportFileAsyncResult;
+    } | {
+        status: 400;
+        data: FwCoreApiSwashbuckleBadRequestResponse;
+    } | {
+        status: 401;
+    } | {
+        status: 403;
+    } | {
+        status: 500;
+        data: FwStandardModelsFwApiException;
+    }>(`/api/v1/invoice/${encodeURIComponent(invoiceid)}/document/exportexcelxlsx`, oazapfts.json({
+        ...opts,
+        method: "POST",
+        body: fwStandardModelsBrowseRequest
+    })));
+}
+/**
+ * Get documents.
+ */
+export function getApiV1InvoiceByInvoiceidDocuments(invoiceid: string, { documentTypeId, description, dateStamp, pageNo, pageSize, sort }: {
+    documentTypeId?: string;
+    description?: string;
+    dateStamp?: string;
+    pageNo?: number;
+    pageSize?: number;
+    sort?: string;
+} = {}, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.ok(oazapfts.fetchJson<{
+        status: 200;
+        data: FwStandardModelsGetResponseFwStandardGridsAppDocumentAppDocumentGetManyResponse;
+    } | {
+        status: 400;
+        data: FwCoreApiSwashbuckleBadRequestResponse;
+    } | {
+        status: 401;
+    } | {
+        status: 403;
+    } | {
+        status: 500;
+        data: FwStandardModelsFwApiException;
+    }>(`/api/v1/invoice/${encodeURIComponent(invoiceid)}/documents${QS.query(QS.explode({
+        DocumentTypeId: documentTypeId,
+        Description: description,
+        DateStamp: dateStamp,
+        PageNo: pageNo,
+        PageSize: pageSize,
+        Sort: sort
+    }))}`, {
+        ...opts
+    }));
+}
+/**
+ * Get a document.
+ */
+export function getApiV1InvoiceByInvoiceidDocumentAndDocumentid(invoiceid: string, documentid: string, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.ok(oazapfts.fetchJson<{
+        status: 200;
+        data: WebApiModulesBilingInvoiceInvoiceDocumentRead;
+    } | {
+        status: 400;
+        data: FwCoreApiSwashbuckleBadRequestResponse;
+    } | {
+        status: 401;
+    } | {
+        status: 403;
+    } | {
+        status: 500;
+        data: FwStandardModelsFwApiException;
+    }>(`/api/v1/invoice/${encodeURIComponent(invoiceid)}/document/${encodeURIComponent(documentid)}`, {
+        ...opts
+    }));
+}
+/**
+ * Update a document.
+ */
+export function putApiV1InvoiceByInvoiceidDocumentAndDocumentid(invoiceid: string, documentid: string, webApiModulesBilingInvoiceInvoiceDocumentPutRequest?: WebApiModulesBilingInvoiceInvoiceDocumentPutRequest, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.ok(oazapfts.fetchJson<{
+        status: 200;
+        data: WebApiModulesBilingInvoiceInvoiceDocumentRead;
+    } | {
+        status: 400;
+        data: FwCoreApiSwashbuckleBadRequestResponse;
+    } | {
+        status: 401;
+    } | {
+        status: 403;
+    } | {
+        status: 500;
+        data: FwStandardModelsFwApiException;
+    }>(`/api/v1/invoice/${encodeURIComponent(invoiceid)}/document/${encodeURIComponent(documentid)}`, oazapfts.json({
+        ...opts,
+        method: "PUT",
+        body: webApiModulesBilingInvoiceInvoiceDocumentPutRequest
+    })));
+}
+/**
+ * Delete a document.
+ */
+export function deleteApiV1InvoiceByInvoiceidDocumentAndDocumentid(invoiceid: string, documentid: string, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.ok(oazapfts.fetchJson<{
+        status: 200;
+        data: boolean;
+    } | {
+        status: 400;
+        data: FwCoreApiSwashbuckleBadRequestResponse;
+    } | {
+        status: 401;
+    } | {
+        status: 403;
+    } | {
+        status: 500;
+        data: FwStandardModelsFwApiException;
+    }>(`/api/v1/invoice/${encodeURIComponent(invoiceid)}/document/${encodeURIComponent(documentid)}`, {
+        ...opts,
+        method: "DELETE"
+    }));
+}
+/**
+ * Create a new document.
+ */
+export function postApiV1InvoiceByInvoiceidDocument(invoiceid: string, webApiModulesBilingInvoiceInvoiceDocumentPostRequest?: WebApiModulesBilingInvoiceInvoiceDocumentPostRequest, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.ok(oazapfts.fetchJson<{
+        status: 200;
+        data: WebApiModulesBilingInvoiceInvoiceDocumentRead;
+    } | {
+        status: 400;
+        data: FwCoreApiSwashbuckleBadRequestResponse;
+    } | {
+        status: 401;
+    } | {
+        status: 403;
+    } | {
+        status: 500;
+        data: FwStandardModelsFwApiException;
+    }>(`/api/v1/invoice/${encodeURIComponent(invoiceid)}/document`, oazapfts.json({
+        ...opts,
+        method: "POST",
+        body: webApiModulesBilingInvoiceInvoiceDocumentPostRequest
+    })));
+}
+/**
+ * Get thumbnails for any images attached to the document.
+ */
+export function getApiV1InvoiceByInvoiceidDocumentAndDocumentidThumbnails(invoiceid: string, documentid: string, { pageno, pagesize }: {
+    pageno?: number;
+    pagesize?: number;
+} = {}, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.ok(oazapfts.fetchJson<{
+        status: 200;
+        data: FwStandardGridsAppDocumentGetDocumentThumbnailsResponse;
+    } | {
+        status: 400;
+        data: FwCoreApiSwashbuckleBadRequestResponse;
+    } | {
+        status: 401;
+    } | {
+        status: 403;
+    } | {
+        status: 500;
+        data: FwStandardModelsFwApiException;
+    }>(`/api/v1/invoice/${encodeURIComponent(invoiceid)}/document/${encodeURIComponent(documentid)}/thumbnails${QS.query(QS.explode({
+        pageno,
+        pagesize
+    }))}`, {
+        ...opts
+    }));
+}
+/**
+ * Get a fullsize image.
+ */
+export function getApiV1InvoiceByInvoiceidDocumentAndDocumentidImageImageid(invoiceid: string, documentid: string, imageid: string, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.ok(oazapfts.fetchJson<{
+        status: 200;
+        data: FwStandardGridsAppDocumentGetDocumentImageResponse;
+    } | {
+        status: 400;
+        data: FwCoreApiSwashbuckleBadRequestResponse;
+    } | {
+        status: 401;
+    } | {
+        status: 403;
+    } | {
+        status: 500;
+        data: FwStandardModelsFwApiException;
+    }>(`/api/v1/invoice/${encodeURIComponent(invoiceid)}/document/${encodeURIComponent(documentid)}/image/${encodeURIComponent(imageid)}`, {
+        ...opts
+    }));
+}
+/**
+ * Delete an attached image.
+ */
+export function deleteApiV1InvoiceByInvoiceidDocumentAndDocumentidImageImageid(invoiceid: string, documentid: string, imageid: string, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.ok(oazapfts.fetchJson<{
+        status: 200;
+        data: boolean;
+    } | {
+        status: 400;
+        data: FwCoreApiSwashbuckleBadRequestResponse;
+    } | {
+        status: 401;
+    } | {
+        status: 403;
+    } | {
+        status: 500;
+        data: FwStandardModelsFwApiException;
+    }>(`/api/v1/invoice/${encodeURIComponent(invoiceid)}/document/${encodeURIComponent(documentid)}/image/${encodeURIComponent(imageid)}`, {
+        ...opts,
+        method: "DELETE"
+    }));
+}
+/**
+ * Attach an image from a dataurl.
+ */
+export function postApiV1InvoiceByInvoiceidDocumentAndDocumentidImage(invoiceid: string, documentid: string, fwStandardGridsAppDocumentPostDocumentImageRequest?: FwStandardGridsAppDocumentPostDocumentImageRequest, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.ok(oazapfts.fetchJson<{
+        status: 200;
+        data: boolean;
+    } | {
+        status: 400;
+        data: FwCoreApiSwashbuckleBadRequestResponse;
+    } | {
+        status: 401;
+    } | {
+        status: 403;
+    } | {
+        status: 500;
+        data: FwStandardModelsFwApiException;
+    }>(`/api/v1/invoice/${encodeURIComponent(invoiceid)}/document/${encodeURIComponent(documentid)}/image`, oazapfts.json({
+        ...opts,
+        method: "POST",
+        body: fwStandardGridsAppDocumentPostDocumentImageRequest
+    })));
+}
+/**
+ * Attach an image from a form submission.
+ */
+export function postApiV1InvoiceByInvoiceidDocumentAndDocumentidImageformupload(invoiceid: string, documentid: string, body?: string, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.ok(oazapfts.fetchJson<{
+        status: 200;
+        data: boolean;
+    } | {
+        status: 400;
+        data: FwCoreApiSwashbuckleBadRequestResponse;
+    } | {
+        status: 401;
+    } | {
+        status: 403;
+    } | {
+        status: 500;
+        data: FwStandardModelsFwApiException;
+    }>(`/api/v1/invoice/${encodeURIComponent(invoiceid)}/document/${encodeURIComponent(documentid)}/imageformupload`, {
+        ...opts,
+        method: "POST",
+        body
+    }));
+}
+/**
+ * Get the attached file.
+ */
+export function getApiV1InvoiceByInvoiceidDocumentAndDocumentidFile(invoiceid: string, documentid: string, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.ok(oazapfts.fetchJson<{
+        status: 200;
+    } | {
+        status: 400;
+        data: FwCoreApiSwashbuckleBadRequestResponse;
+    } | {
+        status: 401;
+    } | {
+        status: 403;
+    } | {
+        status: 500;
+        data: FwStandardModelsFwApiException;
+    }>(`/api/v1/invoice/${encodeURIComponent(invoiceid)}/document/${encodeURIComponent(documentid)}/file`, {
+        ...opts
+    }));
+}
+/**
+ * Update the attached file from a dataurl.
+ */
+export function putApiV1InvoiceByInvoiceidDocumentAndDocumentidFile(invoiceid: string, documentid: string, fwStandardGridsAppDocumentPutDocumentFileRequest?: FwStandardGridsAppDocumentPutDocumentFileRequest, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.ok(oazapfts.fetchJson<{
+        status: 200;
+        data: boolean;
+    } | {
+        status: 400;
+        data: FwCoreApiSwashbuckleBadRequestResponse;
+    } | {
+        status: 401;
+    } | {
+        status: 403;
+    } | {
+        status: 500;
+        data: FwStandardModelsFwApiException;
+    }>(`/api/v1/invoice/${encodeURIComponent(invoiceid)}/document/${encodeURIComponent(documentid)}/file`, oazapfts.json({
+        ...opts,
+        method: "PUT",
+        body: fwStandardGridsAppDocumentPutDocumentFileRequest
+    })));
+}
+/**
+ * Delete attached file.
+ */
+export function deleteApiV1InvoiceByInvoiceidDocumentAndDocumentidFile(invoiceid: string, documentid: string, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.ok(oazapfts.fetchJson<{
+        status: 200;
+        data: boolean;
+    } | {
+        status: 400;
+        data: FwCoreApiSwashbuckleBadRequestResponse;
+    } | {
+        status: 401;
+    } | {
+        status: 403;
+    } | {
+        status: 500;
+        data: FwStandardModelsFwApiException;
+    }>(`/api/v1/invoice/${encodeURIComponent(invoiceid)}/document/${encodeURIComponent(documentid)}/file`, {
+        ...opts,
+        method: "DELETE"
+    }));
+}
+/**
+ * Update attached file from a form submission.
+ */
+export function putApiV1InvoiceByInvoiceidDocumentAndDocumentidFileformupload(invoiceid: string, documentid: string, body?: string, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.ok(oazapfts.fetchJson<{
+        status: 200;
+        data: boolean;
+    } | {
+        status: 400;
+        data: FwCoreApiSwashbuckleBadRequestResponse;
+    } | {
+        status: 401;
+    } | {
+        status: 403;
+    } | {
+        status: 500;
+        data: FwStandardModelsFwApiException;
+    }>(`/api/v1/invoice/${encodeURIComponent(invoiceid)}/document/${encodeURIComponent(documentid)}/fileformupload`, {
+        ...opts,
+        method: "PUT",
+        body
+    }));
+}
+export function getApiV1InvoiceByInvoiceidDocumentEmptyobject(invoiceid: string, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.ok(oazapfts.fetchJson<{
+        status: 200;
+    } | {
+        status: 400;
+        data: FwCoreApiSwashbuckleBadRequestResponse;
+    } | {
+        status: 401;
+    } | {
+        status: 403;
+    } | {
+        status: 500;
+        data: FwStandardModelsFwApiException;
+    }>(`/api/v1/invoice/${encodeURIComponent(invoiceid)}/document/emptyobject`, {
+        ...opts
+    }));
+}
 export function postApiV1InvoicebatchBrowse(fwStandardModelsBrowseRequest?: FwStandardModelsBrowseRequest, opts?: Oazapfts.RequestOpts) {
     return oazapfts.ok(oazapfts.fetchJson<{
         status: 200;
@@ -53997,6 +55818,26 @@ export function postApiV1ItemattributevalueValidateattributevalueBrowse(fwStanda
         body: fwStandardModelsBrowseRequest
     })));
 }
+export function postApiV1ItemattributevalueMassupdateitemattributes(webApiModulesHomeControlsItemAttributeValueMassUpdateItemAttributesRequest?: WebApiModulesHomeControlsItemAttributeValueMassUpdateItemAttributesRequest, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.ok(oazapfts.fetchJson<{
+        status: 200;
+        data: WebApiModulesHomeControlsItemAttributeValueMassUpdateItemAttributesResponse;
+    } | {
+        status: 400;
+        data: FwCoreApiSwashbuckleBadRequestResponse;
+    } | {
+        status: 401;
+    } | {
+        status: 403;
+    } | {
+        status: 500;
+        data: FwStandardModelsFwApiException;
+    }>("/api/v1/itemattributevalue/massupdateitemattributes", oazapfts.json({
+        ...opts,
+        method: "POST",
+        body: webApiModulesHomeControlsItemAttributeValueMassUpdateItemAttributesRequest
+    })));
+}
 export function postApiV1ItemchargeBrowse(fwStandardModelsBrowseRequest?: FwStandardModelsBrowseRequest, opts?: Oazapfts.RequestOpts) {
     return oazapfts.ok(oazapfts.fetchJson<{
         status: 200;
@@ -54267,6 +56108,27 @@ export function putApiV1ItemqcById(id: string, webApiModulesHomeControlsItemQcIt
         method: "PUT",
         body: webApiModulesHomeControlsItemQcItemQc
     })));
+}
+export function getJspm({ timestamp }: {
+    timestamp?: string;
+} = {}, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.ok(oazapfts.fetchJson<{
+        status: 200;
+    } | {
+        status: 400;
+        data: FwCoreApiSwashbuckleBadRequestResponse;
+    } | {
+        status: 401;
+    } | {
+        status: 403;
+    } | {
+        status: 500;
+        data: FwStandardModelsFwApiException;
+    }>(`/jspm${QS.query(QS.explode({
+        timestamp
+    }))}`, {
+        ...opts
+    }));
 }
 export function postApiV1LossanddamageStartsession(webApiModulesHomeControlsLossAndDamageStartLossAndDamageSessionRequest?: WebApiModulesHomeControlsLossAndDamageStartLossAndDamageSessionRequest, opts?: Oazapfts.RequestOpts) {
     return oazapfts.ok(oazapfts.fetchJson<{
@@ -55371,10 +57233,10 @@ export function postApiV1OrderExportexcelxlsx(fwStandardModelsBrowseRequest?: Fw
         body: fwStandardModelsBrowseRequest
     })));
 }
-export function postApiV1OrderCopytemplate(webApiModulesAgentOrderCopyTemplateRequest?: WebApiModulesAgentOrderCopyTemplateRequest, opts?: Oazapfts.RequestOpts) {
+export function postApiV1OrderApplytemplate(webApiModulesAgentOrderApplyTemplateRequest?: WebApiModulesAgentOrderApplyTemplateRequest, opts?: Oazapfts.RequestOpts) {
     return oazapfts.ok(oazapfts.fetchJson<{
         status: 200;
-        data: WebApiModulesAgentOrderCopyTemplateResponse;
+        data: WebApiModulesAgentOrderApplyTemplateResponse;
     } | {
         status: 400;
         data: FwCoreApiSwashbuckleBadRequestResponse;
@@ -55385,10 +57247,10 @@ export function postApiV1OrderCopytemplate(webApiModulesAgentOrderCopyTemplateRe
     } | {
         status: 500;
         data: FwStandardModelsFwApiException;
-    }>("/api/v1/order/copytemplate", oazapfts.json({
+    }>("/api/v1/order/applytemplate", oazapfts.json({
         ...opts,
         method: "POST",
-        body: webApiModulesAgentOrderCopyTemplateRequest
+        body: webApiModulesAgentOrderApplyTemplateRequest
     })));
 }
 export function postApiV1OrderByIdCopytoquote(id: string, webApiModulesAgentOrderCopyQuoteOrderRequest?: WebApiModulesAgentOrderCopyQuoteOrderRequest, opts?: Oazapfts.RequestOpts) {
@@ -55590,7 +57452,7 @@ export function postApiV1OrderApplybottomlinediscountpercent(webApiApplyBottomLi
 export function postApiV1OrderApplybottomlinetotal(webApiApplyBottomLineTotalRequest?: WebApiApplyBottomLineTotalRequest, opts?: Oazapfts.RequestOpts) {
     return oazapfts.ok(oazapfts.fetchJson<{
         status: 200;
-        data: WebApiLogicTSpStatusResponse;
+        data: FwStandardSqlServerTSpStatusResponse;
     } | {
         status: 400;
         data: FwCoreApiSwashbuckleBadRequestResponse;
@@ -55661,7 +57523,7 @@ export function putApiV1OrderUpdatepoworksheetsessionBySessionid(sessionId: stri
     } | {
         status: 500;
         data: FwStandardModelsFwApiException;
-    }>(`/api/v1/order/updatepoworksheetsession/${encodeURIComponent(sessionId)}`, oazapfts.json({
+    }>(`/api/v1/order/updatepoworksheetsession/${encodeURIComponent(sessionid)}`, oazapfts.json({
         ...opts,
         method: "PUT",
         body: webApiModulesAgentOrderUpdatePoWorksheetSessionRequest
@@ -55681,7 +57543,7 @@ export function getApiV1OrderPoworksheetsessiontotalsBySessionid(sessionId: stri
     } | {
         status: 500;
         data: FwStandardModelsFwApiException;
-    }>(`/api/v1/order/poworksheetsessiontotals/${encodeURIComponent(sessionId)}`, {
+    }>(`/api/v1/order/poworksheetsessiontotals/${encodeURIComponent(sessionid)}`, {
         ...opts
     }));
 }
@@ -55759,7 +57621,7 @@ export function putApiV1OrderUpdatequiklocatesessionBySessionid(sessionId: strin
     } | {
         status: 500;
         data: FwStandardModelsFwApiException;
-    }>(`/api/v1/order/updatequiklocatesession/${encodeURIComponent(sessionId)}`, oazapfts.json({
+    }>(`/api/v1/order/updatequiklocatesession/${encodeURIComponent(sessionid)}`, oazapfts.json({
         ...opts,
         method: "PUT",
         body: webApiModulesAgentOrderUpdatePoWorksheetSessionRequest
@@ -57128,6 +58990,130 @@ export function postApiV1OrderdatesExportexcelxlsx(fwStandardModelsBrowseRequest
         body: fwStandardModelsBrowseRequest
     })));
 }
+export function postApiV1OrderdayBrowse(fwStandardModelsBrowseRequest?: FwStandardModelsBrowseRequest, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.ok(oazapfts.fetchJson<{
+        status: 200;
+        data: FwStandardSqlServerFwJsonDataTableRead;
+    } | {
+        status: 400;
+        data: FwCoreApiSwashbuckleBadRequestResponse;
+    } | {
+        status: 401;
+    } | {
+        status: 403;
+    } | {
+        status: 500;
+        data: FwStandardModelsFwApiException;
+    }>("/api/v1/orderday/browse", oazapfts.json({
+        ...opts,
+        method: "POST",
+        body: fwStandardModelsBrowseRequest
+    })));
+}
+export function postApiV1OrderdayExportexcelxlsx(fwStandardModelsBrowseRequest?: FwStandardModelsBrowseRequest, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.ok(oazapfts.fetchJson<{
+        status: 200;
+        data: FwCoreControllersFwDataControllerDoExportExcelXlsxExportFileAsyncResult;
+    } | {
+        status: 400;
+        data: FwCoreApiSwashbuckleBadRequestResponse;
+    } | {
+        status: 401;
+    } | {
+        status: 403;
+    } | {
+        status: 500;
+        data: FwStandardModelsFwApiException;
+    }>("/api/v1/orderday/exportexcelxlsx", oazapfts.json({
+        ...opts,
+        method: "POST",
+        body: fwStandardModelsBrowseRequest
+    })));
+}
+export function getApiV1Orderday({ pageno, pagesize, sort }: {
+    pageno?: number;
+    pagesize?: number;
+    sort?: string;
+} = {}, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.ok(oazapfts.fetchJson<{
+        status: 200;
+        data: WebApiModulesHomeOrderDayOrderDayRead[];
+    } | {
+        status: 400;
+        data: FwCoreApiSwashbuckleBadRequestResponse;
+    } | {
+        status: 401;
+    } | {
+        status: 403;
+    } | {
+        status: 500;
+        data: FwStandardModelsFwApiException;
+    }>(`/api/v1/orderday${QS.query(QS.explode({
+        pageno,
+        pagesize,
+        sort
+    }))}`, {
+        ...opts
+    }));
+}
+export function getApiV1OrderdayById(id: string, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.ok(oazapfts.fetchJson<{
+        status: 200;
+        data: WebApiModulesHomeOrderDayOrderDayRead;
+    } | {
+        status: 400;
+        data: FwCoreApiSwashbuckleBadRequestResponse;
+    } | {
+        status: 401;
+    } | {
+        status: 403;
+    } | {
+        status: 500;
+        data: FwStandardModelsFwApiException;
+    }>(`/api/v1/orderday/${encodeURIComponent(id)}`, {
+        ...opts
+    }));
+}
+export function putApiV1OrderdayById(id: string, webApiModulesHomeOrderDayOrderDay?: WebApiModulesHomeOrderDayOrderDay, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.ok(oazapfts.fetchJson<{
+        status: 200;
+        data: WebApiModulesHomeOrderDayOrderDayRead;
+    } | {
+        status: 400;
+        data: FwCoreApiSwashbuckleBadRequestResponse;
+    } | {
+        status: 401;
+    } | {
+        status: 403;
+    } | {
+        status: 500;
+        data: FwStandardModelsFwApiException;
+    }>(`/api/v1/orderday/${encodeURIComponent(id)}`, oazapfts.json({
+        ...opts,
+        method: "PUT",
+        body: webApiModulesHomeOrderDayOrderDay
+    })));
+}
+export function postApiV1OrderdayMany(body?: WebApiModulesHomeOrderDayOrderDay[], opts?: Oazapfts.RequestOpts) {
+    return oazapfts.ok(oazapfts.fetchJson<{
+        status: 200;
+        data: MicrosoftAspNetCoreMvcActionResultWebApiModulesHomeOrderDayOrderDayLogicRead[];
+    } | {
+        status: 400;
+        data: FwCoreApiSwashbuckleBadRequestResponse;
+    } | {
+        status: 401;
+    } | {
+        status: 403;
+    } | {
+        status: 500;
+        data: FwStandardModelsFwApiException;
+    }>("/api/v1/orderday/many", oazapfts.json({
+        ...opts,
+        method: "POST",
+        body
+    })));
+}
 export function postApiV1OrderitemBrowse(fwStandardModelsBrowseRequest?: FwStandardModelsBrowseRequest, opts?: Oazapfts.RequestOpts) {
     return oazapfts.ok(oazapfts.fetchJson<{
         status: 200;
@@ -57268,7 +59254,7 @@ export function postApiV1OrderitemMany(body?: WebApiModulesAgentOrderItemOrderIt
 export function postApiV1OrderitemInsertheaders(body?: WebApiModulesAgentOrderItemOrderItem[], opts?: Oazapfts.RequestOpts) {
     return oazapfts.ok(oazapfts.fetchJson<{
         status: 200;
-        data: WebApiLogicTSpStatusResponse;
+        data: FwStandardSqlServerTSpStatusResponse;
     } | {
         status: 400;
         data: FwCoreApiSwashbuckleBadRequestResponse;
@@ -57288,7 +59274,7 @@ export function postApiV1OrderitemInsertheaders(body?: WebApiModulesAgentOrderIt
 export function postApiV1OrderitemInserttexts(body?: WebApiModulesAgentOrderItemOrderItem[], opts?: Oazapfts.RequestOpts) {
     return oazapfts.ok(oazapfts.fetchJson<{
         status: 200;
-        data: WebApiLogicTSpStatusResponse;
+        data: FwStandardSqlServerTSpStatusResponse;
     } | {
         status: 400;
         data: FwCoreApiSwashbuckleBadRequestResponse;
@@ -57308,7 +59294,7 @@ export function postApiV1OrderitemInserttexts(body?: WebApiModulesAgentOrderItem
 export function postApiV1OrderitemInsertsubtotals(body?: WebApiModulesAgentOrderItemOrderItem[], opts?: Oazapfts.RequestOpts) {
     return oazapfts.ok(oazapfts.fetchJson<{
         status: 200;
-        data: WebApiLogicTSpStatusResponse;
+        data: FwStandardSqlServerTSpStatusResponse;
     } | {
         status: 400;
         data: FwCoreApiSwashbuckleBadRequestResponse;
@@ -57328,7 +59314,7 @@ export function postApiV1OrderitemInsertsubtotals(body?: WebApiModulesAgentOrder
 export function postApiV1OrderitemInsertlineitem(webApiModulesAgentOrderItemInsertLineItemRequest?: WebApiModulesAgentOrderItemInsertLineItemRequest, opts?: Oazapfts.RequestOpts) {
     return oazapfts.ok(oazapfts.fetchJson<{
         status: 200;
-        data: WebApiLogicTSpStatusResponse;
+        data: FwStandardSqlServerTSpStatusResponse;
     } | {
         status: 400;
         data: FwCoreApiSwashbuckleBadRequestResponse;
@@ -57348,7 +59334,7 @@ export function postApiV1OrderitemInsertlineitem(webApiModulesAgentOrderItemInse
 export function postApiV1OrderitemInsertoption(webApiModulesAgentOrderItemInsertOptionRequest?: WebApiModulesAgentOrderItemInsertOptionRequest, opts?: Oazapfts.RequestOpts) {
     return oazapfts.ok(oazapfts.fetchJson<{
         status: 200;
-        data: WebApiLogicTSpStatusResponse;
+        data: FwStandardSqlServerTSpStatusResponse;
     } | {
         status: 400;
         data: FwCoreApiSwashbuckleBadRequestResponse;
@@ -57363,6 +59349,26 @@ export function postApiV1OrderitemInsertoption(webApiModulesAgentOrderItemInsert
         ...opts,
         method: "POST",
         body: webApiModulesAgentOrderItemInsertOptionRequest
+    })));
+}
+export function postApiV1OrderitemAddalistofitems(webApiModulesAgentOrderItemAddAListOfItemsRequest?: WebApiModulesAgentOrderItemAddAListOfItemsRequest, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.ok(oazapfts.fetchJson<{
+        status: 200;
+        data: WebApiModulesAgentOrderItemAddAListOfItemsResponse;
+    } | {
+        status: 400;
+        data: FwCoreApiSwashbuckleBadRequestResponse;
+    } | {
+        status: 401;
+    } | {
+        status: 403;
+    } | {
+        status: 500;
+        data: FwStandardModelsFwApiException;
+    }>("/api/v1/orderitem/addalistofitems", oazapfts.json({
+        ...opts,
+        method: "POST",
+        body: webApiModulesAgentOrderItemAddAListOfItemsRequest
     })));
 }
 export function postApiV1OrderitemSplitlineitem(webApiModulesAgentOrderItemSplitOrderItemRequest?: WebApiModulesAgentOrderItemSplitOrderItemRequest, opts?: Oazapfts.RequestOpts) {
@@ -57599,7 +59605,7 @@ export function postApiV1OrderitemSort(webApiModulesAgentOrderItemSortOrderItems
 export function postApiV1OrderitemCancelmanualsort(webApiModulesAgentOrderItemCancelManualSortRequest?: WebApiModulesAgentOrderItemCancelManualSortRequest, opts?: Oazapfts.RequestOpts) {
     return oazapfts.ok(oazapfts.fetchJson<{
         status: 200;
-        data: WebApiLogicTSpStatusResponse;
+        data: FwStandardSqlServerTSpStatusResponse;
     } | {
         status: 400;
         data: FwCoreApiSwashbuckleBadRequestResponse;
@@ -57654,26 +59660,6 @@ export function postApiV1OrderitemPastefromclipboard(webApiModulesAgentOrderItem
         ...opts,
         method: "POST",
         body: webApiModulesAgentOrderItemPasteOrderItemsFromClipboardRequest
-    })));
-}
-export function postApiV1OrderitemUpdatecostorder(webApiModulesAgentOrderItemCostOrderItemsRequest?: WebApiModulesAgentOrderItemCostOrderItemsRequest, opts?: Oazapfts.RequestOpts) {
-    return oazapfts.ok(oazapfts.fetchJson<{
-        status: 200;
-        data: WebApiModulesAgentOrderItemCostOrderItemsResponse;
-    } | {
-        status: 400;
-        data: FwCoreApiSwashbuckleBadRequestResponse;
-    } | {
-        status: 401;
-    } | {
-        status: 403;
-    } | {
-        status: 500;
-        data: FwStandardModelsFwApiException;
-    }>("/api/v1/orderitem/updatecostorder", oazapfts.json({
-        ...opts,
-        method: "POST",
-        body: webApiModulesAgentOrderItemCostOrderItemsRequest
     })));
 }
 export function postApiV1OrderitemDonothingPoworksheet(body?: any, opts?: Oazapfts.RequestOpts) {
@@ -58054,26 +60040,6 @@ export function postApiV1OrderitemToggleorderapproval(webApiModulesAgentOrderIte
         ...opts,
         method: "POST",
         body: webApiModulesAgentOrderItemToggleOrderApprovalRequest
-    })));
-}
-export function postApiV1OrderitemMassupdatecrew(webApiModulesAgentOrderItemMassUpdateCrewRequest?: WebApiModulesAgentOrderItemMassUpdateCrewRequest, opts?: Oazapfts.RequestOpts) {
-    return oazapfts.ok(oazapfts.fetchJson<{
-        status: 200;
-        data: WebApiModulesAgentOrderItemMassUpdateCrewResponse;
-    } | {
-        status: 400;
-        data: FwCoreApiSwashbuckleBadRequestResponse;
-    } | {
-        status: 401;
-    } | {
-        status: 403;
-    } | {
-        status: 500;
-        data: FwStandardModelsFwApiException;
-    }>("/api/v1/orderitem/massupdatecrew", oazapfts.json({
-        ...opts,
-        method: "POST",
-        body: webApiModulesAgentOrderItemMassUpdateCrewRequest
     })));
 }
 export function postApiV1OrderitemValidatecrewBrowse(fwStandardModelsBrowseRequest?: FwStandardModelsBrowseRequest, opts?: Oazapfts.RequestOpts) {
@@ -58691,7 +60657,7 @@ export function getApiV1OrderstatusdetailLegendByOrdertype(orderType: string, op
     } | {
         status: 500;
         data: FwStandardModelsFwApiException;
-    }>(`/api/v1/orderstatusdetail/legend/${encodeURIComponent(orderType)}`, {
+    }>(`/api/v1/orderstatusdetail/legend/${encodeURIComponent(ordertype)}`, {
         ...opts
     }));
 }
@@ -58837,7 +60803,7 @@ export function getApiV1OrderstatussummaryLegendByOrdertype(orderType: string, o
     } | {
         status: 500;
         data: FwStandardModelsFwApiException;
-    }>(`/api/v1/orderstatussummary/legend/${encodeURIComponent(orderType)}`, {
+    }>(`/api/v1/orderstatussummary/legend/${encodeURIComponent(ordertype)}`, {
         ...opts
     }));
 }
@@ -58885,6 +60851,32 @@ export function getApiV1Ordersummary({ orderid, totaltype }: {
     }>(`/api/v1/ordersummary${QS.query(QS.explode({
         orderid,
         totaltype
+    }))}`, {
+        ...opts
+    }));
+}
+export function getApiV1OrdersummaryGetsummaries({ projectid, totaltype, ordertype }: {
+    projectid?: string;
+    totaltype?: string;
+    ordertype?: string;
+} = {}, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.ok(oazapfts.fetchJson<{
+        status: 200;
+        data: WebApiModulesHomeControlsOrderSummaryOrderSummaryResponse;
+    } | {
+        status: 400;
+        data: FwCoreApiSwashbuckleBadRequestResponse;
+    } | {
+        status: 401;
+    } | {
+        status: 403;
+    } | {
+        status: 500;
+        data: FwStandardModelsFwApiException;
+    }>(`/api/v1/ordersummary/getsummaries${QS.query(QS.explode({
+        projectid,
+        totaltype,
+        ordertype
     }))}`, {
         ...opts
     }));
@@ -59705,26 +61697,6 @@ export function postApiV1PartsinventoryValidatecountryoforiginBrowse(fwStandardM
         body: fwStandardModelsBrowseRequest
     })));
 }
-export function postApiV1PartsinventoryCopy(webApiModulesInventoryInventoryCopyInventoryRequest?: WebApiModulesInventoryInventoryCopyInventoryRequest, opts?: Oazapfts.RequestOpts) {
-    return oazapfts.ok(oazapfts.fetchJson<{
-        status: 200;
-        data: WebApiModulesInventoryPartsInventoryPartsInventoryRead;
-    } | {
-        status: 400;
-        data: FwCoreApiSwashbuckleBadRequestResponse;
-    } | {
-        status: 401;
-    } | {
-        status: 403;
-    } | {
-        status: 500;
-        data: FwStandardModelsFwApiException;
-    }>("/api/v1/partsinventory/copy", oazapfts.json({
-        ...opts,
-        method: "POST",
-        body: webApiModulesInventoryInventoryCopyInventoryRequest
-    })));
-}
 export function postApiV1PartsinventoryRefreshusagehistory(webApiModulesInventoryInventoryPopulateInventoryUsageHistoryRequest?: WebApiModulesInventoryInventoryPopulateInventoryUsageHistoryRequest, opts?: Oazapfts.RequestOpts) {
     return oazapfts.ok(oazapfts.fetchJson<{
         status: 200;
@@ -59805,6 +61777,26 @@ export function getApiV1PartsinventoryGetqbodata({ inventoryid }: {
     }))}`, {
         ...opts
     }));
+}
+export function postApiV1PartsinventoryByIdCopy(id: string, fwStandardModelsCopyLogicRequest?: FwStandardModelsCopyLogicRequest, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.ok(oazapfts.fetchJson<{
+        status: 200;
+        data: FwStandardModelsCopyLogicResponseRead;
+    } | {
+        status: 400;
+        data: FwCoreApiSwashbuckleBadRequestResponse;
+    } | {
+        status: 401;
+    } | {
+        status: 403;
+    } | {
+        status: 500;
+        data: FwStandardModelsFwApiException;
+    }>(`/api/v1/partsinventory/${encodeURIComponent(id)}/copy`, oazapfts.json({
+        ...opts,
+        method: "POST",
+        body: fwStandardModelsCopyLogicRequest
+    })));
 }
 export function postApiV1PaymentBrowse(fwStandardModelsBrowseRequest?: FwStandardModelsBrowseRequest, opts?: Oazapfts.RequestOpts) {
     return oazapfts.ok(oazapfts.fetchJson<{
@@ -61656,6 +63648,66 @@ export function deleteApiV1PicklistById(id: string, opts?: Oazapfts.RequestOpts)
         method: "DELETE"
     }));
 }
+export function postApiV1PicklistValidatedeliverycarrierBrowse(fwStandardModelsBrowseRequest?: FwStandardModelsBrowseRequest, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.ok(oazapfts.fetchJson<{
+        status: 200;
+        data: FwStandardSqlServerFwJsonDataTableRead;
+    } | {
+        status: 400;
+        data: FwCoreApiSwashbuckleBadRequestResponse;
+    } | {
+        status: 401;
+    } | {
+        status: 403;
+    } | {
+        status: 500;
+        data: FwStandardModelsFwApiException;
+    }>("/api/v1/picklist/validatedeliverycarrier/browse", oazapfts.json({
+        ...opts,
+        method: "POST",
+        body: fwStandardModelsBrowseRequest
+    })));
+}
+export function postApiV1PicklistValidateshipviaBrowse(fwStandardModelsBrowseRequest?: FwStandardModelsBrowseRequest, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.ok(oazapfts.fetchJson<{
+        status: 200;
+        data: FwStandardSqlServerFwJsonDataTableRead;
+    } | {
+        status: 400;
+        data: FwCoreApiSwashbuckleBadRequestResponse;
+    } | {
+        status: 401;
+    } | {
+        status: 403;
+    } | {
+        status: 500;
+        data: FwStandardModelsFwApiException;
+    }>("/api/v1/picklist/validateshipvia/browse", oazapfts.json({
+        ...opts,
+        method: "POST",
+        body: fwStandardModelsBrowseRequest
+    })));
+}
+export function postApiV1PicklistValidatedeliverytocountryBrowse(fwStandardModelsBrowseRequest?: FwStandardModelsBrowseRequest, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.ok(oazapfts.fetchJson<{
+        status: 200;
+        data: FwStandardSqlServerFwJsonDataTableRead;
+    } | {
+        status: 400;
+        data: FwCoreApiSwashbuckleBadRequestResponse;
+    } | {
+        status: 401;
+    } | {
+        status: 403;
+    } | {
+        status: 500;
+        data: FwStandardModelsFwApiException;
+    }>("/api/v1/picklist/validatedeliverytocountry/browse", oazapfts.json({
+        ...opts,
+        method: "POST",
+        body: fwStandardModelsBrowseRequest
+    })));
+}
 export function postApiV1PicklistitemBrowse(fwStandardModelsBrowseRequest?: FwStandardModelsBrowseRequest, opts?: Oazapfts.RequestOpts) {
     return oazapfts.ok(oazapfts.fetchJson<{
         status: 200;
@@ -62023,7 +64075,7 @@ export function postApiV1PicklistutilityitemStartsession(webApiModulesHomeContro
 export function postApiV1PicklistutilityitemApplypicklistsessionitems(webApiModulesHomeControlsPickListUtilityItemApplyPickListSessionItemsRequest?: WebApiModulesHomeControlsPickListUtilityItemApplyPickListSessionItemsRequest, opts?: Oazapfts.RequestOpts) {
     return oazapfts.ok(oazapfts.fetchJson<{
         status: 200;
-        data: WebApiLogicTSpStatusResponse;
+        data: FwStandardSqlServerTSpStatusResponse;
     } | {
         status: 400;
         data: FwCoreApiSwashbuckleBadRequestResponse;
@@ -62749,6 +64801,26 @@ export function deleteApiV1ProjectById(id: string, opts?: Oazapfts.RequestOpts) 
         ...opts,
         method: "DELETE"
     }));
+}
+export function postApiV1ProjectByIdCopy(id: string, fwStandardModelsCopyLogicRequest?: FwStandardModelsCopyLogicRequest, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.ok(oazapfts.fetchJson<{
+        status: 200;
+        data: FwStandardModelsCopyLogicResponseRead;
+    } | {
+        status: 400;
+        data: FwCoreApiSwashbuckleBadRequestResponse;
+    } | {
+        status: 401;
+    } | {
+        status: 403;
+    } | {
+        status: 500;
+        data: FwStandardModelsFwApiException;
+    }>(`/api/v1/project/${encodeURIComponent(id)}/copy`, oazapfts.json({
+        ...opts,
+        method: "POST",
+        body: fwStandardModelsCopyLogicRequest
+    })));
 }
 export function postApiV1ProjectCreatequote(webApiModulesAgentProjectCreateQuoteFromProjectRequest?: WebApiModulesAgentProjectCreateQuoteFromProjectRequest, opts?: Oazapfts.RequestOpts) {
     return oazapfts.ok(oazapfts.fetchJson<{
@@ -63825,7 +65897,7 @@ export function postApiV1PurchaseorderApplybottomlinediscountpercent(webApiApply
 export function postApiV1PurchaseorderApplybottomlinetotal(webApiApplyBottomLineTotalRequest?: WebApiApplyBottomLineTotalRequest, opts?: Oazapfts.RequestOpts) {
     return oazapfts.ok(oazapfts.fetchJson<{
         status: 200;
-        data: WebApiLogicTSpStatusResponse;
+        data: FwStandardSqlServerTSpStatusResponse;
     } | {
         status: 400;
         data: FwCoreApiSwashbuckleBadRequestResponse;
@@ -63912,7 +65984,7 @@ export function getApiV1PurchaseorderNextvendorinvoicedefaultdatesByPurchaseorde
     } | {
         status: 500;
         data: FwStandardModelsFwApiException;
-    }>(`/api/v1/purchaseorder/nextvendorinvoicedefaultdates/${encodeURIComponent(purchaseOrderId)}`, {
+    }>(`/api/v1/purchaseorder/nextvendorinvoicedefaultdates/${encodeURIComponent(purchaseorderid)}`, {
         ...opts
     }));
 }
@@ -64036,6 +66108,46 @@ export function postApiV1PurchaseorderFirstapprove(webApiModulesAgentPurchaseOrd
         body: webApiModulesAgentPurchaseOrderFirstApprovePurchaseOrderRequest
     })));
 }
+export function postApiV1PurchaseorderApprovefromkissflow(webApiModulesAgentPurchaseOrderKissFlowPoApprovalRequest?: WebApiModulesAgentPurchaseOrderKissFlowPoApprovalRequest, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.ok(oazapfts.fetchJson<{
+        status: 200;
+        data: WebApiModulesAgentPurchaseOrderKissFlowPoApproveReseponseRead;
+    } | {
+        status: 400;
+        data: FwCoreApiSwashbuckleBadRequestResponse;
+    } | {
+        status: 401;
+    } | {
+        status: 403;
+    } | {
+        status: 500;
+        data: FwStandardModelsFwApiException;
+    }>("/api/v1/purchaseorder/approvefromkissflow", oazapfts.json({
+        ...opts,
+        method: "POST",
+        body: webApiModulesAgentPurchaseOrderKissFlowPoApprovalRequest
+    })));
+}
+export function postApiV1PurchaseorderRejectfromkissflow(webApiModulesAgentPurchaseOrderKissFlowPoRejectRequest?: WebApiModulesAgentPurchaseOrderKissFlowPoRejectRequest, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.ok(oazapfts.fetchJson<{
+        status: 200;
+        data: WebApiModulesAgentPurchaseOrderKissFlowPoRejectReseponseRead;
+    } | {
+        status: 400;
+        data: FwCoreApiSwashbuckleBadRequestResponse;
+    } | {
+        status: 401;
+    } | {
+        status: 403;
+    } | {
+        status: 500;
+        data: FwStandardModelsFwApiException;
+    }>("/api/v1/purchaseorder/rejectfromkissflow", oazapfts.json({
+        ...opts,
+        method: "POST",
+        body: webApiModulesAgentPurchaseOrderKissFlowPoRejectRequest
+    })));
+}
 export function postApiV1PurchaseorderSecondapprove(webApiModulesAgentPurchaseOrderSecondApprovePurchaseOrderRequest?: WebApiModulesAgentPurchaseOrderSecondApprovePurchaseOrderRequest, opts?: Oazapfts.RequestOpts) {
     return oazapfts.ok(oazapfts.fetchJson<{
         status: 200;
@@ -64059,7 +66171,7 @@ export function postApiV1PurchaseorderSecondapprove(webApiModulesAgentPurchaseOr
 export function postApiV1PurchaseorderAllitemscheckedout(webApiModulesAgentPurchaseOrderAllItemsCheckedOutRequest?: WebApiModulesAgentPurchaseOrderAllItemsCheckedOutRequest, opts?: Oazapfts.RequestOpts) {
     return oazapfts.ok(oazapfts.fetchJson<{
         status: 200;
-        data: WebApiLogicTSpStatusResponse;
+        data: FwStandardSqlServerTSpStatusResponse;
     } | {
         status: 400;
         data: FwCoreApiSwashbuckleBadRequestResponse;
@@ -65343,7 +67455,7 @@ export function postApiV1QuikinCancelitems(webApiModulesWarehouseCheckInQuikInIt
 export function postApiV1QuikinCancelcontract(webApiModulesWarehouseContractCancelContractRequest?: WebApiModulesWarehouseContractCancelContractRequest, opts?: Oazapfts.RequestOpts) {
     return oazapfts.ok(oazapfts.fetchJson<{
         status: 200;
-        data: WebApiLogicTSpStatusResponse;
+        data: FwStandardSqlServerTSpStatusResponse;
     } | {
         status: 400;
         data: FwCoreApiSwashbuckleBadRequestResponse;
@@ -65363,7 +67475,7 @@ export function postApiV1QuikinCancelcontract(webApiModulesWarehouseContractCanc
 export function postApiV1QuikinForcesuspendsession(webApiModulesWarehouseContractForceSuspendSessionRequest?: WebApiModulesWarehouseContractForceSuspendSessionRequest, opts?: Oazapfts.RequestOpts) {
     return oazapfts.ok(oazapfts.fetchJson<{
         status: 200;
-        data: WebApiLogicTSpStatusResponse;
+        data: FwStandardSqlServerTSpStatusResponse;
     } | {
         status: 400;
         data: FwCoreApiSwashbuckleBadRequestResponse;
@@ -66377,7 +68489,7 @@ export function postApiV1QuoteCreatenewversionById(id: string, opts?: Oazapfts.R
 export function postApiV1QuoteMakequoteactiveById(id: string, opts?: Oazapfts.RequestOpts) {
     return oazapfts.ok(oazapfts.fetchJson<{
         status: 200;
-        data: WebApiLogicTSpStatusResponse;
+        data: FwStandardSqlServerTSpStatusResponse;
     } | {
         status: 400;
         data: FwCoreApiSwashbuckleBadRequestResponse;
@@ -66513,7 +68625,7 @@ export function postApiV1QuoteApplybottomlinediscountpercent(webApiApplyBottomLi
 export function postApiV1QuoteApplybottomlinetotal(webApiApplyBottomLineTotalRequest?: WebApiApplyBottomLineTotalRequest, opts?: Oazapfts.RequestOpts) {
     return oazapfts.ok(oazapfts.fetchJson<{
         status: 200;
-        data: WebApiLogicTSpStatusResponse;
+        data: FwStandardSqlServerTSpStatusResponse;
     } | {
         status: 400;
         data: FwCoreApiSwashbuckleBadRequestResponse;
@@ -68426,7 +70538,7 @@ export function postApiV1ReceivefromvendorCompletecontractById(id: string, webAp
 export function postApiV1ReceivefromvendorCancelcontract(webApiModulesWarehouseContractCancelContractRequest?: WebApiModulesWarehouseContractCancelContractRequest, opts?: Oazapfts.RequestOpts) {
     return oazapfts.ok(oazapfts.fetchJson<{
         status: 200;
-        data: WebApiLogicTSpStatusResponse;
+        data: FwStandardSqlServerTSpStatusResponse;
     } | {
         status: 400;
         data: FwCoreApiSwashbuckleBadRequestResponse;
@@ -70567,10 +72679,10 @@ export function postApiV1RentalinventoryValidateorderBrowse(fwStandardModelsBrow
         body: fwStandardModelsBrowseRequest
     })));
 }
-export function postApiV1RentalinventoryCopy(webApiModulesInventoryInventoryCopyInventoryRequest?: WebApiModulesInventoryInventoryCopyInventoryRequest, opts?: Oazapfts.RequestOpts) {
+export function postApiV1RentalinventoryByIdCopy(id: string, fwStandardModelsCopyLogicRequest?: FwStandardModelsCopyLogicRequest, opts?: Oazapfts.RequestOpts) {
     return oazapfts.ok(oazapfts.fetchJson<{
         status: 200;
-        data: WebApiModulesInventoryRentalInventoryRentalInventoryRead;
+        data: FwStandardModelsCopyLogicResponseRead;
     } | {
         status: 400;
         data: FwCoreApiSwashbuckleBadRequestResponse;
@@ -70581,10 +72693,10 @@ export function postApiV1RentalinventoryCopy(webApiModulesInventoryInventoryCopy
     } | {
         status: 500;
         data: FwStandardModelsFwApiException;
-    }>("/api/v1/rentalinventory/copy", oazapfts.json({
+    }>(`/api/v1/rentalinventory/${encodeURIComponent(id)}/copy`, oazapfts.json({
         ...opts,
         method: "POST",
-        body: webApiModulesInventoryInventoryCopyInventoryRequest
+        body: fwStandardModelsCopyLogicRequest
     })));
 }
 export function postApiV1RentalinventoryRefreshusagehistory(webApiModulesInventoryInventoryPopulateInventoryUsageHistoryRequest?: WebApiModulesInventoryInventoryPopulateInventoryUsageHistoryRequest, opts?: Oazapfts.RequestOpts) {
@@ -72943,7 +75055,7 @@ export function postApiV1ReturntovendorCompletecontractById(id: string, opts?: O
 export function postApiV1ReturntovendorCancelcontract(webApiModulesWarehouseContractCancelContractRequest?: WebApiModulesWarehouseContractCancelContractRequest, opts?: Oazapfts.RequestOpts) {
     return oazapfts.ok(oazapfts.fetchJson<{
         status: 200;
-        data: WebApiLogicTSpStatusResponse;
+        data: FwStandardSqlServerTSpStatusResponse;
     } | {
         status: 400;
         data: FwCoreApiSwashbuckleBadRequestResponse;
@@ -73876,26 +75988,6 @@ export function postApiV1SalesinventoryValidatemanufacturerBrowse(fwStandardMode
         body: fwStandardModelsBrowseRequest
     })));
 }
-export function postApiV1SalesinventoryCopy(webApiModulesInventoryInventoryCopyInventoryRequest?: WebApiModulesInventoryInventoryCopyInventoryRequest, opts?: Oazapfts.RequestOpts) {
-    return oazapfts.ok(oazapfts.fetchJson<{
-        status: 200;
-        data: WebApiModulesInventorySalesInventorySalesInventoryRead;
-    } | {
-        status: 400;
-        data: FwCoreApiSwashbuckleBadRequestResponse;
-    } | {
-        status: 401;
-    } | {
-        status: 403;
-    } | {
-        status: 500;
-        data: FwStandardModelsFwApiException;
-    }>("/api/v1/salesinventory/copy", oazapfts.json({
-        ...opts,
-        method: "POST",
-        body: webApiModulesInventoryInventoryCopyInventoryRequest
-    })));
-}
 export function postApiV1SalesinventoryRefreshusagehistory(webApiModulesInventoryInventoryPopulateInventoryUsageHistoryRequest?: WebApiModulesInventoryInventoryPopulateInventoryUsageHistoryRequest, opts?: Oazapfts.RequestOpts) {
     return oazapfts.ok(oazapfts.fetchJson<{
         status: 200;
@@ -73976,6 +76068,26 @@ export function getApiV1SalesinventoryGetqbodata({ inventoryid }: {
     }))}`, {
         ...opts
     }));
+}
+export function postApiV1SalesinventoryByIdCopy(id: string, fwStandardModelsCopyLogicRequest?: FwStandardModelsCopyLogicRequest, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.ok(oazapfts.fetchJson<{
+        status: 200;
+        data: FwStandardModelsCopyLogicResponseRead;
+    } | {
+        status: 400;
+        data: FwCoreApiSwashbuckleBadRequestResponse;
+    } | {
+        status: 401;
+    } | {
+        status: 403;
+    } | {
+        status: 500;
+        data: FwStandardModelsFwApiException;
+    }>(`/api/v1/salesinventory/${encodeURIComponent(id)}/copy`, oazapfts.json({
+        ...opts,
+        method: "POST",
+        body: fwStandardModelsCopyLogicRequest
+    })));
 }
 export function postApiV1SalesinventorySynctoqbo({ inventoryid, locationid }: {
     inventoryid?: string;
@@ -75045,6 +77157,26 @@ export function getApiV1SetimagehistoryByInventoryidSetimagehistoryitemEmptyobje
         ...opts
     }));
 }
+export function postApiV1SetqcSetqcitem(webApiModulesInventorySetQcSetQcItemRequest?: WebApiModulesInventorySetQcSetQcItemRequest, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.ok(oazapfts.fetchJson<{
+        status: 200;
+        data: WebApiModulesInventorySetQcSetQcItemResponse;
+    } | {
+        status: 400;
+        data: FwCoreApiSwashbuckleBadRequestResponse;
+    } | {
+        status: 401;
+    } | {
+        status: 403;
+    } | {
+        status: 500;
+        data: FwStandardModelsFwApiException;
+    }>("/api/v1/setqc/setqcitem", oazapfts.json({
+        ...opts,
+        method: "POST",
+        body: webApiModulesInventorySetQcSetQcItemRequest
+    })));
+}
 export function postApiV1StageditemBrowse(fwStandardModelsBrowseRequest?: FwStandardModelsBrowseRequest, opts?: Oazapfts.RequestOpts) {
     return oazapfts.ok(oazapfts.fetchJson<{
         status: 200;
@@ -75873,7 +78005,7 @@ export function postApiV1TransferinReleaserepairitems(webApiModulesWarehouseChec
 export function postApiV1TransferinCancelcontract(webApiModulesWarehouseContractCancelContractRequest?: WebApiModulesWarehouseContractCancelContractRequest, opts?: Oazapfts.RequestOpts) {
     return oazapfts.ok(oazapfts.fetchJson<{
         status: 200;
-        data: WebApiLogicTSpStatusResponse;
+        data: FwStandardSqlServerTSpStatusResponse;
     } | {
         status: 400;
         data: FwCoreApiSwashbuckleBadRequestResponse;
@@ -75893,7 +78025,7 @@ export function postApiV1TransferinCancelcontract(webApiModulesWarehouseContract
 export function postApiV1TransferinForcesuspendsession(webApiModulesWarehouseContractForceSuspendSessionRequest?: WebApiModulesWarehouseContractForceSuspendSessionRequest, opts?: Oazapfts.RequestOpts) {
     return oazapfts.ok(oazapfts.fetchJson<{
         status: 200;
-        data: WebApiLogicTSpStatusResponse;
+        data: FwStandardSqlServerTSpStatusResponse;
     } | {
         status: 400;
         data: FwCoreApiSwashbuckleBadRequestResponse;
@@ -76281,6 +78413,397 @@ export function deleteApiV1TransfermanifestById(id: string, opts?: Oazapfts.Requ
     }>(`/api/v1/transfermanifest/${encodeURIComponent(id)}`, {
         ...opts,
         method: "DELETE"
+    }));
+}
+/**
+ * Get documents.
+ */
+export function postApiV1TransferorderByTransferidDocumentBrowse(transferid: string, fwStandardModelsBrowseRequest?: FwStandardModelsBrowseRequest, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.ok(oazapfts.fetchJson<{
+        status: 200;
+        data: FwStandardSqlServerFwJsonDataTableRead;
+    } | {
+        status: 400;
+        data: FwCoreApiSwashbuckleBadRequestResponse;
+    } | {
+        status: 401;
+    } | {
+        status: 403;
+    } | {
+        status: 500;
+        data: FwStandardModelsFwApiException;
+    }>(`/api/v1/transferorder/${encodeURIComponent(transferid)}/document/browse`, oazapfts.json({
+        ...opts,
+        method: "POST",
+        body: fwStandardModelsBrowseRequest
+    })));
+}
+/**
+ * Export documents to Excel.
+ */
+export function postApiV1TransferorderByTransferidDocumentExportexcelxlsx(transferid: string, fwStandardModelsBrowseRequest?: FwStandardModelsBrowseRequest, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.ok(oazapfts.fetchJson<{
+        status: 200;
+        data: FwCoreControllersFwDataControllerDoExportExcelXlsxExportFileAsyncResult;
+    } | {
+        status: 400;
+        data: FwCoreApiSwashbuckleBadRequestResponse;
+    } | {
+        status: 401;
+    } | {
+        status: 403;
+    } | {
+        status: 500;
+        data: FwStandardModelsFwApiException;
+    }>(`/api/v1/transferorder/${encodeURIComponent(transferid)}/document/exportexcelxlsx`, oazapfts.json({
+        ...opts,
+        method: "POST",
+        body: fwStandardModelsBrowseRequest
+    })));
+}
+/**
+ * Get documents.
+ */
+export function getApiV1TransferorderByTransferidDocuments(transferid: string, { documentTypeId, description, dateStamp, pageNo, pageSize, sort }: {
+    documentTypeId?: string;
+    description?: string;
+    dateStamp?: string;
+    pageNo?: number;
+    pageSize?: number;
+    sort?: string;
+} = {}, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.ok(oazapfts.fetchJson<{
+        status: 200;
+        data: FwStandardModelsGetResponseFwStandardGridsAppDocumentAppDocumentGetManyResponse;
+    } | {
+        status: 400;
+        data: FwCoreApiSwashbuckleBadRequestResponse;
+    } | {
+        status: 401;
+    } | {
+        status: 403;
+    } | {
+        status: 500;
+        data: FwStandardModelsFwApiException;
+    }>(`/api/v1/transferorder/${encodeURIComponent(transferid)}/documents${QS.query(QS.explode({
+        DocumentTypeId: documentTypeId,
+        Description: description,
+        DateStamp: dateStamp,
+        PageNo: pageNo,
+        PageSize: pageSize,
+        Sort: sort
+    }))}`, {
+        ...opts
+    }));
+}
+/**
+ * Get a document.
+ */
+export function getApiV1TransferorderByTransferidDocumentAndDocumentid(transferid: string, documentid: string, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.ok(oazapfts.fetchJson<{
+        status: 200;
+        data: WebApiModulesTransfersTransferOrderTransferOrderDocumentRead;
+    } | {
+        status: 400;
+        data: FwCoreApiSwashbuckleBadRequestResponse;
+    } | {
+        status: 401;
+    } | {
+        status: 403;
+    } | {
+        status: 500;
+        data: FwStandardModelsFwApiException;
+    }>(`/api/v1/transferorder/${encodeURIComponent(transferid)}/document/${encodeURIComponent(documentid)}`, {
+        ...opts
+    }));
+}
+/**
+ * Update a document.
+ */
+export function putApiV1TransferorderByTransferidDocumentAndDocumentid(transferid: string, documentid: string, webApiModulesTransfersTransferOrderTransferOrderDocumentPutRequest?: WebApiModulesTransfersTransferOrderTransferOrderDocumentPutRequest, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.ok(oazapfts.fetchJson<{
+        status: 200;
+        data: WebApiModulesTransfersTransferOrderTransferOrderDocumentRead;
+    } | {
+        status: 400;
+        data: FwCoreApiSwashbuckleBadRequestResponse;
+    } | {
+        status: 401;
+    } | {
+        status: 403;
+    } | {
+        status: 500;
+        data: FwStandardModelsFwApiException;
+    }>(`/api/v1/transferorder/${encodeURIComponent(transferid)}/document/${encodeURIComponent(documentid)}`, oazapfts.json({
+        ...opts,
+        method: "PUT",
+        body: webApiModulesTransfersTransferOrderTransferOrderDocumentPutRequest
+    })));
+}
+/**
+ * Delete a document.
+ */
+export function deleteApiV1TransferorderByTransferidDocumentAndDocumentid(transferid: string, documentid: string, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.ok(oazapfts.fetchJson<{
+        status: 200;
+        data: boolean;
+    } | {
+        status: 400;
+        data: FwCoreApiSwashbuckleBadRequestResponse;
+    } | {
+        status: 401;
+    } | {
+        status: 403;
+    } | {
+        status: 500;
+        data: FwStandardModelsFwApiException;
+    }>(`/api/v1/transferorder/${encodeURIComponent(transferid)}/document/${encodeURIComponent(documentid)}`, {
+        ...opts,
+        method: "DELETE"
+    }));
+}
+/**
+ * Create a new document.
+ */
+export function postApiV1TransferorderByTransferidDocument(transferid: string, webApiModulesTransfersTransferOrderTransferOrderDocumentPostRequest?: WebApiModulesTransfersTransferOrderTransferOrderDocumentPostRequest, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.ok(oazapfts.fetchJson<{
+        status: 200;
+        data: WebApiModulesTransfersTransferOrderTransferOrderDocumentRead;
+    } | {
+        status: 400;
+        data: FwCoreApiSwashbuckleBadRequestResponse;
+    } | {
+        status: 401;
+    } | {
+        status: 403;
+    } | {
+        status: 500;
+        data: FwStandardModelsFwApiException;
+    }>(`/api/v1/transferorder/${encodeURIComponent(transferid)}/document`, oazapfts.json({
+        ...opts,
+        method: "POST",
+        body: webApiModulesTransfersTransferOrderTransferOrderDocumentPostRequest
+    })));
+}
+/**
+ * Get thumbnails for any images attached to the document.
+ */
+export function getApiV1TransferorderByTransferidDocumentAndDocumentidThumbnails(transferid: string, documentid: string, { pageno, pagesize }: {
+    pageno?: number;
+    pagesize?: number;
+} = {}, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.ok(oazapfts.fetchJson<{
+        status: 200;
+        data: FwStandardGridsAppDocumentGetDocumentThumbnailsResponse;
+    } | {
+        status: 400;
+        data: FwCoreApiSwashbuckleBadRequestResponse;
+    } | {
+        status: 401;
+    } | {
+        status: 403;
+    } | {
+        status: 500;
+        data: FwStandardModelsFwApiException;
+    }>(`/api/v1/transferorder/${encodeURIComponent(transferid)}/document/${encodeURIComponent(documentid)}/thumbnails${QS.query(QS.explode({
+        pageno,
+        pagesize
+    }))}`, {
+        ...opts
+    }));
+}
+/**
+ * Get a fullsize image.
+ */
+export function getApiV1TransferorderByTransferidDocumentAndDocumentidImageImageid(transferid: string, documentid: string, imageid: string, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.ok(oazapfts.fetchJson<{
+        status: 200;
+        data: FwStandardGridsAppDocumentGetDocumentImageResponse;
+    } | {
+        status: 400;
+        data: FwCoreApiSwashbuckleBadRequestResponse;
+    } | {
+        status: 401;
+    } | {
+        status: 403;
+    } | {
+        status: 500;
+        data: FwStandardModelsFwApiException;
+    }>(`/api/v1/transferorder/${encodeURIComponent(transferid)}/document/${encodeURIComponent(documentid)}/image/${encodeURIComponent(imageid)}`, {
+        ...opts
+    }));
+}
+/**
+ * Delete an attached image.
+ */
+export function deleteApiV1TransferorderByTransferidDocumentAndDocumentidImageImageid(transferid: string, documentid: string, imageid: string, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.ok(oazapfts.fetchJson<{
+        status: 200;
+        data: boolean;
+    } | {
+        status: 400;
+        data: FwCoreApiSwashbuckleBadRequestResponse;
+    } | {
+        status: 401;
+    } | {
+        status: 403;
+    } | {
+        status: 500;
+        data: FwStandardModelsFwApiException;
+    }>(`/api/v1/transferorder/${encodeURIComponent(transferid)}/document/${encodeURIComponent(documentid)}/image/${encodeURIComponent(imageid)}`, {
+        ...opts,
+        method: "DELETE"
+    }));
+}
+/**
+ * Attach an image from a dataurl.
+ */
+export function postApiV1TransferorderByTransferidDocumentAndDocumentidImage(transferid: string, documentid: string, fwStandardGridsAppDocumentPostDocumentImageRequest?: FwStandardGridsAppDocumentPostDocumentImageRequest, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.ok(oazapfts.fetchJson<{
+        status: 200;
+        data: boolean;
+    } | {
+        status: 400;
+        data: FwCoreApiSwashbuckleBadRequestResponse;
+    } | {
+        status: 401;
+    } | {
+        status: 403;
+    } | {
+        status: 500;
+        data: FwStandardModelsFwApiException;
+    }>(`/api/v1/transferorder/${encodeURIComponent(transferid)}/document/${encodeURIComponent(documentid)}/image`, oazapfts.json({
+        ...opts,
+        method: "POST",
+        body: fwStandardGridsAppDocumentPostDocumentImageRequest
+    })));
+}
+/**
+ * Attach an image from a form submission.
+ */
+export function postApiV1TransferorderByTransferidDocumentAndDocumentidImageformupload(transferid: string, documentid: string, body?: string, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.ok(oazapfts.fetchJson<{
+        status: 200;
+        data: boolean;
+    } | {
+        status: 400;
+        data: FwCoreApiSwashbuckleBadRequestResponse;
+    } | {
+        status: 401;
+    } | {
+        status: 403;
+    } | {
+        status: 500;
+        data: FwStandardModelsFwApiException;
+    }>(`/api/v1/transferorder/${encodeURIComponent(transferid)}/document/${encodeURIComponent(documentid)}/imageformupload`, {
+        ...opts,
+        method: "POST",
+        body
+    }));
+}
+/**
+ * Get the attached file.
+ */
+export function getApiV1TransferorderByTransferidDocumentAndDocumentidFile(transferid: string, documentid: string, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.ok(oazapfts.fetchJson<{
+        status: 200;
+    } | {
+        status: 400;
+        data: FwCoreApiSwashbuckleBadRequestResponse;
+    } | {
+        status: 401;
+    } | {
+        status: 403;
+    } | {
+        status: 500;
+        data: FwStandardModelsFwApiException;
+    }>(`/api/v1/transferorder/${encodeURIComponent(transferid)}/document/${encodeURIComponent(documentid)}/file`, {
+        ...opts
+    }));
+}
+/**
+ * Update the attached file from a dataurl.
+ */
+export function putApiV1TransferorderByTransferidDocumentAndDocumentidFile(transferid: string, documentid: string, fwStandardGridsAppDocumentPutDocumentFileRequest?: FwStandardGridsAppDocumentPutDocumentFileRequest, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.ok(oazapfts.fetchJson<{
+        status: 200;
+        data: boolean;
+    } | {
+        status: 400;
+        data: FwCoreApiSwashbuckleBadRequestResponse;
+    } | {
+        status: 401;
+    } | {
+        status: 403;
+    } | {
+        status: 500;
+        data: FwStandardModelsFwApiException;
+    }>(`/api/v1/transferorder/${encodeURIComponent(transferid)}/document/${encodeURIComponent(documentid)}/file`, oazapfts.json({
+        ...opts,
+        method: "PUT",
+        body: fwStandardGridsAppDocumentPutDocumentFileRequest
+    })));
+}
+/**
+ * Delete attached file.
+ */
+export function deleteApiV1TransferorderByTransferidDocumentAndDocumentidFile(transferid: string, documentid: string, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.ok(oazapfts.fetchJson<{
+        status: 200;
+        data: boolean;
+    } | {
+        status: 400;
+        data: FwCoreApiSwashbuckleBadRequestResponse;
+    } | {
+        status: 401;
+    } | {
+        status: 403;
+    } | {
+        status: 500;
+        data: FwStandardModelsFwApiException;
+    }>(`/api/v1/transferorder/${encodeURIComponent(transferid)}/document/${encodeURIComponent(documentid)}/file`, {
+        ...opts,
+        method: "DELETE"
+    }));
+}
+/**
+ * Update attached file from a form submission.
+ */
+export function putApiV1TransferorderByTransferidDocumentAndDocumentidFileformupload(transferid: string, documentid: string, body?: string, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.ok(oazapfts.fetchJson<{
+        status: 200;
+        data: boolean;
+    } | {
+        status: 400;
+        data: FwCoreApiSwashbuckleBadRequestResponse;
+    } | {
+        status: 401;
+    } | {
+        status: 403;
+    } | {
+        status: 500;
+        data: FwStandardModelsFwApiException;
+    }>(`/api/v1/transferorder/${encodeURIComponent(transferid)}/document/${encodeURIComponent(documentid)}/fileformupload`, {
+        ...opts,
+        method: "PUT",
+        body
+    }));
+}
+export function getApiV1TransferorderByTransferidDocumentEmptyobject(transferid: string, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.ok(oazapfts.fetchJson<{
+        status: 200;
+    } | {
+        status: 400;
+        data: FwCoreApiSwashbuckleBadRequestResponse;
+    } | {
+        status: 401;
+    } | {
+        status: 403;
+    } | {
+        status: 500;
+        data: FwStandardModelsFwApiException;
+    }>(`/api/v1/transferorder/${encodeURIComponent(transferid)}/document/emptyobject`, {
+        ...opts
     }));
 }
 export function postApiV1TransferorderBrowse(fwStandardModelsBrowseRequest?: FwStandardModelsBrowseRequest, opts?: Oazapfts.RequestOpts) {
@@ -76875,7 +79398,7 @@ export function deleteApiV1TransferreceiptById(id: string, opts?: Oazapfts.Reque
 export function postApiV1TransferreceiptVoidcontract(webApiModulesWarehouseContractVoidContractRequest?: WebApiModulesWarehouseContractVoidContractRequest, opts?: Oazapfts.RequestOpts) {
     return oazapfts.ok(oazapfts.fetchJson<{
         status: 200;
-        data: WebApiLogicTSpStatusResponse;
+        data: FwStandardSqlServerTSpStatusResponse;
     } | {
         status: 400;
         data: FwCoreApiSwashbuckleBadRequestResponse;

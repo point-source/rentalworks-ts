@@ -158,6 +158,7 @@ export type FwStandardSqlServerFwJsonDataTable = {
     TotalPages?: number;
     TotalRows?: number;
     DateFields?: string[] | null;
+    ServerVersion?: string | null;
     _Translation?: FwStandardDataFwTranslatedValue[] | null;
 };
 export type FwStandardSqlServerFwJsonDataTableRead = {
@@ -177,6 +178,7 @@ export type FwStandardSqlServerFwJsonDataTableRead = {
     ColumnNameByIndex?: {
         [key: string]: string | null;
     } | null;
+    ServerVersion?: string | null;
     _Translation?: FwStandardDataFwTranslatedValue[] | null;
 };
 export type WebApiModulesAccountServicesAccountSystemSettingsResponse = {
@@ -188,6 +190,10 @@ export type WebApiModulesAccountServicesAccountSystemSettingsResponse = {
     EnableOriginalShow?: boolean;
     EnablePropsWardrobe?: boolean;
     EnableSetsWalls?: boolean;
+    IsStorefrontHosted?: boolean;
+    IsStorefrontApiEnabled?: boolean;
+    IsUniversity?: boolean;
+    SystemUTCDateTime?: string;
 };
 export type WebApiModulesAccountServicesAccountSystemSettingsResponseRead = {
     DefaultUnitId?: string | null;
@@ -198,6 +204,10 @@ export type WebApiModulesAccountServicesAccountSystemSettingsResponseRead = {
     EnableOriginalShow?: boolean;
     EnablePropsWardrobe?: boolean;
     EnableSetsWalls?: boolean;
+    IsStorefrontHosted?: boolean;
+    IsStorefrontApiEnabled?: boolean;
+    IsUniversity?: boolean;
+    SystemUTCDateTime?: string;
 };
 export type WebApiModulesAccountServicesAccountAccountControllerGetSessionResponse = {
     location?: WebApiLogicAppFuncSessionLocation;
@@ -251,9 +261,7 @@ export type WebApiModulesAccountServicesAccountGetSettingsRequest = {
     LocationId?: string | null;
 };
 export type WebApiLogicAppFuncUserSettingsResponse = {
-    SuccessBase64Sound?: string | null;
-    ErrorBase64Sound?: string | null;
-    NotificationBase64Sound?: string | null;
+    SoundProfileId?: number | null;
     WebAdministrator?: boolean | null;
     HomeMenuGuid?: string | null;
     HomeMenuPath?: string | null;
@@ -268,6 +276,7 @@ export type WebApiLogicAppFuncUserSettingsResponse = {
     AvailabilityAllWarehouses?: boolean | null;
     QuikSearchMode?: string | null;
     ShowRentalItemsOutOnly?: boolean | null;
+    AutoPrintContract?: boolean | null;
 };
 export type WebApiLogicAppFuncCustomFieldsResponse = {
     ModuleNames?: string[] | null;
@@ -295,6 +304,22 @@ export type WebApiLogicAppFuncDefaultSettingsResponse = {
     DefaultCustomerStatus?: string | null;
     DefaultDealBillingCycleId?: string | null;
     DefaultDealBillingCycle?: string | null;
+    DefaultVendorPaymentTermsId?: string | null;
+    DefaultVendorPaymentTerms?: string | null;
+    DefaultVendorOutgoingDeliveryType?: string | null;
+    DefaultVendorIncomingDeliveryType?: string | null;
+    DefaultVendorRentalInventory?: boolean | null;
+    DefaultVendorSalesPartsInventory?: boolean | null;
+    DefaultVendorRepair?: boolean | null;
+    DefaultVendorManufacturer?: boolean | null;
+    DefaultVendorFreight?: boolean | null;
+    DefaultVendorInsurance?: boolean | null;
+    DefaultVendorSubRent?: boolean | null;
+    DefaultVendorSubSales?: boolean | null;
+    DefaultVendorSubMisc?: boolean | null;
+    DefaultVendorSubLabor?: boolean | null;
+    DefaultVendorSubVehicle?: boolean | null;
+    DefaultVendorConsignment?: boolean | null;
     DefaultNonRecurringBillingCycleId?: string | null;
     DefaultNonRecurringBillingCycle?: string | null;
     DefaultVendorBillingCycleId?: string | null;
@@ -364,6 +389,8 @@ export type WebApiLogicAppFuncSystemSettingsResponse = {
     DefaultBillingSelectAllOrders?: boolean | null;
     DefaultProcessConsignmentSelectAllInvoices?: boolean | null;
     EnableCrew?: boolean | null;
+    DisableHelpIcon?: boolean | null;
+    OverrideHelpURL?: string | null;
 };
 export type WebApiLogicAppFuncDepartmentDefaultActivities = {
     Facilities?: boolean | null;
@@ -423,17 +450,6 @@ export type FwCoreControllersFwJwtControllerJwtResponseModel = {
     access_token?: string | null;
     expires_in?: number;
     resetpassword?: boolean;
-};
-export type WebApiModulesAccountServicesJwtOktaRequest = {
-    Email?: string | null;
-    Token?: string | null;
-};
-export type WebApiModulesAccountServicesJwtOktaSessionRequest = {
-    Token?: string | null;
-    Apiurl?: string | null;
-};
-export type WebApiModulesAccountServicesJwtOktaSessionResponseModel = {
-    Status?: string | null;
 };
 export type WebApiModulesAccountServicesJwtAzureAdRequest = {
     Email?: string | null;
@@ -714,6 +730,27 @@ export function postApiV1AccountGetsettings(webApiModulesAccountServicesAccountG
         body: webApiModulesAccountServicesAccountGetSettingsRequest
     })));
 }
+export function getJspm({ timestamp }: {
+    timestamp?: string;
+} = {}, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.ok(oazapfts.fetchJson<{
+        status: 200;
+    } | {
+        status: 400;
+        data: FwCoreApiSwashbuckleBadRequestResponse;
+    } | {
+        status: 401;
+    } | {
+        status: 403;
+    } | {
+        status: 500;
+        data: FwStandardModelsFwApiException;
+    }>(`/jspm${QS.query(QS.explode({
+        timestamp
+    }))}`, {
+        ...opts
+    }));
+}
 export function postApiV1Jwt(fwStandardModelsFwApplicationUser?: FwStandardModelsFwApplicationUser, opts?: Oazapfts.RequestOpts) {
     return oazapfts.ok(oazapfts.fetchJson<{
         status: 200;
@@ -732,46 +769,6 @@ export function postApiV1Jwt(fwStandardModelsFwApplicationUser?: FwStandardModel
         ...opts,
         method: "POST",
         body: fwStandardModelsFwApplicationUser
-    })));
-}
-export function postApiV1JwtOkta(webApiModulesAccountServicesJwtOktaRequest?: WebApiModulesAccountServicesJwtOktaRequest, opts?: Oazapfts.RequestOpts) {
-    return oazapfts.ok(oazapfts.fetchJson<{
-        status: 200;
-        data: FwCoreControllersFwJwtControllerJwtResponseModel;
-    } | {
-        status: 400;
-        data: FwCoreApiSwashbuckleBadRequestResponse;
-    } | {
-        status: 401;
-    } | {
-        status: 403;
-    } | {
-        status: 500;
-        data: FwStandardModelsFwApiException;
-    }>("/api/v1/jwt/okta", oazapfts.json({
-        ...opts,
-        method: "POST",
-        body: webApiModulesAccountServicesJwtOktaRequest
-    })));
-}
-export function postApiV1JwtOktaverify(webApiModulesAccountServicesJwtOktaSessionRequest?: WebApiModulesAccountServicesJwtOktaSessionRequest, opts?: Oazapfts.RequestOpts) {
-    return oazapfts.ok(oazapfts.fetchJson<{
-        status: 200;
-        data: WebApiModulesAccountServicesJwtOktaSessionResponseModel;
-    } | {
-        status: 400;
-        data: FwCoreApiSwashbuckleBadRequestResponse;
-    } | {
-        status: 401;
-    } | {
-        status: 403;
-    } | {
-        status: 500;
-        data: FwStandardModelsFwApiException;
-    }>("/api/v1/jwt/oktaverify", oazapfts.json({
-        ...opts,
-        method: "POST",
-        body: webApiModulesAccountServicesJwtOktaSessionRequest
     })));
 }
 export function postApiV1JwtAzuread(webApiModulesAccountServicesJwtAzureAdRequest?: WebApiModulesAccountServicesJwtAzureAdRequest, opts?: Oazapfts.RequestOpts) {

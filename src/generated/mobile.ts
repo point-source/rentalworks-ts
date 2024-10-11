@@ -35,7 +35,7 @@ export type FwStandardModelsFwApiException = {
 export type WebApiModulesWarehouseContractCancelContractRequest = {
     ContractId?: string | null;
 };
-export type WebApiLogicTSpStatusResponse = {
+export type FwStandardSqlServerTSpStatusResponse = {
     status?: number;
     success?: boolean;
     msg?: string | null;
@@ -127,6 +127,8 @@ export type WebApiModulesInventoryRentalInventoryRentalInventory = {
     ExcludeFromReturnOnAsset?: boolean | null;
     /** Format: Boolean */
     IsFixedAsset?: boolean | null;
+    /** Format: Boolean */
+    IsFixedContainer?: boolean | null;
     /** Format: Boolean */
     MultiAssignRFIDs?: boolean | null;
     /** Format: Boolean */
@@ -289,7 +291,13 @@ export type WebApiModulesInventoryRentalInventoryRentalInventory = {
     /** Format: Boolean */
     AutomaticallyRebuildContainerAtCheckIn?: boolean | null;
     /** Format: Boolean */
+    AutomaticallyCheckInEntireContainerWithScannableItem?: boolean | null;
+    /** Format: Boolean */
     AutomaticallyRebuildContainerAtTransferIn?: boolean | null;
+    /** Format: Boolean */
+    AutomaticallyCountAllItemsWhenPhysicalInventoryInitiated?: boolean | null;
+    /** Format: Boolean */
+    AutomaticallyTransferInEntireContainerWithScannableItem?: boolean | null;
     /** Format: Text */
     ContainerStagingRule?: string | null;
     /** Format: Boolean */
@@ -332,8 +340,6 @@ export type WebApiModulesInventoryRentalInventoryRentalInventory = {
     WardrobeDetailedDescription?: string | null;
     WebDetailedDescription?: string | null;
     TechnicalNotes?: string | null;
-    /** Format: Boolean */
-    OverrideSystemDefaultRevenueAllocationBehavior?: boolean | null;
     /** Format: Boolean */
     AllocateRevenueForAccessories?: boolean | null;
     /** Format: Text */
@@ -503,6 +509,8 @@ export type WebApiModulesInventoryRentalInventoryRentalInventoryRead = {
     /** Format: Boolean */
     IsFixedAsset?: boolean | null;
     /** Format: Boolean */
+    IsFixedContainer?: boolean | null;
+    /** Format: Boolean */
     MultiAssignRFIDs?: boolean | null;
     /** Format: Boolean */
     AllowFlexibleContainer?: boolean | null;
@@ -664,7 +672,13 @@ export type WebApiModulesInventoryRentalInventoryRentalInventoryRead = {
     /** Format: Boolean */
     AutomaticallyRebuildContainerAtCheckIn?: boolean | null;
     /** Format: Boolean */
+    AutomaticallyCheckInEntireContainerWithScannableItem?: boolean | null;
+    /** Format: Boolean */
     AutomaticallyRebuildContainerAtTransferIn?: boolean | null;
+    /** Format: Boolean */
+    AutomaticallyCountAllItemsWhenPhysicalInventoryInitiated?: boolean | null;
+    /** Format: Boolean */
+    AutomaticallyTransferInEntireContainerWithScannableItem?: boolean | null;
     /** Format: Text */
     ContainerStagingRule?: string | null;
     /** Format: Boolean */
@@ -707,8 +721,6 @@ export type WebApiModulesInventoryRentalInventoryRentalInventoryRead = {
     WardrobeDetailedDescription?: string | null;
     WebDetailedDescription?: string | null;
     TechnicalNotes?: string | null;
-    /** Format: Boolean */
-    OverrideSystemDefaultRevenueAllocationBehavior?: boolean | null;
     /** Format: Boolean */
     AllocateRevenueForAccessories?: boolean | null;
     /** Format: Text */
@@ -937,6 +949,7 @@ export type FwStandardSqlServerFwJsonDataTable = {
     TotalPages?: number;
     TotalRows?: number;
     DateFields?: string[] | null;
+    ServerVersion?: string | null;
     _Translation?: FwStandardDataFwTranslatedValue[] | null;
 };
 export type FwStandardSqlServerFwJsonDataTableRead = {
@@ -956,6 +969,7 @@ export type FwStandardSqlServerFwJsonDataTableRead = {
     ColumnNameByIndex?: {
         [key: string]: string | null;
     } | null;
+    ServerVersion?: string | null;
     _Translation?: FwStandardDataFwTranslatedValue[] | null;
 };
 export type WebApiModulesUtilitiesInventoryPurchaseUtilityInventoryPurchaseItem = {
@@ -1232,7 +1246,7 @@ export function getApiV1QuikscanAssetdispositionLookupretiredreason(reasonType: 
 export function postApiV1QuikscanExchangeCancelcontract(webApiModulesWarehouseContractCancelContractRequest?: WebApiModulesWarehouseContractCancelContractRequest, opts?: Oazapfts.RequestOpts) {
     return oazapfts.ok(oazapfts.fetchJson<{
         status: 200;
-        data: WebApiLogicTSpStatusResponse;
+        data: FwStandardSqlServerTSpStatusResponse;
     } | {
         status: 400;
         data: FwCoreApiSwashbuckleBadRequestResponse;
@@ -1276,6 +1290,27 @@ export function getApiV1QuikscanFillcontainerScannableitemByScannableinventoryid
         pagesize,
         sort,
         filter
+    }))}`, {
+        ...opts
+    }));
+}
+export function getJspm({ timestamp }: {
+    timestamp?: string;
+} = {}, opts?: Oazapfts.RequestOpts) {
+    return oazapfts.ok(oazapfts.fetchJson<{
+        status: 200;
+    } | {
+        status: 400;
+        data: FwCoreApiSwashbuckleBadRequestResponse;
+    } | {
+        status: 401;
+    } | {
+        status: 403;
+    } | {
+        status: 500;
+        data: FwStandardModelsFwApiException;
+    }>(`/jspm${QS.query(QS.explode({
+        timestamp
     }))}`, {
         ...opts
     }));
@@ -1328,7 +1363,7 @@ export function postApiV1QuikscanQuikasset(webApiModulesInventoryRentalInventory
 export function postApiV1QuikscanQuikassetUpdateunitvalue(webApiModulesMobileQuikAssetQuikAssetFuncUpdateUnitValueRequest?: WebApiModulesMobileQuikAssetQuikAssetFuncUpdateUnitValueRequest, opts?: Oazapfts.RequestOpts) {
     return oazapfts.ok(oazapfts.fetchJson<{
         status: 200;
-        data: WebApiLogicTSpStatusResponse;
+        data: FwStandardSqlServerTSpStatusResponse;
     } | {
         status: 400;
         data: FwCoreApiSwashbuckleBadRequestResponse;
@@ -1488,7 +1523,7 @@ export function postApiV1QuikscanQuikassetGetimages(webApiModulesMobileQuikAsset
 export function postApiV1QuikscanQuikassetDeleteimage(webApiModulesMobileQuikAssetQuikAssetFuncDeleteImageRequest?: WebApiModulesMobileQuikAssetQuikAssetFuncDeleteImageRequest, opts?: Oazapfts.RequestOpts) {
     return oazapfts.ok(oazapfts.fetchJson<{
         status: 200;
-        data: WebApiLogicTSpStatusResponse;
+        data: FwStandardSqlServerTSpStatusResponse;
     } | {
         status: 400;
         data: FwCoreApiSwashbuckleBadRequestResponse;

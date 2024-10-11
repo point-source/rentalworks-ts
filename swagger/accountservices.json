@@ -235,6 +235,53 @@
         }
       }
     },
+    "/jspm": {
+      "get": {
+        "tags": [
+          "JSPM"
+        ],
+        "parameters": [
+          {
+            "name": "timestamp",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FwCore.Api.Swashbuckle.BadRequestResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized (jwt token is invalid)"
+          },
+          "403": {
+            "description": "Forbidden (jwt token is valid, but you don't have permission)"
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FwStandard.Models.FwApiException"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/v1/jwt": {
       "post": {
         "tags": [
@@ -256,114 +303,6 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/FwCore.Controllers.FwJwtController_JwtResponseModel"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad Request",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/FwCore.Api.Swashbuckle.BadRequestResponse"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized (jwt token is invalid)"
-          },
-          "403": {
-            "description": "Forbidden (jwt token is valid, but you don't have permission)"
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/FwStandard.Models.FwApiException"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/v1/jwt/okta": {
-      "post": {
-        "tags": [
-          "Jwt"
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/WebApi.Modules.AccountServices.Jwt.OktaRequest"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Success",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/FwCore.Controllers.FwJwtController_JwtResponseModel"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad Request",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/FwCore.Api.Swashbuckle.BadRequestResponse"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized (jwt token is invalid)"
-          },
-          "403": {
-            "description": "Forbidden (jwt token is valid, but you don't have permission)"
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/FwStandard.Models.FwApiException"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/v1/jwt/oktaverify": {
-      "post": {
-        "tags": [
-          "Jwt"
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/WebApi.Modules.AccountServices.Jwt.OktaSessionRequest"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Success",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/WebApi.Modules.AccountServices.Jwt.OktaSessionResponseModel"
                 }
               }
             }
@@ -1517,6 +1456,10 @@
             "nullable": true,
             "readOnly": true
           },
+          "ServerVersion": {
+            "type": "string",
+            "nullable": true
+          },
           "_Translation": {
             "type": "array",
             "items": {
@@ -1679,6 +1622,70 @@
           },
           "DefaultDealBillingCycle": {
             "type": "string",
+            "nullable": true
+          },
+          "DefaultVendorPaymentTermsId": {
+            "type": "string",
+            "nullable": true
+          },
+          "DefaultVendorPaymentTerms": {
+            "type": "string",
+            "nullable": true
+          },
+          "DefaultVendorOutgoingDeliveryType": {
+            "type": "string",
+            "nullable": true
+          },
+          "DefaultVendorIncomingDeliveryType": {
+            "type": "string",
+            "nullable": true
+          },
+          "DefaultVendorRentalInventory": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "DefaultVendorSalesPartsInventory": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "DefaultVendorRepair": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "DefaultVendorManufacturer": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "DefaultVendorFreight": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "DefaultVendorInsurance": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "DefaultVendorSubRent": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "DefaultVendorSubSales": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "DefaultVendorSubMisc": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "DefaultVendorSubLabor": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "DefaultVendorSubVehicle": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "DefaultVendorConsignment": {
+            "type": "boolean",
             "nullable": true
           },
           "DefaultNonRecurringBillingCycleId": {
@@ -2471,6 +2478,14 @@
           "EnableCrew": {
             "type": "boolean",
             "nullable": true
+          },
+          "DisableHelpIcon": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "OverrideHelpURL": {
+            "type": "string",
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -2478,16 +2493,9 @@
       "WebApi.Logic.AppFunc_UserSettingsResponse": {
         "type": "object",
         "properties": {
-          "SuccessBase64Sound": {
-            "type": "string",
-            "nullable": true
-          },
-          "ErrorBase64Sound": {
-            "type": "string",
-            "nullable": true
-          },
-          "NotificationBase64Sound": {
-            "type": "string",
+          "SoundProfileId": {
+            "type": "integer",
+            "format": "int32",
             "nullable": true
           },
           "WebAdministrator": {
@@ -2543,6 +2551,10 @@
             "nullable": true
           },
           "ShowRentalItemsOutOnly": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "AutoPrintContract": {
             "type": "boolean",
             "nullable": true
           }
@@ -2688,6 +2700,19 @@
           },
           "EnableSetsWalls": {
             "type": "boolean"
+          },
+          "IsStorefrontHosted": {
+            "type": "boolean"
+          },
+          "IsStorefrontApiEnabled": {
+            "type": "boolean"
+          },
+          "IsUniversity": {
+            "type": "boolean"
+          },
+          "SystemUTCDateTime": {
+            "type": "string",
+            "format": "date-time"
           }
         },
         "additionalProperties": false
@@ -2712,44 +2737,6 @@
             "nullable": true
           },
           "Issuer": {
-            "type": "string",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "WebApi.Modules.AccountServices.Jwt.OktaRequest": {
-        "type": "object",
-        "properties": {
-          "Email": {
-            "type": "string",
-            "nullable": true
-          },
-          "Token": {
-            "type": "string",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "WebApi.Modules.AccountServices.Jwt.OktaSessionRequest": {
-        "type": "object",
-        "properties": {
-          "Token": {
-            "type": "string",
-            "nullable": true
-          },
-          "Apiurl": {
-            "type": "string",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "WebApi.Modules.AccountServices.Jwt.OktaSessionResponseModel": {
-        "type": "object",
-        "properties": {
-          "Status": {
             "type": "string",
             "nullable": true
           }

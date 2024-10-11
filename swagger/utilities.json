@@ -1377,21 +1377,21 @@
             }
           },
           {
-            "name": "locationId",
+            "name": "filters",
             "in": "query",
             "schema": {
               "type": "string"
             }
           },
           {
-            "name": "warehouseId",
+            "name": "filterValues",
             "in": "query",
             "schema": {
               "type": "string"
             }
           },
           {
-            "name": "departmentId",
+            "name": "mappedFilterValues",
             "in": "query",
             "schema": {
               "type": "string"
@@ -1433,6 +1433,13 @@
             "schema": {
               "type": "boolean"
             }
+          },
+          {
+            "name": "displayNumbers",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
           }
         ],
         "responses": {
@@ -1441,7 +1448,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/WebApi.Modules.Settings.WidgetSettings.Widget.Widget"
+                  "$ref": "#/components/schemas/FwStandard.Modules.Settings.WidgetSettings.Widget.Widget"
                 }
               }
             }
@@ -1496,7 +1503,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/WebApi.Modules.Utilities.DashboardSettings.DashboardSettings"
+                  "$ref": "#/components/schemas/FwStandard.Modules.Utilities.DashboardSettings.DashboardSettingsLogic"
                 }
               }
             }
@@ -1547,7 +1554,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/WebApi.Modules.Utilities.DashboardSettings.DashboardSettings"
+                "$ref": "#/components/schemas/FwStandard.Modules.Utilities.DashboardSettings.DashboardSettingsLogic"
               }
             }
           }
@@ -1558,7 +1565,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/WebApi.Modules.Utilities.DashboardSettings.DashboardSettings"
+                  "$ref": "#/components/schemas/FwStandard.Modules.Utilities.DashboardSettings.DashboardSettingsLogic"
                 }
               }
             }
@@ -1601,7 +1608,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/WebApi.Modules.Utilities.DashboardSettings.DashboardSettings"
+                "$ref": "#/components/schemas/FwStandard.Modules.Utilities.DashboardSettings.DashboardSettingsLogic"
               }
             }
           }
@@ -1612,7 +1619,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/WebApi.Modules.Utilities.DashboardSettings.DashboardSettings"
+                  "$ref": "#/components/schemas/FwStandard.Modules.Utilities.DashboardSettings.DashboardSettingsLogic"
                 }
               }
             }
@@ -2671,7 +2678,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/WebApi.Logic.TSpStatusResponse"
+                  "$ref": "#/components/schemas/FwStandard.SqlServer.TSpStatusResponse"
                 }
               }
             }
@@ -4943,6 +4950,53 @@
         }
       }
     },
+    "/jspm": {
+      "get": {
+        "tags": [
+          "JSPM"
+        ],
+        "parameters": [
+          {
+            "name": "timestamp",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FwCore.Api.Swashbuckle.BadRequestResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized (jwt token is invalid)"
+          },
+          "403": {
+            "description": "Forbidden (jwt token is valid, but you don't have permission)"
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FwStandard.Models.FwApiException"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/v1/keepalive": {
       "get": {
         "tags": [
@@ -5775,7 +5829,7 @@
         }
       }
     },
-    "/api/v1/labeldesign/barcodes/inventorypurchase/{sessionid}/warehouse/{warehouseid}": {
+    "/api/v1/labeldesign/barcodes/inventorypurchase/{sessionid}": {
       "get": {
         "tags": [
           "LabelDesign"
@@ -5784,14 +5838,6 @@
         "parameters": [
           {
             "name": "sessionid",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "warehouseid",
             "in": "path",
             "required": true,
             "schema": {
@@ -6175,7 +6221,7 @@
         }
       }
     },
-    "/api/v1/labeldesign/labeldata/inventorypurchase/{sessionid}/barcode/{barcode}/warehouse/{warehouseid}": {
+    "/api/v1/labeldesign/labeldata/inventorypurchase/{sessionid}/barcode/{barcode}": {
       "get": {
         "tags": [
           "LabelDesign"
@@ -6192,14 +6238,6 @@
           },
           {
             "name": "barcode",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "warehouseid",
             "in": "path",
             "required": true,
             "schema": {
@@ -9534,6 +9572,60 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/WebApi.Modules.Inventory.Inventory.CopyPendingModificationsToOtherWarehousesResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FwCore.Api.Swashbuckle.BadRequestResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized (jwt token is invalid)"
+          },
+          "403": {
+            "description": "Forbidden (jwt token is valid, but you don't have permission)"
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FwStandard.Models.FwApiException"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/rateupdateutility/copycurrentpricingtootherwarehouses": {
+      "post": {
+        "tags": [
+          "RateUpdateUtility"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FwStandard.Models.BrowseRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WebApi.Modules.Inventory.Inventory.CopyCurrentPricingToOtherWarehousesResponse"
                 }
               }
             }
@@ -13504,6 +13596,603 @@
         },
         "additionalProperties": false
       },
+      "FwStandard.Modules.Settings.AvailableWidget.AvailableWidgetLogic": {
+        "type": "object",
+        "properties": {
+          "WidgetId": {
+            "type": "string",
+            "nullable": true
+          },
+          "Widget": {
+            "type": "string",
+            "nullable": true
+          },
+          "value": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "text": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "AuditNote": {
+            "type": "string",
+            "nullable": true
+          },
+          "RecordTitle": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "_Fields": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FwStandard.BusinessLogic.FwBusinessLogicFieldDefinition"
+            },
+            "nullable": true,
+            "readOnly": true
+          },
+          "_Custom": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FwStandard.Data.FwCustomValue"
+            },
+            "nullable": true
+          },
+          "_DefaultFieldAttributes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FwStandard.Data.FwDefaultAttribute"
+            },
+            "nullable": true
+          },
+          "_Original": {
+            "$ref": "#/components/schemas/FwStandard.BusinessLogic.FwBusinessLogic"
+          },
+          "_Translation": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FwStandard.Data.FwTranslatedValue"
+            },
+            "nullable": true
+          },
+          "_HasImport": {
+            "type": "boolean"
+          },
+          "_CreatedByUserId": {
+            "type": "string",
+            "nullable": true
+          },
+          "_CreatedByUserName": {
+            "type": "string",
+            "nullable": true
+          },
+          "_CreatedDateTime": {
+            "type": "string",
+            "nullable": true
+          },
+          "_ModifiedByUserId": {
+            "type": "string",
+            "nullable": true
+          },
+          "_ModifiedByUserName": {
+            "type": "string",
+            "nullable": true
+          },
+          "_ModifiedDateTime": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "FwStandard.Modules.Settings.WidgetSettings.Widget.Widget": {
+        "type": "object",
+        "properties": {
+          "displayNumbers": {
+            "type": "boolean"
+          },
+          "filters": {
+            "type": "string",
+            "nullable": true
+          },
+          "filterValues": {
+            "type": "string",
+            "nullable": true
+          },
+          "mappedFilterValues": {
+            "type": "string",
+            "nullable": true
+          },
+          "dateBehaviorId": {
+            "type": "string",
+            "nullable": true
+          },
+          "dateField": {
+            "type": "string",
+            "nullable": true
+          },
+          "fromDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "toDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "type": {
+            "type": "string",
+            "nullable": true
+          },
+          "data": {
+            "$ref": "#/components/schemas/FwStandard.Modules.Settings.WidgetSettings.Widget.WidgetData"
+          },
+          "options": {
+            "$ref": "#/components/schemas/FwStandard.Modules.Settings.WidgetSettings.Widget.WidgetOptions"
+          },
+          "dataPoints": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "apiName": {
+            "type": "string",
+            "nullable": true
+          },
+          "procedureName": {
+            "type": "string",
+            "nullable": true
+          },
+          "counterFieldName": {
+            "type": "string",
+            "nullable": true
+          },
+          "label1FieldName": {
+            "type": "string",
+            "nullable": true
+          },
+          "label2FieldName": {
+            "type": "string",
+            "nullable": true
+          },
+          "backgroundColorFieldName": {
+            "type": "string",
+            "nullable": true
+          },
+          "borderColorFieldName": {
+            "type": "string",
+            "nullable": true
+          },
+          "opacity": {
+            "type": "number",
+            "format": "double"
+          },
+          "stacked": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "FwStandard.Modules.Settings.WidgetSettings.Widget.WidgetAxis": {
+        "type": "object",
+        "properties": {
+          "ticks": {
+            "$ref": "#/components/schemas/FwStandard.Modules.Settings.WidgetSettings.Widget.WidgetAxisTicks"
+          },
+          "stacked": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "FwStandard.Modules.Settings.WidgetSettings.Widget.WidgetAxisTicks": {
+        "type": "object",
+        "properties": {
+          "beginAtZero": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "FwStandard.Modules.Settings.WidgetSettings.Widget.WidgetData": {
+        "type": "object",
+        "properties": {
+          "labels": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          },
+          "datasets": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FwStandard.Modules.Settings.WidgetSettings.Widget.WidgetDataSet"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "FwStandard.Modules.Settings.WidgetSettings.Widget.WidgetDataSet": {
+        "type": "object",
+        "properties": {
+          "label": {
+            "type": "string",
+            "nullable": true
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "type": "number",
+              "format": "double"
+            },
+            "nullable": true
+          },
+          "backgroundColor": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          },
+          "borderColor": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          },
+          "borderWidth": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "FwStandard.Modules.Settings.WidgetSettings.Widget.WidgetLegend": {
+        "type": "object",
+        "properties": {
+          "display": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "FwStandard.Modules.Settings.WidgetSettings.Widget.WidgetOptions": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "$ref": "#/components/schemas/FwStandard.Modules.Settings.WidgetSettings.Widget.WidgetTitle"
+          },
+          "legend": {
+            "$ref": "#/components/schemas/FwStandard.Modules.Settings.WidgetSettings.Widget.WidgetLegend"
+          },
+          "scales": {
+            "$ref": "#/components/schemas/FwStandard.Modules.Settings.WidgetSettings.Widget.WidgetScales"
+          },
+          "responsive": {
+            "type": "boolean"
+          },
+          "maintainAspectRatio": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "FwStandard.Modules.Settings.WidgetSettings.Widget.WidgetScales": {
+        "type": "object",
+        "properties": {
+          "xAxes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FwStandard.Modules.Settings.WidgetSettings.Widget.WidgetAxis"
+            },
+            "nullable": true
+          },
+          "yAxes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FwStandard.Modules.Settings.WidgetSettings.Widget.WidgetAxis"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "FwStandard.Modules.Settings.WidgetSettings.Widget.WidgetTitle": {
+        "type": "object",
+        "properties": {
+          "fontSize": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "display": {
+            "type": "boolean"
+          },
+          "text": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "FwStandard.Modules.Utilities.DashboardSettings.DashboardSettingsLogic": {
+        "type": "object",
+        "properties": {
+          "UserId": {
+            "type": "string",
+            "nullable": true
+          },
+          "WidgetsPerRow": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "AvailableWidgets": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FwStandard.Modules.Settings.AvailableWidget.AvailableWidgetLogic"
+            },
+            "nullable": true
+          },
+          "UserWidgets": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FwStandard.Modules.Utilities.DashboardSettings.DashboardSettingsLogic_UserDashboardSetting"
+            },
+            "nullable": true
+          },
+          "AuditNote": {
+            "type": "string",
+            "nullable": true
+          },
+          "RecordTitle": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "_Fields": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FwStandard.BusinessLogic.FwBusinessLogicFieldDefinition"
+            },
+            "nullable": true,
+            "readOnly": true
+          },
+          "_Custom": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FwStandard.Data.FwCustomValue"
+            },
+            "nullable": true
+          },
+          "_DefaultFieldAttributes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FwStandard.Data.FwDefaultAttribute"
+            },
+            "nullable": true
+          },
+          "_Original": {
+            "$ref": "#/components/schemas/FwStandard.BusinessLogic.FwBusinessLogic"
+          },
+          "_Translation": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FwStandard.Data.FwTranslatedValue"
+            },
+            "nullable": true
+          },
+          "_HasImport": {
+            "type": "boolean"
+          },
+          "_CreatedByUserId": {
+            "type": "string",
+            "nullable": true
+          },
+          "_CreatedByUserName": {
+            "type": "string",
+            "nullable": true
+          },
+          "_CreatedDateTime": {
+            "type": "string",
+            "nullable": true
+          },
+          "_ModifiedByUserId": {
+            "type": "string",
+            "nullable": true
+          },
+          "_ModifiedByUserName": {
+            "type": "string",
+            "nullable": true
+          },
+          "_ModifiedDateTime": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "FwStandard.Modules.Utilities.DashboardSettings.DashboardSettingsLogic_UserDashboardSetting": {
+        "type": "object",
+        "properties": {
+          "userWidgetId": {
+            "type": "string",
+            "nullable": true
+          },
+          "value": {
+            "type": "string",
+            "nullable": true
+          },
+          "text": {
+            "type": "string",
+            "nullable": true
+          },
+          "selected": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "apiname": {
+            "type": "string",
+            "nullable": true
+          },
+          "modulename": {
+            "type": "string",
+            "nullable": true
+          },
+          "clickpath": {
+            "type": "string",
+            "nullable": true
+          },
+          "defaulttype": {
+            "type": "string",
+            "nullable": true
+          },
+          "widgettype": {
+            "type": "string",
+            "nullable": true
+          },
+          "defaultDataPoints": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "dataPoints": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "defaultAxisNumberFormatId": {
+            "type": "string",
+            "nullable": true
+          },
+          "defaultAxisNumberFormat": {
+            "type": "string",
+            "nullable": true
+          },
+          "defaultAxisNumberFormatMask": {
+            "type": "string",
+            "nullable": true
+          },
+          "axisNumberFormatId": {
+            "type": "string",
+            "nullable": true
+          },
+          "axisNumberFormat": {
+            "type": "string",
+            "nullable": true
+          },
+          "axisNumberFormatMask": {
+            "type": "string",
+            "nullable": true
+          },
+          "defaultDataNumberFormatId": {
+            "type": "string",
+            "nullable": true
+          },
+          "defaultDataNumberFormat": {
+            "type": "string",
+            "nullable": true
+          },
+          "defaultDataNumberFormatMask": {
+            "type": "string",
+            "nullable": true
+          },
+          "dataNumberFormatId": {
+            "type": "string",
+            "nullable": true
+          },
+          "dataNumberFormat": {
+            "type": "string",
+            "nullable": true
+          },
+          "dataNumberFormatMask": {
+            "type": "string",
+            "nullable": true
+          },
+          "defaultDateBehaviorId": {
+            "type": "string",
+            "nullable": true
+          },
+          "defaultDateBehavior": {
+            "type": "string",
+            "nullable": true
+          },
+          "dateBehaviorId": {
+            "type": "string",
+            "nullable": true
+          },
+          "dateBehavior": {
+            "type": "string",
+            "nullable": true
+          },
+          "dateFieldDisplayNames": {
+            "type": "string",
+            "nullable": true
+          },
+          "dateFields": {
+            "type": "string",
+            "nullable": true
+          },
+          "defaultDateField": {
+            "type": "string",
+            "nullable": true
+          },
+          "dateField": {
+            "type": "string",
+            "nullable": true
+          },
+          "defaultFromDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "fromDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "defaultToDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "toDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "filters": {
+            "type": "string",
+            "nullable": true
+          },
+          "filterValues": {
+            "type": "string",
+            "nullable": true
+          },
+          "defaultStacked": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "stacked": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "defaultDisplayNumbers": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "displayNumbers": {
+            "type": "boolean",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "FwStandard.Modules.Utilities.WebImport.ImportExcelRequest": {
         "type": "object",
         "properties": {
@@ -13677,6 +14366,10 @@
             "nullable": true,
             "readOnly": true
           },
+          "ServerVersion": {
+            "type": "string",
+            "nullable": true
+          },
           "_Translation": {
             "type": "array",
             "items": {
@@ -13706,6 +14399,23 @@
           },
           "IsVisible": {
             "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "FwStandard.SqlServer.TSpStatusResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "success": {
+            "type": "boolean"
+          },
+          "msg": {
+            "type": "string",
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -13821,23 +14531,6 @@
           "OrderBy": {
             "type": "integer",
             "format": "int32"
-          }
-        },
-        "additionalProperties": false
-      },
-      "WebApi.Logic.TSpStatusResponse": {
-        "type": "object",
-        "properties": {
-          "status": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "success": {
-            "type": "boolean"
-          },
-          "msg": {
-            "type": "string",
-            "nullable": true
           }
         },
         "additionalProperties": false
@@ -15623,6 +16316,11 @@
             "type": "string",
             "nullable": true
           },
+          "ExcludeItemsWithZero": {
+            "type": "boolean",
+            "description": "Format: Boolean",
+            "nullable": true
+          },
           "Inactive": {
             "type": "boolean",
             "description": "Format: Boolean",
@@ -15739,9 +16437,6 @@
           },
           "Batch": {
             "$ref": "#/components/schemas/WebApi.Modules.Utilities.InvoiceProcessBatch.InvoiceProcessBatch"
-          },
-          "AutoProcessDepeletingDeposit": {
-            "type": "boolean"
           }
         },
         "additionalProperties": false
@@ -16126,6 +16821,23 @@
         },
         "additionalProperties": false
       },
+      "WebApi.Modules.Inventory.Inventory.CopyCurrentPricingToOtherWarehousesResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "success": {
+            "type": "boolean"
+          },
+          "msg": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "WebApi.Modules.Inventory.Inventory.CopyPendingModificationsToOtherWarehousesRequest": {
         "type": "object",
         "properties": {
@@ -16265,6 +16977,12 @@
             "nullable": true
           },
           "IsFixedAsset": {
+            "maxLength": 1,
+            "type": "boolean",
+            "description": "Format: Boolean",
+            "nullable": true
+          },
+          "IsFixedContainer": {
             "maxLength": 1,
             "type": "boolean",
             "description": "Format: Boolean",
@@ -16875,7 +17593,22 @@
             "description": "Format: Boolean",
             "nullable": true
           },
+          "AutomaticallyCheckInEntireContainerWithScannableItem": {
+            "type": "boolean",
+            "description": "Format: Boolean",
+            "nullable": true
+          },
           "AutomaticallyRebuildContainerAtTransferIn": {
+            "type": "boolean",
+            "description": "Format: Boolean",
+            "nullable": true
+          },
+          "AutomaticallyCountAllItemsWhenPhysicalInventoryInitiated": {
+            "type": "boolean",
+            "description": "Format: Boolean",
+            "nullable": true
+          },
+          "AutomaticallyTransferInEntireContainerWithScannableItem": {
             "type": "boolean",
             "description": "Format: Boolean",
             "nullable": true
@@ -17013,11 +17746,6 @@
           },
           "TechnicalNotes": {
             "type": "string",
-            "nullable": true
-          },
-          "OverrideSystemDefaultRevenueAllocationBehavior": {
-            "type": "boolean",
-            "description": "Format: Boolean",
             "nullable": true
           },
           "AllocateRevenueForAccessories": {
@@ -17890,98 +18618,6 @@
         },
         "additionalProperties": false
       },
-      "WebApi.Modules.Settings.AvailableWidget.AvailableWidget": {
-        "type": "object",
-        "properties": {
-          "WidgetId": {
-            "type": "string",
-            "nullable": true
-          },
-          "Widget": {
-            "type": "string",
-            "nullable": true
-          },
-          "value": {
-            "type": "string",
-            "nullable": true,
-            "readOnly": true
-          },
-          "text": {
-            "type": "string",
-            "nullable": true,
-            "readOnly": true
-          },
-          "AuditNote": {
-            "type": "string",
-            "nullable": true
-          },
-          "RecordTitle": {
-            "type": "string",
-            "nullable": true,
-            "readOnly": true
-          },
-          "_Fields": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/FwStandard.BusinessLogic.FwBusinessLogicFieldDefinition"
-            },
-            "nullable": true,
-            "readOnly": true
-          },
-          "_Custom": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/FwStandard.Data.FwCustomValue"
-            },
-            "nullable": true
-          },
-          "_DefaultFieldAttributes": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/FwStandard.Data.FwDefaultAttribute"
-            },
-            "nullable": true
-          },
-          "_Original": {
-            "$ref": "#/components/schemas/FwStandard.BusinessLogic.FwBusinessLogic"
-          },
-          "_Translation": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/FwStandard.Data.FwTranslatedValue"
-            },
-            "nullable": true
-          },
-          "_HasImport": {
-            "type": "boolean"
-          },
-          "_CreatedByUserId": {
-            "type": "string",
-            "nullable": true
-          },
-          "_CreatedByUserName": {
-            "type": "string",
-            "nullable": true
-          },
-          "_CreatedDateTime": {
-            "type": "string",
-            "nullable": true
-          },
-          "_ModifiedByUserId": {
-            "type": "string",
-            "nullable": true
-          },
-          "_ModifiedByUserName": {
-            "type": "string",
-            "nullable": true
-          },
-          "_ModifiedDateTime": {
-            "type": "string",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
       "WebApi.Modules.Settings.CurrencySettings.Currency.Currency": {
         "type": "object",
         "properties": {
@@ -18351,6 +18987,11 @@
             "description": "Format: Boolean",
             "nullable": true
           },
+          "DeleteAssetConditionOnQCRequired": {
+            "type": "boolean",
+            "description": "Format: Boolean",
+            "nullable": true
+          },
           "StagingShowCheckedInHoldingItems": {
             "type": "boolean",
             "description": "Format: Boolean",
@@ -18524,26 +19165,6 @@
             "maxLength": 10,
             "type": "string",
             "description": "Format: Text",
-            "nullable": true
-          },
-          "InternalDealId": {
-            "maxLength": 8,
-            "type": "string",
-            "description": "Format: Text",
-            "nullable": true
-          },
-          "InternalDeal": {
-            "type": "string",
-            "nullable": true
-          },
-          "InternalVendorId": {
-            "maxLength": 8,
-            "type": "string",
-            "description": "Format: Text",
-            "nullable": true
-          },
-          "InternalVendor": {
-            "type": "string",
             "nullable": true
           },
           "CalculateOnPoAfterApproved": {
@@ -18868,512 +19489,6 @@
           },
           "_ModifiedDateTime": {
             "type": "string",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "WebApi.Modules.Settings.WidgetSettings.Widget.Widget": {
-        "type": "object",
-        "properties": {
-          "locationId": {
-            "type": "string",
-            "nullable": true
-          },
-          "warehouseId": {
-            "type": "string",
-            "nullable": true
-          },
-          "departmentId": {
-            "type": "string",
-            "nullable": true
-          },
-          "locationCodes": {
-            "type": "string",
-            "nullable": true
-          },
-          "locations": {
-            "type": "string",
-            "nullable": true
-          },
-          "dateBehaviorId": {
-            "type": "string",
-            "nullable": true
-          },
-          "dateField": {
-            "type": "string",
-            "nullable": true
-          },
-          "fromDate": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          },
-          "toDate": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          },
-          "type": {
-            "type": "string",
-            "nullable": true
-          },
-          "data": {
-            "$ref": "#/components/schemas/WebApi.Modules.Settings.WidgetSettings.Widget.WidgetData"
-          },
-          "options": {
-            "$ref": "#/components/schemas/WebApi.Modules.Settings.WidgetSettings.Widget.WidgetOptions"
-          },
-          "dataPoints": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "apiName": {
-            "type": "string",
-            "nullable": true
-          },
-          "procedureName": {
-            "type": "string",
-            "nullable": true
-          },
-          "counterFieldName": {
-            "type": "string",
-            "nullable": true
-          },
-          "label1FieldName": {
-            "type": "string",
-            "nullable": true
-          },
-          "label2FieldName": {
-            "type": "string",
-            "nullable": true
-          },
-          "backgroundColorFieldName": {
-            "type": "string",
-            "nullable": true
-          },
-          "borderColorFieldName": {
-            "type": "string",
-            "nullable": true
-          },
-          "opacity": {
-            "type": "number",
-            "format": "double"
-          },
-          "stacked": {
-            "type": "boolean"
-          }
-        },
-        "additionalProperties": false
-      },
-      "WebApi.Modules.Settings.WidgetSettings.Widget.WidgetAxis": {
-        "type": "object",
-        "properties": {
-          "ticks": {
-            "$ref": "#/components/schemas/WebApi.Modules.Settings.WidgetSettings.Widget.WidgetAxisTicks"
-          },
-          "stacked": {
-            "type": "boolean"
-          }
-        },
-        "additionalProperties": false
-      },
-      "WebApi.Modules.Settings.WidgetSettings.Widget.WidgetAxisTicks": {
-        "type": "object",
-        "properties": {
-          "beginAtZero": {
-            "type": "boolean"
-          }
-        },
-        "additionalProperties": false
-      },
-      "WebApi.Modules.Settings.WidgetSettings.Widget.WidgetData": {
-        "type": "object",
-        "properties": {
-          "labels": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "nullable": true
-          },
-          "datasets": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/WebApi.Modules.Settings.WidgetSettings.Widget.WidgetDataSet"
-            },
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "WebApi.Modules.Settings.WidgetSettings.Widget.WidgetDataSet": {
-        "type": "object",
-        "properties": {
-          "label": {
-            "type": "string",
-            "nullable": true
-          },
-          "data": {
-            "type": "array",
-            "items": {
-              "type": "number",
-              "format": "double"
-            },
-            "nullable": true
-          },
-          "backgroundColor": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "nullable": true
-          },
-          "borderColor": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "nullable": true
-          },
-          "borderWidth": {
-            "type": "integer",
-            "format": "int32"
-          }
-        },
-        "additionalProperties": false
-      },
-      "WebApi.Modules.Settings.WidgetSettings.Widget.WidgetLegend": {
-        "type": "object",
-        "properties": {
-          "display": {
-            "type": "boolean"
-          }
-        },
-        "additionalProperties": false
-      },
-      "WebApi.Modules.Settings.WidgetSettings.Widget.WidgetOptions": {
-        "type": "object",
-        "properties": {
-          "title": {
-            "$ref": "#/components/schemas/WebApi.Modules.Settings.WidgetSettings.Widget.WidgetTitle"
-          },
-          "legend": {
-            "$ref": "#/components/schemas/WebApi.Modules.Settings.WidgetSettings.Widget.WidgetLegend"
-          },
-          "scales": {
-            "$ref": "#/components/schemas/WebApi.Modules.Settings.WidgetSettings.Widget.WidgetScales"
-          },
-          "responsive": {
-            "type": "boolean"
-          },
-          "maintainAspectRatio": {
-            "type": "boolean"
-          }
-        },
-        "additionalProperties": false
-      },
-      "WebApi.Modules.Settings.WidgetSettings.Widget.WidgetScales": {
-        "type": "object",
-        "properties": {
-          "xAxes": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/WebApi.Modules.Settings.WidgetSettings.Widget.WidgetAxis"
-            },
-            "nullable": true
-          },
-          "yAxes": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/WebApi.Modules.Settings.WidgetSettings.Widget.WidgetAxis"
-            },
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "WebApi.Modules.Settings.WidgetSettings.Widget.WidgetTitle": {
-        "type": "object",
-        "properties": {
-          "fontSize": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "display": {
-            "type": "boolean"
-          },
-          "text": {
-            "type": "string",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "WebApi.Modules.Utilities.DashboardSettings.DashboardSettings": {
-        "type": "object",
-        "properties": {
-          "UserId": {
-            "type": "string",
-            "nullable": true
-          },
-          "WidgetsPerRow": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
-          },
-          "AvailableWidgets": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/WebApi.Modules.Settings.AvailableWidget.AvailableWidget"
-            },
-            "nullable": true
-          },
-          "UserWidgets": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/WebApi.Modules.Utilities.DashboardSettings.DashboardSettingsLogic_UserDashboardSetting"
-            },
-            "nullable": true
-          },
-          "AuditNote": {
-            "type": "string",
-            "nullable": true
-          },
-          "RecordTitle": {
-            "type": "string",
-            "nullable": true,
-            "readOnly": true
-          },
-          "_Fields": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/FwStandard.BusinessLogic.FwBusinessLogicFieldDefinition"
-            },
-            "nullable": true,
-            "readOnly": true
-          },
-          "_Custom": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/FwStandard.Data.FwCustomValue"
-            },
-            "nullable": true
-          },
-          "_DefaultFieldAttributes": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/FwStandard.Data.FwDefaultAttribute"
-            },
-            "nullable": true
-          },
-          "_Original": {
-            "$ref": "#/components/schemas/FwStandard.BusinessLogic.FwBusinessLogic"
-          },
-          "_Translation": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/FwStandard.Data.FwTranslatedValue"
-            },
-            "nullable": true
-          },
-          "_HasImport": {
-            "type": "boolean"
-          },
-          "_CreatedByUserId": {
-            "type": "string",
-            "nullable": true
-          },
-          "_CreatedByUserName": {
-            "type": "string",
-            "nullable": true
-          },
-          "_CreatedDateTime": {
-            "type": "string",
-            "nullable": true
-          },
-          "_ModifiedByUserId": {
-            "type": "string",
-            "nullable": true
-          },
-          "_ModifiedByUserName": {
-            "type": "string",
-            "nullable": true
-          },
-          "_ModifiedDateTime": {
-            "type": "string",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "WebApi.Modules.Utilities.DashboardSettings.DashboardSettingsLogic_UserDashboardSetting": {
-        "type": "object",
-        "properties": {
-          "userWidgetId": {
-            "type": "string",
-            "nullable": true
-          },
-          "value": {
-            "type": "string",
-            "nullable": true
-          },
-          "text": {
-            "type": "string",
-            "nullable": true
-          },
-          "selected": {
-            "type": "boolean",
-            "nullable": true
-          },
-          "apiname": {
-            "type": "string",
-            "nullable": true
-          },
-          "modulename": {
-            "type": "string",
-            "nullable": true
-          },
-          "clickpath": {
-            "type": "string",
-            "nullable": true
-          },
-          "defaulttype": {
-            "type": "string",
-            "nullable": true
-          },
-          "widgettype": {
-            "type": "string",
-            "nullable": true
-          },
-          "defaultDataPoints": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
-          },
-          "dataPoints": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
-          },
-          "defaultAxisNumberFormatId": {
-            "type": "string",
-            "nullable": true
-          },
-          "defaultAxisNumberFormat": {
-            "type": "string",
-            "nullable": true
-          },
-          "defaultAxisNumberFormatMask": {
-            "type": "string",
-            "nullable": true
-          },
-          "axisNumberFormatId": {
-            "type": "string",
-            "nullable": true
-          },
-          "axisNumberFormat": {
-            "type": "string",
-            "nullable": true
-          },
-          "axisNumberFormatMask": {
-            "type": "string",
-            "nullable": true
-          },
-          "defaultDataNumberFormatId": {
-            "type": "string",
-            "nullable": true
-          },
-          "defaultDataNumberFormat": {
-            "type": "string",
-            "nullable": true
-          },
-          "defaultDataNumberFormatMask": {
-            "type": "string",
-            "nullable": true
-          },
-          "dataNumberFormatId": {
-            "type": "string",
-            "nullable": true
-          },
-          "dataNumberFormat": {
-            "type": "string",
-            "nullable": true
-          },
-          "dataNumberFormatMask": {
-            "type": "string",
-            "nullable": true
-          },
-          "defaultDateBehaviorId": {
-            "type": "string",
-            "nullable": true
-          },
-          "defaultDateBehavior": {
-            "type": "string",
-            "nullable": true
-          },
-          "dateBehaviorId": {
-            "type": "string",
-            "nullable": true
-          },
-          "dateBehavior": {
-            "type": "string",
-            "nullable": true
-          },
-          "dateFieldDisplayNames": {
-            "type": "string",
-            "nullable": true
-          },
-          "dateFields": {
-            "type": "string",
-            "nullable": true
-          },
-          "defaultDateField": {
-            "type": "string",
-            "nullable": true
-          },
-          "dateField": {
-            "type": "string",
-            "nullable": true
-          },
-          "defaultFromDate": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          },
-          "fromDate": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          },
-          "defaultToDate": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          },
-          "toDate": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          },
-          "officeLocationId": {
-            "type": "string",
-            "nullable": true
-          },
-          "officeLocation": {
-            "type": "string",
-            "nullable": true
-          },
-          "officeLocationCode": {
-            "type": "string",
-            "nullable": true
-          },
-          "defaultStacked": {
-            "type": "boolean",
-            "nullable": true
-          },
-          "stacked": {
-            "type": "boolean",
             "nullable": true
           }
         },
@@ -20191,6 +20306,18 @@
           "SUBCATEGORY": {
             "type": "string",
             "nullable": true
+          },
+          "TRACKEDBY": {
+            "type": "string",
+            "nullable": true
+          },
+          "MANUFACTURER": {
+            "type": "string",
+            "nullable": true
+          },
+          "MANUFACTURERPARTNUMBER": {
+            "type": "string",
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -20202,16 +20329,6 @@
             "maxLength": 8,
             "type": "string",
             "description": "Format: Text, IsPrimaryKey: true",
-            "nullable": true
-          },
-          "WarehouseId": {
-            "maxLength": 8,
-            "type": "string",
-            "description": "Format: Text",
-            "nullable": true
-          },
-          "Warehouse": {
-            "type": "string",
             "nullable": true
           },
           "Format": {
@@ -22709,45 +22826,13 @@
             "type": "string",
             "nullable": true
           },
-          "SuccessSoundId": {
-            "maxLength": 8,
-            "type": "string",
-            "description": "Format: Text",
+          "SoundProfileId": {
+            "type": "integer",
+            "description": "Format: Integer",
+            "format": "int32",
             "nullable": true
           },
-          "SuccessSound": {
-            "type": "string",
-            "nullable": true
-          },
-          "SuccessBase64Sound": {
-            "type": "string",
-            "nullable": true
-          },
-          "ErrorSoundId": {
-            "maxLength": 8,
-            "type": "string",
-            "description": "Format: Text",
-            "nullable": true
-          },
-          "ErrorSound": {
-            "type": "string",
-            "nullable": true
-          },
-          "ErrorBase64Sound": {
-            "type": "string",
-            "nullable": true
-          },
-          "NotificationSoundId": {
-            "maxLength": 8,
-            "type": "string",
-            "description": "Format: Text",
-            "nullable": true
-          },
-          "NotificationSound": {
-            "type": "string",
-            "nullable": true
-          },
-          "NotificationBase64Sound": {
+          "SoundProfileName": {
             "type": "string",
             "nullable": true
           },
@@ -22839,6 +22924,10 @@
             "maxLength": 1,
             "type": "string",
             "description": "Format: Text",
+            "nullable": true
+          },
+          "AutoPrintContract": {
+            "type": "boolean",
             "nullable": true
           },
           "ShowRentalItemsOutOnly": {
